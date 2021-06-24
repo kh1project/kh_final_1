@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>index.jsp 입니다.</h1>
-	<h3>메인 페이지 입니다</h3>
+	<h1>movie.jsp 입니다.</h1>
+	<h3>영화 메인페이지로 사용됩니다.</h3>
 </body>
 </html>
