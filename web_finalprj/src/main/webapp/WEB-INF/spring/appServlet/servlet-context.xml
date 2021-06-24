@@ -21,7 +21,8 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.web.kh" />
+	<!-- <context:annotation-config /> -->
+	<context:component-scan base-package="com.web.seenema.controller" />
 	
 	<!-- 
 		데이터베이스 연결 객체를 빈(bean)에 등록한다.
@@ -56,5 +57,4 @@
 	  	<beans:constructor-arg index="0" ref="sqlSessionFactory"></beans:constructor-arg>
 	  </beans:bean>
 	  -->
-	
 </beans:beans>
