@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="false" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,5 +10,21 @@
 <body>
 	<h1>login.jsp 입니다.</h1>
 	<h3>로그인 페이지 입니다.</h3>
+	<c:url var="login" value="/account/login" />
+	<form action="${login }" method="post">
+		<div>
+			<label>이메일</label>
+			<input id="id_email" type="text" name="email" required>
+		</div>
+		<div>
+			<label>패스워드</label>
+			<input id="id_password" type="password" name="password" required>
+		</div>
+		<div>
+			<button type="submit">로그인</button>
+			<c:url var="main" value="/index" />
+			<button type="button" onclick="location.href='${main }'">취소</button>
+		</div>
+	</form>
 </body>
 </html>
