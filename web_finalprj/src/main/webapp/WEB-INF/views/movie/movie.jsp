@@ -80,7 +80,7 @@ ul {
         <li>감독</li>
         <li>출연</li>
       </ul>
-      <button type="button">좋아요</button>
+      <button type="button">❤좋아요</button>
       <button type="button">예매하기</button>
     </div>
   </div>
