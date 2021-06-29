@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
-  	<a class="navbar-brand" href="#">
+  	<a class="navbar-brand" href="<%=request.getContextPath() %>/index">
     	<img src="#" width="30" height="30" class="d-inline-block align-top" alt="로고">
    	 SEENEMA - movie theater
  	</a>
@@ -13,12 +13,12 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">영화
+          <a class="nav-link" href="<%=request.getContextPath() %>/movie">영화
                 <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">예매</a>
+          <a class="nav-link" href="<%=request.getContextPath() %>/reserve">예매</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">영화관</a>
