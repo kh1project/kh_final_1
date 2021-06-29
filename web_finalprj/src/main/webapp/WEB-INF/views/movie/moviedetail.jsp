@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>"영화제목" - 주요정보</title>
 </head>
 <body>
 	<h1>moviedetail.jsp 입니다.</h1>

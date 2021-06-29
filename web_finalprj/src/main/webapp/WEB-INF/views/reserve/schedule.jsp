@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상영시간표</title>
 </head>
 <body>
 	<h1>schedule.jsp 입니다.</h1>

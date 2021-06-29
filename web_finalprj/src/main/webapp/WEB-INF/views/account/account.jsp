@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>개인정보 수정</title>
 </head>
 <body>
 	<h1>account.jsp 입니다.</h1>

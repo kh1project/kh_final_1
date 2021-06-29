@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SEENEMA - 환영합니다!</title>
 </head>
 <body>
 	<h1>login.jsp 입니다.</h1>

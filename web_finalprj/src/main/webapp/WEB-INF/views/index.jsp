@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SEENEMA</title>
+<title>SEENEMA - movie theater</title>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 </head>
-<style>
+<style type="text/css">
 .carousel-item {
   height: 100vh;
   min-height: 350px;
@@ -76,9 +76,9 @@
 		wrap: true,
 		// 키보드 이벤트 설정 여부(?)
 		keyboard : true
-		});
+	});
 		// Interval를 설정해서 next가 아닌 prev로 하면 반대로 움직인다.
-		setInterval(function() {
+	setInterval(function() {
 		target.carousel('prev');
 		}, 1000);
 	});

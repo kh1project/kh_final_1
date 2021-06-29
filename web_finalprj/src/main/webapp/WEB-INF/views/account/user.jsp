@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의 SEENEMA</title>
 </head>
 <body>
 	<h1>user.jsp 입니다.</h1>
