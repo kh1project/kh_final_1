@@ -17,7 +17,7 @@ CREATE TABLE comments (
 ALTER TABLE comments ADD CONSTRAINT comments_id_pk PRIMARY KEY(id);
 ALTER TABLE comments ADD CONSTRAINT comments_bid_FK FOREIGN KEY(bid) REFERENCES board(id);
 ALTER TABLE comments ADD CONSTRAINT comments_mid_FK FOREIGN KEY(mid) REFERENCES movie(id);
-ALTER TABLE comments ADD CONSTRAINT comments_aid_FK FOREIGN KEY(mid) REFERENCES account(id);
+ALTER TABLE comments ADD CONSTRAINT comments_aid_FK FOREIGN KEY(aid) REFERENCES account(id);
 
 COMMENT ON COLUMN comments.id IS '댓글 식별번호';
 COMMENT ON COLUMN comments.bid IS '게시글 댓글 식별';

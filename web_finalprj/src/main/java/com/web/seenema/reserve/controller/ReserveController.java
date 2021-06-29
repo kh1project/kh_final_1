@@ -1,12 +1,21 @@
 package com.web.seenema.reserve.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.web.seenema.reserve.dto.RstepDTO;
+import com.web.seenema.reserve.dto.SeatDTO;
+import com.web.seenema.reserve.service.ReserveService;
 
 @Controller
 @RequestMapping(value = "/reserve")
 public class ReserveController {
+	
+	@Autowired
+	private ReserveService ress;
 	
 	@RequestMapping(value = "")
 	public ModelAndView reserve() {
@@ -32,8 +41,11 @@ public class ReserveController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/seats")
-	public ModelAndView seats() {
+	@RequestMapping(value = "/seats", method = RequestMethod.GET)
+	public ModelAndView seats() throws Exception {
+		SeatDTO dto = new SeatDTO();
+		ress.seatList(dto);
+		
 		ModelAndView mv = new ModelAndView("reserve/seats");
 		mv.addObject("", "");
 		

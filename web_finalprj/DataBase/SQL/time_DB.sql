@@ -1,5 +1,6 @@
 SELECT * FROM time;
 CREATE SEQUENCE time_seq;
+DROP SEQUENCE time_seq;
 
 INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/06/28', 'YY/MM/DD'), '11:30:00', '13:14:00');
 INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/06/28', 'YY/MM/DD'), '13:34:00', '15:18:00');
