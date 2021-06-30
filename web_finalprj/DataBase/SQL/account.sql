@@ -1,3 +1,8 @@
+SELECT * FROM account;
+SELECT * FROM account_type;
+DROP TABLE account;
+DROP TABLE account_type;
+
 -- 회원 테이블
 CREATE TABLE account (
     id NUMBER,
@@ -14,7 +19,6 @@ CREATE TABLE account (
 );
 
 ALTER TABLE account ADD CONSTRAINT account_id_pk PRIMARY KEY(id);
-
 
 
 
