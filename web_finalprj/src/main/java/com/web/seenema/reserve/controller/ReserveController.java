@@ -48,6 +48,7 @@ public class ReserveController {
 	@RequestMapping(value = "/seats", method = RequestMethod.GET)
 	public ModelAndView seats() throws Exception {
 		SeatDTO dto = new SeatDTO();
+		// 임시 상영관
 		dto.setTid(1);
 		List<Map<String, Object>> seatlist = ress.seatList(dto);
 		
