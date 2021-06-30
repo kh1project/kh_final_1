@@ -75,5 +75,4 @@ public class RstepDTO {
 	public void setTotalprice(int totalprice) {
 		this.totalprice = totalprice;
 	}
-	
 }

@@ -1,3 +1,5 @@
+SELECT * FROM IMAGE_FILES;
+
 CREATE SEQUENCE Image_files_seq;
 
 -- 위왓치유

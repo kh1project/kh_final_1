@@ -44,8 +44,6 @@ CREATE TABLE time (
    starttime VARCHAR2(20),
    endtime VARCHAR2(20)
 );
--- endtime 컬럼 추가
-ALTER TABLE time ADD endtime VARCHAR(20);
 
 ALTER TABLE time ADD CONSTRAINT time_id_pk PRIMARY KEY(id);
 ALTER TABLE time ADD CONSTRAINT time_mtid_FK FOREIGN KEY(mtid) REFERENCES movie_theater(id);
@@ -88,7 +86,7 @@ CREATE TABLE reservation(
     payment CHAR(1)
 );
 
-ALTER TABLE reservation ADD CONSTRAINT reservation PRIMARY KEY(sid);
+ALTER TABLE reservation ADD CONSTRAINT reservation PRIMARY KEY(id);
 ALTER TABLE reservation ADD CONSTRAINT reservation_sid_FK FOREIGN KEY(sid) REFERENCES seat(id);
 ALTER TABLE reservation ADD CONSTRAINT reservation_timeid_FK FOREIGN KEY(timeid) REFERENCES time(id);
 ALTER TABLE reservation ADD CONSTRAINT reservation_aid_FK FOREIGN KEY(aid) REFERENCES account(id);
@@ -172,5 +170,4 @@ COMMENT ON COLUMN Image_files.mid IS '어떤 영화의 첨부 파일인지 식�
 COMMENT ON COLUMN Image_files.name IS '이미지 첨부파일의 파일명';
 COMMENT ON COLUMN Image_files.path IS '이미지의 실제 저장 경로(위치)';
 
-COMMIT;
-
+commit
