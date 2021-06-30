@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+	PUBLIC "-//mybatis.org//DTO Config 3.0//EN"
+	"http:/mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.web.seenema.reserve.dto.SeatDTO" alias="seat"></typeAlias>
+	</typeAliases>
+</configuration>
