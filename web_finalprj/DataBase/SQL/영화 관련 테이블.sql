@@ -98,7 +98,7 @@ COMMENT ON COLUMN reservation.sid IS '예매 좌석 식별번호';
 COMMENT ON COLUMN reservation.timeid IS '예매 시간 식별번호';
 COMMENT ON COLUMN reservation.aid IS '예매자 식별번호';
 COMMENT ON COLUMN reservation.rdate IS '예매 일시';
-COMMENT ON COLUMN reservation.xdate IS '취소 일시';
+COMMENT ON COLUMN reservation.cdate IS '취소 일시';
 COMMENT ON COLUMN reservation.rcnt IS '예매 인원';
 COMMENT ON COLUMN reservation.payment IS '결제 방법';
 

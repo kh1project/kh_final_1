@@ -1,3 +1,8 @@
+SELECT * FROM account;
+SELECT * FROM account_type;
+DROP TABLE account;
+DROP TABLE account_type;
+
 -- 회원 테이블
 CREATE TABLE account (
     id NUMBER,
@@ -33,7 +38,6 @@ COMMENT ON COLUMN account.age IS '회원 나이';
 COMMENT ON COLUMN account.joindate IS '회원 가입일';
 COMMENT ON COLUMN account.logindate IS '회원 로그인일';
 COMMENT ON COLUMN account.expiredate IS '회원 탈퇴일';
-
 
 
 -- 회원 구분 테이블
