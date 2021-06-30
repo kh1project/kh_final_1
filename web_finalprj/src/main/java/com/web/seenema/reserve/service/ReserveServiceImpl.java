@@ -21,25 +21,21 @@ public class ReserveServiceImpl implements ReserveService {
 
 	@Override
 	public List<Map<String, Object>> movieList() throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<BranchDTO> branchList(int mid, Date date) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<BranchDTO> branchList() throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<TableRstepDTO> tableInfo(int mid, Date date, String loc) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -51,7 +47,6 @@ public class ReserveServiceImpl implements ReserveService {
 
 	@Override
 	public int totalprice(RstepDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 	

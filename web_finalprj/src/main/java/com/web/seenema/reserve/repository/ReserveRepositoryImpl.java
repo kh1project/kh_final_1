@@ -20,49 +20,41 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 
 	@Override
 	public List<Map<String, Object>> selectMovieList() throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<BranchDTO> selectBranchList(TableRstepDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<TableRstepDTO> selectRestInfo(TableRstepDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Map<String, Object>> selectSeatCnt(RstepDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Map<String, Object>> selectSeatFrame(RstepDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<Integer> selectRseatList(RstepDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public boolean updateSeat(RstepDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public int selectPrice(RstepDTO dto) throws Exception {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
