@@ -1,5 +1,7 @@
 package com.web.seenema.reserve.repository;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -68,10 +70,23 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 
 	@Override
 	public List<Map<String, Object>> selectSeatCnt(SeatDTO seatdto) throws Exception {
-		seatdto.setTid(1);
-		int res = sqlSession.selectOne("reserveMapper.seatcnt", seatdto);
-		System.out.println(res);
-		return null;
+		int scnt = sqlSession.selectOne("reserveMapper.seatcnt", seatdto);
+		int s_leftcnt = sqlSession.selectOne("reserveMapper.s_leftcnt", seatdto);
+		List<SeatDTO> seatdata = sqlSession.selectList("reserveMapper.seat_all", seatdto);
+		
+		List<Map<String, Object>> seatlist = new ArrayList<Map<String, Object>>();
+		
+		Map<String, Object> seatmap = new HashMap<String, Object>();
+		
+		seatmap.put("scnt", scnt);
+		seatmap.put("s_leftcnt", s_leftcnt);
+		for(int i = 0; i < seatdata.size(); i++) {
+			seatmap.put("seat" + i , seatdata.get(i));
+		}
+		
+		seatlist.add(seatmap);
+		
+		return seatlist;
 	}
 
 }

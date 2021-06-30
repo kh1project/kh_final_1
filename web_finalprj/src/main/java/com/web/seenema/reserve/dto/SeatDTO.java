@@ -3,8 +3,8 @@ package com.web.seenema.reserve.dto;
 public class SeatDTO {
 	private int id;
 	private int tid;
-	private int seatrow;
-	private char seatcol;
+	private char seatrow;
+	private int seatcol;
 	private char reserved;
 	
 	public int getId() {
@@ -23,19 +23,19 @@ public class SeatDTO {
 		this.tid = tid;
 	}
 	
-	public int getSeatrow() {
+	public char getSeatrow() {
 		return seatrow;
 	}
 	
-	public void setSeatrow(int seatrow) {
+	public void setSeatrow(char seatrow) {
 		this.seatrow = seatrow;
 	}
 	
-	public char getSeatcol() {
+	public int getSeatcol() {
 		return seatcol;
 	}
 	
-	public void setSeatcol(char seatcol) {
+	public void setSeatcol(int seatcol) {
 		this.seatcol = seatcol;
 	}
 	
