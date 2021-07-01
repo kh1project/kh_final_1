@@ -21,11 +21,13 @@ public class ReserveServiceImpl implements ReserveService {
 
 	@Override
 	public List<Map<String, Object>> movieList() throws Exception {
+		// 영화 리스트 뽑기
 		return null;
 	}
 
 	@Override
 	public List<BranchDTO> branchList(int mid, Date date) throws Exception {
+		// 지점 리스트 뽑기
 		return null;
 	}
 
