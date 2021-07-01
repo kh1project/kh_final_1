@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,7 +55,8 @@ hr { margin: 3px; }
 	  	  <label>영화선택</label>
 	  	</div>
 	  	<div class="col-4">
-	  	  <label>2021-07-01(오늘)</label>
+	  	  <c:set var="now" value="<%=new java.util.Date()%>" />
+		  <label><fmt:formatDate value="${now}" pattern="yyyy-MM-dd (E)" /></label>
 	  	</div>
 	  </div>
 	  <div class="row">
@@ -109,7 +112,8 @@ hr { margin: 3px; }
 	      <div class="row">
 	        <div class="col">
 			  <div class="list-group list-group-flush" id="list-tab" role="tablist">
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">#위왓치유</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-danger">청불</span> #위왓치유</a>
 			    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">그 여름, 가장 차가웠던</a>
 			    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">그레타 툰베리</a>
 			    <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">극장판 귀멸의 칼날 무한열차편</a>
@@ -117,7 +121,8 @@ hr { margin: 3px; }
 			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">낫아웃</a>
 			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">노매드랜드</a>
 			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">더 파더</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">루카</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-success">전체</span> 루카</a>
 			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">메이드 인 루프탑</a>
 			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">발신제한</a>
 			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">뱅드림! 로젤리아 에피소드 1 약속</a>
