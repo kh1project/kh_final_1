@@ -1,3 +1,17 @@
+DROP TABLE board;
+DROP TABLE board_type;
+
+-- 게시판 구분 테이블
+CREATE TABLE board_type (
+    id NUMBER,
+    name VARCHAR2(256)
+);
+
+ALTER TABLE board_type ADD CONSTRAINT board_t_id_pk PRIMARY KEY(id);
+
+COMMENT ON COLUMN board_type.id IS '게시판 구분 식별번호';
+COMMENT ON COLUMN board_type.name IS '게시판 구분명';
+
 -- 게시판 테이블
 CREATE TABLE board (
     id NUMBER,
@@ -33,15 +47,11 @@ COMMENT ON COLUMN board.udate IS '게시판 수정일';
 COMMENT ON COLUMN board.nodel IS '게시판 삭제금지';
 COMMENT ON COLUMN board.deleted IS '게시판 삭제 구분';
 
+------------------------------------------------
+CREATE SEQUENCE board_type_seq;
 
--- 게시판 구분 테이블
-CREATE TABLE board_type (
-    id NUMBER,
-    name VARCHAR2(256)
-);
+INSERT INTO board_type(id, name) VALUES (board_type_seq.NEXTVAL, '영화리뷰');
 
-ALTER TABLE board_type ADD CONSTRAINT board_t_id_pk PRIMARY KEY(id);
+CREATE SEQUENCE board_seq;
 
-COMMENT ON COLUMN board_type.id IS '게시판 구분 식별번호';
-COMMENT ON COLUMN board_type.name IS '게시판 구분명';
-
+INSERT INTO board VALUES (board_seq.NEXTVAL, 1, 1, '', '정말 재미있는 영화였습니다.', )
