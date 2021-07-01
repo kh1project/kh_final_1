@@ -2,95 +2,24 @@ package com.web.seenema.movie.dto;
 
 import java.util.*;
 
-/**
- * 
- */
 public class MovieDTO {
 
-    /**
-     * Default constructor
-     */
-    public MovieDTO() {
-    }
-
-    /**
-     * 
-     */
     private int id;
-
-    /**
-     * 
-     */
     private String title;
-
-    /**
-     * 
-     */
     private String summary;
-
-    /**
-     * 
-     */
     private String type;
-
-    /**
-     * 
-     */
     private String director;
-
-    /**
-     * 
-     */
     private String genre;
-
-    /**
-     * 
-     */
     private int runningtime;
-
-    /**
-     * 
-     */
     private int reating;
-
-    /**
-     * 
-     */
     private String actor;
-
-    /**
-     * 
-     */
     private Date playdate;
-
-    /**
-     * 
-     */
     private int rcnt;
-
-    /**
-     * 
-     */
     private float rrate;
-
-    /**
-     * 
-     */
     private int rank;
-
-    /**
-     * 
-     */
     private int gcnt;
-
-    /**
-     * 
-     */
     private int grade;
-
-    /**
-     * @return
-     */
+    
     public int getId() {
         // TODO implement here
         return 0;

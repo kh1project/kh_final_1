@@ -11,19 +11,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.seenema.account.service.AccountServiceImpl;
+import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MovieImageDTO;
-import com.web.seenema.movie.service.MovieService;
+import com.web.seenema.movie.dto.MyMovieDTO;
+import com.web.seenema.movie.service.MovieServiceImpl;
 import com.web.seenema.review.dto.ReviewDTO;
-import com.web.seenema.review.service.ReviewService;
+import com.web.seenema.review.service.ReviewServiceImpl;
 
 @Controller
 @RequestMapping(value = "/review")
 public class ReviewController {
 
 	@Autowired
-	private ReviewService review;
+	private AccountServiceImpl account;
 	@Autowired
-	private MovieService movie;
+	private MovieServiceImpl movie;
+	@Autowired
+	private ReviewServiceImpl review;
 	
 	@RequestMapping(value = "")
 	public ModelAndView review() {
@@ -42,29 +47,51 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView reviewAddGet() {
-		ModelAndView mv = new ModelAndView("review/reviewadd");
+	public ModelAndView reviewAddGet() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int aid = 1; //session에서 aid 받아와야함. 임시데이터.
+		
+		List<List<MyMovieDTO>> mywlist = null;
+		mywlist = account.mywatchList(aid);
+		
+//		System.out.println("---------------reviewController----------------");
+//		System.out.println("mywlist.size() : " + mywlist.size());
+//		for(int i = 0; i < mywlist.size(); i++) {
+//			System.out.println("mywlist의 " + i + "번째 데이터 : [" + mywlist.get(i).getId() + "]" + mywlist.get(i).getTitle() + " 의 파일 : " + mywlist.get(i).getPath() + mywlist.get(i).getName());
+//		} //마지막꺼만 들어오는 상태.
+		
+		mv.setViewName("review/reviewadd");
+		mv.addObject("mywlist", mywlist);
 		mv.addObject("", "");
 		
 		return mv;
 	}
-//	public ModelAndView reviewAddGet(int mid) {
-//		ModelAndView mv = new ModelAndView("review/reviewadd");
-//		mv.addObject("", "");
-//		
-//		return mv;
-//	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView reviewAddPost(HttpServletRequest req) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int mid = 1; //mid를 받아와야한다. 사용자로부터. 임시로 1.
+		mv.setViewName("review/reviewadd");
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/add2", method = RequestMethod.GET)
+	public ModelAndView reviewAdd2Get() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int mid = 1; //mid 받아와야함. 임시데이터.
 		
 		List<MovieImageDTO> mimglist = null;
-		mimglist = movie.findMovieList(mid);
+		mimglist = movie.findMovieImageList(mid);
 		
-		mv.setViewName("review/reviewadd");
+		System.out.println(mimglist.get(0).getId());
+		System.out.println(mimglist.get(0).getMid());
+		System.out.println(mimglist.get(0).getName());
+		System.out.println(mimglist.get(0).getPath());
+		
+		mv.setViewName("review/reviewadd2");
 		mv.addObject("mimglist", mimglist);
 		mv.addObject("", "");
 		

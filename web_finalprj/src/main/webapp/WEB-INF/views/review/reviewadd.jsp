@@ -5,51 +5,30 @@
 		<div class="page-title">영화 리뷰 작성</div>
 		<div>리뷰를 작성하실 영화를 선택해주세요!<span>등록가능한 영화 0 건</span></div>
 		
-		<div id="add-step1" class="row row-cols-lg-4">
-			<div>
-				<div class="p-3 border bg-light">Row column</div>
-			</div>
-			<div>
-				<div class="p-3 border bg-light">Row column</div>
-			</div>
-			<div>
-				<div class="p-3 border bg-light">Row column</div>
-			</div>
-			<div>
-				<div class="p-3 border bg-light">Row column</div>
-			</div>
-			<div>
-				<div class="p-3 border bg-light">Row column</div>
-			</div>
-			<div>
-				<div class="p-3 border bg-light">Row column</div>
-			</div>
-		</div>
-		
-		<c:url var="add" value="/review/add" />
-		<div id="add-step2">
-			<form action="${add }" method="post">
-			<div class="row row-cols-lg-2">
-				<div class="col p-3 add-imagelist">
-					<img id="" src="<%=request.getContextPath() %>/resources/images/movie/movie_image.jpg">
-					<img src="<%=request.getContextPath() %>/resources/images/movie/movie_image (1).jpg">
-					<img src="<%=request.getContextPath() %>/resources/images/movie/movie_image (2).jpg">
-					<img src="<%=request.getContextPath() %>/resources/images/movie/movie_image (3).jpg">
-					<img src="<%=request.getContextPath() %>/resources/images/movie/movie_image (4).jpg">
-					<img src="<%=request.getContextPath() %>/resources/images/movie/movie_image (5).jpg">
-					<img src="<%=request.getContextPath() %>/resources/images/movie/movie_image (6).jpg">
-					<img src="<%=request.getContextPath() %>/resources/images/movie/movie_image (7).jpg">
-					<img src="<%=request.getContextPath() %>/resources/images/movie/movie_image (8).jpg">
+		<c:url var="add2" value="/review/add2" />
+		<form action="${add2 }" method="post">
+			<div id="add-step1" class="row row-cols-lg-4">
+				<div>
+					<div id="1" class="p-3 border bg-light">Row column</div>
 				</div>
-				<!-- 이미지1, 텍스트1 묶음 START -->
-				<div class="col p-3 add-imagetext">
-					<img src="<%=request.getContextPath() %>/resources/images/movie/movie_image (1).jpg">
-					<textarea placeholder="내용을 작성해 주세요."></textarea>
+				<div>
+					<div class="p-3 border bg-light">Row column</div>
 				</div>
-				<!-- 이미지1, 텍스트1 묶음 END -->
+				<div>
+					<div class="p-3 border bg-light">Row column</div>
+				</div>
+				<div>
+					<div class="p-3 border bg-light">Row column</div>
+				</div>
+				<div>
+					<div class="p-3 border bg-light">Row column</div>
+				</div>
+				<div>
+					<div class="p-3 border bg-light">Row column</div>
+				</div>
+				<input type="hidden" value="">
 			</div>
-			<button type="submit">등록</button>
+			<button type="submit">선택</button>
 			<button type="button">취소</button>	
-			</form>
-		</div>
+		</form>
 <jsp:include page="review_footer.jsp"></jsp:include>

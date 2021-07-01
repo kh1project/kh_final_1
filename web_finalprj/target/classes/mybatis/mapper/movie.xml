@@ -5,6 +5,9 @@
 
 <mapper namespace="movieMapper">
 	<select id="movieImageSearch" parameterType="int" resultType="movieImage">
-		select * from image_files where mid = #{mid};
+		select * from image_files where mid = #{mid}
+	</select>
+	<select id="myMovieSearch" parameterType="int" resultType="myMovie">
+		select a.id, a.title, b.path, b.name from movie a, Image_files b where a.id = b.mid and a.id = #{mid}
 	</select>
 </mapper>

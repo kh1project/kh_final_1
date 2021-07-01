@@ -14,7 +14,6 @@ public interface ReviewService {
     public List<ReviewSimpleDTO> reviewList() throws Exception;
     public ReviewDTO reviewOne(int rid) throws Exception;
     public List<CommentSimpleDTO> commentList(int rid) throws Exception;
-    public List<Integer> mywatchList(int aid) throws Exception;
     public List<MovieImageDTO> movieImageList(int mid) throws Exception;
     public MovieDTO movieOne(int mid) throws Exception;
     public boolean addReview(ReviewAddDTO dto) throws Exception;

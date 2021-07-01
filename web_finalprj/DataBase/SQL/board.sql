@@ -55,3 +55,11 @@ INSERT INTO board_type(id, name) VALUES (board_type_seq.NEXTVAL, '영화리뷰')
 CREATE SEQUENCE board_seq;
 
 INSERT INTO board VALUES (board_seq.NEXTVAL, 1, 1, '', '정말 재미있는 영화였습니다.', )
+
+------------------------------------------------
+select id,title from movie where id = 1;
+
+-- MyMovieDTO select문
+select a.id, a.title, b.path, b.name
+  from movie a, Image_files b
+ where a.id = b.mid and a.id = 1;

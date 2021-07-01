@@ -8,20 +8,20 @@ import org.springframework.stereotype.Service;
 import com.web.seenema.comment.dto.CommentSimpleDTO;
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MovieImageDTO;
-import com.web.seenema.movie.repository.MovieRepository;
+import com.web.seenema.movie.repository.MovieRepositoryImpl;
 import com.web.seenema.review.dto.ReviewAddDTO;
 import com.web.seenema.review.dto.ReviewDTO;
 import com.web.seenema.review.dto.ReviewSimpleDTO;
-import com.web.seenema.review.repository.ReviewRepository;
+import com.web.seenema.review.repository.ReviewRepositoryImpl;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
 	
 	@Autowired
-	private ReviewRepository dto;
+	private ReviewRepositoryImpl dto;
 	
 	@Autowired
-	private MovieRepository mdto;
+	private MovieRepositoryImpl mdto;
 
 	@Override
 	public List<ReviewSimpleDTO> reviewList() throws Exception {
@@ -37,12 +37,6 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public List<CommentSimpleDTO> commentList(int rid) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Integer> mywatchList(int aid) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
