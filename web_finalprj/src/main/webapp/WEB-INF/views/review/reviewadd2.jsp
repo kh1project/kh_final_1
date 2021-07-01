@@ -3,29 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="review_header.jsp"></jsp:include>
 		<div class="page-title">영화 리뷰 작성</div>
-		<div>리뷰를 작성하실 영화를 선택해주세요!<span>등록가능한 영화 0 건</span></div>
-		
-		<div id="add-step1" class="row row-cols-lg-4">
-			<div>
-				<div class="p-3 border bg-light">Row column</div>
-			</div>
-			<div>
-				<div class="p-3 border bg-light">Row column</div>
-			</div>
-			<div>
-				<div class="p-3 border bg-light">Row column</div>
-			</div>
-			<div>
-				<div class="p-3 border bg-light">Row column</div>
-			</div>
-			<div>
-				<div class="p-3 border bg-light">Row column</div>
-			</div>
-			<div>
-				<div class="p-3 border bg-light">Row column</div>
-			</div>
-		</div>
-		
 		<c:url var="add" value="/review/add" />
 		<div id="add-step2">
 			<form action="${add }" method="post">

@@ -9,4 +9,6 @@ public interface AccountService {
 
 	public List<List<MyMovieDTO>> mywatchList(int aid) throws Exception;
 
+	public List<MyMovieDTO> mywatchSelect(int aid) throws Exception;
+
 }

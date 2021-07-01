@@ -55,13 +55,13 @@ public class ReviewController {
 		List<List<MyMovieDTO>> mywlist = null;
 		mywlist = account.mywatchList(aid);
 		
-		System.out.println("---------------reviewController----------------");
-		System.out.println("mywlist.size() : " + mywlist.size());
-		for(int i = 0; i < mywlist.size(); i++) {
-			for(int j = 0; j < mywlist.get(i).size(); j++) {
-				System.out.println("mywlist의 " + i + "번째 데이터 : [" + mywlist.get(i).get(j).getId() + "]" + mywlist.get(i).get(j).getTitle() + " 의 파일 : " + mywlist.get(i).get(j).getPath() + mywlist.get(i).get(j).getName());
-			}
-		}
+//		System.out.println("---------------reviewController----------------");
+//		System.out.println("mywlist.size() : " + mywlist.size());
+//		for(int i = 0; i < mywlist.size(); i++) {
+//			for(int j = 0; j < mywlist.get(i).size(); j++) {
+//				System.out.println("mywlist의 " + i + "번째 데이터 : [" + mywlist.get(i).get(j).getId() + "]" + mywlist.get(i).get(j).getTitle() + " 의 파일 : " + mywlist.get(i).get(j).getPath() + mywlist.get(i).get(j).getName());
+//			}
+//		}
 		
 		mv.setViewName("review/reviewadd");
 		mv.addObject("mywlist", mywlist);
@@ -73,29 +73,27 @@ public class ReviewController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public ModelAndView reviewAddPost(HttpServletRequest req) throws Exception {
 		ModelAndView mv = new ModelAndView();
+		int SelectMovie = (Integer.parseInt((String)req.getParameter("wm").replace("wm", "")));
 		
-		mv.setViewName("review/reviewadd");
+		List<MyMovieDTO> mywatch = null;
+		mywatch = account.mywatchSelect(SelectMovie);
+		
+		for(int i = 0; i < mywatch.size(); i++) {
+			System.out.println(mywatch.get(i).getPath() + mywatch.get(i).getName() );
+		}
+		
+		mv.setViewName("redirect:/review/add");	
+		mv.addObject("mywatch", mywatch);	//이거 내일 jsp에서 불러다 #add-step2 쪽에 출력하면 됨.
+											//그리고 jsp에서 script 처리할 것. 메가박스처럼.
 		
 		return mv;
 	}
 	
-	@RequestMapping(value = "/add2", method = RequestMethod.GET)
-	public ModelAndView reviewAdd2Get() throws Exception {
+	@RequestMapping(value = "/add2", method = RequestMethod.POST)
+	public ModelAndView reviewAdd2Post(HttpServletRequest req) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		int mid = 1; //mid 받아와야함. 임시데이터.
-		
-		List<MovieImageDTO> mimglist = null;
-		mimglist = movie.findMovieImageList(mid);
-		
-		System.out.println(mimglist.get(0).getId());
-		System.out.println(mimglist.get(0).getMid());
-		System.out.println(mimglist.get(0).getName());
-		System.out.println(mimglist.get(0).getPath());
-		
-		mv.setViewName("review/reviewadd2");
-		mv.addObject("mimglist", mimglist);
-		mv.addObject("", "");
+		mv.setViewName("review");		
 		
 		return mv;
 	}

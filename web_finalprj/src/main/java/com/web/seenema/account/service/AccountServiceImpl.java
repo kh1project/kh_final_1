@@ -29,15 +29,15 @@ public class AccountServiceImpl implements AccountService {
 		LinkedList<List<MyMovieDTO>> datalist = new LinkedList<List<MyMovieDTO>>();
 		
 		for(int i = 0; i < midlist.size(); i++) {
-//			System.out.println("midlist.get("+i+") 내가 본 영화의 mid : " + midlist.get(i));
 			List<MyMovieDTO> data = mdto.selectWatchMovieList(midlist.get(i));
 			datalist.add(data);
-//			for(int j = 0; j < datalist.size(); j++) {
-//				for(int k = 0; k < datalist.get(j).size(); k++) {
-//					System.out.println(datalist.get(j).get(k).getTitle() + "의 : " + k + "번째 주소+파일명 : " + datalist.get(j).get(k).getPath() + datalist.get(j).get(k).getName());
-//				}
-//			}
 		}
 		return datalist;
+	}
+	
+	@Override
+	public List<MyMovieDTO> mywatchSelect(int aid) throws Exception {
+		List<MyMovieDTO> data = mdto.selectWatchMovieList(aid);
+		return data;
 	}
 }
