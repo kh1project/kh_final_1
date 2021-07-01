@@ -1,5 +1,6 @@
 package com.web.seenema.account.service;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,36 +21,23 @@ public class AccountServiceImpl implements AccountService {
 	@Autowired
 	private AccountRepositoryImpl dto;
 
-	@SuppressWarnings("null")
 	@Override
 	public List<List<MyMovieDTO>> mywatchList(int aid) throws Exception {
 		List<Integer> temp = dto.selectMyMovieList(aid);
 		List<Integer> midlist = temp.stream().distinct().collect(Collectors.toList());
 		
-		List<List<MyMovieDTO>> datalist = null;
+		LinkedList<List<MyMovieDTO>> datalist = new LinkedList<List<MyMovieDTO>>();
 		
 		for(int i = 0; i < midlist.size(); i++) {
-			System.out.println("midlist.get("+i+") 내가 본 영화의 mid : " + midlist.get(i));
+//			System.out.println("midlist.get("+i+") 내가 본 영화의 mid : " + midlist.get(i));
 			List<MyMovieDTO> data = mdto.selectWatchMovieList(midlist.get(i));
-			//mdto.selectWatchMovieList(midlist.get(i))
 			datalist.add(data);
-			for(int j = 0; j < datalist.size(); j++) {
-				for(int k = 0; k < datalist.get(j).size(); k++) {
-					System.out.println(datalist.get(j).get(k).getTitle() + "의 : " + k + "번째 주소+파일명 : " + datalist.get(j).get(k).getPath() + datalist.get(j).get(k).getName());
-				}
-			}
-		}
-		
-//		List<List<MyMovieDTO>> datalist = null;
-//		
-//		System.out.println("---------------디버깅 코드 ---------------");
-//		for(int i = 0; i < datalist.size(); i++) {
-//			List<MyMovieDTO> temp2 = datalist.get(i);
-//			for(int j = 0; j < temp2.size(); j++) {
-//				System.out.println(temp2.get(j).getTitle() + "의 : " + j + "번째 주소+파일명 : " + temp2.get(j).getPath() + temp2.get(j).getName());
+//			for(int j = 0; j < datalist.size(); j++) {
+//				for(int k = 0; k < datalist.get(j).size(); k++) {
+//					System.out.println(datalist.get(j).get(k).getTitle() + "의 : " + k + "번째 주소+파일명 : " + datalist.get(j).get(k).getPath() + datalist.get(j).get(k).getName());
+//				}
 //			}
-//		}
-//		System.out.println("---------------디버깅 코드 끝 ---------------");
+		}
 		return datalist;
 	}
 }

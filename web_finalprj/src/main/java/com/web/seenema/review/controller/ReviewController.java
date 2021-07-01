@@ -55,11 +55,13 @@ public class ReviewController {
 		List<List<MyMovieDTO>> mywlist = null;
 		mywlist = account.mywatchList(aid);
 		
-//		System.out.println("---------------reviewController----------------");
-//		System.out.println("mywlist.size() : " + mywlist.size());
-//		for(int i = 0; i < mywlist.size(); i++) {
-//			System.out.println("mywlist의 " + i + "번째 데이터 : [" + mywlist.get(i).getId() + "]" + mywlist.get(i).getTitle() + " 의 파일 : " + mywlist.get(i).getPath() + mywlist.get(i).getName());
-//		} //마지막꺼만 들어오는 상태.
+		System.out.println("---------------reviewController----------------");
+		System.out.println("mywlist.size() : " + mywlist.size());
+		for(int i = 0; i < mywlist.size(); i++) {
+			for(int j = 0; j < mywlist.get(i).size(); j++) {
+				System.out.println("mywlist의 " + i + "번째 데이터 : [" + mywlist.get(i).get(j).getId() + "]" + mywlist.get(i).get(j).getTitle() + " 의 파일 : " + mywlist.get(i).get(j).getPath() + mywlist.get(i).get(j).getName());
+			}
+		}
 		
 		mv.setViewName("review/reviewadd");
 		mv.addObject("mywlist", mywlist);
