@@ -47,13 +47,13 @@ public class ReserveController {
 	
 	@RequestMapping(value = "/seats", method = RequestMethod.GET)
 	public ModelAndView seats() throws Exception {
-		SeatDTO dto = new SeatDTO();
-		// 임시 상영관
-		dto.setTid(1);
-		List<Map<String, Object>> seatlist = ress.seatList(dto);
+		List<SeatDTO> seatlists = ress.seatList(1);
+		
+		Map<String, Object> seatcnt = ress.seatcntlist(1);
 		
 		ModelAndView mv = new ModelAndView("reserve/seats");
-		mv.addObject("seatlist", seatlist);
+		mv.addObject("seatlists", seatlists);
+		mv.addObject("seatcnt", seatcnt);
 		
 		return mv;
 	}

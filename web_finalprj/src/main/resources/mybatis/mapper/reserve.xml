@@ -12,7 +12,7 @@
 		SELECT count(*) FROM seat WHERE tid = #{tid} AND reserved = 'n'
 	</select>
 	
-	<select id="seat_all" resultType="HashMap">
+	<select id="seat_all" resultType="seat">
 	    SELECT * FROM seat WHERE tid = #{tid} ORDER BY id
 	</select>
 </mapper>

@@ -17,5 +17,6 @@ public interface ReserveRepository {
 	public List<Integer> selectRseatList(RstepDTO dto) throws Exception;
 	public boolean updateSeat(RstepDTO dto) throws Exception;
 	public int selectPrice(RstepDTO dto) throws Exception;
-	public List<Map<String, Object>> selectSeatCnt(SeatDTO seatdto) throws Exception;
+	public Map<String, Object> selectSeatCnt(int tid) throws Exception;
+	public List<SeatDTO> selectSeatAll(int tid) throws Exception;
 }

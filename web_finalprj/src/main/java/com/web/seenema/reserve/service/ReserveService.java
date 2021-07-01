@@ -14,6 +14,7 @@ public interface ReserveService {
 	public List<BranchDTO> branchList(int mid, Date date) throws Exception;
 	public List<BranchDTO> branchList() throws Exception;
 	public List<TableRstepDTO> tableInfo(int mid, Date date, String loc) throws Exception;
-	public List<Map<String, Object>> seatList(SeatDTO seatdto) throws Exception;
+	public Map<String, Object> seatcntlist(int tid) throws Exception;
+	public List<SeatDTO> seatList(int tid) throws Exception;
 	public int totalprice(RstepDTO dto) throws Exception;
 }

@@ -61,24 +61,23 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectSeatCnt(SeatDTO seatdto) throws Exception {
-		int scnt = sqlSession.selectOne("reserveMapper.seatcnt", seatdto);
-		int s_leftcnt = sqlSession.selectOne("reserveMapper.s_leftcnt", seatdto);
-		List<SeatDTO> seatdata = sqlSession.selectList("reserveMapper.seat_all", seatdto);
-		
-		List<Map<String, Object>> seatlist = new ArrayList<Map<String, Object>>();
+	public Map<String, Object> selectSeatCnt(int tid) throws Exception {
+		int scnt = sqlSession.selectOne("reserveMapper.seatcnt", tid);
+		int s_leftcnt = sqlSession.selectOne("reserveMapper.s_leftcnt", tid);
 		
 		Map<String, Object> seatmap = new HashMap<String, Object>();
 		
 		seatmap.put("scnt", scnt);
 		seatmap.put("s_leftcnt", s_leftcnt);
-		for(int i = 0; i < seatdata.size(); i++) {
-			seatmap.put("seat" + i , seatdata.get(i));
-		}
 		
-		seatlist.add(seatmap);
+		return seatmap;
+	}
+	
+	@Override
+	public List<SeatDTO> selectSeatAll(int tid) throws Exception {
+		List<SeatDTO> seatdata = sqlSession.selectList("reserveMapper.seat_all", tid);
 		
-		return seatlist;
+		return seatdata;
 	}
 
 }

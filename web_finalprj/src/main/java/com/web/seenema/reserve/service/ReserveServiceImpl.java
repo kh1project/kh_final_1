@@ -41,8 +41,14 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public List<Map<String, Object>> seatList(SeatDTO seatdto) throws Exception {
-		List<Map<String, Object>> seatlist = dao.selectSeatCnt(seatdto);
+	public Map<String, Object> seatcntlist(int tid) throws Exception {
+		Map<String, Object> seatlist = dao.selectSeatCnt(tid);
+		return seatlist;
+	}
+	
+	@Override
+	public List<SeatDTO> seatList(int tid) throws Exception {
+		List<SeatDTO> seatlist = dao.selectSeatAll(tid);
 		return seatlist;
 	}
 
