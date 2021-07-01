@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SEENEMA - 회원탈퇴</title>
 </head>
 <body>
 	<h1>expire.jsp 입니다.</h1>

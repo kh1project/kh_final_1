@@ -1,199 +1,153 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>SEENEMA</title>
-   
-    <style>
-        *{
-          margin: 0pt;  
-        }
+<meta charset="UTF-8">
+<title>SEENEMA</title>
+<script>
+	window.onload = function() {
+		const likeBtn = document.querySelector("#like-btn");
+		const detailBtn = document.querySelector("#detail-btn");
+		const btn = document.querySelector(".inner-btn");
 
-        header{
-            
-            height: 200px;
-            
-        }
+		btn.onmouseover = function() {
+			btn.style.backgroundColor = "lightgray";
+		}
 
-        header, #container, footer{
-            display: block;
-            position: relative;
-            max-width: 1100px;
-            background-color: rgb(165, 165, 152);
-            margin: 0 auto 0 auto;
-        }
+		btn.onmouseout = function() {
+			btn.style.backgroundColor = "transparent";
+		}
 
-        .movies-container{
-          border: 1px solid red;
-         
-        }
-    
-            .movies{
-                display: inline-block;
-                border: 1px solid black;
-                width: 230px;
-                height: 450px;
-                margin-left: 60px;
-                margin-bottom: 60px;
-            }
+		likeBtn.onclick = function() {
+			console.log("좋아여");
+		}
 
-                .poster{
+		detailBtn.onclick = function() {
+			console.log("상세보기")
+		}
 
-                }
+		function init() {
+			console.log("init");
+		}
 
-                    .poster img{
-                        width: 230px;
-                        height: 330px;
-                    }
-    
-                .btn-util{
-                    display: block;
-                    
-                }
-    
-                    .inner-btn{
-                        border: 1px solid blue;
-                        width: 80px;
-                        text-align: center;
-                        display: inline-block;
-                        margin: 0px auto 0px auto;
-                        cursor: pointer;
-                        
-                        
-                    }
-        .logo{
-            display: inline-block;
-            position: absolute;
-            left: 350px;
-            
-            
-        }
+		init();
+	}
+</script>
+<meta charset="UTF-8">
+<title>박스오피스 - SEENEMA</title>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/jquery/js/jquery-3.6.0.min.js"></script>
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/static/css/movie.css">
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/static/css/common.css">
+<style type="text/css">
+ul {
+	list-style: none;
+	padding-left: 10px;
+}
 
-        .view-path{
-            position: sticky;
-            top: 230px;
-        }
-    </style>
-    <script>
-        window.onload = function(){
-            const likeBtn = document.querySelector("#like-btn");
-            const detailBtn = document.querySelector("#detail-btn");
-            const btns = document.querySelectorAll(".inner-btn");
-            
-            for(var btn of btns){
-                btn.onmouseover = function(){
-                    btn.style.backgroundColor = "lightgray";
-                }
-    
-                btn.onmouseout = function(){
-                    btn.style.backgroundColor = "white";
-                }
-            }
-
-
-            likeBtn.onclick = function(){
-                console.log("좋아여");
-            }
-            
-            detailBtn.onclick = function(){
-                console.log("상세보기")
-            }
-        
-            function init(){
-                console.log("init");
-            }
-            
-            init();
-        }
-    </script>
+.carousel-item {
+	height: 65vh;
+	min-height: 350px;
+	background: no-repeat center center scroll;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+</style>
 </head>
-<body>
-    <!-- ----------------<header>---------------- -->
-    <header>
-        <div class="logo"><h1><a href="/index.html"><img src="resources/imgs/임시로고.png" alt="SEENEMA.logo"></a></h1></div>
-        <div>멤버십,고객센터,로그인,회원가입 등</div>
-        <div>영화,예매,극장,이벤트 등 메인메뉴</div>
-        <nav class="view-path">홈>영화>..</nav> 
-    </header>
-    <!-- ----------------</header>---------------- -->
-    <!-- ----------------<body>---------------- -->
+<body class="pt-5">
+	<!-- ----------------<header>---------------- -->
+	<header>
+		<%@ include file="../module/header.jsp"%>
+	</header>
+
+	<!-- ----------------</header>---------------- -->
+	<!-- ----------------<body>---------------- -->
 	<container id="container">
-	    <div class="movies-container">
-	        <div class="movies">
-	            <div class="poster"><a href=""><img src="resources/imgs/그 여름, 가장 차가웠던 (少女佳禾, Summer Is the Coldest Season)/poster/movie_image (1).jpg" alt="Summer Is the Coldest Season"></a></div>
-	            <div class="title">그 여름 가장 차가웠던</div>
-	            <div class="rate-date">예매율, 개봉일</div>
-	            <div class="btn-util">
-	                <span class="inner-btn" id="like-btn">
-	                    좋아여
-	                </span>
-	                <span class="inner-btn" id="detail-btn">
-	                    예매
-	                </span>
-	            </div>
-	        </div>
-	        <div class="movies">
-	            <div class="poster"><a href=""><img src="resources/imgs/루카 (Luca)/poster/movie_image.jpg" alt="Summer Is the Coldest Season"></a></div>
-	            <div class="title">그 여름 가장 차가웠던</div>
-	            <div class="rate-date">예매율, 개봉일</div>
-	            <div class="btn-util">
-	                <span class="inner-btn" id="like-btn">
-	                    좋아여
-	                </span>
-	                <span class="inner-btn" id="detail-btn">
-	                    상세보기
-	                </span>
-	            </div>
-	        </div>
-	        <div class="movies">
-	            <div class="poster"><a href=""><img src="resources/imgs/킬러의 보디가드 (Hitman's Wife's Bodyguard)/poster/movie_image (1).jpg" alt="Summer Is the Coldest Season"></a></div>
-	            <div class="title">그 여름 가장 차가웠던</div>
-	            <div class="rate-date">예매율, 개봉일</div>
-	            <div class="btn-util">
-	                <span class="inner-btn" id="like-btn">
-	                    좋아여
-	                </span>
-	                <span class="inner-btn" id="detail-btn">
-	                    상세보기
-	                </span>
-	            </div>
-	        </div>
-	        <div class="movies">
-	            <div class="poster"><a href=""><img src="resources/imgs/그 여름, 가장 차가웠던 (少女佳禾, Summer Is the Coldest Season)/poster/movie_image.jpg" alt="Summer Is the Coldest Season"></a></div>
-	            <div class="title">그 여름 가장 차가웠던</div>
-	            <div class="rate-date">예매율, 개봉일</div>
-	            <div class="btn-util">
-	                <span class="inner-btn" id="like-btn">
-	                    좋아여
-	                </span>
-	                <span class="inner-btn" id="detail-btn">
-	                    상세보기
-	                </span>
-	            </div>
-	        </div>
-	        <div class="movies">
-	            <div class="poster"><a href=""><img src="resources/imgs/더 파더 (The Father)/poster/movie_image.jpg" alt="Summer Is the Coldest Season"></a></div>
-	            <div class="title">그 여름 가장 차가웠던</div>
-	            <div class="rate-date">예매율, 개봉일</div>
-	            <div class="btn-util">
-	                <span class="inner-btn" id="like-btn">
-	                    좋아여
-	                </span>
-	                <span class="inner-btn" id="detail-btn">
-	                    상세보기
-	                </span>
-	            </div>
-	        </div>
-	    </div>
+	<div class="page-util">
+		<div class="inner-wrap">
+			<span class="svg">
+				<a href="/index">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+					  <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+					  <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+					</svg>
+				</a>
+			</span>
+			<span class="svg">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right" viewBox="0 0 16 16">
+				  <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
+				</svg>		
+			</span>
+			<span class="page-util-text">
+				<a href="/movie">
+					영화
+				</a>
+			</span>
+		</div>	
+	</div>
+	<div class="movies-container">
+	<div class="inner-wrap">
+		<h2>전체영화</h2>
+			<c:set var="rank" value="0"/>
+			<fmt:formatNumber value="${rank }" type="number" var="numRank"/>
+			<c:forEach var="item" items="${movieList }">
+				<div class="movies">
+					<div class="poster">
+						<div class="rank">
+						${numRank = numRank+1 }
+						</div>
+						<a href="/movie/detail?mid=${item.getId() }"><img
+							src="/resources/imgs/movie/${item.getId() }/poster/movie_image.jpg"
+							alt="${item.getTitle() }"></a>
+					</div>
+					<div class="title">
+						<c:url var="rating" value="/resources/imgs/static/rating/" />
+						<c:choose>
+							<c:when test="${item.getRating() eq 0 }">
+								<img class="rating" src="${rating }ratingAll_ico1.png">
+							</c:when>
+							<c:when test="${item.getRating() eq 12 }">
+								<img class="rating" src="${rating }ratingAll_ico2.png">
+							</c:when>
+							<c:when test="${item.getRating() eq 15 }">
+								<img class="rating" src="${rating }ratingAll_ico3.png">
+							</c:when>
+							<c:otherwise>
+								<img class="rating" src="${rating }ratingAll_ico4.png">
+							</c:otherwise>
+						</c:choose>
+						${item.getTitle() }
+					</div>
+					<div class="rate-date">개봉일 ${item.playdate }</div>
+					<div class="reserve-rating">예매율 ${reserveRating.get(numRank-1).get(item.getId()) }%</div>
+					<div class="btn-util">
+						<span class="inner-btn" id="like-btn"> ${item.gcnt } </span> <span
+							class="inner-btn" id="detail-btn"> 예매 </span>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
 	</container>
-    <!-- ----------------</body>---------------- -->
-    <!-- ----------------<footer>---------------- -->
-        <footer>
-    
-        </footer>
-    <!-- ----------------</footer>---------------- -->
+	<!-- ----------------</body>---------------- -->
+	<!-- ----------------<footer>---------------- -->
+	<footer>
+		<%@ include file="../module/footer.jsp"%>
+	</footer>
+	<!-- ----------------</footer>---------------- -->
 </body>
 </html>
 
