@@ -114,35 +114,62 @@ hr { margin: 3px; }
 			  <div class="list-group list-group-flush" id="list-tab" role="tablist">
 			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
 			    <span class="badge badge-pill badge-danger">청불</span> #위왓치유</a>
-			    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">그 여름, 가장 차가웠던</a>
-			    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">그레타 툰베리</a>
-			    <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">극장판 귀멸의 칼날 무한열차편</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">까치발</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">낫아웃</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">노매드랜드</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">더 파더</a>
+			    <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">
+			    <span class="badge badge-pill badge-warning">15</span> 그 여름, 가장 차가웠던</a>
+			    <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">
+			    <span class="badge badge-pill badge-success">전체</span> 그레타 툰베리</a>
+			    <a class="list-group-item list-group-item-action" id="list-settings-list" data-toggle="list" href="#list-settings" role="tab" aria-controls="settings">
+			    <span class="badge badge-pill badge-warning">15</span> 극장판 귀멸의 칼날 무한열차편</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-primary">12</span> 까치발</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-warning">15</span> 낫아웃</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-primary">12</span> 노매드랜드</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-primary">12</span> 더 파더</a>
 			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
 			    <span class="badge badge-pill badge-success">전체</span> 루카</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">메이드 인 루프탑</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">발신제한</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">뱅드림! 로젤리아 에피소드 1 약속</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">분노의 질주 더 얼티메이트</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">아야와 마녀</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">애플</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">야구소녀</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">여고괴담 여섯번째 이야기 모교</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">인트로덕션</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">청춘선거</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">캐시트럭</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">컨저링 3 악마가 시켰다</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">콰이어트 플레이스2</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">크루엘라</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">클라이밍</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">킬러의 보디가드2</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">패터슨</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">프로페서 앤 매드맨</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">학교 가는길</a>
-			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">혼자 사는 사람들</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-warning">15</span> 메이드 인 루프탑</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-warning">15</span> 발신제한</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-success">전체</span> 뱅드림! 로젤리아 에피소드 1 약속</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-primary">12</span> 분노의 질주 더 얼티메이트</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-success">전체</span> 아야와 마녀</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-primary">12</span> 애플</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-primary">12</span> 야구소녀</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-warning">15</span> 여고괴담 여섯번째 이야기 모교</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-primary">12</span> 인트로덕션</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-primary">12</span> 청춘선거</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-danger">청불</span> 캐시트럭</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-warning">15</span> 컨저링 3 악마가 시켰다</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-warning">15</span> 콰이어트 플레이스2</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-primary">12</span> 크루엘라</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-warning">15</span> 클라이밍</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-danger">청불</span> 킬러의 보디가드2</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-primary">12</span> 패터슨</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-warning">15</span> 프로페서 앤 매드맨</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-primary">12</span> 학교 가는길</a>
+			    <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">
+			    <span class="badge badge-pill badge-primary">12</span> 혼자 사는 사람들</a>
 			  </div>
 			</div>
 		  </div>
