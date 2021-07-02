@@ -1,89 +1,178 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
+
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>박스오피스 - SEENEMA</title>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
+<script>
+
+	function mouseoverLike(mid){
+		document.querySelector('#like-'+mid).style.backgroundColor = "lightgray";
+	}
+	
+	function mouseoverReserve(mid){
+		document.querySelector('#reserve-'+mid).style.backgroundColor = "lightgray";
+	}
+	
+	function mouseoutLike(mid){
+		document.querySelector('#like-'+mid).style.backgroundColor = "transparent";
+	}
+	
+	function mouseoutReserve(mid){
+		document.querySelector('#reserve-'+mid).style.backgroundColor = "transparent";
+	}
+</script>
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/static/css/movie.css">
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/static/css/common.css">
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap')
+	;
+</style>
+<script>
+
+	function mouseoverLike(mid){
+		document.querySelector('#like-'+mid).style.backgroundColor = "lightgray";
+	}
+	
+	function mouseoverReserve(mid){
+		document.querySelector('#reserve-'+mid).style.backgroundColor = "lightgray";
+	}
+	
+	function mouseoutLike(mid){
+		document.querySelector('#like-'+mid).style.backgroundColor = "transparent";
+	}
+	
+	function mouseoutReserve(mid){
+		document.querySelector('#reserve-'+mid).style.backgroundColor = "transparent";
+	}
+</script>
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/static/css/movie.css">
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/static/css/common.css">
+<style>
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap')
+	;
+</style>
 <style type="text/css">
-ul {
-  list-style: none;
-  padding-left: 10px;
+* {
+	font-family: 'Noto Sans KR', sans-serif;
 }
+
+ul {
+	list-style: none;
+	padding-left: 10px;
+}
+
 .carousel-item {
-  height: 65vh;
-  min-height: 350px;
-  background: no-repeat center center scroll;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+	height: 65vh;
+	min-height: 350px;
+	background: no-repeat center center scroll;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 }
 </style>
 </head>
 <body class="pt-5">
-  <%@ include file="../module/header.jsp" %>
-  <header>
-  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-      <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-      <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
-  <div class="carousel-inner" role="listbox">
-      <!-- Slide One - Set the background image for this slide in the line below -->
-    <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/RCAhiGJsUUE/1920x1080')">
-      <div class="carousel-caption d-none d-md-block">
-        <h3 class="display-4">First Slide</h3>
-        <p class="lead">This is a description for the first slide.</p>
-      </div>
-    </div>
-      <!-- Slide Two - Set the background image for this slide in the line below -->
-    <div class="carousel-item" style="background-image: url('https://source.unsplash.com/wfh8dDlNFOk/1920x1080')">
-      <div class="carousel-caption d-none d-md-block">
-        <h3 class="display-4">Second Slide</h3>
-        <p class="lead">This is a description for the second slide.</p>
-      </div>
-    </div>
-      <!-- Slide Three - Set the background image for this slide in the line below -->
-    <div class="carousel-item" style="background-image: url('https://source.unsplash.com/O7fzqFEfLlo/1920x1080')">
-      <div class="carousel-caption d-none d-md-block">
-        <h3 class="display-4">Third Slide</h3>
-        <p class="lead">This is a description for the third slide.</p>
-      </div>
-    </div>
-  </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-  </div>
-  </header>
-  <div class="row">
-    <div class="col-md-8">
-      <img class="img-fluid" src="http://placehold.it/750x500" alt="">
-    </div>
-
-    <div class="col-md-4">
-      <h3 class="my-3">영화 제목</h3>
-      <p>대충 줄거리</p>
-      <h3 class="my-3">영화 정보</h3>
-      <ul>
-        <li>장르</li>
-        <li>감독</li>
-        <li>출연</li>
-      </ul>
-      <button type="button">❤좋아요</button>
-      <button type="button">예매하기</button>
-    </div>
-  </div>
-  <%@ include file="../module/footer.jsp" %>
-</body>
+    <!-- ----------------</header>---------------- -->
+    <header>
+		<%@ include file="../module/header.jsp"%>
+	</header>
+	<!-- ----------------</header>---------------- -->
+	<!-- ----------------<body>---------------- -->
+	<container id="container">
+	<div class="page-util">
+		<div class="inner-wrap">
+			<span class="svg"> <a href="/index"> <svg
+						xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+						fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+					  <path fill-rule="evenodd"
+							d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
+					  <path fill-rule="evenodd"
+							d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
+					</svg>
+			</a>
+			</span> <span class="svg"> <svg xmlns="http://www.w3.org/2000/svg"
+					width="16" height="16" fill="currentColor"
+					class="bi bi-caret-right" viewBox="0 0 16 16">
+				  <path
+						d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z" />
+				</svg>
+			</span> <span class="page-util-text"> <a href="/movie"> 영화 </a>
+			</span>
+		</div>
+	</div>
+	<div class="movies-container">
+		<div class="inner-wrap">
+			<h2>전체영화</h2>
+			<c:set var="rank" value="0" />
+			<fmt:formatNumber value="${rank }" type="number" var="numRank" />
+			<c:forEach var="item" items="${movieList }">
+				<div class="movies">
+					<div class="poster">
+						<div class="rank">${numRank = numRank+1 }</div>
+						<a href="/movie/detail?mid=${item.getId() }"><img
+							src="/resources/imgs/movie/${item.getId() }/poster/movie_image.jpg"
+							alt="${item.getTitle() }"></a>
+					</div>
+					<div class="title">
+						<c:url var="rating" value="/resources/imgs/static/rating/" />
+						<c:choose>
+							<c:when test="${item.getRating() eq 0 }">
+								<img class="rating" src="${rating }ratingAll_ico1.png">
+							</c:when>
+							<c:when test="${item.getRating() eq 12 }">
+								<img class="rating" src="${rating }ratingAll_ico2.png">
+							</c:when>
+							<c:when test="${item.getRating() eq 15 }">
+								<img class="rating" src="${rating }ratingAll_ico3.png">
+							</c:when>
+							<c:otherwise>
+								<img class="rating" src="${rating }ratingAll_ico4.png">
+							</c:otherwise>
+						</c:choose>
+						${item.getTitle() }
+					</div>
+					<div class="rate-date">개봉일 ${item.playdate }</div>
+					<div class="reserve-rating">예매율
+						${reserveRating.get(item.getId()) }%</div>
+					<div class="btn-util">
+						<span class="inner-btn" id="like-${item.getId() }" 
+						onmouseover="mouseoverLike(${item.getId() }) "
+						onmouseout="mouseoutLike(${item.getId() })">
+							${item.gcnt } 
+						</span> 
+						<span class="inner-btn" id="reserve-${item.getId() }" 
+						onmouseover="mouseoverReserve(${item.getId() })"
+						onmouseout="mouseoutReserve(${item.getId() })"> 
+							예매
+						</span>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
+	</container>
+	<!-- ----------------</body>---------------- -->
+	<!-- ----------------<footer>---------------- -->
+	<footer>
+		<%@ include file="../module/footer.jsp"%>
+	</footer>
+	<!-- ----------------</footer>---------------- -->
 </html>
+
+

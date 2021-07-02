@@ -1,27 +1,46 @@
 package com.web.seenema.movie.controller;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.web.seenema.movie.dao.MovieDAO;
+import com.web.seenema.movie.dto.MovieDTO;
+import com.web.seenema.movie.service.MovieService;
 
 @Controller
 @RequestMapping(value = "/movie")
 public class MovieController {
 	
+	@Autowired
+	private MovieService service;
+	
+	@Autowired
+	MovieDAO mdao;
+	
 	@RequestMapping(value = "")
-	public ModelAndView movie() {
-		ModelAndView mv = new ModelAndView("movie/movie");
-		mv.addObject("", "");
-		System.out.println("movie 페이지");
-		return mv;
+	public String movie(Model model) {
+		List<MovieDTO> movieList = service.getAllMoviesSortByReserve();
+		Map<Integer, String> reserveRating = service.getReserveRate();
+		model.addAttribute("movieList", movieList);
+		model.addAttribute("reserveRating", reserveRating);
+
+		return "movie/movie";
 	}
 	
 	@RequestMapping(value = "/detail")
-	public ModelAndView movieDetail() {
-		ModelAndView mv = new ModelAndView("movie/moviedetail");
-		mv.addObject("", "");
+	public String movieDetail(Model model, @RequestParam("mid") int mid) {
+		MovieDTO dto = mdao.getMovie(mid);
+		Map<Integer, String> reserveRating = service.getReserveRate();
+		model.addAttribute("movie", dto);		
+		model.addAttribute("reserveRating", reserveRating.get(mid));
 		
-		return mv;
+		return "movie/moviedetail";
 	}
 	
 }

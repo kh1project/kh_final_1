@@ -1,0 +1,98 @@
+* {
+	margin: 0pt;
+}
+
+.movies {
+	display: inline-block;
+	width: 230px;
+	height: 450px;
+	margin: 0px 30px 60px 0px;
+}
+
+.poster {
+	position: relative;
+}
+
+.poster img {
+	width: 230px;
+	height: 330px;
+}
+
+.btn-util {
+	display: block;
+}
+
+.inner-btn {
+	border: 1px solid blue;
+	width: 80px;
+	text-align: center;
+	display: inline-block;
+	margin: 0px auto 0px auto;
+	cursor: pointer;
+}
+
+.logo {
+	display: inline-block;
+	position: absolute;
+	left: 350px;
+}
+
+.view-path {
+	position: sticky;
+	top: 230px;
+}
+
+.title {
+	text-align: center;
+}
+
+.rating {
+	width: 20px;
+	height: 20px;
+	border-radius: 10px;
+}
+
+.page-util-text{
+	vertical-align: text-bottom;
+	line-height: 43px;
+}
+
+.svg{
+    position: relative;
+    bottom: 13px;
+}
+
+.page-util{
+	background-color: #edf7f4;
+	height: 43px;
+}
+
+.page-util a{
+	text-decoration: none;
+	color: #666;
+	font-weight: 600;
+}
+
+.page-util > .inner-wrap{
+	height: 100%; 
+}
+
+.title{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.rank{
+	position: absolute;
+    left: 0;
+    top: 0;
+    padding: 8px 0 0 10px;
+    line-height: 1.1;
+    font-size: 2em;
+    font-style: italic;
+    font-family: Roboto,Dotum,'돋움',sans-serif;
+    font-weight: 300;
+    color: #fff;
+    text-shadow: 2px 2px 2px rgb(0 0 0 / 80%);
+}

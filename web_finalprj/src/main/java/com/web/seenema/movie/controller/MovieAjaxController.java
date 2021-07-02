@@ -8,7 +8,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(value = "/movieajax")
 public class MovieAjaxController {
 	
-	@RequestMapping(value = "")
+	@RequestMapping(value = "ajax")
 	public ModelAndView movieAjax() {
 		ModelAndView mv = new ModelAndView("views/movie");
 		mv.addObject("", "");
