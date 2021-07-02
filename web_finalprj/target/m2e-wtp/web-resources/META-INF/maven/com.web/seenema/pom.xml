@@ -24,7 +24,12 @@
 			<version></version>
 		</dependency> -->		
 
-
+		<!-- JSON 자바 객체를 손쉽게 JSON 형태로 변환(반대 작업도 가능) -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.12.3</version>
+		</dependency>
 	
 		<!--  REST API 디버깅용  -->
 		<dependency>
