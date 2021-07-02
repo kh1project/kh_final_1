@@ -1,5 +1,9 @@
 package com.web.seenema.reserve.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,11 +47,13 @@ public class ReserveController {
 	
 	@RequestMapping(value = "/seats", method = RequestMethod.GET)
 	public ModelAndView seats() throws Exception {
-		SeatDTO dto = new SeatDTO();
-		ress.seatList(dto);
+		List<SeatDTO> seatlists = ress.seatList(1);
+		
+		Map<String, Object> seatcnt = ress.seatcntlist(1);
 		
 		ModelAndView mv = new ModelAndView("reserve/seats");
-		mv.addObject("", "");
+		mv.addObject("seatlists", seatlists);
+		mv.addObject("seatcnt", seatcnt);
 		
 		return mv;
 	}
