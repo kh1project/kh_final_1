@@ -12,7 +12,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <script>
 	function seatinfo(seat) {
-		alert(seat);
+		document.getElementById(seat).style.backgroundColor = "red";
 	}
 	
 	function person_value(person, updown){
@@ -57,16 +57,25 @@ div.seatfream {
 	text-align: center;
 }
 
-input.Screen{ 
-	margin-bottom : 50px;
-	width: 500px; height: 30px;
-	font-size: 10pt;
-	text-align: center;
+input.seatinfo {
+	display: none;
 }
 
-input.seat {
+label.seatinfo {
 	width: 30px; height: 30px;
-	font-size: 8pt;
+	background-color : white;
+	-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
+}
+
+label.screen{
+	width: 500px; height: 30px;
+	border: 1px solid gray;
+	margin-bottom : 50px;
+	font-size: 10pt;
+	background-color: white;
+	text-align: center;
+	line-height: 30px;
+	-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
 }
 
 div.personner {
@@ -80,6 +89,7 @@ label.seat {
 	margin: 20px; padding: auto auto;
 	background-color: white;
 	font-size: 10pt; text-align: center;
+	-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
 }
 
 input.personnel {
@@ -99,16 +109,27 @@ input.personnel {
 	<main class="pt-5">
 		<section class="main">
 			<div class="seatfream pt-5">
-				<input class="Screen" type="text" value="Screen" readonly="readonly"><br>
-				<c:forEach var="list" items="${seatlists }" >
-					<input class="seat" type="button" onclick="seatinfo(this.value)" id="${list.seatrow }${list.seatcol }" value="${list.seatrow }${list.seatcol }">
-					<c:if test="${(list.seatcol eq 4) || (list.seatcol eq 10)}">
-						&nbsp;&nbsp;&nbsp;
-					</c:if>
-					<c:if test="${list.seatcol eq 14}">
-						<br>
-					</c:if>
-				</c:forEach>
+				<form>
+					<label class="screen">Screen</label><br>
+					<c:forEach var="list" items="${seatlists }" >
+						<c:choose>
+							<c:when test="${fn: containsIgnoreCase(list.reserved, 'y') }">
+								<label class="seatinfo" for="${list.seatrow }${list.seatcol }" style="background-color: #666666;">
+								X</label>
+							</c:when>
+							<c:otherwise>
+								<label class="seatinfo" id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }" onclick="seatinfo(this.id);">
+								<input class="seatinfo" type="checkbox" id="${list.seatrow }${list.seatcol }" name="${list.seatrow }" value="${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+							</c:otherwise>
+						</c:choose>
+						<c:if test="${(list.seatcol eq 4) || (list.seatcol eq 10)}">
+							&nbsp;&nbsp;&nbsp;
+						</c:if>
+						<c:if test="${list.seatcol eq 14}">
+							<br>
+						</c:if>
+					</c:forEach>
+				</form>
 				
 				<c:forEach var="seatcnt" items="${seatcnt }">
 					<c:if test="${seatcnt.key eq 'scnt' }">
