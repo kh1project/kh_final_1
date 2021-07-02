@@ -4,6 +4,7 @@
 	"http:/mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
+		<typeAlias type="com.web.seenema.dto.BoxofficeDTO" alias="boxoffice" />
 		<typeAlias type="com.web.seenema.reserve.dto.BranchDTO" alias="branch"></typeAlias>
 		<typeAlias type="com.web.seenema.reserve.dto.RstepDTO" alias="rstep"></typeAlias>
 		<typeAlias type="com.web.seenema.reserve.dto.TableRstepDTO" alias="table"></typeAlias>

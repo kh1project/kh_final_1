@@ -3,7 +3,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
   	<a class="navbar-brand" href="<%=request.getContextPath() %>/index">
-    	<img src="" width="30" height="30" class="d-inline-block align-top" alt="로고">
+    	<!-- <img src="#" width="30" height="30" class="d-inline-block align-top" alt="로고">-->
    	 SEENEMA - movie theater
  	</a>
     <!-- <a class="navbar-brand" href="#">SEENEMA - movie theater</a> -->
@@ -21,10 +21,10 @@
           <a class="nav-link" href="<%=request.getContextPath() %>/reserve">예매</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">영화관</a>
+          <a class="nav-link" href="<%=request.getContextPath() %>/reserve">영화관</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">이벤트</a>
+          <a class="nav-link" href="<%=request.getContextPath() %>/reserve">이벤트</a>
         </li>
       </ul>
     </div>
