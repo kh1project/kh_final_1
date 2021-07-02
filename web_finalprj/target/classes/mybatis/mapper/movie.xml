@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="movieMapper">
+	<select id="movieImageSearch" parameterType="int" resultType="movieImage">
+		select * from image_files where mid = #{mid}
+	</select>
+	<select id="myMovieSearch" parameterType="int" resultType="myMovie">
+		select a.id, a.title, b.path, b.name from movie a, Image_files b where a.id = b.mid and a.id = #{mid}
+	</select>
+</mapper>

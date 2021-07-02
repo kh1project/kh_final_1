@@ -1,13 +1,34 @@
 package com.web.seenema.review.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.seenema.account.service.AccountServiceImpl;
+import com.web.seenema.movie.dto.MovieDTO;
+import com.web.seenema.movie.dto.MovieImageDTO;
+import com.web.seenema.movie.dto.MyMovieDTO;
+import com.web.seenema.movie.service.MovieServiceImpl;
+import com.web.seenema.review.dto.ReviewDTO;
+import com.web.seenema.review.service.ReviewServiceImpl;
+
 @Controller
 @RequestMapping(value = "/review")
 public class ReviewController {
+
+	@Autowired
+	private AccountServiceImpl account;
+	@Autowired
+	private MovieServiceImpl movie;
+	@Autowired
+	private ReviewServiceImpl review;
 	
 	@RequestMapping(value = "")
 	public ModelAndView review() {
@@ -18,47 +39,83 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/detail")
-	public ModelAndView reviewDetail() {
+	public ModelAndView reviewDetail(int rid) {
 		ModelAndView mv = new ModelAndView("review/reviewdetail");
 		mv.addObject("", "");
 		
 		return mv;
 	}
 	
-	@RequestMapping(value = "/reviewadd", method = RequestMethod.GET)
-	public ModelAndView reviewAddGet() {
-		ModelAndView mv = new ModelAndView("review/reviewadd");
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	public ModelAndView reviewAddGet() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		int aid = 1; //session에서 aid 받아와야함. 임시데이터.
+		
+		List<List<MyMovieDTO>> mywlist = null;
+		mywlist = account.mywatchList(aid);
+		
+//		System.out.println("---------------reviewController----------------");
+//		System.out.println("mywlist.size() : " + mywlist.size());
+//		for(int i = 0; i < mywlist.size(); i++) {
+//			for(int j = 0; j < mywlist.get(i).size(); j++) {
+//				System.out.println("mywlist의 " + i + "번째 데이터 : [" + mywlist.get(i).get(j).getId() + "]" + mywlist.get(i).get(j).getTitle() + " 의 파일 : " + mywlist.get(i).get(j).getPath() + mywlist.get(i).get(j).getName());
+//			}
+//		}
+		
+		mv.setViewName("review/reviewadd");
+		mv.addObject("mywlist", mywlist);
 		mv.addObject("", "");
 		
 		return mv;
 	}
 	
-	@RequestMapping(value = "/reviewadd", method = RequestMethod.POST)
-	public ModelAndView reviewAddPost() {
-		ModelAndView mv = new ModelAndView("review/reviewadd");
-		mv.addObject("", "");
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	public ModelAndView reviewAddPost(HttpServletRequest req) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int SelectMovie = (Integer.parseInt((String)req.getParameter("wm").replace("wm", "")));
+		
+		List<MyMovieDTO> mywatch = null;
+		mywatch = account.mywatchSelect(SelectMovie);
+		
+		for(int i = 0; i < mywatch.size(); i++) {
+			System.out.println(mywatch.get(i).getPath() + mywatch.get(i).getName() );
+		}
+		
+		mv.setViewName("redirect:/review/add");	
+		mv.addObject("mywatch", mywatch);	//이거 내일 jsp에서 불러다 #add-step2 쪽에 출력하면 됨.
+											//그리고 jsp에서 script 처리할 것. 메가박스처럼.
 		
 		return mv;
 	}
 	
-	@RequestMapping(value = "/reviewupdate", method = RequestMethod.GET)
-	public ModelAndView reviewUpdateGet() {
+	@RequestMapping(value = "/add2", method = RequestMethod.POST)
+	public ModelAndView reviewAdd2Post(HttpServletRequest req) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		
+		mv.setViewName("review");		
+		
+		return mv;
+	}
+	
+	@RequestMapping(value = "/update", method = RequestMethod.GET)
+	public ModelAndView reviewUpdateGet(Model m, int rid) {
 		ModelAndView mv = new ModelAndView("review/reviewupdate");
 		mv.addObject("", "");
 		
 		return mv;
 	}
 	
-	@RequestMapping(value = "/reviewupdate", method = RequestMethod.POST)
-	public ModelAndView reviewUpdatePost() {
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	public ModelAndView reviewUpdatePost(ReviewDTO dto) {
 		ModelAndView mv = new ModelAndView("review/reviewupdate");
 		mv.addObject("", "");
 		
 		return mv;
 	}
 	
-	@RequestMapping(value = "/reviewdelete")
-	public ModelAndView reviewDelete() {
+	@RequestMapping(value = "/delete")
+	public ModelAndView reviewDelete(int rid) {
 		ModelAndView mv = new ModelAndView("review/review.jsp");
 		mv.addObject("", "");
 		

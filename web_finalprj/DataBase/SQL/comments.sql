@@ -1,3 +1,5 @@
+DROP TABLE comments;
+
 -- 댓글 테이블
 CREATE TABLE comments (
     id NUMBER,

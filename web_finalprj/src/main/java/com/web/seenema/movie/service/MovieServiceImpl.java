@@ -9,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
+//import com.web.seenema.account.Repository.AccountRepositoryImpl;
+//import com.web.seenema.movie.dto.MovieImageDTO;
+//import com.web.seenema.movie.dto.MyMovieDTO;
+//import com.web.seenema.movie.repository.MovieRepositoryImpl;
 import com.web.seenema.movie.dao.MovieDAO;
 import com.web.seenema.movie.dto.MovieDTO;
 
@@ -20,6 +24,22 @@ public class MovieServiceImpl implements MovieService {
 	
 	@Autowired
 	MovieDAO dao;
+	
+	// 주석은 효정님 코드(2021-07-02)
+//	@Autowired
+//	private MovieRepositoryImpl dto;
+//	
+//	@Override
+//	public List<MovieImageDTO> findMovieImageList(int mid) throws Exception {
+//		List<MovieImageDTO> data = dto.selectMovieImageList(mid);
+//		return data;
+//	}
+//	
+//	@Override
+//	public List<MyMovieDTO> mywatchmovieList(int mid) throws Exception {
+//		List<MyMovieDTO> data = dto.selectWatchMovieList(mid);
+//		return data;
+//	}
 
 	@Override
 	public List<MovieDTO> getAllMovies() {

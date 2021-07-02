@@ -1,0 +1,5 @@
+@charset "UTF-8";
+.add-imagelist { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-around; align-content: flex-start; }
+.add-imagelist img { width:23%; padding:1%; margin:1%; border:1px solid #ddd; border-radius:5px; height:150px; }
+.add-imagetext {  }
+.add-imagetext img, .add-imagetext textarea { width:100%; }

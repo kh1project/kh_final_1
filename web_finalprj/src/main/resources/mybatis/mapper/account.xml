@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="accountMapper">
+	<select id="myMovieSearch" parameterType="int" resultType="_int">
+		select mid from MOVIE_THEATER MT where MT.id IN (select mtid from time T where T.id IN (select timeid from reservation R where R.aid = #{aid}))
+	</select>
+</mapper>
