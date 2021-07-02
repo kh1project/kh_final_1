@@ -33,6 +33,6 @@ INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '광주/전�
 INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '광주/전라', '목포하당');
 
 -- 강원
-INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '광원', '남춘천');
-INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '광원', '속초');
-INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '광원', '원주');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '강원', '남춘천');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '강원', '속초');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '강원', '원주');
