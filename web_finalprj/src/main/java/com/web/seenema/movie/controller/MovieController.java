@@ -26,7 +26,7 @@ public class MovieController {
 	@RequestMapping(value = "")
 	public String movie(Model model) {
 		List<MovieDTO> movieList = service.getAllMoviesSortByReserve();
-		List<Map<Integer, String>> reserveRating = service.getReserveRate();
+		Map<Integer, String> reserveRating = service.getReserveRate();
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("reserveRating", reserveRating);
 
@@ -36,7 +36,9 @@ public class MovieController {
 	@RequestMapping(value = "/detail")
 	public String movieDetail(Model model, @RequestParam("mid") int mid) {
 		MovieDTO dto = mdao.getMovie(mid);
+		Map<Integer, String> reserveRating = service.getReserveRate();
 		model.addAttribute("movie", dto);		
+		model.addAttribute("reserveRating", reserveRating.get(mid));
 		
 		return "movie/moviedetail";
 	}

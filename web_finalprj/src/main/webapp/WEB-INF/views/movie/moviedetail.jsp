@@ -5,16 +5,28 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>"영화제목" - 주요정보</title>
+<title>"${movie.getTitle() }" - 주요정보</title>
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
+
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/static/css/common.css">
 <style>
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap');
+</style>	
+<style>
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;	
+	letter-spacing: 0;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
 .poster {
 	position: absolute;
 	width: 270px;
@@ -70,41 +82,93 @@
 	padding-left: 15px;
 }
 
-.info>* {
+.info > * {
 	color: white;
 	display: block;
+}
+
+.title {
+	font-weight: 500;
+	text-shadow: 2px 2px 10px rgb(0 0 0 / 70%);
+}
+
+.score-info > div {
+	top: 300px;
+    position: relative;
+	display:inline-block;
+	margin: 0 20px 0 0;
+}
+
+.score-title {
+	font-size: 14px;
+	font-weight: bold;
+	color: #CCCCCC;
+	margin-bottom: -5px;
+}
+
+.score-data{
+	font-size: 32px;
 }
 
 .like-btn {
 	border: 2px solid rgba(255, 255, 255, 0.4);
 	border-radius: 5px;
-	padding: 2px 5px 2px 5px;
+	padding: 3px 6px 3px 6px;
 	width: 100px;
 	text-align: center;
-	font-size: 14pt;
+	font-size: 14px;
+}
+
+.movie-textinfo > div p{
+	color: #222;
+}
+
+.movie-textinfo > div > p:before{
+	width: 10px;
+	height: 10px;
+	background-color: black;
+	display: inline-block;
+}
+
+.movie-textinfo > div > p{
+	display: inline-block;
+}
+.partition{
+height: 10px;
+    background-color: lightgray;
+    width: 2px;
+    margin: 0px 10px 0px 16px
+}
+
+.info-graph{
+	margin-bottom: 20px;
+}
+
+.content-text{
+	font-size: 15px;
 }
 </style>
 <script>
-window.onload = function(){
-	const likeBtn = document.querySelector(".like-btn");
+	window.onload = function() {
+		const likeBtn = document.querySelector(".like-btn");
 
-	likeBtn.onmouseover = function() {
-		likeBtn.style.backgroundColor = "white";
-		likeBtn.style.color = "black";
-	}
+		likeBtn.onmouseover = function() {
+			likeBtn.style.backgroundColor = "white";
+			likeBtn.style.color = "black";
+		}
 
-	likeBtn.onmouseout = function() {
-		likeBtn.style.backgroundColor = "transparent";
-		likeBtn.style.color = "white";
+		likeBtn.onmouseout = function() {
+			likeBtn.style.backgroundColor = "transparent";
+			likeBtn.style.color = "white";
+		}
 	}
-}
 </script>
 </head>
 <body>
 	<header>
 		<%@ include file="../module/header.jsp"%>
 	</header>
-<body>
+<body class="pt-5">
 	<div class="bgcolor"></div>
 	<div class="inner-wrap">
 		<div>
@@ -122,10 +186,15 @@ window.onload = function(){
 							</svg>${movie.getGcnt() }
 						</div>
 					</div>
-					<div class="info">
-						<div></div>
-						<div></div>
-						<div>평점 ${movie.getGrade() }</div>
+					<div class="score-info">
+						<div class="score">
+							<p class="score-title">평점</p>
+							<p class="score-data">${movie.getGrade() }</p>
+						</div>
+						<div class="rank">
+							<p class="score-title">예매율</p>
+							<p class="score-data">${reserveRating }%</p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -151,16 +220,47 @@ window.onload = function(){
 					alt="${movie.getTitle() }"
 					src="/resources/imgs/movie/${movie.getId() }/poster/movie_image.jpg">
 			</div>
-			<div class="reserve pt-5">예매</div>
-			<h4>${movie.getId() }</h4>
-			<h4>${movie.getSummary() }</h4>
-			<h4>${movie.getType() }</h4>
-			<h4>${movie.getDirector() }</h4>
-			<h4>${movie.getGenre() }</h4>
-			<h4>${movie.getRunningtime() }</h4>
-			<h4>${movie.getRating() }</h4>
-			<h4>${movie.getActor() }</h4>
-			<h4>${movie.getPlaydate() }</h4>
+			<div class="content-text">
+				<div class="reserve">예매</div>
+				<div class="summary">${movie.getSummary() }</div>
+				<hr>
+				<div class="movie-textinfo">			
+					<div>상영타입 : ${movie.getType() }</div>
+					<div style="margin-bottom: -15px"> 
+						<p>감독 : ${movie.getDirector() }</p><p class="partition"></p> 
+						<p>장르 : ${movie.getGenre() } / ${movie.getRunningtime() }분</p><p class="partition"></p>
+						<p>등급 : ${movie.getRating() }세이상관림가</p><p class="partition"></p>
+						<p>개봉일 : ${movie.getPlaydate() }</p>
+					</div>
+						<p>출연진 : ${movie.getActor() }</p>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="info-graph">
+			여기쯤 인포그래픽이 있으면 좋겟다.
+		</div>
+		<hr>
+		<div class="review">
+			<div class="review-cnt">"영화에 대한"리뷰가 "몇개" 있어요</div>
+			<div class="input-container">리뷰 입력창</div>
+			<!--  반복문 -->
+			<div class="review-list">
+				<div class="user-info">유저정보</div>
+				<div class="review-score">별점</div>
+				<div class="review-context">리뷰 내용</div>
+				<div class="review-date">리뷰작성일</div>
+				<div class="review-goods">따봉</div>
+				<div>줄 늘리기</div>
+				<div>줄 늘리기</div>
+				<div>줄 늘리기</div>
+				<div>줄 늘리기</div>
+				<div>줄 늘리기</div>
+				<div>줄 늘리기</div>
+				<div>줄 늘리기</div>
+				<div>줄 늘리기</div>
+				<div>줄 늘리기</div>
+			</div>
 		</div>
 	</div>
 </body>

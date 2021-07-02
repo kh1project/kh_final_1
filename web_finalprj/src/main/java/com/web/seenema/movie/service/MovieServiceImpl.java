@@ -58,7 +58,7 @@ public class MovieServiceImpl implements MovieService {
 	}
 	
 	@Override
-	public List<Map<Integer, String>> getReserveRate() {
+	public Map<Integer, String> getReserveRate() {
 		Map<Integer, String> map = new HashMap<>();
 		List<Map<Integer, String>> mapList = new ArrayList<>();
 		
@@ -72,10 +72,9 @@ public class MovieServiceImpl implements MovieService {
 			String reserveRate = 
 					String.format("%.2f", (movie.getRcnt()*100)/(double)rcntAll);
 			map.put(movie.getId(), reserveRate);
-			mapList.add(map);
 		}
 		
-		return mapList;
+		return map;
 	}
 
 }

@@ -12,5 +12,5 @@ public interface MovieService {
 	public List<MovieDTO> getPreMovies();
 	public MovieDTO getMovie(int mid);
 	public List<MovieDTO> getAllMoviesSortByReserve();
-	public List<Map<Integer, String>> getReserveRate();
+	public Map<Integer, String> getReserveRate();
 }
