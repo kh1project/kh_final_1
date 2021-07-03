@@ -13,7 +13,7 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <c:url var="url" value="/mainAjax" />
 <script type="text/javascript">
-	function like(id) {
+	function like(id, ele) {
 		$.ajax({
 			url: "${url }",
 			type: "get",
@@ -23,10 +23,10 @@
 			},
 			success: function(data) {
 				if(data.res == "success") {
-					document.querySelector('#gcnt').innerText = data.gcnt;
-					var heart = document.querySelector('#heart');
-					heart.innerText = "♥ ";
-					heart.style.color = "red";
+					var span = ele.children;
+					span.gcnt.innerText = data.gcnt;
+					span.heart.innerText = "♥ ";
+					span.heart.style.color = "red";
 				}
 			},
 			/*error: function(request, status, error) {
@@ -125,7 +125,7 @@
 				      <div class="card-body p-0">
 				  		<a href=""><img class="card-img mb-2" src="<c:url value="/resources/img/${item.id }/poster/movie_image.jpg" />"></a>
 				  		<div class="cover">
-					        <button class="btn btn1 btn-outline-light" onclick="like(${item.id });"><span id="heart">♡ </span><span id="gcnt">${item.gcnt }</span></button>
+					        <button class="btn btn1 btn-outline-light" onclick="like(${item.id }, this);"><span name="heart">♡ </span><span name="gcnt">${item.gcnt }</span></button>
 					        <a href="<c:url value="/reserve" />" class="btn btn2 btn-primary">예매하기</a>
 					    </div>
 				      </div>

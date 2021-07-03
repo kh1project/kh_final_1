@@ -12,19 +12,43 @@
 	</select>
 	
 	<select id="boxoffice" resultType="boxoffice">
-		SELECT * FROM(
-			SELECT id, gcnt FROM(
-				SELECT m.id as id, count(m.id) as cnt, avg(m.gcnt) as gcnt
-					FROM reservation r
-					  INNER JOIN time t
-						ON r.timeid = t.id
-					  INNER JOIN movie_theater mt
-						ON t.mtid = mt.id
-					  INNER JOIN movie m
-						ON mt.mid = m.id
-					GROUP BY m.id
-					ORDER BY gcnt DESC))
+		SELECT *
+		  FROM(
+			
+				SELECT m.id as id, avg(m.gcnt) as gcnt
+				  FROM reservation r
+				 INNER JOIN time t
+					ON r.timeid = t.id
+				 INNER JOIN movie_theater mt
+					ON t.mtid = mt.id
+				 INNER JOIN movie m
+					ON mt.mid = m.id
+				 GROUP BY m.id
+				 ORDER BY gcnt DESC
+		  )
 		WHERE ROWNUM &lt;= 4
+	</select>
+	
+	<select id="boxofficeUnder4" resultType="boxoffice">
+		SELECT id, gcnt
+		  FROM movie
+		 WHERE id IN(
+		 			SELECT *
+		 			  FROM (SELECT id FROM movie WHERE id &lt;= 15 ORDER BY playdate DESC)
+		 			 WHERE ROWNUM &lt;= 4
+		 )
+		 
+	</select>
+	
+	<select id="movieCnt" resultType="_int">
+		SELECT COUNT(distinct m.id) as cnt
+		  FROM reservation r
+		 INNER JOIN time t
+		   	ON r.timeid = t.id
+		 INNER JOIN movie_theater mt
+		    ON t.mtid = mt.id
+		 INNER JOIN movie m
+		    ON mt.mid = m.id
 	</select>
 	
 	<select id="getGcnt" resultType="_int">

@@ -24,7 +24,18 @@ public class MainRepositoryImpl implements MainRepository {
 		// 순서가 필요해서 HashMap 아닌 DTO에 담음.
 		return sqlSession.selectList("mainMapper.boxoffice");
 	}
+	
+	@Override
+	public List<BoxofficeDTO> selectBoxofficeListUnder4() {
+		// 순서가 필요해서 HashMap 아닌 DTO에 담음.
+		return sqlSession.selectList("mainMapper.boxofficeUnder4");
+	}
 
+	@Override
+	public int selectMovieCnt() {
+		return sqlSession.selectOne("mainMapper.movieCnt");
+	}
+	
 	@Override
 	public boolean updateGcnt(int id) {
 		boolean result = false;

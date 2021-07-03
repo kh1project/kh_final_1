@@ -9,6 +9,8 @@ public interface MainRepository {
 
 	public List<Integer> selectCarouselList();
 	public List<BoxofficeDTO> selectBoxofficeList();
+	public List<BoxofficeDTO> selectBoxofficeListUnder4();
+	public int selectMovieCnt();
 	public boolean updateGcnt(int id);
 	public int selectGcnt(int id);
 }
