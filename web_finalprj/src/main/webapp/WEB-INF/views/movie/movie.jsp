@@ -126,7 +126,7 @@ ul {
 					<div class="poster">
 						<div class="rank">${numRank = numRank+1 }</div>
 						<a href="/movie/detail?mid=${item.getId() }"><img
-							src="/resources/imgs/movie/${item.getId() }/poster/movie_image.jpg"
+							src="<c:url value="/resources/img/${item.getId() }/poster/movie_image.jpg" />"
 							alt="${item.getTitle() }"></a>
 					</div>
 					<div class="title">

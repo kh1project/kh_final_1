@@ -67,7 +67,8 @@
 	      			<div class="carousel-item">
 	      		</c:otherwise>
 	      	</c:choose>
-	      		<img src="<c:url value="/resources/img/${item }/stillcut/movie_image.jpg" />">
+	      		<c:url var="path1" value="/resources/img/${item }/stillcut/movie_image.jpg" />
+	      		<img src="${path1 }">
 	      	</div>
 	      </c:forEach>
 	    </div>
@@ -82,32 +83,6 @@
 	  </div>
 	</div>
 	    
-	  <%--
-	      <!-- Slide One - Set the background image for this slide in the line below -->
-	      <div class="carousel-item active">
-	        <img src="<%=request.getContextPath() %>/resources/img/크루엘라 (Cruella)/poster/movie_image.jpg">
-	        <!-- <div class="carousel-caption d-none d-md-block">
-	          <h3 class="display-4">First Slide</h3>
-	          <p class="lead">This is a description for the first slide.</p>
-	        </div> -->
-	      </div>
-	      <!-- Slide Two - Set the background image for this slide in the line below -->
-	      <div class="carousel-item">
-	        <img src="<%=request.getContextPath() %>/resources/img/분노의 질주 더 얼티메이트 (Fast & Furious 9 THE FAST SAGA)/poster/movie_image.jpg">
-	        <!-- <div class="carousel-caption d-none d-md-block">
-	          <h3 class="display-4">Second Slide</h3>
-	          <p class="lead">This is a description for the second slide.</p>
-	        </div> -->
-	      </div>
-	      <!-- Slide Three - Set the background image for this slide in the line below -->
-	      <div class="carousel-item">
-	        <img src="<%=request.getContextPath() %>/resources/img/발신제한 (HARD HIT)/poster/movie_image.jpg">
-	        <!-- <div class="carousel-caption d-none d-md-block">
-	          <h3 class="display-4">Third Slide</h3>
-	          <p class="lead">This is a description for the third slide.</p>
-	        </div> -->
-	      </div>
-	--%>
 
 	<div id="boxoffice">
 		<div class="caption">
@@ -123,7 +98,8 @@
 				  <div class="col-md-2">
 				    <div class="card">
 				      <div class="card-body p-0">
-				  		<a href=""><img class="card-img mb-2" src="<c:url value="/resources/img/${item.id }/poster/movie_image.jpg" />"></a>
+				        <c:url var="path2" value="/resources/img/${item.id }/poster/movie_image.jpg" />
+				  		<a href=""><img class="card-img mb-2" src="${path2 }"></a>
 				  		<div class="cover">
 					        <button class="btn btn1 btn-outline-light" onclick="like(${item.id }, this);"><span name="heart">♡ </span><span name="gcnt">${item.gcnt }</span></button>
 					        <a href="<c:url value="/reserve" />" class="btn btn2 btn-primary">예매하기</a>
