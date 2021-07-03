@@ -14,8 +14,7 @@
 	<select id="boxoffice" resultType="boxoffice">
 		SELECT *
 		  FROM(
-			
-				SELECT m.id as id, avg(m.gcnt) as gcnt
+				SELECT distinct m.id as id, m.gcnt as gcnt, m.summary as summary
 				  FROM reservation r
 				 INNER JOIN time t
 					ON r.timeid = t.id
@@ -23,14 +22,13 @@
 					ON t.mtid = mt.id
 				 INNER JOIN movie m
 					ON mt.mid = m.id
-				 GROUP BY m.id
 				 ORDER BY gcnt DESC
 		  )
 		WHERE ROWNUM &lt;= 4
 	</select>
 	
 	<select id="boxofficeUnder4" resultType="boxoffice">
-		SELECT id, gcnt
+		SELECT id, gcnt, summary
 		  FROM movie
 		 WHERE id IN(
 		 			SELECT *

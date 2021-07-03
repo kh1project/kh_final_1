@@ -100,17 +100,17 @@
 				    <div class="card">     
 				        <c:url var="path2" value="/resources/img/${item.id }/poster/movie_image.jpg" />
 				  		<a href=""><img class="card-img mb-2" src="${path2 }"></a>
-				  		<div class="cover">
-					        <button class="btn btn1 btn-outline-light" onclick="like(${item.id }, this);"><span name="heart">♡ </span><span name="gcnt">${item.gcnt }</span></button>
-					        <a href="<c:url value="/reserve" />" class="btn btn2 btn-primary">예매하기</a>
-					    </div>
-					    <div class="card-img-overlay num">
+					    <div class="card-img-overlay">
 				      		<h1 class="card-title">${status.count }</h1>
 				      	</div>
 				      	<div class="card-img-overlay summary">
-				      		<p class="card-text">summary</p>
+				      		<p class="card-text">${item.summary }</p>
 				      	</div>
 				    </div>
+				    <div class="cover">
+				        <button class="btn btn1 btn-outline-light" onclick="like(${item.id }, this);"><span name="heart">♡ </span><span name="gcnt">${item.gcnt }</span></button>
+				        <a href="<c:url value="/reserve" />" class="btn btn2 btn-primary">예매하기</a>
+					</div>
 				  </div> 
 			  </c:forEach>
 			  

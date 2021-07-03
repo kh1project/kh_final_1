@@ -58,7 +58,7 @@
 .card:hover .summary {
 	visibility: visible;
 	background-color: rgba(0, 0, 0, 0.8);
-	text-align: right;
+	text-align: left;
 	color: white;
 }
 
