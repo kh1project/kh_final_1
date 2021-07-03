@@ -27,7 +27,6 @@ public class MainRepositoryImpl implements MainRepository {
 	
 	@Override
 	public List<BoxofficeDTO> selectBoxofficeListUnder4() {
-		// 순서가 필요해서 HashMap 아닌 DTO에 담음.
 		return sqlSession.selectList("mainMapper.boxofficeUnder4");
 	}
 
