@@ -25,3 +25,11 @@ select mid
 				  where T.id IN (select timeid
 				                   from reservation R
 				                  where R.aid = 1));
+
+SELECT m.rating
+  FROM movie m
+  JOIN movie_theater t
+    ON m.id = t.mid
+  JOIN seat s
+    ON t.id = s.tid
+ WHERE s.tid = 1;

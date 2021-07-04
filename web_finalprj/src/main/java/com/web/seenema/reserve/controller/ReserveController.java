@@ -51,7 +51,11 @@ public class ReserveController {
 		
 		Map<String, Object> seatcnt = ress.seatcntlist(1);
 		
+		int rating = 19; // 임시 연령
+		
 		ModelAndView mv = new ModelAndView("reserve/seats");
+		
+		mv.addObject("rating", rating);
 		mv.addObject("seatlists", seatlists);
 		mv.addObject("seatcnt", seatcnt);
 		
