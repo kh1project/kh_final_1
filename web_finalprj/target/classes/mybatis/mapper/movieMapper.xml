@@ -15,4 +15,16 @@
 	<select id="getAllMoviesSortByReserve" resultType="com.web.seenema.movie.dto.MovieDTO">
 		SELECT * FROM movie ORDER BY rcnt DESC
 	</select>
+	
+	<select id="getLikeList" resultType="com.web.seenema.movie.dto.MovieLikeDTO">
+		SELECT * FROM movielike Where aid = #{aid}
+	</select>
+	
+	<insert id="insertMovieLike" parameterType="com.web.seenema.movie.dto.MovieLikeDTO">
+		INSERT INTO movielike VALUES(#{mid}, #{aid})
+	</insert>
+	
+	<delete id="deleteMovieLike" parameterType="com.web.seenema.movie.dto.MovieLikeDTO">
+		DELETE FROM movieLike WHERE mid = #{mid} AND aid = #{aid} 
+	</delete>
 </mapper>

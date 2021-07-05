@@ -19,14 +19,12 @@
 	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap');
 </style>	
 <style>
-
 *{
 	font-family: 'Noto Sans KR', sans-serif;	
 	letter-spacing: 0;
     line-height: 1.5;
     font-weight: 400;
 }
-
 .poster {
 	position: absolute;
 	width: 270px;
@@ -34,7 +32,6 @@
 	top: 50px;
 	right: 30px;
 }
-
 .rating {
 	width: 23px;
 	height: 23px;
@@ -44,72 +41,63 @@
 	position: absolute;
 	text-shadow: 2px 2px 2px rgb(0 0 0/ 80%);
 }
-
 .info-container {
 	height: 520px;
 	margin: 0 0 40px 0;
 	position: relative;
 	overflow: hidden;
 }
-
 .bgcolor {
 	background-color: black;
 	width: 100%;
 	height: 520px;
 	position: absolute;
 }
-
 .bg-poster {
 	position: absolute;
 	width: 100%;
 	opacity: .3;
 }
-
 .title {
 	padding-top: 15px; font-size : 46px;
 	width: 800px;
 	display: block;
 	font-size: 46px;
 }
-
 .util-btn {
 	display: block;
 }
-
 .info {
 	position: relative;
 	z-index: 1;
 	padding-left: 15px;
 }
-
 .info > * {
 	color: white;
 	display: block;
 }
-
 .title {
 	font-weight: 500;
 	text-shadow: 2px 2px 10px rgb(0 0 0 / 70%);
 }
-
+.subtitle{
+	
+}
 .score-info > div {
 	top: 300px;
     position: relative;
 	display:inline-block;
 	margin: 0 20px 0 0;
 }
-
 .score-title {
 	font-size: 14px;
 	font-weight: bold;
 	color: #CCCCCC;
 	margin-bottom: -5px;
 }
-
 .score-data{
 	font-size: 32px;
 }
-
 .like-btn {
 	border: 2px solid rgba(255, 255, 255, 0.4);
 	border-radius: 5px;
@@ -117,19 +105,17 @@
 	width: 100px;
 	text-align: center;
 	font-size: 14px;
+	cursor: pointer;
 }
-
 .movie-textinfo > div p{
 	color: #222;
 }
-
 .movie-textinfo > div > p:before{
 	width: 10px;
 	height: 10px;
 	background-color: black;
 	display: inline-block;
 }
-
 .movie-textinfo > div > p{
 	display: inline-block;
 }
@@ -139,11 +125,9 @@ height: 10px;
     width: 2px;
     margin: 0px 10px 0px 16px
 }
-
 .info-graph{
 	margin-bottom: 20px;
 }
-
 .content-text{
 	font-size: 15px;
 }
@@ -151,17 +135,30 @@ height: 10px;
 <script>
 	window.onload = function() {
 		const likeBtn = document.querySelector(".like-btn");
-
 		likeBtn.onmouseover = function() {
 			likeBtn.style.backgroundColor = "white";
 			likeBtn.style.color = "black";
 		}
-
 		likeBtn.onmouseout = function() {
 			likeBtn.style.backgroundColor = "transparent";
 			likeBtn.style.color = "white";
 		}
+		
 	}
+	
+		function mouseclickLike(mid){
+			$.ajax({
+				url: "/movieajax", 
+				type: "post",
+				datatype: "json",
+				data: {
+					userid : 1,
+					"mid" : mid
+				},
+				success: function(data){},
+				error: function(){}
+			})
+		}
 </script>
 </head>
 <body>
@@ -177,8 +174,9 @@ height: 10px;
 					src="/resources/imgs/movie/${movie.getId() }/poster/movie_image (1).jpg">
 				<div class="info">
 					<div class="title ">${movie.getTitle()}</div>
+					<div class="subtitle ">${movie.getSubtitle()}</div>
 					<div class="util-btn">
-						<div class="like-btn">
+						<div class="like-btn" onclick="mouseclickLike(${movie.getId() })">
 							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 								fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
 						  		<path

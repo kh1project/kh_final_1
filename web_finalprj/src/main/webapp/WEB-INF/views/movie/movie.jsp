@@ -9,17 +9,29 @@
 <head>
 <meta charset="UTF-8">
 <title>박스오피스 - SEENEMA</title>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
-<link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <script>
-
+/* $.ajax({
+	url: , 
+	type: ,
+	datatype: "json",
+	data: {},
+	success: function(data){},
+	error: function(){}
+}) */
+	function mouseoverUnlike(mid){
+		document.querySelector('#unlike-'+mid).style.backgroundColor = "lightgray";
+	}
+	
 	function mouseoverLike(mid){
 		document.querySelector('#like-'+mid).style.backgroundColor = "lightgray";
 	}
 	
 	function mouseoverReserve(mid){
 		document.querySelector('#reserve-'+mid).style.backgroundColor = "lightgray";
+	}
+	
+	function mouseoutUnlike(mid){
+		document.querySelector('#unlike-'+mid).style.backgroundColor = "transparent";
 	}
 	
 	function mouseoutLike(mid){
@@ -29,34 +41,61 @@
 	function mouseoutReserve(mid){
 		document.querySelector('#reserve-'+mid).style.backgroundColor = "transparent";
 	}
+	
+	function iLikeIt(mid){
+		$.ajax({
+			url: "/movieajax/like", 
+			type: "post",
+			datatype: "json",
+			data: {
+				userid : 1,
+				"mid" : mid
+			},
+			success: function(data){
+				document.querySelector("#unlike-"+mid).innerHTML = "<span class=\"inner-btn liked\" id=\"like-"+mid+"\" onmouseover=\"mouseoverLike("+mid+")\" onmouseout=\"mouseoutLike("+mid+")\" onclick=\"iHateIt("+mid+")\">"+${movieList.get(mid).getGcnt()}+"</span>";
+				console.log("likeit");
+				console.log("mid -> " + ${movieList.get(mid).getId()});
+			},
+			error: function(){
+				console.log("like 실패");
+			}
+		})
+	}
+	
+	function iHateIt(mid){
+		$.ajax({
+			url: "/movieajax/unlike", 
+			type: "post",
+			datatype: "json",
+			data: {
+				userid : 1,
+				"mid" : mid
+			},
+			success: function(data){
+				document.querySelector("#like-"+mid).innerHTML = "<span class=\"inner-btn unlike\" id=\"unlike-"+mid+"\" onmouseover=\"mouseoverUnlike("+mid+")\" onmouseout=\"mouseoutUnlike("+mid+")\" onclick=\"iLikeIt("+mid+")\">"+${movieList.get(mid).getGcnt()}+"</span>";
+				console.log("hateit");
+			},
+			error: function(){
+				console.log("like 실패");
+			}
+		})
+	}
+	
+	/* <span class="inner-btn unlike" id="unlike-${item.getId() }"
+		onmouseover="mouseoverUnlike(${item.getId() })" 
+		onmouseout="mouseoutUnlike(${item.getId() })" 
+		onclick="iLikeIt(${item.getId() })">
+			${item.gcnt } 
+		</span> */ 
+	
+	
 </script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <link type="text/css" rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/static/css/movie.css">
-<link type="text/css" rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/static/css/common.css">
-<style>
-@import
-	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap')
-	;
-</style>
-<script>
-
-	function mouseoverLike(mid){
-		document.querySelector('#like-'+mid).style.backgroundColor = "lightgray";
-	}
-	
-	function mouseoverReserve(mid){
-		document.querySelector('#reserve-'+mid).style.backgroundColor = "lightgray";
-	}
-	
-	function mouseoutLike(mid){
-		document.querySelector('#like-'+mid).style.backgroundColor = "transparent";
-	}
-	
-	function mouseoutReserve(mid){
-		document.querySelector('#reserve-'+mid).style.backgroundColor = "transparent";
-	}
-</script>
+	href="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/static/css/movie.css">
 <link type="text/css" rel="stylesheet"
@@ -70,12 +109,10 @@
 * {
 	font-family: 'Noto Sans KR', sans-serif;
 }
-
 ul {
 	list-style: none;
 	padding-left: 10px;
 }
-
 .carousel-item {
 	height: 65vh;
 	min-height: 350px;
@@ -88,10 +125,11 @@ ul {
 </style>
 </head>
 <body class="pt-5">
-    <!-- ----------------</header>---------------- -->
-    <header>
+	<!-- ----------------<header>---------------- -->
+	<header>
 		<%@ include file="../module/header.jsp"%>
 	</header>
+
 	<!-- ----------------</header>---------------- -->
 	<!-- ----------------<body>---------------- -->
 	<container id="container">
@@ -150,14 +188,37 @@ ul {
 					<div class="rate-date">개봉일 ${item.playdate }</div>
 					<div class="reserve-rating">예매율
 						${reserveRating.get(item.getId()) }%</div>
-					<div class="btn-util">
-						<span class="inner-btn" id="like-${item.getId() }" 
-						onmouseover="mouseoverLike(${item.getId() }) "
-						onmouseout="mouseoutLike(${item.getId() })">
-							${item.gcnt } 
-						</span> 
+					<div class="btn-util" id="btns-${item.getId() }">
+					<c:forEach var="likeList" items="${likeList }">
+					<c:set var="liked" value="false"/>
+						<c:if test="${item.getId() eq likeList.getMid() }">
+							<c:set var="liked" value="true" />
+						</c:if>
+					</c:forEach>
+					<c:choose>
+						<c:when test="${liked eq 'true' }" >
+							<span id="like-${item.getId() }">
+								<span class="inner-btn liked" 
+								onmouseover="mouseoverLike(${item.getId() })" 
+								onmouseout="mouseoutLike(${item.getId() })" 
+								onclick="iHateIt(${item.getId() })">
+									${item.getGcnt() } 
+								</span>
+							</span>
+						</c:when>
+						<c:otherwise>
+							<span id="unlike-${item.getId() }">
+								<span class="inner-btn unlike"
+								onmouseover="mouseoverUnlike(${item.getId() })" 
+								onmouseout="mouseoutUnlike(${item.getId() })" 
+								onclick="iLikeIt(${item.getId() })">
+									${item.getGcnt() } 
+								</span> 
+							</span>
+						</c:otherwise>
+					</c:choose>
 						<span class="inner-btn" id="reserve-${item.getId() }" 
-						onmouseover="mouseoverReserve(${item.getId() })"
+						onmouseover="mouseoverReserve(${item.getId() })" 
 						onmouseout="mouseoutReserve(${item.getId() })"> 
 							예매
 						</span>
@@ -173,6 +234,5 @@ ul {
 		<%@ include file="../module/footer.jsp"%>
 	</footer>
 	<!-- ----------------</footer>---------------- -->
+</body>
 </html>
-
-
