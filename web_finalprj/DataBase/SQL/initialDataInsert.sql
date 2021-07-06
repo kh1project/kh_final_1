@@ -1,20 +1,9 @@
--- 영화 테이블 조회
-SELECT * FROM movie ORDER BY id;
+-- 초기데이터 전부 삽입하는 sql
 
-DELETE FROM movie WHERE id  <= 30;
-
--- 영화 식별번호
+-- 영화테이블 INSERT
 CREATE SEQUENCE movie_seq;
---DROP SEQUENCE movie_seq;
+-- DROP SEQUENCE movie_seq;
 
---INSERT INTO movie(id, title, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
--- VALUES (movie_seq.NEXTVAL, '' , 
---'',
---'', '', '', 0, 0, 
---'', 
---to_date('21/06/05','YY/MM/DD'), 0, 0, 0);
-
---               영화 번호, 제목, 줄거리, 상영 종류, 감독, 장르, 상영시간, 등급(나이), 출연진, 개봉일, 예매 수, 좋아요 수, 영화의 평점
 INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
  VALUES (movie_seq.NEXTVAL, '#위왓치유' , 'V siti, #WeWatchYou', 
  '평범한 집처럼 꾸며진 3개의 세트장, 12살로 설정한 페이크 계정을 만들고 컴퓨터 모니터 앞에 선 배우들. 
@@ -42,7 +31,7 @@ INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningti
 '2D(자막)', '나타 그로스만', '다큐멘터리', 102, 0, '나타 그로스만', to_date('21/06/17','YY/MM/DD'), 1255, 124, 3.57);
 
 INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '극장판 귀멸의 칼날 무한열차편', 'Demon Slayer: Kimetsu no Yaiba the Movie - Mugen Train' 
+ VALUES (movie_seq.NEXTVAL, '극장판 귀멸의 칼날 무한열차편', 'Demon Slayer: Kimetsu no Yaiba the Movie - Mugen Train', 
  '혈귀로 변해버린 여동생 ‘네즈코’를 인간으로 되돌릴 단서를 찾아 비밀조직 귀살대에 들어간 ‘탄지로’
  ‘젠이츠’, ‘이노스케’와 새로운 임무 수행을 위해 무한열차에 탑승 후
  귀살대 최강 검사 염주 ‘렌고쿠’와 합류한다.
@@ -125,7 +114,7 @@ INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningti
 to_date('21/06/17','YY/MM/DD'), 152422, 736, 9.20);
 
 INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '메이드 인 루프탑' , 'Made in Rooftop'
+ VALUES (movie_seq.NEXTVAL, '메이드 인 루프탑' , 'Made in Rooftop',
 '“나도 쿨해질거야 이제!”
  3년 동안 지지고 볶은 남자친구 ‘정민’에게 가.짜. 이별 통보를 한 지
  30분 만에 한 개의 캐리어와 함께 집에서 쫓겨난 밀.당.실.패 취준생 ‘하늘’.
@@ -427,3 +416,368 @@ INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningti
 to_date('21/05/19','YY/MM/DD'), 12275, 378, 8.74);
 
 commit;
+
+-- 영화관테이블 INSERT
+CREATE SEQUENCE branch_seq;
+
+-- 서울 지점.
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '서울', '강남');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '서울', '강남대로(씨티)');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '서울', '강동');
+
+-- 경기 지점.
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '경기', '고양스타필드');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '경기', '김포한강신도시');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '경기', '남양주');
+
+-- 인천지점
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '인천', '검단');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '인천', '송도');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '인천', '영종');
+
+-- 대전/충청/세종
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '대전/충청/세종', '공주');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '대전/충청/세종', '논산');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '대전/충청/세종', '대전');
+
+-- 부산/대구/경상
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '부산/대구/경상', '경북도청');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '부산/대구/경상', '경산하양');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '부산/대구/경상', '구미강동');
+
+-- 광주/전라
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '광주/전라', '광주상무');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '광주/전라', '광주하남');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '광주/전라', '목포하당');
+
+-- 강원
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '강원', '남춘천');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '강원', '속초');
+INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '강원', '원주');
+
+-- 상영관테이블 INSERT
+CREATE SEQUENCE theater_seq;
+-- DROP SEQUENCE theater_seq;
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 1, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 1, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 2, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 2, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 3, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 3, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 4, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 4, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 5, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 5, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 6, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 6, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 7, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 7, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 8, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 8, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 9, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 9, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 10, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 10, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 11, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 11, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 12, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 12, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 13, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 13, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 14, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 14, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 15, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 15, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 16, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 16, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 17, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 17, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 18, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 18, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 19, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 19, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 20, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 20, '2관');
+
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 21, '1관');
+INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 21, '2관');
+
+-- 영화상영관테이블 INSERT
+CREATE SEQUENCE movie_t_seq;
+
+-- 위왓치유(ID : 1) / 강남 1관(ID : 1)
+INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 1, 1, TO_DATE('21/09/12','YY/MM/DD'));
+-- 위왓치유(ID : 1) / 강남대로 2관(ID : 4)
+INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 1, 4, TO_DATE('21/09/15','YY/MM/DD'));
+
+-- 그 여름, 가장 차가웠던(ID : 2) / 고양스타필드 1관(ID :7)
+INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 2, 7, TO_DATE('21/10/02','YY/MM/DD'));
+-- 그 여름, 가장 차가웠던(ID : 2) / 김포한강신도시 2관(ID :10)
+INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 2, 10, TO_DATE('21/09/24','YY/MM/DD'));
+
+-- 그레타 툰베리(ID : 3) / 검단 1관(ID :13)
+INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 3, 13, TO_DATE('21/09/24','YY/MM/DD'));
+-- 그레타 툰베리(ID : 3) / 송도 2관(ID : 16)
+INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 3, 16, TO_DATE('21/10/10','YY/MM/DD'));
+
+-- 위왓치유(ID : 1) / 공주 1관(ID : 19)
+INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 1, 19, TO_DATE('21/09/02','YY/MM/DD'));
+-- 위왓치유(ID : 1) / 논산 2관(ID : 22)
+INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 1, 22, TO_DATE('21/09/12','YY/MM/DD'));
+
+-- 그 여름, 가장 차가웠던(ID : 2) / 경북도청 1관(ID :25)
+INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 2, 25, TO_DATE('21/10/01','YY/MM/DD'));
+-- 그 여름, 가장 차가웠던(ID : 2) / 경산하양 2관(ID :28)
+INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 2, 28, TO_DATE('21/09/20','YY/MM/DD'));
+
+-- 그레타 툰베리(ID : 3) / 광주상무 1관(ID :31)
+INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 3, 31, TO_DATE('21/09/30','YY/MM/DD'));
+-- 그레타 툰베리(ID : 3) / 송광주하남 2관(ID : 34)
+INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 3, 34, TO_DATE('21/10/21','YY/MM/DD'));
+
+COMMIT;
+
+-- 영화이미지테이블 INSERT
+CREATE SEQUENCE Image_files_seq;
+
+-- 위왓치유
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image.jpg', '/resources/images/movie/1/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (1).jpg', '/resources/images/movie/1/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (2).jpg', '/resources/images/movie/1/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (3).jpg', '/resources/images/movie/1/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (4).jpg', '/resources/images/movie/1/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (5).jpg', '/resources/images/movie/1/poster/');
+
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image.jpg', '/resources/images/movie/1/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (1).jpg', '/resources/images/movie/1/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (2).jpg', '/resources/images/movie/1/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (3).jpg', '/resources/images/movie/1/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (4).jpg', '/resources/images/movie/1/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (5).jpg', '/resources/images/movie/1/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (6).jpg', '/resources/images/movie/1/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (7).jpg', '/resources/images/movie/1/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image (8).jpg', '/resources/images/movie/1/stillcut/');
+
+--  그 여름, 가장 차가웠던
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image.jpg', '/resources/images/movie/2/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (1).jpg', '/resources/images/movie/2/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (2).jpg', '/resources/images/movie/2/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (3).jpg', '/resources/images/movie/2/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (4).jpg', '/resources/images/movie/2/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (5).jpg', '/resources/images/movie/2/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (6).jpg', '/resources/images/movie/2/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (7).jpg', '/resources/images/movie/2/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (8).jpg', '/resources/images/movie/2/poster/');
+
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image.jpg', '/resources/images/movie/2/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (1).jpg', '/resources/images/movie/2/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (2).jpg', '/resources/images/movie/2/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (3).jpg', '/resources/images/movie/2/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (4).jpg', '/resources/images/movie/2/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (5).jpg', '/resources/images/movie/2/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (6).jpg', '/resources/images/movie/2/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (7).jpg', '/resources/images/movie/2/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (8).jpg', '/resources/images/movie/2/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (9).jpg', '/resources/images/movie/2/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (10).jpg', '/resources/images/movie/2/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 2, 'movie_image (11).jpg', '/resources/images/movie/2/stillcut/');
+
+--  그레타 툰베리 (I Am Greta)
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image.jpg', '/resources/images/movie/3/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (1).jpg', '/resources/images/movie/3/poster/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (2).jpg', '/resources/images/movie/3/poster/');
+
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image.jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (1).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (2).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (3).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (4).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (5).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (6).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (7).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (8).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (9).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (10).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (11).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (12).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (13).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (14).jpg', '/resources/images/movie/3/stillcut/');
+INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (15).jpg', '/resources/images/movie/3/stillcut/');
+
+-- 시간테이블 INSERT
+CREATE SEQUENCE time_seq;
+
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/06/28', 'YY/MM/DD'), '11:30:00', '13:14:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/06/28', 'YY/MM/DD'), '13:34:00', '15:18:00');
+
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 2, TO_DATE('21/06/28', 'YY/MM/DD'), '11:40:00', '13:24:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 2, TO_DATE('21/06/28', 'YY/MM/DD'), '13:44:00', '15:28:00');
+
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/06/29', 'YY/MM/DD'), '11:20:00', '13:04:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/06/29', 'YY/MM/DD'), '13:04:00', '15:08:00');
+
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 2, TO_DATE('21/06/29', 'YY/MM/DD'), '11:30:00', '13:14:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 2, TO_DATE('21/06/29', 'YY/MM/DD'), '13:34:00', '15:18:00');
+
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/01', 'YY/MM/DD'), '11:30:00', '13:14:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/01', 'YY/MM/DD'), '13:34:00', '15:18:00');
+
+-- 좌석테이블 INSERT
+CREATE SEQUENCE seat_seq;
+
+-- 강남 1관 A
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 1, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 2, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 3, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 4, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 5, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 6, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 7, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 8, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 9, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 10, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 11, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 12, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 13, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'A', 14, 'n');
+
+-- 강남 1관 B
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 1, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 2, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 3, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 4, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 5, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 6, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 7, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 8, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 9, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 10, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 11, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 12, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 13, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'B', 14, 'n');
+
+-- 강남 1관 C
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 1, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 2, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 3, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 4, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 5, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 6, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 7, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 8, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 9, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 10, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 11, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 12, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 13, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'C', 14, 'n');
+
+-- 강남 1관 D
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 1, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 2, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 3, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 4, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 5, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 6, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 7, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 8, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 9, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 10, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 11, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 12, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 13, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'D', 14, 'n');
+
+-- 강남 1관 E
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 1, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 2, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 3, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 4, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 5, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 6, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 7, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 8, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 9, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 10, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 11, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 12, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 13, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'E', 14, 'n');
+
+-- 강남 1관 F
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 1, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 2, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 3, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 4, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 5, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 6, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 7, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 8, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 9, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 10, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 11, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 12, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 13, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'F', 14, 'n');
+
+-- 강남 1관 G
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 1, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 2, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 3, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 4, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 5, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 6, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 7, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 8, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 9, 'n');
+
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 10, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 11, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 12, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 13, 'n');
+INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 14, 'n');
+
+-- 회원테이블 INSERT (SEQUENCE 없는 상태)
+INSERT INTO ACCOUNT (id, name, nickname, email, phone, password, gender, age, joindate) VALUES(1, '어드민', '어드민', 'admin@admin.com', '010-1234-1234', 'admin', 'F', 25, SYSDATE);
+
+-- 예매테이블 INSERT
+CREATE SEQUENCE res_seq;
+
+INSERT INTO reservation(id, sid, timeid, aid, rdate, rcnt, payment) VALUES(res_seq.NEXTVAL, 1, 1, 1, SYSDATE, 1, 'k');
+INSERT INTO reservation(id, sid, timeid, aid, rdate, rcnt, payment) VALUES(res_seq.NEXTVAL, 3, 2, 1, SYSDATE, 1, 'k');
+INSERT INTO reservation(id, sid, timeid, aid, rdate, rcnt, payment) VALUES(res_seq.NEXTVAL, 8, 8, 1, SYSDATE, 1, 'k');
+INSERT INTO reservation(id, sid, timeid, aid, rdate, rcnt, payment) VALUES(res_seq.NEXTVAL, 5, 10, 1, SYSDATE, 1, 'k');

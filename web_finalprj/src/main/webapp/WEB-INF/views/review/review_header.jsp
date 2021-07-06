@@ -12,7 +12,6 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://kit.fontawesome.com/74ba2bf207.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/review.js"></script>
 </head>
 <body>
 	<header>

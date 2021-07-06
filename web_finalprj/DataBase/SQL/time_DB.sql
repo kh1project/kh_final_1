@@ -14,5 +14,5 @@ INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVA
 INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 2, TO_DATE('21/06/29', 'YY/MM/DD'), '11:30:00', '13:14:00');
 INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 2, TO_DATE('21/06/29', 'YY/MM/DD'), '13:34:00', '15:18:00');
 
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/01', 'YY/MM/DD'), '11:30:00', '13:14:00'); --21
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/01', 'YY/MM/DD'), '13:34:00', '15:18:00'); --22
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/01', 'YY/MM/DD'), '11:30:00', '13:14:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/01', 'YY/MM/DD'), '13:34:00', '15:18:00');
