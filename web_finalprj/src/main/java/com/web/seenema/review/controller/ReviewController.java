@@ -70,30 +70,11 @@ public class ReviewController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView reviewAddPost(HttpServletRequest req) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		int SelectMovie = (Integer.parseInt((String)req.getParameter("wm").replace("wm", "")));
-		
-		List<MyMovieDTO> mywatch = null;
-		mywatch = account.mywatchSelect(SelectMovie);
-		
-		for(int i = 0; i < mywatch.size(); i++) {
-			System.out.println(mywatch.get(i).getPath() + mywatch.get(i).getName() );
-		}
-		
-		mv.setViewName("redirect:/review/add");	
-		mv.addObject("mywatch", mywatch);	//이거 내일 jsp에서 불러다 #add-step2 쪽에 출력하면 됨.
-											//그리고 jsp에서 script 처리할 것. 메가박스처럼.
-		
-		return mv;
-	}
-	
 	@RequestMapping(value = "/add2", method = RequestMethod.POST)
 	public ModelAndView reviewAdd2Post(HttpServletRequest req) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		
-		mv.setViewName("review");		
+		mv.setViewName("review");
 		
 		return mv;
 	}
