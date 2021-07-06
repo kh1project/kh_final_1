@@ -52,9 +52,8 @@
 				"mid" : mid
 			},
 			success: function(data){
-				document.querySelector("#unlike-"+mid).innerHTML = "<span class=\"inner-btn liked\" id=\"like-"+mid+"\" onmouseover=\"mouseoverLike("+mid+")\" onmouseout=\"mouseoutLike("+mid+")\" onclick=\"iHateIt("+mid+")\">"+${movieList.get(mid).getGcnt()}+"</span>";
-				console.log("likeit");
-				console.log("mid -> " + ${movieList.get(mid).getId()});
+				document.querySelector("#unlike-"+mid).innerHTML = "<span class=\"inner-btn liked\" onmouseover=\"mouseoverLike("+mid+")\" onmouseout=\"mouseoutLike("+mid+")\" onclick=\"iHateIt("+mid+")\">♥"+data.gcnt+"</span>";
+				document.querySelector("#unlike-"+mid).id = "like-"+mid;
 			},
 			error: function(){
 				console.log("like 실패");
@@ -72,11 +71,11 @@
 				"mid" : mid
 			},
 			success: function(data){
-				document.querySelector("#like-"+mid).innerHTML = "<span class=\"inner-btn unlike\" id=\"unlike-"+mid+"\" onmouseover=\"mouseoverUnlike("+mid+")\" onmouseout=\"mouseoutUnlike("+mid+")\" onclick=\"iLikeIt("+mid+")\">"+${movieList.get(mid).getGcnt()}+"</span>";
-				console.log("hateit");
+				document.querySelector("#like-"+mid).innerHTML = "<span class=\"inner-btn unlike\" onmouseover=\"mouseoverUnlike("+mid+")\" onmouseout=\"mouseoutUnlike("+mid+")\" onclick=\"iLikeIt("+mid+")\">♡"+data.gcnt+"</span>";
+				document.querySelector("#like-"+mid).id = "unlike-"+mid;
 			},
 			error: function(){
-				console.log("like 실패");
+				console.log("unlike 실패");
 			}
 		})
 	}
@@ -189,20 +188,20 @@ ul {
 					<div class="reserve-rating">예매율
 						${reserveRating.get(item.getId()) }%</div>
 					<div class="btn-util" id="btns-${item.getId() }">
-					<c:forEach var="likeList" items="${likeList }">
 					<c:set var="liked" value="false"/>
+					<c:forEach var="likeList" items="${likeList }">
 						<c:if test="${item.getId() eq likeList.getMid() }">
 							<c:set var="liked" value="true" />
 						</c:if>
 					</c:forEach>
 					<c:choose>
-						<c:when test="${liked eq 'true' }" >
+						<c:when test='${liked eq "true" }' >
 							<span id="like-${item.getId() }">
 								<span class="inner-btn liked" 
 								onmouseover="mouseoverLike(${item.getId() })" 
 								onmouseout="mouseoutLike(${item.getId() })" 
 								onclick="iHateIt(${item.getId() })">
-									${item.getGcnt() } 
+									♥${item.getGcnt() } 
 								</span>
 							</span>
 						</c:when>
@@ -212,7 +211,7 @@ ul {
 								onmouseover="mouseoverUnlike(${item.getId() })" 
 								onmouseout="mouseoutUnlike(${item.getId() })" 
 								onclick="iLikeIt(${item.getId() })">
-									${item.getGcnt() } 
+									♡${item.getGcnt() } 
 								</span> 
 							</span>
 						</c:otherwise>

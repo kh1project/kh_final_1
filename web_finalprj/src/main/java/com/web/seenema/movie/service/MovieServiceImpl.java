@@ -105,5 +105,9 @@ public class MovieServiceImpl implements MovieService {
 		return dao.deleteMovieLike(dto);		
 	}
 	
+	@Override
+		public MovieDTO getLikeCnt(int mid) {
+			return dao.getLikeCnt(mid);
+	}	
 
 }

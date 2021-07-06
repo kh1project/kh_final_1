@@ -77,4 +77,9 @@ public class MovieDAOImpl implements MovieDAO {
 		return sqlSession.delete("movieMapper.deleteMovieLike", dto);
 	}
 	
+	@Override
+	public MovieDTO getLikeCnt(int mid) {
+		return sqlSession.selectOne("movieMapper.getLikeCnt", mid);
+	}
+	
 }

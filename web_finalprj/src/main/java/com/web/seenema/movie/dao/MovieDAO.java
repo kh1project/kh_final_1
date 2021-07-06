@@ -16,4 +16,5 @@ public interface MovieDAO {
 	public List<MovieLikeDTO> getMovieLikeList(int aid);
 	public int insertMovieLike(MovieLikeDTO dto);
 	public int deleteMovieLike(MovieLikeDTO dto);
+	public MovieDTO getLikeCnt(int mid);
 }

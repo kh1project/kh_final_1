@@ -18,4 +18,5 @@ public interface MovieService {
 	public int insertMovieLike(MovieLikeDTO dto);
 	public List<MovieLikeDTO> getMovieLikeList(int aid);
 	public int movieUnlike(MovieLikeDTO dto);
+	public MovieDTO getLikeCnt(int mid);
 }
