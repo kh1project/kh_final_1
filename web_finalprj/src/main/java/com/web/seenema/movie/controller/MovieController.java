@@ -44,11 +44,15 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value = "/detail")
-	public String movieDetail(Model model, @RequestParam("mid") int mid) {
+	public String movieDetail(Model model, @RequestParam("mid") int mid, HttpServletRequest request) {
 		MovieDTO dto = mdao.getMovie(mid);
 		Map<Integer, String> reserveRating = service.getReserveRate();
 		model.addAttribute("movie", dto);		
 		model.addAttribute("reserveRating", reserveRating.get(mid));
+		
+		HttpSession session = request.getSession();
+		List<MovieLikeDTO> likeList = service.getMovieLikeList((int) session.getAttribute("id"));
+		model.addAttribute("likeList", likeList);
 		
 		return "movie/moviedetail";
 	}
