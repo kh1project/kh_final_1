@@ -124,12 +124,13 @@ COMMENT ON COLUMN seat.reserved IS '좌석 예약 여부';
 CREATE TABLE movie(
     id NUMBER,
     title VARCHAR2(256),
+    subtitle VARCHAR2(256),
     summary NVARCHAR2(1024),
     type VARCHAR2(64),
     director VARCHAR2(64),
     genre  VARCHAR2(128),
     runningtime NUMBER DEFAULT 0,
-    reating NUMBER DEFAULT 0,
+    rating NUMBER DEFAULT 0,
     actor NVARCHAR2(512),
     playdate date,
     rcnt NUMBER DEFAULT 0,
@@ -146,7 +147,7 @@ COMMENT ON COLUMN movie.type IS '영화의 상영 종류(2D, 3D)';
 COMMENT ON COLUMN movie.director IS '영화의 감독';
 COMMENT ON COLUMN movie.genre IS '영화의 장르';
 COMMENT ON COLUMN movie.runningtime IS '영화의 상영시간';
-COMMENT ON COLUMN movie.reating IS '영화의 등급(나이제한)';
+COMMENT ON COLUMN movie.rating IS '영화의 등급(나이제한)';
 COMMENT ON COLUMN movie.actor IS '영화의 출연진';
 COMMENT ON COLUMN movie.playdate IS '영화의 개봉일';
 COMMENT ON COLUMN movie.rcnt IS '영화의 예매 수';

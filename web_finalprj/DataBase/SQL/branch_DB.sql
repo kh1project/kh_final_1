@@ -1,4 +1,9 @@
 SELECT * FROM branch;
+DROP SEQUENCE branch_seq;
+
+--DELETE FROM branch WHERE id = 1;
+
+-- SELECT * FROM branch WHERE location = '서울' ORDER BY name;
 
 CREATE SEQUENCE branch_seq;
 
@@ -36,3 +41,6 @@ INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '광주/전�
 INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '강원', '남춘천');
 INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '강원', '속초');
 INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '강원', '원주');
+
+
+-- SELECT distinct location FROM branch;

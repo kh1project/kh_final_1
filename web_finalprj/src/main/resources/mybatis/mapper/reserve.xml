@@ -15,4 +15,29 @@
 	<select id="seat_all" resultType="seat">
 	    SELECT * FROM seat WHERE tid = #{tid} ORDER BY id
 	</select>
+	
+	<!-- 지역 선택시 지점리스트 -->
+	<select id="branchlist" parameterType="String" resultType="com.web.seenema.reserve.dto.BranchDTO">
+		SELECT * FROM branch WHERE location = #{location} ORDER BY name
+	</select>
+	
+	<!-- 영화상영관(1관, 2관) 리스트 -->
+	<select id="theaterlist">
+		SELECT * FROM movie_theater WHERE tid = #{tid}
+	</select>
+	
+	<!-- 영화전체리스트 -->
+	<select id="movieAll_list" resultType="com.web.seenema.movie.dto.MovieDTO">
+		SELECT id, title, rating FROM movie ORDER BY grade DESC
+	</select>
+	
+	<!-- 영화시작시간 -->
+	<select id="timestart">
+		SELECT starttime FROM time WHERE mtid = #{mtid} AND moviedate = #{moviedate}
+	</select>
+	
+	<!-- 영화종료시간 -->
+	<select id="timeend">
+		SELECT endtime FROM time WHERE mtid = #{mtid} AND moviedate = #{moviedate}
+	</select>
 </mapper>

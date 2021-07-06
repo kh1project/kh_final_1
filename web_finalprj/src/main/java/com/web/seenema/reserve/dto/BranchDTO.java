@@ -2,10 +2,13 @@ package com.web.seenema.reserve.dto;
 
 public class BranchDTO {
 	private int id;
-	private String loc;
-	private String branch;
+	private String location;	// 지역명
+	private String name;		// 지점명
 	private int cntByloc;
 	
+	public String toString() {
+		return "지역명 : " + this.getLocation() + " 지점명 : " + this.getName();
+	}
 	public int getId() {
 		return id;
 	}
@@ -14,20 +17,20 @@ public class BranchDTO {
 		this.id = id;
 	}
 	
-	public String getLoc() {
-		return loc;
+	public String getLocation() {
+		return location;
 	}
 	
-	public void setLoc(String loc) {
-		this.loc = loc;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	
-	public String getBranch() {
-		return branch;
+	public String getName() {
+		return name;
 	}
 	
-	public void setBranch(String branch) {
-		this.branch = branch;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	public int getCntByloc() {

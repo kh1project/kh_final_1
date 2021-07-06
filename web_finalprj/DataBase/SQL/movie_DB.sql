@@ -1,13 +1,17 @@
 -- 영화 테이블 조회
 SELECT * FROM movie ORDER BY id;
 
+-- SELECT * FROM movie ORDER BY grade DESC;
+
+-- SELECT id, title, rating FROM movie ORDER BY grade DESC;
+
 DELETE FROM movie WHERE id  <= 30;
 
 -- 영화 식별번호
 CREATE SEQUENCE movie_seq;
-DROP SEQUENCE movie_seq;
+--DROP SEQUENCE movie_seq;
 
---INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
+--INSERT INTO movie(id, title, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
 -- VALUES (movie_seq.NEXTVAL, '' , 
 --'',
 --'', '', '', 0, 0, 
@@ -15,8 +19,8 @@ DROP SEQUENCE movie_seq;
 --to_date('21/06/05','YY/MM/DD'), 0, 0, 0);
 
 --               영화 번호, 제목, 줄거리, 상영 종류, 감독, 장르, 상영시간, 등급(나이), 출연진, 개봉일, 예매 수, 좋아요 수, 영화의 평점
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '#위왓치유 (V siti, #WeWatchYou)' ,
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '#위왓치유' , 'V siti, #WeWatchYou', 
  '평범한 집처럼 꾸며진 3개의 세트장, 12살로 설정한 페이크 계정을 만들고 컴퓨터 모니터 앞에 선 배우들. 
  계정 계설과 동시에 전 세계 남성이 접촉해왔으며 열흘 간 나체사진 요구, 가스라이팅, 협박, 그루밍 등을 시도하는 남성은 총 2,458명이었다. 
  그리고 우린 그 중 21명과 대면하게 된다. 범죄의 형식이 온라인으로 확산된 언택트 시대. 
@@ -25,8 +29,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '2D(자막)', '바르보라 차르포바, 비트 클루삭', '다큐멘터리', 104, 19, '바르보라 차르포바(감독), 비트 클루삭(감독)', 
 to_date('21/06/05','YY/MM/DD'), 1757, 103, 9.09);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '그 여름, 가장 차가웠던 (Summer Is the Coldest Season)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '그 여름, 가장 차가웠던' , 'Summer Is the Coldest Season',  
  '3년 전 엄마가 살해된 후, 소녀 ‘자허’와 아빠의 삶은 엉망이다.
  친구들에게 왕따를 당하고, 아빠와도 마음 속 이야기를 하지 않게 된 소녀,
  그러던 어느 날 우연히 자신의 엄마를 죽인 소년 ‘유레이’와 마주치게 된다.
@@ -34,15 +38,15 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
  복수하고 싶은 마음으로 그에게 의도적으로 접근하게 되는데…',
 '2D(자막)', '주순', '드라마', 100, 0, '등은희, 이감', to_date('21/06/17','YY/MM/DD'), 4411, 109, 7.69);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '그레타 툰베리 (I Am Greta)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '그레타 툰베리' , 'I Am Greta',  
  '기후 변화 법안 마련 촉구를 위해 금요일마다 학교를 결석하며 의회 앞에서 홀로 시위를 시작한 15세 소녀 ‘그레타 툰베리’. 
  그녀가 쏘아 올린 ‘미래를 위한 금요일’ 운동은 전 세계로 퍼져나가는데… 평범한 10대 소녀에서 
  어른들의 무감각한 환경 의식에 일침을 가하는 세계적인 청소년 환경운동가가 되기까지! 700만을 움직인 그녀의 외침에 주목하라!',
 '2D(자막)', '나타 그로스만', '다큐멘터리', 102, 0, '나타 그로스만', to_date('21/06/17','YY/MM/DD'), 1255, 124, 3.57);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '극장판 귀멸의 칼날 무한열차편' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '극장판 귀멸의 칼날 무한열차편', 'Demon Slayer: Kimetsu no Yaiba the Movie - Mugen Train',
  '혈귀로 변해버린 여동생 ‘네즈코’를 인간으로 되돌릴 단서를 찾아 비밀조직 귀살대에 들어간 ‘탄지로’
  ‘젠이츠’, ‘이노스케’와 새로운 임무 수행을 위해 무한열차에 탑승 후
  귀살대 최강 검사 염주 ‘렌고쿠’와 합류한다.
@@ -56,8 +60,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 히노 사토시(렌고쿠 코쥬로 목소리 역), 히라카와 다이스케(엔무 목소리 역)', 
 to_date('21/01/27','YY/MM/DD'), 2141067, 8507, 9.28);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '까치발 (Tiptoeing)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '까치발' , 'Tiptoeing',  
  '까치발로 걸음마를 시작한 딸 ‘지후’
  엄마 ‘우정’은 의사에게 충격적인 선언을 듣는다!
  “아이가 뇌성마비일 수 있어요”
@@ -67,8 +71,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '2D', '권우정', '다큐멘터리', 79, 12, '권우정(본익 역), 정지후(본익 역), 정인섭(본익 역), 신유진(본익 역), 우진아(본익 역)', 
 to_date('21/06/03','YY/MM/DD'), 1913, 58, 9);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '낫아웃 (NOT OUT)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '낫아웃' , 'NOT OUT',  
  '“내 꿈은 얼마예요?”
 기적이 일어났고, 끝까지 가고 싶었다.
  특별할 것 없던 열아홉 고교 야구 입시생 ‘광호’는
@@ -82,8 +86,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '정재광(광호 역), 정승길(승길 역), 김희창(감독 역), 이규성(민철 역), 송이재(수현 역), 조우겸(성태 역), 허정도(사장 역), 최희승(희승 역)', 
 to_date('21/06/03','YY/MM/DD'), 9006, 178, 8.12);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '노매드랜드 (Nomadland)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '노매드랜드' , 'Nomadland',  
 '전 세계가 동행한 가슴 벅찬 여정, 길이 계속되는 한 우리의 삶도 계속된다.
 모든 것이 무너진 후에야 비로소 열리는 새로운 길 그리고 희망
 경제적 붕괴로 도시 전체가 무너진 후 홀로 남겨진 ‘펀’.(프란시스 맥도맨드)
@@ -95,8 +99,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '프란시스 맥도맨드(펀 역), 데이빗 스트라탄(데이브 역), 린다 메이(린다 역), 밥 웰스(밥 역), 샬린 스완키(스완키 역)', 
 to_date('21/04/15','YY/MM/DD'), 82054, 972, 8.48);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '더 파더 (The Father)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '더 파더' , 'The Father', 
 '나는 런던에서 평화롭게 삶을 보내고 있었다.
  무료한 일상 속 나를 찾아오는 건 딸 ‘앤’ 뿐이다.
  그런데 앤이 갑작스럽게 런던을 떠난다고 말한다.
@@ -108,8 +112,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '안소니 홉킨스(안소니 역), 올리비아 콜맨(앤 역), 마크 게티스(남자 역), 올리비아 윌리암스(여자 역), 이모겐 푸츠(로라 역), 루퍼스 스웰(폴 역), 에비 레이(루시 역)', 
 to_date('21/04/07','YY/MM/DD'), 46000, 611, 8.93);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '루카 (Luca)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '루카' , 'Luca', 
 '바다 밖은 위험해?! 아니, 궁금해!
 이탈리아 리비에라의 아름다운 해변 마을,
  바다 밖 세상이 궁금하지만, 두렵기도 한 호기심 많은 소년 ‘루카’
@@ -124,8 +128,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '제이콥 트렘블레이, 잭 딜러 그레이저, 엠마 버만', 
 to_date('21/06/17','YY/MM/DD'), 152422, 736, 9.20);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '메이드 인 루프탑 (Made in Rooftop)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '메이드 인 루프탑' , 'Made in Rooftop',
 '“나도 쿨해질거야 이제!”
  3년 동안 지지고 볶은 남자친구 ‘정민’에게 가.짜. 이별 통보를 한 지
  30분 만에 한 개의 캐리어와 함께 집에서 쫓겨난 밀.당.실.패 취준생 ‘하늘’.
@@ -141,8 +145,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '이홍내, 정휘, 곽민규, 염문경, 이정은, 강정우', 
 to_date('21/06/23','YY/MM/DD'), 1190, 231, 8.13);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '발신제한 (HARD HIT)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '발신제한' , 'HARD HIT', 
 '평범한 출근길, 의문의 발신번호 표시제한 전화 한 통,
 “지금 당신의 의자 밑에는 폭탄이 설치되어 있습니다”
  은행센터장 성규(조우진)는 아이들을 차에 태우고 출발한 평범한 출근길에
@@ -158,8 +162,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '조우진, 이재인, 진경, 김지호', 
 to_date('21/06/23','YY/MM/DD'), 96668, 1604, 7.9);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '뱅드림! 로젤리아 에피소드 1 약속' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '뱅드림! 로젤리아 에피소드 1 약속' , 'BanG Dream! Episode of Roselia I：Promise', 
 '너희들, Roselia에 전부를 걸 각오는 됐어?
  "페스"에 출전하기 위해 밴드 결성을 결심한 미나토 유키나.
  그런 그녀 앞에 각자의 소망을 품은 멤버들이 모인다.
@@ -169,8 +173,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '아이바 아이나, 쿠도 하루카, 나카시마 유키, 사쿠라가와 메구, 시자키 카논', 
 to_date('21/06/03','YY/MM/DD'), 16974, 870, 8.35);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '분노의 질주 더 얼티메이트 (Fast ＆ Furious 9 THE FAST SAGA)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '분노의 질주 더 얼티메이트' , 'Fast ＆ Furious 9 THE FAST SAGA', 
 '기다림은 끝났다!
 전 세계가 기다려온 단 하나의 액션블록버스터!
 도미닉(빈 디젤)은 자신과 가장 가까웠던 형제 제이콥(존 시나)이 사이퍼(샤를리즈 테론)와 연합해
@@ -183,8 +187,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '빈 디젤(도미닉 토레토 역), 존 시나(제이콥 토레토 역), 성강(한 역), 샤를리즈 테론(샤를리즈 테론), 미셸 로드리게즈(테리 "오티즈" 토레토 역), 조다나 브류스터(미아 토레토 역), 나탈리 엠마뉴엘(램지 역), 엘렌 미렌(막달레나 쇼 역)', 
 to_date('21/05/19','YY/MM/DD'), 2263166, 6966, 7.62);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '아야와 마녀' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '아야와 마녀' , 'Earwig and the Witch', 
 '마녀지망생 ‘아야’의 신비롭고 미스터리한 모험이 시작된다!
 ‘동료 마녀 12명을 완전히 따돌리면 아이를 찾으러 오겠다’는 수수께끼 같은 편지와 함께 성 모어발트의 집에 맡겨진 아야. 
 10살이 된 어느 날, 아야는 갑자기 찾아온 마법사 벨라와 맨드레이크를 따라 미스터리한 저택에 발을 들이게 된다. 순간이동할 수 있는 문부터 비밀의 방까지 신비로움으로 가득 찬 그곳에서의 생활이 시작되고, 
@@ -195,8 +199,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '히라사와 코코로/이성은(아야 역), 테라지마 시노부/성선녀(벨라 야가 역), 토요카와 에츠시/민응식(맨드레이크 역), 하마다 가쿠/서반석(토마스 역)', 
 to_date('21/06/10','YY/MM/DD'), 28849, 281, 7.03);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '애플 (Mila, Apples)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '애플' , 'Mila, Apples', 
 '당신을 사로잡을 가장 특별한 여운.
  원인 모를 단기 기억상실증 유행병에 걸린 ‘알리스’에게 유일하게 남은 기억은 이름도 집 주소도 아닌 한 입 베어 문 사과의 맛.
  며칠이 지나도 그를 찾아오는 가족이 나타나지 않자 무연고 환자로 분류된 ‘알리스’에게 병원에서는 새로운 경험들로 기억을 만들어내는 ‘인생 배우기’ 프로그램을 제안한다.
@@ -206,8 +210,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '알리스 세르베탈리스, 소피아 게오르고바실리', 
 to_date('21/05/26','YY/MM/DD'), 7713, 210, 7.86);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '야구소녀 (Baseball Girl)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '야구소녀' , 'Baseball Girl', 
 '“사람들이 내 미래를 어떻게 알아요? 나도 모르는데…”
 고교 야구팀의 유일한 여자이자 최고구속 134km, 볼 회전력의 강점으로 ‘천재 야구소녀’라는 별명을 얻으며 주목받았던 야구선수
 ‘주수인’(이주영). 고교 졸업 후 오로지 프로팀에 입단해 계속해서 야구를 하는 것이 꿈이지만 여자라는 이유로 제대로 된 평가도 기회도 잡지 못한다.
@@ -219,8 +223,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '이주영(주수인 역), 이준혁(최진태 역), 염혜란(신해숙 역), 송영규(주귀남 역), 곽동연(이정호 역), 주해은(한방글 역), 박연수(주수영 역), 김종수(박감독 역)', 
 to_date('21/06/18','YY/MM/DD'), 37432, 1872, 8.12);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '여고괴담 여섯번째 이야기 모교' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '여고괴담 여섯번째 이야기 모교' , 'WHISPERING CORRIDORS 6 : THE HUMMING', 
 '고교시절의 기억을 잃은 ‘은희(김서형)’는
  모교에 교감으로 부임한 후부터
  알 수 없는 환영과 환청에 시달리기 시작한다.
@@ -235,8 +239,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '김서형(노은희 역), 김현수(김하영 역), 최리(김소연 역), 김형서(여고생 은희 역), 서혜원(안미숙 역), 박세현(여고생 재연 역), 이지원(한예지 역), 김지혜(엄문정 역)', 
 to_date('21/06/17','YY/MM/DD'), 77363, 1117, 5.45);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '인트로덕션 (INTRODUCTION)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '인트로덕션' , 'INTRODUCTION', 
 '1.
  아들은 아버지가 불러서 한의원을 찾았다
  도착했을 때 아버지는 환자들 때문에 바빴고
@@ -253,8 +257,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '신석호, 박미소, 예지원, 기주봉, 서영화, 김민희, 조윤희, 하성국', 
 to_date('21/05/27','YY/MM/DD'), 5498, 184, 8.00);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '청춘선거 (Vote Young Ones)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '청춘선거' , 'Vote Young Ones', 
 '제주 최초 여성 도지사에 출마한 만 32세 고은영.
  바꾸고 싶어서, 바뀌고 싶어서 선거에 뛰어든 사람들.
  맨땅에 헤딩하면 어떤가. 맨날 후달리면 어떤가.
@@ -266,8 +270,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '고은영, 윤경미, 오수경, 김기홍, 안재홍, 박정경수, 김순애, 이선자', 
 to_date('21/06/17','YY/MM/DD'), 844, 285, 8.60);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '캐시트럭 (Wrath of Man)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '캐시트럭' , 'Wrath of Man', 
 '캐시트럭을 노리는 무장 강도에 의해 아들을 잃은 H(제이슨 스타뎀).
  분노에 휩싸인 그는 아들을 죽인 범인의 단서를 찾기 위해
  현금 호송 회사에 위장 취업한다.
@@ -281,8 +285,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '제이슨 스타뎀, 스콧 이스트우드, 조쉬 하트넷, 포스트 말론, 홀트 맥칼라니, 제프리 도노반', 
 to_date('21/06/09','YY/MM/DD'), 224508, 648, 8.14);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '컨저링 3 악마가 시켰다 (The Conjuring The Devil Made Me Do It)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '컨저링 3 악마가 시켰다' , 'The Conjuring The Devil Made Me Do It', 
 '모든 것은 악마가 시켰다!
 1981년, 미국 역사상 최초로 잔혹한 살인사건의 용의자가 악마가 살해하도록 시켰다고 주장하는 초유의 사태가 일어난다! 그리고 사건의 배후에는 악마에게 빙의된 소년이 있었는데…
  초자연 현상 연구가 워렌 부부의 사건 파일 중 여전히 미스터리로 남아있는 실화!
@@ -291,8 +295,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '베라 파미가(로레인 역), 패트릭 윌슨(에디 역), 줄리안 힐리아드(데이빗 역), 로우리 오코너(어니 역), 샬린 아모이아(주디 역), 유지니 본듀란트', 
 to_date('21/06/03','YY/MM/DD'), 738430, 2696, 6.66);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '콰이어트 플레이스2 (A Quiet Place Part II)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '콰이어트 플레이스2' , 'A Quiet Place Part II', 
 '소리 없이 맞서 싸워라!
 실체를 알 수 없는 괴생명체의 공격으로 일상의 모든 것이 사라진 세상,
  아이들 대신 죽음을 선택한 아빠의 희생 이후 살아남은 가족들은 위험에 노출된다.
@@ -303,8 +307,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '에밀리 블런트, 킬리언 머피, 밀리센트 시몬스, 노아 주프, 디몬 하운수, 웨인 듀발', 
 to_date('21/06/16','YY/MM/DD'), 444209, 5053, 8.47);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '크루엘라 (Cruella)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '크루엘라' , 'Cruella', 
 '처음부터 난 알았어. 내가 특별하단 걸
  그게 불편한 인간들도 있겠지만 모두의 비위를 맞출 수는 없잖아?
  그러다 보니 결국, 학교를 계속 다닐 수가 없었지
@@ -329,8 +333,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '엠마 스톤(크루엘라 역), 엠마 톰슨(바로네스 역), 마크 스트롱(보리스 역), 폴 월터 하우저(호러스 역), 에밀리 비샴(캐서린 역), 조엘 프라이(재스퍼 역), 커비 하월 바티스트(아니타 역), 제이미 드메트리우(제럴드 역)', 
 to_date('21/05/26','YY/MM/DD'), 1277427, 4457, 9.29);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '클라이밍 (Climbing)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '클라이밍' , 'Climbing', 
 '“너는 나고, 나는 너야”
 세 달 전 교통사고를 겪은 세현은 세계 클라이밍 대회를 앞두고
  회복되지 않는 컨디션과 경쟁에 대한 압박으로 악몽에 시달린다.
@@ -345,8 +349,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '김민지(최세현 목소리 역), 박송이(노인화 목소리 역), 박송이(김아인/여자의사 목소리 역), 구지원(이우인 목소리 역), 박주광(코치/남자의사 목소리 역), 김민지(아이 목소리 역)', 
 to_date('21/06/16','YY/MM/DD'), 4677, 151, 6.45);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '킬러의 보디가드 2 (Hitman''s Wife''s Bodyguard)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '킬러의 보디가드 2' , 'Hitman''s Wife''s Bodyguard', 
 '2배로 고통받는 짠내 폭발 보디가드
 안식년인데 왜 쉬지를 못하니!
 미치광이 킬러 ‘다리우스’의 경호를 맡은 후
@@ -359,12 +363,12 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
  
  2배 더 강력한, 2배 더 골때리는, 2배 더 커진
  모두가 기다린 1+1 트리플 환장 액션 블록버스터가 온다!',
-'2D(자막)', '패트릭 휴즈', '액션, 코미디, 범죄', 117, 11, 
+'2D(자막)', '패트릭 휴즈', '액션, 코미디, 범죄', 117, 19, 
 '라이언 레이놀즈(마이클 브라이스 역), 사무엘 L.잭슨(다리우스 킨케이드 역), 셀마 헤이엑(소니아 킨케이드 역), 모건 프리먼(시니어 역), 안토니오 반데라스(아리스토텔레스 파파도풀로스 역), 게리 올드만(블라디슬라프 투코비치 역), 프랭크 그릴로(바비 오닐 역), 톰 호퍼(마그누손 역)', 
 to_date('21/06/23','YY/MM/DD'), 35481, 714, 7.77);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '패터슨 (Paterson)', 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '패터슨', 'Paterson', 
 '미국 뉴저지 주의 소도시 ‘패터슨’에 사는 버스 운전사의 이름은 ‘패터슨’이다.
  매일 비슷한 일상을 보내는 패터슨은 일을 마치면 아내와 저녁을 먹고 애완견 산책 겸 동네 바에 들러 맥주 한 잔으로 하루를 마무리한다.
  그리고 일상의 기록들을 틈틈이 비밀 노트에 시로 써내려 간다.',
@@ -372,8 +376,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '라담 드라이버(패터슨 역), 골쉬프테 파라하니(로라 역), 리즈원 맨지(도니 역), 카라 헤이워드(여학생 역), 자레드 길만(남학생 역), 스털링 제린스(젊은 시인 역), 나가세 마사토시(일본 시인 역), 메소드 맨(메소드 맨 역)', 
 to_date('17/12/21','YY/MM/DD'), 29264, 900, 8.30);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '프로페서 앤 매드맨 (The Professor and the Madman)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '프로페서 앤 매드맨' , 'The Professor and the Madman', 
 '역사의 첫 페이지를 연 꿈의 프로젝트,
 그 시작에는 두 천재가 있었다!
 빅토리아 시대, 대영제국의 부활을 위해 세상을 정의할 ''옥스퍼드 사전 편찬 프로젝트''가 시작된다. 
@@ -385,8 +389,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '멜 깁슨(제임스 머리 역), 숀 펜(윌리엄 마이너 역), 나탈리 도머(일라이자 역), 스티브 쿠건(프레디 역), 에디 마산(먼시 역), 제니퍼 엘(에이다 머리 역), 스티븐 딜레인(리처드 브라이언 역), 제레미 어바인(찰스 홀 역)', 
 to_date('21/06/02','YY/MM/DD'), 17043, 270, 9.00);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '플로리다 프로젝트 (The Florida Project)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '플로리다 프로젝트' , 'The Florida Project', 
 '2018년 우리를 행복하게 할 가장 사랑스러운 걸작!
 "안심하세요 나랑 있으면 안전해요"
  플로리다 디즈니월드 건너편 ‘매직 캐슬’에 사는
@@ -396,8 +400,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '윌렘 대포(바비 역), 브루클린 프린스(무니 역), 브리아 비나이트(핼리 역), 크리스토퍼 리베라(스쿠티 역), 발레리아 코토(젠시 역), 멜라 머더(애슐리 역), 케일럽 랜드리 존스(잭 역), 에이든 말릭(딕키 역)', 
 to_date('18/03/07','YY/MM/DD'), 93936, 1754, 8.65);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '학교 가는 길 (A Long Way to School)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '학교 가는 길' , 'A Long Way to School', 
 '전국 특수학교 재학생의 절반은
  매일 왕복 1~4시간 거리를 통학하며
  전쟁 같은 아침을 맞이한다
@@ -412,8 +416,8 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '이은자, 정난모, 조부용, 장민희, 김남연', 
 to_date('21/05/05','YY/MM/DD'), 21534, 509, 9.60);
 
-INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reating, actor, playdate, rcnt, gcnt, grade)
- VALUES (movie_seq.NEXTVAL, '혼자 사는 사람들 (Aloners)' , 
+INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningtime, rating, actor, playdate, rcnt, gcnt, grade)
+ VALUES (movie_seq.NEXTVAL, '혼자 사는 사람들' , 'Aloners', 
 '집에서도 밖에서도 늘 혼자가 편한 진아.
  사람들은 자꾸 말을 걸어오지만, 진아는 그저 불편하다.
  회사에서 신입사원의 1:1 교육까지 떠맡자 괴로워 죽을 지경.
@@ -425,3 +429,5 @@ INSERT INTO movie(id, title, summary, type, director, genre, runningtime, reatin
 '2D', '홍성은', '드라마', 90, 12, 
 '공승연(진아 역), 정다은(수진 역), 서현우(성훈 역), 김모범(옆집남자 역), 김혜나(팀장 역), 변진수(성훈친구2 역), 정성민(성훈 친구3 역)', 
 to_date('21/05/19','YY/MM/DD'), 12275, 378, 8.74);
+
+commit;

@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.reserve.dto.BranchDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
@@ -20,14 +21,25 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 	@Autowired
 	SqlSession sqlSession;
 
+//	@Override
+//	public List<Map<String, Object>> selectMovieList() throws Exception {
+//		return sqlSession.selectList("reserveMapper.movieAll_list");
+//	}
+	
 	@Override
-	public List<Map<String, Object>> selectMovieList() throws Exception {
-		return null;
+	public List<MovieDTO> selectMovieList() throws Exception {
+		return sqlSession.selectList("reserveMapper.movieAll_list");
 	}
 
 	@Override
 	public List<BranchDTO> selectBranchList(TableRstepDTO dto) throws Exception {
 		return null;
+	}
+	
+	@Override
+	public List<BranchDTO> selectBranchList(String location) throws Exception {
+		System.out.println("Repository loc : " + location);
+		return sqlSession.selectList("reserveMapper.branchlist", location);
 	}
 
 	@Override

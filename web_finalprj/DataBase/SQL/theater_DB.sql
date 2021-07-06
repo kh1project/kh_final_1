@@ -1,5 +1,5 @@
 SELECT * FROM theater;
-SELECT * FROM branch;
+--SELECT * FROM branch WHERE location = '서울';
 
 -- 지점의 상영관 조회
 SELECT branch.location,
@@ -11,6 +11,7 @@ FROM  branch
 INNER JOIN theater
 ON branch.id = theater.bid;
 
+DROP SEQUENCE theater_seq;
 CREATE SEQUENCE theater_seq;
 
 INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 1, '1관');

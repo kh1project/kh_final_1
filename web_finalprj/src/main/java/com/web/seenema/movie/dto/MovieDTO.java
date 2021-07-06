@@ -10,18 +10,16 @@ public class MovieDTO {
 	private String director;
 	private String genre;
 	private int runningtime;
-	private int reating;
+	private int rating;
 	private String actor;
 	private Date playdate;
 	private int rcnt;
-	private float rrate;
-	private int rank;
 	private int gcnt;
 	private float grade;
 	
 	public MovieDTO() {}
 	
-	public MovieDTO(int id, String title, String summary, String type, String director, String genre, int runningtime, int reating,
+	public MovieDTO(int id, String title, String summary, String type, String director, String genre, int runningtime, int rating,
 			String actor, Date playdate, int rcnt, int gcnt, float grade) {
 		super();
 		this.id = id;
@@ -31,7 +29,7 @@ public class MovieDTO {
 		this.director = director;
 		this.genre = genre;
 		this.runningtime = runningtime;
-		this.reating = reating;
+		this.rating = rating;
 		this.actor = actor;
 		this.playdate = playdate;
 		this.rcnt = rcnt;
@@ -95,12 +93,12 @@ public class MovieDTO {
 		this.runningtime = runningtime;
 	}
 	
-	public int getReating() {
-		return reating;
+	public int getRating() {
+		return rating;
 	}
 	
-	public void setReating(int reating) {
-		this.reating = reating;
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 	
 	public String getActor() {
@@ -126,22 +124,6 @@ public class MovieDTO {
 	public void setRcnt(int rcnt) {
 		this.rcnt = rcnt;
 	}
-	
-	public float getRrate() {
-        return rrate;
-    }
-	
-    public void setRrate(float rrate) {
-    	this.rrate = rrate;
-    }
-
-    public int getRank() {
-        return rank;
-    }
-
-    public void setRank(int rank) {
-    	this.rank = rank;
-    }
 	
 	public int getGcnt() {
 		return gcnt;

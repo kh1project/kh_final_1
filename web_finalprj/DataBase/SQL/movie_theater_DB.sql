@@ -1,6 +1,8 @@
 SELECT * FROM movie_theater;
 
 DELETE movie_theater;
+DROP SEQUENCE movie_t_seq;
+
 CREATE SEQUENCE movie_t_seq;
 
 -- 위왓치유(ID : 1) / 강남 1관(ID : 1)
@@ -33,4 +35,4 @@ INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 3, 
 -- 그레타 툰베리(ID : 3) / 송광주하남 2관(ID : 34)
 INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 3, 34, TO_DATE('21/10/21','YY/MM/DD'));
 
-COMMIT
+COMMIT;

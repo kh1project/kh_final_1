@@ -18,7 +18,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="<%=request.getContextPath() %>/reserve">예매</a>
+          <a class="nav-link" href="<%=request.getContextPath() %>/reserve?location=${branchDTO.location }">예매</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="<%=request.getContextPath() %>/reserve">영화관</a>

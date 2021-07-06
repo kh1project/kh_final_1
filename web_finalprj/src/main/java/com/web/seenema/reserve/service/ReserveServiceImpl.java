@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.reserve.dto.BranchDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
@@ -20,8 +21,14 @@ public class ReserveServiceImpl implements ReserveService {
 	@Autowired
 	private ReserveRepository dao;
 
+//	@Override
+//	public List<Map<String, Object>> movieList() throws Exception {
+//		// 영화 리스트 뽑기??
+//		return dao.selectMovieList();
+//	}
+	
 	@Override
-	public List<Map<String, Object>> movieList() throws Exception {
+	public List<MovieDTO> movieList() throws Exception {
 		// 영화 리스트 뽑기??
 		return dao.selectMovieList();
 	}
@@ -31,10 +38,18 @@ public class ReserveServiceImpl implements ReserveService {
 		// 지점 리스트 뽑기??
 		return null;
 	}
+	
+//	@Override
+//	public List<Map<String, Object>> branchList() throws Exception {
+//		return null;
+//	}
 
 	@Override
-	public List<BranchDTO> branchList() throws Exception {
-		return null;
+	public List<BranchDTO> branchList(String location) throws Exception {
+		System.out.println(location);
+		List<BranchDTO> branchlist = dao.selectBranchList(location);
+		System.out.println(branchlist);
+		return branchlist;
 	}
 
 	@Override
