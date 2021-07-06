@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MovieImageDTO;
 import com.web.seenema.movie.dto.MyMovieDTO;
 
@@ -29,6 +30,12 @@ public class MovieRepositoryImpl implements MovieRepository {
 //			System.out.println(data.get(i).getTitle() + "의 : " + i + "번째 주소+파일명 : " + data.get(i).getPath() + data.get(i).getName());
 //		}
 		return data;
+	}
+
+	@Override
+	public List<MovieDTO> selectMovie(int mid) throws Exception {
+		List<MovieDTO> moviedata = sqlSession.selectList("movieMapper.getMovie", mid);
+		return moviedata;
 	}
 
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.web.seenema.pay.dto.PayDTO;
 import com.web.seenema.reserve.dto.BranchDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
@@ -57,6 +58,12 @@ public class ReserveServiceImpl implements ReserveService {
 	@Override
 	public int totalprice(RstepDTO dto) throws Exception {
 		return 0;
+	}
+
+	@Override
+	public int getprice(int id) throws Exception {
+		int price = dao.searchprice(id);
+		return price;
 	}
 	
 }

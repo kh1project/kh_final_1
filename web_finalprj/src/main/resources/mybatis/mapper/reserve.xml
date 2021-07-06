@@ -15,4 +15,8 @@
 	<select id="seat_all" resultType="seat">
 	    SELECT * FROM seat WHERE tid = #{tid} ORDER BY id
 	</select>
+	
+	<select id="pay_all" resultType="_int">
+	    SELECT price FROM pay WHERE id = #{id}
+	</select>
 </mapper>

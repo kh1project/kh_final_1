@@ -15,12 +15,16 @@ import org.springframework.stereotype.Service;
 //import com.web.seenema.movie.repository.MovieRepositoryImpl;
 import com.web.seenema.movie.dao.MovieDAO;
 import com.web.seenema.movie.dto.MovieDTO;
+import com.web.seenema.movie.repository.MovieRepository;
 
 @Service
 public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private MovieRepository mdao;
 	
 	@Autowired
 	MovieDAO dao;
@@ -60,9 +64,9 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
-	public MovieDTO getMovie(int mid) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<MovieDTO> getMovie(int mid) throws Exception {
+		List<MovieDTO> list = mdao.selectMovie(mid);
+		return list;
 	}
 
 	@Override

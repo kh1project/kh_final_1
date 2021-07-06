@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.web.seenema.pay.dto.PayDTO;
 import com.web.seenema.reserve.dto.BranchDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
@@ -78,6 +79,12 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 		List<SeatDTO> seatdata = sqlSession.selectList("reserveMapper.seat_all", tid);
 		
 		return seatdata;
+	}
+
+	@Override
+	public int searchprice(int id) throws Exception {
+		int pay = sqlSession.selectOne("reserveMapper.pay_all", id);
+		return pay;
 	}
 
 }

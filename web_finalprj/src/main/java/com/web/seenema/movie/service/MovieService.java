@@ -12,7 +12,7 @@ public interface MovieService {
 	public List<MovieDTO> getCurrentMovies();
 	public List<MovieDTO> getEndMovies();
 	public List<MovieDTO> getPreMovies();
-	public MovieDTO getMovie(int mid);
+	public List<MovieDTO> getMovie(int mid) throws Exception;
 	public List<MovieDTO> getAllMoviesSortByReserve();
 	public Map<Integer, String> getReserveRate();
 //	public List<MovieImageDTO> findMovieImageList(int mid) throws Exception;

@@ -1,0 +1,159 @@
+@charset "UTF-8";
+
+main{
+	width: 100%; height: 810px;
+	margin: auto auto;
+}
+
+section.main {
+	width: 800px; height: auto;
+	margin: auto auto;
+	background: #353535;
+	justify-content: center;
+	align-items: center;
+}
+
+div.seatfream {
+	width: auto; height: auto;
+	justify-content: center;
+	text-align: center;
+}
+
+div.seats{
+	width: auto;
+	justify-content: center;
+	align-items: center;
+	margin: auto auto;
+}
+
+input.seatinfo-checkbox { display: none; }
+
+label, .no-seat {
+	line-height: 20px; padding: auto;
+	font-size: 8pt;
+	text-align: center;
+	-ms-user-select: none;
+	-moz-user-select: -moz-none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+}
+
+label.screen{
+	width: 500px;
+	margin-bottom : 40px;
+	background-color: white;
+}
+
+input[name="seat"] + label {
+	display: inline-block;
+	background-color: white;
+	width: 30px; height: 25px;
+	border: 2px solid #bcbcbc;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	cursor: pointer;
+}
+
+label.no-seat{
+	display: inline-block;
+	width: 30px; height: 25px;
+	background-color: #BDBDBD;
+	border: 1px solid #bcbcbc;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+	cursor: pointer;
+	color: white;
+	font-weight: bold;
+}
+
+input[name="seat"]:checked + label {
+	background-color: #8FAE48;
+	color: white;
+	font-weight: bold;
+}
+
+div.person {
+	width: auto; height: auto;
+}
+
+div.peoples-number {
+	width: auto; height: auto;
+	justify-content: center;
+	align-items: center;
+	padding: auto auto;
+}
+
+label.personnel, input.personnel-type{
+	background: #353535;
+	text-align: center;
+	color: white; font-weight: bold;
+}
+
+input.personnel{
+	width: 30px;
+	border: 2px solid white;
+	border-radius: 5px;
+	font-size: 10pt;
+	text-align: center;
+}
+
+input.personnel-value{
+	width: 30px;
+	border: 2px solid white;
+	border-radius: 5px;
+	font-size: 10pt;
+	text-align: center;
+	pointer-events: none;
+}
+
+input.personnel-type {
+	width: 50px;
+	border: 2px solid white;
+	border-radius: 5px;
+	pointer-events: none;
+}
+
+input.payment {
+	border: 2px solid white;
+	border-radius: 5px;
+	background-color: white;
+	color: #353535;
+	font-weight: bold;
+}
+
+div.payment{ padding: 10px; }
+
+div.seatexample{
+	width: auto; height: auto;
+	justify-content: flex-start;
+	text-align: left;
+	padding-left: 10px;
+}
+
+span.seat{
+	display: inline-block;
+	width: 20px; height: 15px;
+	border: 1px solid #bcbcbc;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	margin-right: 5px;
+}
+
+span.selected {
+	background-color: #BDBDBD;
+}
+
+span.choose {
+	background-color: white;
+}
+
+span.select {
+	background-color: #8FAE48;
+}
+
+p.selected {
+	display: inline;
+	color: white;
+	font-size: 8pt;
+	font-weight: bold;
+}
