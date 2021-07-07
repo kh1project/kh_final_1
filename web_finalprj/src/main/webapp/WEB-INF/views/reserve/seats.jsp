@@ -19,14 +19,7 @@
 	</header>
 	<section class="reserve-frame pt-5">
 		<div class="reserve-window">
-			<div class="left-menu">
-				<button class="choice-time">상영시간</button>
-				<button class="choice-movie">영화</button>
-				<button class="choice-seat active">좌석</button>
-				<button class="choice-payment">결제</button>
-				<button class="choice-paySuccess">결제완료</button>
-			</div>
-			
+			<%@ include file="../module/ReserveFrame.jsp" %>
 			<c:url var="seat" value="/reserve/reservecheck" />
 			<div class="main-frame">
 				<div class="seat-info">

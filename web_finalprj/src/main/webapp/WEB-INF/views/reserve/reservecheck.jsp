@@ -20,13 +20,7 @@
 	
 	<section class="reserve-frame pt-5">
 		<div class="reserve-window">
-			<div class="left-menu">
-				<button class="choice-time">상영시간</button>
-				<button class="choice-movie">영화</button>
-				<button class="choice-seat">좌석</button>
-				<button class="choice-payment active">결제</button>
-				<button class="choice-paySuccess">결제완료</button>
-			</div>
+			<%@ include file="../module/ReserveFrame.jsp" %>
 			
 			<c:forEach var="movieinfo" items="${moviedata }">
 				<c:set var="title" value="${movieinfo.title }" />
