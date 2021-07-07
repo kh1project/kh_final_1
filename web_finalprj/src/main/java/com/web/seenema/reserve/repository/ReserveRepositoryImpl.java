@@ -32,8 +32,8 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 	}
 
 	@Override
-	public List<BranchDTO> selectBranchList(TableRstepDTO dto) throws Exception {
-		return null;
+	public List<TableRstepDTO> selectTimeList() throws Exception {
+		return sqlSession.selectList("reserveMapper.timelist");
 	}
 	
 	@Override

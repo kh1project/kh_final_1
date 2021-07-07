@@ -17,7 +17,7 @@
 	</select>
 	
 	<!-- 지역 선택시 지점리스트 -->
-	<select id="branchlist" parameterType="String" resultType="com.web.seenema.reserve.dto.BranchDTO">
+	<select id="branchlist" parameterType="String" resultType="branch">
 		SELECT * FROM branch WHERE location = #{location} ORDER BY name
 	</select>
 	
@@ -27,8 +27,12 @@
 	</select>
 	
 	<!-- 영화전체리스트 -->
-	<select id="movieAll_list" resultType="com.web.seenema.movie.dto.MovieDTO">
+	<select id="movieAll_list" resultType="movie">
 		SELECT id, title, rating FROM movie ORDER BY grade DESC
+	</select>
+	
+	<select id="timelist" resultType="table">
+		SELECT * FROM time
 	</select>
 	
 	<!-- 영화시작시간 -->

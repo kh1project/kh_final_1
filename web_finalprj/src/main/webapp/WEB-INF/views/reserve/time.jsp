@@ -14,7 +14,11 @@
 <!-- button { opacity: 0.25 } 버튼 투명하게 설정할 수 있음 -->
 <style type="text/css">
 hr { margin: 3px; }
-button { 
+dl { margin: 0px; }
+.btn {
+	display: inline-block;
+	width: 65%;
+	text-align: center;
 	border-style: hidden;
 	border-collapse: separate;
 	border-radius: 1ex;
@@ -53,6 +57,7 @@ button {
 <body class="pt-5">
   <%@ include file="../module/header.jsp" %>
   <c:url var="location" value="/reserve" />
+  <form method="get" action="${location }/seats">
 	  <div class="container">
 		<div class="row" id="title">
 		  <div class="col-12">
@@ -62,22 +67,93 @@ button {
 		</div>
 		<div class="row">
 		  <div class="col">
-		    <label id="sub">시간표</label><hr>
+		    <label id="sub">
+		    <c:choose>
+		        <c:when test="${param.rating eq '0'}">
+		          <span class="badge badge-pill badge-success">ALL</span>
+		        </c:when>
+		        <c:when test="${param.rating eq '12'}">
+		          <span class="badge badge-pill badge-primary">12</span>
+		        </c:when>
+		        <c:when test="${param.rating eq '15'}">
+		          <span class="badge badge-pill badge-warning">15</span>
+		        </c:when>
+		        <c:otherwise>
+		          <span class="badge badge-pill badge-danger">19</span>
+		        </c:otherwise>
+            </c:choose>
+		    ${param.title } - 시간표</label><hr>
 			<div class="row">
-			  <div class="col">
-			    <button type="button">영화</button>
-			    <button type="button">시간</button>
-			    <button type="button">좌석</button>
-			    <button type="button">관</button>
+			  <div class="col-4">
+			    <a class="btn" role="button" href="#none">
+			      <dl>
+			        <dd>
+			          <strong>11:30</strong>
+			          <div class="tooltip">종료 13:14</div>
+			        </dd>
+			        <dd>
+			          <strong>24</strong>
+			           / 32
+			        </dd>
+			        <dd>1관</dd>
+			      </dl>
+			    </a>
 			  </div>
+			  <div class="col-4">
+			    <a class="btn" role="button" href="#none">
+			      <dl>
+			        <dd>
+			          <strong>13:04</strong>
+			          <div class="tooltip">종료 15:08</div>
+			        </dd>
+			        <dd>
+			          <strong>24</strong>
+			           / 32
+			        </dd>
+			        <dd>1관</dd>
+			      </dl>
+			    </a>
+			  </div>
+			  <div class="col-4">
+			    <a class="btn" role="button" href="#none">
+			      <dl>
+			        <dd>
+			          <strong>13:34</strong>
+			          <div class="tooltip">종료 15:18</div>
+			        </dd>
+			        <dd>
+			          <strong>24</strong>
+			           / 32
+			        </dd>
+			        <dd>1관</dd>
+			      </dl>
+			    </a>
+			  </div>
+			  <!-- 
+			  <div class="col">
+			  <c:forEach var="TableRstepDTO" items="${timelist}" varStatus="status">
+				<a class="btn" role="button" href="#none">
+			      <dl>
+			        <dd>
+			          <strong>${TableRstepDTO.time }</strong>
+			        </dd>
+			        <dd>
+			          <strong>${TableRstepDTO.leftseat }</strong>
+			           / ${TableRstepDTO.totalseat }
+			        </dd>
+			        <dd>${TableRstepDTO.branch }</dd>
+			      </dl>
+			    </a>
+			  </c:forEach>
+			  </div>
+			   -->
 			</div>
 		  </div>
-		</div>
-		<form method="get" action="${location }/seats" target="_self">
+		</div><hr>
 	      <input type="button" onclick="history.back();" value="이전" />
 	      <input type="submit" value="다음" />
-	    </form>
 	  </div>
+	</form>
   <%@ include file="../module/footer.jsp" %>
 </body>
 </html>

@@ -29,7 +29,7 @@ public class ReserveServiceImpl implements ReserveService {
 	
 	@Override
 	public List<MovieDTO> movieList() throws Exception {
-		// 영화 리스트 뽑기??
+		// 영화 리스트 뽑기
 		return dao.selectMovieList();
 	}
 
@@ -38,11 +38,6 @@ public class ReserveServiceImpl implements ReserveService {
 		// 지점 리스트 뽑기??
 		return null;
 	}
-	
-//	@Override
-//	public List<Map<String, Object>> branchList() throws Exception {
-//		return null;
-//	}
 
 	@Override
 	public List<BranchDTO> branchList(String location) throws Exception {
@@ -53,8 +48,8 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public List<TableRstepDTO> tableInfo(int mid, Date date, String loc) throws Exception {
-		return null;
+	public List<TableRstepDTO> timeTableInfo() throws Exception {
+		return dao.selectTimeList();
 	}
 
 	@Override

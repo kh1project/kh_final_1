@@ -46,13 +46,14 @@ hr { margin: 3px; }
 <body class="pt-5">
   <%@ include file="../module/header.jsp" %>
   <c:url var="location" value="/reserve" />
+  <form method="get" action="${location }/schedule">
 	<div class="container">
 	  <div class="row" id="title">
 	  	<div class="col-6">
-	  	  <label>영화관</label>
+	  	  <label>지역</label>
 	  	</div>
 	  	<div class="col-6">
-	  	  <label>영화선택</label>
+	  	  <label>지점</label>
 	  	</div>
 	  </div>
 	  <div class="row">
@@ -150,16 +151,16 @@ hr { margin: 3px; }
 			  <div class="list-group list-group-flush" id="list-tab" role="tablist">
 			    <!-- 지점리스트 출력 -->
 			  	<c:forEach var="branchDTO" items="${branchlist}" varStatus="status">
-				  <c:choose>
-				    <c:when test="${parm.location eq branchDTO.name }">
-					    <a class="list-group-item list-group-item-action active" id="list-name-list" href="${location }?location=${param.location }&name=${branchDTO.name }" role="tab" aria-controls="home">
-					      ${branchDTO.name}</a>
-				    </c:when>
-				    <c:otherwise>
-				    	<a class="list-group-item list-group-item-action" id="list-name-list" href="${location }?location=${param.location }&name=${branchDTO.name }" role="tab" aria-controls="home">
-					      ${branchDTO.name}</a>
-				    </c:otherwise>
-				  </c:choose>
+			  	  <c:choose>
+			  	    <c:when test="${branchDTO.name eq param.name }">
+			  	      <a class="list-group-item list-group-item-action active" id="list-name-list" href="${location }?location=${param.location }&name=${branchDTO.name }" role="tab" aria-controls="home">
+				      ${branchDTO.name}</a>
+			  	    </c:when>
+			  	    <c:otherwise>
+		  	    	  <a class="list-group-item list-group-item-action" id="list-name-list" href="${location }?location=${param.location }&name=${branchDTO.name }" role="tab" aria-controls="home">
+			          ${branchDTO.name}</a>
+			  	    </c:otherwise>
+			  	  </c:choose>
 			    </c:forEach>
 			  </div>
 		    </div>
@@ -167,22 +168,19 @@ hr { margin: 3px; }
         </div>
       </div>
       <div>
+      <!-- 
         <form method="get" action="${location }/schedule" target="_self">
         	<input type="hidden" name="location" value="${param.location }">
-        	<input type="hidden" name="name" value="${branchDTO.name }">
-	      	<!-- 
-	      	<input type="hidden" id="seoul" name="location" value="서울">
-	      	<input type="hidden" id="gyeonggi" name="location" value="경기">
-	      	<input type="hidden" id="incheon" name="location" value="인천">
-	      	<input type="hidden" id="daejeon" name="location" value="대전/충청/세종">
-	      	<input type="hidden" id="busan" name="location" value="부산/대구/경상">
-	      	<input type="hidden" id="gwanju" name="location" value="광주/전라">
-	      	<input type="hidden" id="gangwon" name="location" value="강원">
-	      	-->
+        	<input type="hidden" name="name" value="${param.name }">
 	      	<input type="submit" value="다음" />
         </form>
+       -->
+       <input type="hidden" name="location" value="${param.location }">
+       <input type="hidden" name="name" value="${param.name }">
+       <input type="submit" value="다음" />
       </div>
 	</div>
+  </form>
   <%@ include file="../module/footer.jsp" %>
 <script type="text/javascript">
 $(document).ready(function(){

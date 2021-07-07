@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,12 +49,12 @@ hr { margin: 3px; }
 <body class="pt-5">
   <%@ include file="../module/header.jsp" %>
   <c:url var="location" value="/reserve" />
-  <c:url var="movielist" value="/reserve/schedule" />
+  <form method="get" action="${location }/time">
 	<div class="container">
 	  <div class="row" id="title">
 	  	<div class="col-12">
 	  	  <c:set var="now" value="<%=new java.util.Date()%>" />
-		  <label><fmt:formatDate value="${now}" pattern="yyyy-MM-dd (E)" /></label>
+		  <label>${param.location } / ${param.name } / <fmt:formatDate value="${now}" pattern="yyyy-MM-dd (E)" /></label>
 	  	</div>
 	  </div>
       <div class="col">
@@ -62,33 +63,61 @@ hr { margin: 3px; }
 		    <div class="list-group list-group-flush" id="list-tab" role="tablist">
 		  	<!-- 평점 순으로 영화 목록 나열 -->
 		    <c:forEach var="MovieDTO" items="${movieAll_list}" varStatus="status">
-		      <a class="list-group-item list-group-item-action" id="list-seoul-list" href="?title=${MovieDTO.title }" role="tab" aria-controls="home">
-			      <!-- 등급제한에 따라 뱃지 표시 -->
-			      <c:choose>
-			        <c:when test="${MovieDTO.rating eq '0'}">
-			          <span class="badge badge-pill badge-success">ALL</span>
-			        </c:when>
-			        <c:when test="${MovieDTO.rating eq '12'}">
-			          <span class="badge badge-pill badge-primary">12</span>
-			        </c:when>
-			        <c:when test="${MovieDTO.rating eq '15'}">
-			          <span class="badge badge-pill badge-warning">15</span>
-			        </c:when>
-			        <c:otherwise>
-			          <span class="badge badge-pill badge-danger">19</span>
-			        </c:otherwise>
-			      </c:choose>
-		        ${MovieDTO.title}</a>
+		      <c:choose>
+		        <c:when test="${param.title eq MovieDTO.title }">
+			      <a class="list-group-item list-group-item-action active" id="list-seoul-list"
+			        href="?location=${param.location }&name=${param.name }&rating=${MovieDTO.rating }&title=${fn:replace(MovieDTO.title, '#', '%23') }" role="tab" aria-controls="home">
+				      <!-- 등급제한에 따라 뱃지 표시 -->
+				      <c:choose>
+				        <c:when test="${MovieDTO.rating eq '0'}">
+				          <span class="badge badge-pill badge-success">ALL</span>
+				        </c:when>
+				        <c:when test="${MovieDTO.rating eq '12'}">
+				          <span class="badge badge-pill badge-primary">12</span>
+				        </c:when>
+				        <c:when test="${MovieDTO.rating eq '15'}">
+				          <span class="badge badge-pill badge-warning">15</span>
+				        </c:when>
+				        <c:otherwise>
+				          <span class="badge badge-pill badge-danger">19</span>
+				        </c:otherwise>
+			          </c:choose>
+		          ${MovieDTO.title}</a>
+		        </c:when>
+		        <c:otherwise>
+		        <a class="list-group-item list-group-item-action" id="list-seoul-list"
+		          href="?location=${param.location }&name=${param.name }&rating=${MovieDTO.rating }&title=${fn:replace(MovieDTO.title, '#', '%23') }" role="tab" aria-controls="home">
+				      <!-- 등급제한에 따라 뱃지 표시 -->
+				      <c:choose>
+				        <c:when test="${MovieDTO.rating eq '0'}">
+				          <span class="badge badge-pill badge-success">ALL</span>
+				        </c:when>
+				        <c:when test="${MovieDTO.rating eq '12'}">
+				          <span class="badge badge-pill badge-primary">12</span>
+				        </c:when>
+				        <c:when test="${MovieDTO.rating eq '15'}">
+				          <span class="badge badge-pill badge-warning">15</span>
+				        </c:when>
+				        <c:otherwise>
+				          <span class="badge badge-pill badge-danger">19</span>
+				        </c:otherwise>
+			          </c:choose>
+		          ${MovieDTO.title}</a>
+		        </c:otherwise>
+		      </c:choose>
 		    </c:forEach>
 		  </div>
 		</div>
 	  </div>
 	  </div>
-	  <form method="get" action="${location }/time" target="_self">
+	  	<input type="hidden" name="location" value="${param.location }">
+        <input type="hidden" name="name" value="${param.name }">
+        <input type="hidden" name="rating" value="${param.rating }">
+        <input type="hidden" name="title" value="${param.title }">
 	    <input type="button" onclick="history.back();" value="이전" />
       	<input type="submit" value="다음" />
-      </form>
 	</div>
+  </form>
   <%@ include file="../module/footer.jsp" %>
 <script type="text/javascript">
 

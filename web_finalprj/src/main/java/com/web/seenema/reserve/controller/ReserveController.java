@@ -19,6 +19,7 @@ import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.reserve.dto.BranchDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
+import com.web.seenema.reserve.dto.TableRstepDTO;
 import com.web.seenema.reserve.service.ReserveService;
 
 @Controller
@@ -63,11 +64,10 @@ public class ReserveController {
 //	}
 	
 	@RequestMapping(value = "/time")
-	public ModelAndView time() {
-		ModelAndView mv = new ModelAndView("reserve/time");
-		mv.addObject("", "");
-		
-		return mv;
+	public String timeList(Model m) throws Exception {
+		List<TableRstepDTO> time = ress.timeTableInfo();
+		m.addAttribute("timelist", time);
+		return "reserve/time";
 	}
 	
 	@RequestMapping(value = "/seats", method = RequestMethod.GET)
