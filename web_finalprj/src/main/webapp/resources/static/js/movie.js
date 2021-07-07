@@ -6,29 +6,6 @@
 	success: function(data){},
 	error: function(){}
 }) */
-	function mouseoverUnlike(mid){
-		document.querySelector('#unlike-'+mid).style.backgroundColor = "lightgray";
-	}
-	
-	function mouseoverLike(mid){
-		document.querySelector('#like-'+mid).style.backgroundColor = "lightgray";
-	}
-	
-	function mouseoverReserve(mid){
-		document.querySelector('#reserve-'+mid).style.backgroundColor = "lightgray";
-	}
-	
-	function mouseoutUnlike(mid){
-		document.querySelector('#unlike-'+mid).style.backgroundColor = "transparent";
-	}
-	
-	function mouseoutLike(mid){
-		document.querySelector('#like-'+mid).style.backgroundColor = "transparent";
-	}
-	
-	function mouseoutReserve(mid){
-		document.querySelector('#reserve-'+mid).style.backgroundColor = "transparent";
-	}
 	
 	function iLikeIt(mid){
 		$.ajax({
@@ -40,7 +17,7 @@
 				"mid" : mid
 			},
 			success: function(data){
-				document.querySelector("#unlike-"+mid).innerHTML = "<span class=\"inner-btn liked\" onmouseover=\"mouseoverLike("+mid+")\" onmouseout=\"mouseoutLike("+mid+")\" onclick=\"iHateIt("+mid+")\">♥"+data.gcnt+"</span>";
+				document.querySelector("#unlike-"+mid).innerHTML = "<span class=\"btn btn-outline-dark\" onclick=\"iHateIt("+mid+")\">♥"+data.gcnt+"</span>";
 				document.querySelector("#unlike-"+mid).id = "like-"+mid;
 			},
 			error: function(){
@@ -59,7 +36,7 @@
 				"mid" : mid
 			},
 			success: function(data){
-				document.querySelector("#like-"+mid).innerHTML = "<span class=\"inner-btn unlike\" onmouseover=\"mouseoverUnlike("+mid+")\" onmouseout=\"mouseoutUnlike("+mid+")\" onclick=\"iLikeIt("+mid+")\">♡"+data.gcnt+"</span>";
+				document.querySelector("#like-"+mid).innerHTML = "<span class=\"btn btn-outline-dark\" onclick=\"iLikeIt("+mid+")\">♡"+data.gcnt+"</span>";
 				document.querySelector("#like-"+mid).id = "unlike-"+mid;
 			},
 			error: function(){
