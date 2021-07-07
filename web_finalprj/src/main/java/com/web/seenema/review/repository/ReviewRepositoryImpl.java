@@ -8,8 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.web.seenema.comment.dto.CommentSimpleDTO;
 import com.web.seenema.movie.dto.MovieDTO;
+import com.web.seenema.movie.dto.MyMovieDTO;
 import com.web.seenema.review.dto.ReviewAddDTO;
 import com.web.seenema.review.dto.ReviewDTO;
+import com.web.seenema.review.dto.ReviewPostDTO;
 import com.web.seenema.review.dto.ReviewSimpleDTO;
 
 @Repository
@@ -61,5 +63,21 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	public boolean deleteReview(int rid) throws Exception {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	@Override
+	public boolean insertPost(ReviewPostDTO rpdto) throws Exception {
+		boolean result = false;
+		int rs = sqlSession.insert("review.insertPost", rpdto); //아직 mapper처리 안함
+		if(rs == 1) {
+			result = true;
+		}
+		return result;
+	}
+	
+	@Override
+	public List<Integer> selectMergePost(int mergeId) throws Exception {
+		List<Integer> data = sqlSession.selectList("review.selectMergePost", mergeId); //아직 mapper처리 안함
+		return data;
 	}
 }

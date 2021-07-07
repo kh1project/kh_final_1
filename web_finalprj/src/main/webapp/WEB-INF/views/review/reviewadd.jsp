@@ -21,26 +21,27 @@
 			</div>
 		</div>
 		
-		
-		<c:url var="add2" value="/review/add2" />
+		<c:url var="add" value="/review/add" />
 		<div id="add-step2">
-		<form action="${add2 }" method="post">
+		<form action="${add }" name="step2form" method="post">
 			<div class="row">
 				<div class="col-6">
 					<div id="add-imagelist" class="row">
 					</div>
 				</div>
 				<div class="col-6 postwrap">
+					<input type="number" id="star" min="1" max="5" value="1"><!-- 나중에 별 체크하는걸로 바꿔야함. 임시. -->
 					<!-- 이미지1, 텍스트1 묶음 START -->
 					<div id="post1" class="col p-3 post" onclick="selectPost(1)">
 						<img class="selectImg" src="" alt="이미지 없음">
 						<textarea placeholder="내용을 작성해 주세요."></textarea>
+						<div class="pTextCnt">(0 / 100)</div>
 					</div>
 					<!-- 이미지1, 텍스트1 묶음 END -->
 					<button id="btn_addpost" type="button" onclick="addPost()">포스트추가</button>
 				</div>
 			</div>
-			<button type="submit">등록</button>
+			<button id="btn_step2submit" type="button" onclick="addReview()">등록</button>
 			<button type="button">취소</button>	
 		</form>
 	</div>
