@@ -10,4 +10,5 @@ public interface MovieRepository {
 	public List<MovieImageDTO> selectMovieImageList(int mid) throws Exception;
 	public List<MyMovieDTO> selectWatchMovieList(int mid) throws Exception;
 	public List<MovieDTO> selectMovie(int mid) throws Exception;
+	public List<MovieImageDTO> getPoster(int mid) throws Exception;
 }

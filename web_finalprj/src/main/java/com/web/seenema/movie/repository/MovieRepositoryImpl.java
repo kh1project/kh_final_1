@@ -38,4 +38,11 @@ public class MovieRepositoryImpl implements MovieRepository {
 		return moviedata;
 	}
 
+	@Override
+	public List<MovieImageDTO> getPoster(int mid) throws Exception {
+		List<MovieImageDTO> movieimg = sqlSession.selectList("movieMapper.getPoster", mid);
+		
+		return movieimg;
+	}
+
 }

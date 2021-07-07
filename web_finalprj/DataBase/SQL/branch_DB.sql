@@ -1,6 +1,7 @@
 SELECT * FROM branch;
 
 CREATE SEQUENCE branch_seq;
+--DROP SEQUENCE branch_seq;
 
 -- 서울 지점.
 INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '서울', '강남');

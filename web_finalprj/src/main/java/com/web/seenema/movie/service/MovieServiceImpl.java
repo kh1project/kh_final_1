@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 //import com.web.seenema.movie.repository.MovieRepositoryImpl;
 import com.web.seenema.movie.dao.MovieDAO;
 import com.web.seenema.movie.dto.MovieDTO;
+import com.web.seenema.movie.dto.MovieImageDTO;
 import com.web.seenema.movie.repository.MovieRepository;
 
 @Service
@@ -99,6 +100,12 @@ public class MovieServiceImpl implements MovieService {
 		}
 		
 		return map;
+	}
+
+	@Override
+	public List<MovieImageDTO> getPoster(int mid) throws Exception {
+		List<MovieImageDTO> movieimg = mdao.getPoster(mid);
+		return movieimg;
 	}
 
 }

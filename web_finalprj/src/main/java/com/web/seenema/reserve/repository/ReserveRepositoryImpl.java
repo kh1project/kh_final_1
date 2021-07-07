@@ -1,6 +1,5 @@
 package com.web.seenema.reserve.repository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +8,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.web.seenema.pay.dto.PayDTO;
 import com.web.seenema.reserve.dto.BranchDTO;
+import com.web.seenema.reserve.dto.BranchTheaterDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
 import com.web.seenema.reserve.dto.TableRstepDTO;
@@ -85,6 +84,13 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 	public int searchprice(int id) throws Exception {
 		int pay = sqlSession.selectOne("reserveMapper.pay_all", id);
 		return pay;
+	}
+
+	@Override
+	public List<BranchTheaterDTO> selectMovieTheater(int tid) throws Exception {
+		List<BranchTheaterDTO> mtlist = sqlSession.selectList("reserveMapper.search_Branch", tid);
+		
+		return mtlist;
 	}
 
 }

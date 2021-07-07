@@ -12,4 +12,7 @@
 		select a.id, a.title, b.path, b.name from movie a, Image_files b where a.id = b.mid and a.id = #{mid}
 	</select>
 	
+	<select id="getPoster" resultType="movieImage">
+		select * from image_files where mid = #{mid} AND path LIKE '%poster%' AND name = 'movie_image.jpg'
+	</select>
 </mapper>

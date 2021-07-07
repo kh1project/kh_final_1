@@ -1,6 +1,5 @@
 package com.web.seenema.reserve.controller;
 
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.web.seenema.movie.dto.MovieDTO;
+import com.web.seenema.movie.dto.MovieImageDTO;
 import com.web.seenema.movie.service.MovieService;
 import com.web.seenema.pay.dto.PayDTO;
+import com.web.seenema.reserve.dto.BranchTheaterDTO;
 import com.web.seenema.reserve.dto.MovieTheaterDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
 import com.web.seenema.reserve.service.ReserveService;
@@ -86,9 +87,11 @@ public class ReserveController {
 		int tid = 1; // 임시 상영관 번호
 		
 		MovieTheaterDTO mtdto = new MovieTheaterDTO();
+		List<BranchTheaterDTO> btlist = ress.getmovieTheater(tid);
 		
 		mtdto.setTid(tid);
 		List<MovieDTO> moviedata = movies.getMovie(mid);
+		List<MovieImageDTO> poster = movies.getPoster(mid);
 		
 		String Seat ="";
 		String[] seatinfo = req.getParameterValues("seat");
@@ -100,29 +103,35 @@ public class ReserveController {
 			}
 		}
 		
-		// 성인 수.
-		String adult = req.getParameter("adult");
-		// 청소년 수.
-		String teenager = req.getParameter("teenager");
-		
 		// 가격 가져오기
 		PayDTO pay = new PayDTO();
 		
+		int adult = 0;
+		int teenager = 0;
 		int adultPrice = 0;
 		int teenPrice = 0;
+		int peple = 0;
 		
-		if(adult != null) {
-			adultPrice = (ress.getprice(2))*Integer.parseInt(adult);
+		
+		if(req.getParameter("adult") != null) {
+			adult = Integer.parseInt(req.getParameter("adult"));
+			adultPrice = (ress.getprice(2))*adult;
+			peple = teenager + adult;
 		}
 		
-		if(teenager != null) {
+		if(req.getParameter("teenager") != null) {
+			teenager = Integer.parseInt(req.getParameter("teenager"));
 			pay.setId(1);
-			teenPrice = (ress.getprice(1))*Integer.parseInt(teenager);
+			teenPrice = (ress.getprice(1))*teenager;
+			peple = teenager + adult;
 		}
 		
 		int payment = adultPrice + teenPrice;
 		
+		mv.addObject("poster", poster);
 		mv.addObject("moviedata", moviedata);
+		mv.addObject("btlist", btlist);
+		mv.addObject("peple", peple);
 		mv.addObject("Seat", Seat);
 		mv.addObject("payment", payment);
 		

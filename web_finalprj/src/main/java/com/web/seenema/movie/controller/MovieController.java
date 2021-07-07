@@ -29,7 +29,7 @@ public class MovieController {
 		Map<Integer, String> reserveRating = service.getReserveRate();
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("reserveRating", reserveRating);
-
+		
 		return "movie/movie";
 	}
 	

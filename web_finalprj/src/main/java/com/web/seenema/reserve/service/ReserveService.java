@@ -4,8 +4,8 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.web.seenema.pay.dto.PayDTO;
 import com.web.seenema.reserve.dto.BranchDTO;
+import com.web.seenema.reserve.dto.BranchTheaterDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
 import com.web.seenema.reserve.dto.TableRstepDTO;
@@ -19,4 +19,5 @@ public interface ReserveService {
 	public List<SeatDTO> seatList(int tid) throws Exception;
 	public int totalprice(RstepDTO dto) throws Exception;
 	public int getprice(int id) throws Exception;
+	public List<BranchTheaterDTO> getmovieTheater(int tid) throws Exception;
 }

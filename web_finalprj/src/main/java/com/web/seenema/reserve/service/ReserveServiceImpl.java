@@ -1,15 +1,14 @@
 package com.web.seenema.reserve.service;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.web.seenema.pay.dto.PayDTO;
 import com.web.seenema.reserve.dto.BranchDTO;
+import com.web.seenema.reserve.dto.BranchTheaterDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
 import com.web.seenema.reserve.dto.TableRstepDTO;
@@ -64,6 +63,12 @@ public class ReserveServiceImpl implements ReserveService {
 	public int getprice(int id) throws Exception {
 		int price = dao.searchprice(id);
 		return price;
+	}
+
+	@Override
+	public List<BranchTheaterDTO> getmovieTheater(int tid) throws Exception {
+		List<BranchTheaterDTO> data = dao.selectMovieTheater(tid);
+		return data;
 	}
 	
 }

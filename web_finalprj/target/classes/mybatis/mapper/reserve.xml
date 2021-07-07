@@ -19,4 +19,16 @@
 	<select id="pay_all" resultType="_int">
 	    SELECT price FROM pay WHERE id = #{id}
 	</select>
+	
+	<select id="search_Branch" resultType="BranchTheater">
+		SELECT b.location
+			 , b.name AS bname
+			 , t.name AS tname
+		  FROM movie_theater mt
+		  JOIN theater t
+		    ON mt.tid = t.id
+		  JOIN branch b
+		    ON t.bid = b.id
+		 WHERE mt.id = #{tid}
+	</select>
 </mapper>

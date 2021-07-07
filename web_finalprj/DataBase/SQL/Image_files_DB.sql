@@ -1,6 +1,9 @@
 SELECT * FROM IMAGE_FILES;
 
 CREATE SEQUENCE Image_files_seq;
+DROP SEQUENCE Image_files_seq;
+
+select name from image_files where mid = 1 AND path LIKE '%poster%' AND name = 'movie_image.jpg';
 
 -- 위왓치유
 INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 1, 'movie_image.jpg', 'C:/seenema/#위왓치유 (V siti, #WeWatchYou)/poster/');

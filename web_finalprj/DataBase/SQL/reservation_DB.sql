@@ -21,10 +21,10 @@ select * from reservation where aid = 1;
 select mid
   from MOVIE_THEATER MT
  where MT.id IN (select mtid
-				   from time T
-				  where T.id IN (select timeid
-				                   from reservation R
-				                  where R.aid = 1));
+   from time T
+  where T.id IN (select timeid
+                   from reservation R
+                  where R.aid = 1));
 
 SELECT m.rating
   FROM movie m

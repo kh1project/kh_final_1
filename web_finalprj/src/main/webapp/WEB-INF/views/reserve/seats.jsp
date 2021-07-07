@@ -6,104 +6,120 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>좌석선택</title>
+<title>이미지 페이지</title>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
-<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/seat.css">
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/seats.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 </head>
-<body class="pt-5" ondragstart="return false"> 
+<body class="pt-5">
 	<header>
 		<%@ include file="../module/header.jsp" %>
 	</header>
-	<main class="pt-5">
-		<section class="main">
+	<section class="reserve-frame pt-5">
+		<div class="reserve-window">
+			<div class="left-menu">
+				<button class="choice-time">상영시간</button>
+				<button class="choice-movie">영화</button>
+				<button class="choice-seat active">좌석</button>
+				<button class="choice-payment">결제</button>
+				<button class="choice-paySuccess">결제완료</button>
+			</div>
+			
 			<c:url var="seat" value="/reserve/reservecheck" />
-			<form id="seat-form" action="${seat }" method="post">
-				<div class="seatfream pt-5">
-					<label class="screen">Screen</label><br>
-					<div class="seats">
-						<c:forEach var="list" items="${seatlists }" >
-							<c:forEach var="seatcnt" items="${seatcnt }">
-								<c:if test="${seatcnt.key eq 'scnt' }">
-									<c:set var="seatamount" value="${seatcnt.value }" />
-								</c:if>
-							</c:forEach>
-							<c:choose>
-								<c:when test="${fn: containsIgnoreCase(list.reserved, 'y') }">
-										<label class="no-seat" id="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
-								</c:when>
-								<c:otherwise>
-									<c:choose>
-										<c:when test="${seatamount%2 == 0 }" >
-											<c:choose>
-												<c:when test="${(list.seatcol eq 4) || (list.seatcol eq 10)}">
-													<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
-													<label id="${list.seatrow }${list.seatcol }" style="margin-right : 10px;" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
-												</c:when>
-												<c:when test="${list.seatcol eq 1}">
-													<br><input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
-													<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
-												</c:when>
-												<c:otherwise>
-													<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
-													<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
-												</c:otherwise>
-											</c:choose>
-										</c:when>
-										<c:otherwise>
-											<c:choose>
-												<c:when test="${(list.seatcol eq 5) || (list.seatcol eq 10)}">
-													<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
-													<label id="${list.seatrow }${list.seatcol }" style="margin-right : 10px;" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
-												</c:when>
-												<c:when test="${list.seatcol eq 1}">
-													<br><input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
-													<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
-												</c:when>
-												<c:otherwise>
-													<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
-													<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
-												</c:otherwise>
-											</c:choose>
-										</c:otherwise>
-									</c:choose>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
+			<div class="main-frame">
+				<div class="seat-info">
+					<label class="info-title">좌석/인원 선택</label>
+				</div>
+				<div class="theater-info">
+					<div class="screen-spot">
+						<label class="screen">Screen</label>
 					</div>
 					
-					<div class="person">
-						<c:forEach var="movie" items="${moviedata }">
-							<c:set var="rating" value="${list.rating }" />
+					<c:forEach var="list" items="${seatlists }" >
+						<c:forEach var="seatcnt" items="${seatcnt }">
+							<c:if test="${seatcnt.key eq 'scnt' }">
+								<c:set var="seatamount" value="${seatcnt.value }" />
+							</c:if>
 						</c:forEach>
-							<div class="peoples-number">
-								<input class="personnel-type" type="text" id="Adult" value="성인">
-								<input class="personnel" type="button" value="-" onclick="person_value(document.getElementById('person1'), '-')">
-								<input class="personnel" type="text" name= "adult"id="person1" value="0" onchange="person_add(this, '')">
-								<input class="personnel" type="button" value="+" onclick="person_value(document.getElementById('person1'), '+')">
-							</div>
-						<c:if test="${rating < 19}">
-							<div class="peoples-number">
-								<input class="personnel-type" type="text" id="Teenager" value="청소년">
-								<input class="personnel" type="button" value="-" onclick="person_value(document.getElementById('person2'), '-')">
-								<input class="personnel-value" type="text" name="teenager" id="person2" value="0" onchange="person_add(this, '')">
-								<input class="personnel" type="button" value="+" onclick="person_value(document.getElementById('person2'), '+')">
-							</div>
-						</c:if>
-						<div class="payment">
-							<input class="payment" type="button" value="결제하기 >" onclick="send('seat-form');">
+						<c:choose>
+							<c:when test="${fn: containsIgnoreCase(list.reserved, 'y') }">
+									<label class="no-seat" id="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+							</c:when>
+							<c:otherwise>
+								<c:choose>
+									<c:when test="${seatamount%2 == 0 }" >
+										<c:choose>
+											<c:when test="${(list.seatcol eq 4) || (list.seatcol eq 10)}">
+												<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+												<label id="${list.seatrow }${list.seatcol }" style="margin-right : 10px;" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+											</c:when>
+											<c:when test="${list.seatcol eq 1}">
+												<br><input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+												<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+											</c:when>
+											<c:otherwise>
+												<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+												<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+											</c:otherwise>
+										</c:choose>
+									</c:when>
+									<c:otherwise>
+										<c:choose>
+											<c:when test="${(list.seatcol eq 5) || (list.seatcol eq 10)}">
+												<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+												<label id="${list.seatrow }${list.seatcol }" style="margin-right : 10px;" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+											</c:when>
+											<c:when test="${list.seatcol eq 1}">
+												<br><input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+												<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+											</c:when>
+											<c:otherwise>
+												<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+												<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+											</c:otherwise>
+										</c:choose>
+									</c:otherwise>
+								</c:choose>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</div>
+				
+				<div class="seatexample">
+					<span class="seat selected"></span><p class="selected">선택 불가능한 좌석</p>
+					<span class="seat choose"></span><p class="selected">선택 가능한 좌석</p>
+					<span class="seat select"></span><p class="selected">선택된 좌석</p>
+				</div>
+				
+				<c:forEach var="movie" items="${moviedata }">
+					<c:set var="rating" value="${list.rating }" />
+				</c:forEach>
+				
+				<div class="personnel-info">
+					<input class="personnel-type" type="text" id="Adult" value="성인">
+					<div class="peoples-number">
+						<input class="personnel" type="button" value="-" onclick="person_value(document.getElementById('person1'), '-')">
+						<input class="personnel-value" type="text" name= "adult"id="person1" value="0" onchange="person_add(this, '')">
+						<input class="personnel" type="button" value="+" onclick="person_value(document.getElementById('person1'), '+')">
+					</div>
+					<c:if test="${rating < 19}">
+						<input class="personnel-type" type="text" id="Teenager" value="청소년">
+						<div class="peoples-number">
+							<input class="personnel" type="button" value="-" onclick="person_value(document.getElementById('person2'), '-')">
+							<input class="personnel-value" type="text" name="teenager" id="person2" value="0" onchange="person_add(this, '')">
+							<input class="personnel" type="button" value="+" onclick="person_value(document.getElementById('person2'), '+')">
 						</div>
-						<div class="seatexample">
-							<span class="seat selected"></span><p class="selected">선택 불가능한 좌석</p>
-							<span class="seat choose"></span><p class="selected">선택 가능한 좌석</p>
-							<span class="seat select"></span><p class="selected">선택된 좌석</p>
-						</div>
+					</c:if>
+					<div class="payment">
+						<input class="payment" type="button" value="결제하기 >" onclick="send('seat-form');">
 					</div>
 				</div>
-			</form>
-		</section>
-	</main>
+			</div>
+		</div>
+	</section>
+	
 	<footer>
 		<%@ include file="../module/footer.jsp" %>
 	</footer>
@@ -120,11 +136,18 @@
 	    	cnt = Number(test1) + Number(test2);
 	    	console.log(cnt);
 	    	
-	        if( cnt==$(":checkbox:checked").length ) {
-	            $(":checkbox:not(:checked)").attr("disabled", "disabled");
-	        }
-	        else {
-	            $(":checkbox").removeAttr("disabled");
+	        if(cnt != 0){
+	        	if( cnt == $(":checkbox:checked").length ) {
+		            $(":checkbox:not(:checked)").attr("disabled", "disabled");
+		        }
+		        else {
+		            $(":checkbox").removeAttr("disabled");
+		        }
+	        } else {
+	        	alert("인원 수를 선택해주세요.");
+	        	$("input[type=checkbox]").prop("checked",false);
+        		$(":checkbox").removeAttr("checked");
+        		$(":checkbox").removeAttr("disabled");
 	        }
 	    });
 	    
