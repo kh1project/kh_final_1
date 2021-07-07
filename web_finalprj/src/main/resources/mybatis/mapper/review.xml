@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reviewMapper">
+	<insert id="insertPost" parameterType="reviewpost">
+		INSERT INTO post(id, mergePost, postimg, posttext)
+			VALUES(post_seq.NEXTVAL, #{mergePost}, #{postimg}, #{posttext}) 
+	</insert>
+	<select id="selectMergePost" parameterType="int" resultType="Integer">
+		SELECT * FROM post WHERE mergePost = #{mergeId}
+	</select>
+</mapper>

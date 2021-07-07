@@ -9,7 +9,6 @@ import com.web.seenema.comment.dto.CommentSimpleDTO;
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MovieImageDTO;
 import com.web.seenema.movie.repository.MovieRepositoryImpl;
-import com.web.seenema.review.dto.ReviewAddDTO;
 import com.web.seenema.review.dto.ReviewDTO;
 import com.web.seenema.review.dto.ReviewPostDTO;
 import com.web.seenema.review.dto.ReviewSimpleDTO;
@@ -92,7 +91,7 @@ public class ReviewServiceImpl implements ReviewService {
 			ReviewPostDTO rpdto = new ReviewPostDTO();
 			rpdto.setMergePost(mergeId);
 			rpdto.setPostimg(post.get("postimg"));
-			rpdto.setPostimg(post.get("posttext"));
+			rpdto.setPosttext(post.get("posttext"));
 			result = dto.insertPost(rpdto);
 			if(result == false) {
 				break;
@@ -101,14 +100,15 @@ public class ReviewServiceImpl implements ReviewService {
 		List<Integer> mergePost = null;
 		if(result) {
 			mergePost = MergePost(mergeId);
-			mergeId++;
-			System.out.println("mergeId : " + mergeId);
+			mergeId++; //뭔가 mergeId담는데 오류 있음.
+			System.out.println("mergePost select하고 난 후 mergeId(1증가된 상태) : " + mergeId);
 		}
 		return mergePost;
 	}
 	
 	@Override
 	public List<Integer> MergePost(int mergeId) throws Exception {
+		System.out.println("select하는 mergeId : " + mergeId);
 		List<Integer> mergePost = dto.selectMergePost(mergeId);
 		return mergePost;
 	}

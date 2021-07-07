@@ -70,11 +70,15 @@ public class ReviewController {
 		String forward = "";
 		
 		int aid = 1; //session에서 aid 받아와야함. 임시데이터.
+		System.out.println("star : " + star);
+		for(int  i = 0; i < mergePost.size(); i++) {
+			System.out.println("mergePost.get(i) : " + mergePost.get(i));
+		}
 		//ajaxcontroller의 addstep2 메서드에서 받은 mergePost,star 값을 이용하여 addReview 한다.
 		
-		//addreview 메서드 호출
+//		//addreview 메서드 호출
 //		boolean result = review.addReview(mergePost, star);
-				
+//				
 //		if(result) {
 //			// 작성 성공시 리뷰 리스트로 이동
 //			forward = "redirect:/review";
@@ -85,7 +89,8 @@ public class ReviewController {
 //			forward = "account/join";
 //		}
 		
-		return forward;
+		return null;
+		//return forward;
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)

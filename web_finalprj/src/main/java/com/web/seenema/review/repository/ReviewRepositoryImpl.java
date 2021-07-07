@@ -68,7 +68,7 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	@Override
 	public boolean insertPost(ReviewPostDTO rpdto) throws Exception {
 		boolean result = false;
-		int rs = sqlSession.insert("review.insertPost", rpdto); //아직 mapper처리 안함
+		int rs = sqlSession.insert("reviewMapper.insertPost", rpdto);
 		if(rs == 1) {
 			result = true;
 		}
@@ -77,7 +77,10 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	
 	@Override
 	public List<Integer> selectMergePost(int mergeId) throws Exception {
-		List<Integer> data = sqlSession.selectList("review.selectMergePost", mergeId); //아직 mapper처리 안함
+		List<Integer> data = sqlSession.selectList("reviewMapper.selectMergePost", mergeId);
+		for(int i = 0; i < data.size(); i++) {
+			System.out.println("Repository selectMergePost : " + data.get(i));
+		}
 		return data;
 	}
 }
