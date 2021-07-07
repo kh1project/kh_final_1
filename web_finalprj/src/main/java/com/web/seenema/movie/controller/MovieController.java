@@ -18,7 +18,6 @@ import com.web.seenema.movie.dto.MovieLikeDTO;
 import com.web.seenema.movie.service.MovieService;
 
 @Controller
-@RequestMapping(value = "/movie")
 public class MovieController {
 	
 	@Autowired
@@ -27,7 +26,7 @@ public class MovieController {
 	@Autowired
 	MovieDAO mdao;
 	
-	@RequestMapping(value = "")
+	@RequestMapping(value = "/movie")
 	public String movie(Model model, HttpServletRequest request) {
 		List<MovieDTO> movieList = service.getAllMoviesSortByReserve();
 		Map<Integer, String> reserveRating = service.getReserveRate();
@@ -39,11 +38,10 @@ public class MovieController {
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("reserveRating", reserveRating);
 		model.addAttribute("likeList", likeList);		
-		
 		return "movie/movie";
 	}
 	
-	@RequestMapping(value = "/detail")
+	@RequestMapping(value = "/movie/detail")
 	public String movieDetail(Model model, @RequestParam("mid") int mid, HttpServletRequest request) {
 		MovieDTO dto = mdao.getMovie(mid);
 		Map<Integer, String> reserveRating = service.getReserveRate();
@@ -55,6 +53,13 @@ public class MovieController {
 		model.addAttribute("likeList", likeList);
 		
 		return "movie/moviedetail";
+	}
+	
+	
+	@RequestMapping(value = "/testview")
+	public String testview() {		
+
+		return "movie/test";
 	}
 	
 }

@@ -54,8 +54,8 @@ public class MovieServiceImpl implements MovieService {
 	
 	@Override
 	public List<MovieDTO> getAllMoviesSortByReserve() {
-		List<MovieDTO> list = dao.getAllMoviesSortByReserve();
-		return list;
+		System.out.println("두번체크 serviceImpl");
+		return dao.getAllMoviesSortByReserve();
 	}
 	
 	@Override

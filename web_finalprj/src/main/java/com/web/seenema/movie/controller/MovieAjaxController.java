@@ -1,10 +1,11 @@
 package com.web.seenema.movie.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MovieLikeDTO;
@@ -56,6 +57,12 @@ public class MovieAjaxController {
 			System.out.println(aid+"번 영화 like 취소 실패");
 
 		return service.getLikeCnt(mid);
+	}
+	
+	@RequestMapping(value = "/test")
+	public List<MovieDTO> test() {		
+
+		return service.getAllMovies();
 	}
 	
 }

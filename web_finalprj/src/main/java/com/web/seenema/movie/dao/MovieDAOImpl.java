@@ -79,6 +79,7 @@ public class MovieDAOImpl implements MovieDAO {
 	
 	@Override
 	public MovieDTO getLikeCnt(int mid) {
+		System.out.println("두번체크 daoImpl");
 		return sqlSession.selectOne("movieMapper.getLikeCnt", mid);
 	}
 	
