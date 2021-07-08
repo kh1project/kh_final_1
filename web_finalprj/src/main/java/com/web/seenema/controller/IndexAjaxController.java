@@ -12,7 +12,7 @@ import com.web.seenema.service.MainService;
 
 @Controller
 @RequestMapping(value = "/mainAjax")
-public class MainAjaxController {
+public class IndexAjaxController {
 	
 	@Autowired
 	private MainService service;

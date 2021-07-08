@@ -12,12 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.seenema.line.dto.LineDTO;
+import com.web.seenema.line.service.LineService;
 import com.web.seenema.movie.dao.MovieDAO;
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MovieLikeDTO;
 import com.web.seenema.movie.service.MovieService;
 
 @Controller
+@RequestMapping(value = "/movie")
 public class MovieController {
 	
 	@Autowired
@@ -25,6 +28,9 @@ public class MovieController {
 	
 	@Autowired
 	MovieDAO mdao;
+	
+	@Autowired
+	private LineService lineService;
 	
 	@RequestMapping(value = "/movie")
 	public String movie(Model model, HttpServletRequest request) {
@@ -52,6 +58,20 @@ public class MovieController {
 		List<MovieLikeDTO> likeList = service.getMovieLikeList((int) session.getAttribute("id"));
 		model.addAttribute("likeList", likeList);
 		
+		// 아영님 코드 시작
+		// linelist 추가
+		List<LineDTO> linelist = lineService.linelist(mid);
+		for(LineDTO line : linelist) {
+			String email = line.getEmail().split("@")[0];
+			email = email.substring(0, email.length() - 2);
+			email += "**";
+			line.setEmail(email);
+		}
+		
+		model.addAttribute("linelist", linelist);
+		model.addAttribute("linecnt", linelist.size());
+		// 아영님 코드 끝
+
 		return "movie/moviedetail";
 	}
 	

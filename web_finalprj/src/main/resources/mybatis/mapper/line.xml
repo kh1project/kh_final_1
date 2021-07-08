@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="lineMapper">
+	<select id="linelist" resultType="line">
+		SELECT l.*, a.email
+		  FROM line l
+		 INNER JOIN movie m
+		    ON l.mid = m.id
+		 INNER JOIN account a
+		    ON l.aid = a.id
+		 WHERE l.mid = #{id}
+		   AND l.deleted = 'N'
+		 ORDER BY l.cdate DESC
+	</select>
+	
+	<select id="lineOne" resultType="line">
+		SELECT l.*, a.email
+		  FROM line l
+		 INNER JOIN account a
+		    ON l.aid = a.id
+		 WHERE l.id = #{id}
+	</select>
+	
+	<select id="getGcnt" resultType="_int">
+		SELECT gcnt
+		  FROM line
+		 WHERE id = #{id}
+	</select>
+	
+	<insert id="add" parameterType="lineAddDTO" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			SELECT line_seq.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO line (id, mid, aid, contents, star)
+			 VALUES (#{id}, #{mid}, #{aid}, #{contents}, #{star})
+	</insert>
+	
+	<update id="incGcnt">
+		UPDATE line
+		   SET gcnt = gcnt + 1
+		 WHERE id = #{lid}
+	</update>
+	
+	<update id="delete">
+		UPDATE line
+		   SET deleted = 'Y'
+		 WHERE id = #{lid}
+	</update>
+</mapper>

@@ -14,6 +14,9 @@
 	src="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/static/css/common.css">
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath() %>/resources/static/css/line.css">
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/static/js/line.js"></script>
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap')
@@ -98,7 +101,6 @@
 					alt="${movie.getTitle() }"
 					src="/resources/imgs/movie/${movie.getId() }/poster/movie_image.jpg">
 			</div>
-
 			<div class="content-text">
 				<div class="summary">${movie.getSummary() }</div>
 				<hr>

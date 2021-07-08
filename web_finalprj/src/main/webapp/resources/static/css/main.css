@@ -51,6 +51,17 @@
 	background-color: black;
 }
 
+.summary {
+	visibility: hidden;
+	font-style: normal !important;
+}
+
+.card:hover .summary {
+	visibility: visible;
+	background-color: rgba(0, 0, 0, 0.8);
+	text-align: left;
+	color: white;
+}
 
 .btn-primary {
 	background-color: #1a56b0;

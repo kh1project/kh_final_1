@@ -10,11 +10,11 @@
 <meta charset="UTF-8">
 <title>박스오피스 - SEENEMA</title>
 <script type="text/javascript"
-	src="<%=request.getContextPath()%>/resources/jquery/js/jquery-3.6.0.min.js"></script>
-<link type="text/css" rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
+	src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
+<link type="text/css"
+	rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <script type="text/javascript"
-	src="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
+	src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/static/css/movie.css">
 <link type="text/css" rel="stylesheet"
@@ -48,11 +48,10 @@ ul {
 </style>
 </head>
 <body class="pt-5">
-	<!-- ----------------<header>---------------- -->
-	<header>
+    <!-- ----------------</header>---------------- -->
+    <header>
 		<%@ include file="../module/header.jsp"%>
 	</header>
-
 	<!-- ----------------</header>---------------- -->
 	<!-- ----------------<body>---------------- -->
 	<container id="container">

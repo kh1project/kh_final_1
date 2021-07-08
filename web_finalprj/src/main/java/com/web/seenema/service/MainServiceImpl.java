@@ -21,7 +21,13 @@ public class MainServiceImpl implements MainService {
 	
 	@Override
 	public List<BoxofficeDTO> getBoxOffice() {
-		return repository.selectBoxofficeList();
+		List<BoxofficeDTO> boxoffice = null;
+		if(repository.selectMovieCnt() < 4) {
+			boxoffice = repository.selectBoxofficeListUnder4();
+		} else {
+			boxoffice = repository.selectBoxofficeList();
+		}
+		return boxoffice;
 	}
 
 	@Override
