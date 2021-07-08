@@ -20,5 +20,6 @@
 		<typeAlias type="com.web.seenema.line.dto.LineDTO" alias="line"></typeAlias>
 		<typeAlias type="com.web.seenema.line.dto.LineAddDTO" alias="lineAddDTO"></typeAlias>
 		<typeAlias type="com.web.seenema.review.dto.ReviewPostDTO" alias="reviewpost"></typeAlias>
+		<typeAlias type="com.web.seenema.account.dto.AccountDTO" alias="account"></typeAlias>
 	</typeAliases>
 </configuration>
