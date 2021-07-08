@@ -12,12 +12,17 @@ import org.springframework.stereotype.Service;
 import com.web.seenema.movie.dao.MovieDAO;
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MovieLikeDTO;
+import com.web.seenema.movie.dto.MovieImageDTO;
+import com.web.seenema.movie.repository.MovieRepository;
 
 @Service
 public class MovieServiceImpl implements MovieService {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	private MovieRepository mdao;
 	
 	@Autowired
 	MovieDAO dao;
@@ -44,6 +49,12 @@ public class MovieServiceImpl implements MovieService {
 	public MovieDTO getMovie(int mid) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	@Override
+	public List<MovieDTO> getMovies(int mid) throws Exception {
+		List<MovieDTO> list = mdao.selectMovie(mid);
+		return list;
 	}
 
 	@Override
@@ -109,5 +120,11 @@ public class MovieServiceImpl implements MovieService {
 		public MovieDTO getLikeCnt(int mid) {
 			return dao.getLikeCnt(mid);
 	}	
+
+	@Override
+	public List<MovieImageDTO> getPoster(int mid) throws Exception {
+		List<MovieImageDTO> movieimg = mdao.getPoster(mid);
+		return movieimg;
+	}
 
 }

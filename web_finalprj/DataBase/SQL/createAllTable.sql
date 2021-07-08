@@ -14,8 +14,6 @@ DROP TABLE movie;
 DROP TABLE account;
 DROP TABLE board_type;
 
-
-
 -- 영화 테이블
 CREATE TABLE movie(
     id NUMBER,

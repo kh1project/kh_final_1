@@ -19,7 +19,7 @@ public class MovieDTO {
 	private float grade;
 	
 	public MovieDTO() {}
-	
+
 	public MovieDTO(int id, String title, String subtitle, String summary, String type, String director, String genre, int runningtime, int rating,
 			String actor, Date playdate, int rcnt, int gcnt, float grade) {
 		super();

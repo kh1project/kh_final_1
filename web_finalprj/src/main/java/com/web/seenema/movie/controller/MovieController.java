@@ -37,7 +37,7 @@ public class MovieController {
 		
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("reserveRating", reserveRating);
-		model.addAttribute("likeList", likeList);		
+		model.addAttribute("likeList", likeList);
 		return "movie/movie";
 	}
 	

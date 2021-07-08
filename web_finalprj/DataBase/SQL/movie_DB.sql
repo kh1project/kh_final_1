@@ -1,10 +1,6 @@
 -- 영화 테이블 조회
 SELECT * FROM movie ORDER BY id;
 
--- SELECT * FROM movie ORDER BY grade DESC;
-
--- SELECT id, title, rating FROM movie ORDER BY grade DESC;
-
 DELETE FROM movie WHERE id  <= 30;
 
 -- 영화 식별번호

@@ -86,6 +86,9 @@ CREATE TABLE reservation(
     payment CHAR(1)
 );
 
+-- 컬럼명 오타 확인
+ALTER TABLE movie RENAME COLUMN reating TO rating;
+
 ALTER TABLE reservation ADD CONSTRAINT reservation PRIMARY KEY(id);
 ALTER TABLE reservation ADD CONSTRAINT reservation_sid_FK FOREIGN KEY(sid) REFERENCES seat(id);
 ALTER TABLE reservation ADD CONSTRAINT reservation_timeid_FK FOREIGN KEY(timeid) REFERENCES time(id);

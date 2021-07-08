@@ -6,6 +6,7 @@ DROP SEQUENCE branch_seq;
 -- SELECT * FROM branch WHERE location = '서울' ORDER BY name;
 
 CREATE SEQUENCE branch_seq;
+--DROP SEQUENCE branch_seq;
 
 -- 서울 지점.
 INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '서울', '강남');

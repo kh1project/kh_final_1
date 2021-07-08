@@ -6,149 +6,198 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>좌석선택</title>
+<title>이미지 페이지</title>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/seats.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
-<script>
-	function seatinfo(seat) {
-		document.getElementById(seat).style.backgroundColor = "red";
-	}
-	
-	function person_value(person, updown){
-		if(person.value > 0 && person.value < 6){
-			switch(updown){
-		        case"+":
-		        	if(person.value != 5){
-		        		person.value = parseInt(person.value) + 1;
-		        	} else {
-		        		alert('최대 5명 선택 가능합니다.');
-		        	}
-		    		break;
-		        case"-":
-		        	if(person.value != 1){
-		        		person.value = parseInt(person.value) - 1;	
-		        	} else {
-		        		alert('최소 1명 선택 가능합니다.');
-		        	}
-		            break;
-		    }
-		}
-	}
-</script>
 </head>
-<style type="text/css">
-main{
-	width: 100%; height: 100%;
-	margin: auto auto;
-}
-
-section.main {
-	width: 800px; height: 500px;
-	margin: auto auto;
-	background: gray;
-	justify-content: center;
-	align-items: center;
-}
-
-div.seatfream {
-	width: auto; height: auto;
-	justify-content: center;
-	text-align: center;
-}
-
-input.seatinfo {
-	display: none;
-}
-
-label.seatinfo {
-	width: 30px; height: 30px;
-	background-color : white;
-	-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
-}
-
-label.screen{
-	width: 500px; height: 30px;
-	border: 1px solid gray;
-	margin-bottom : 50px;
-	font-size: 10pt;
-	background-color: white;
-	text-align: center;
-	line-height: 30px;
-	-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
-}
-
-div.personner {
-	padding: auto;
-}
-
-label.seat {
-	width: 100px; height: 30px;
-	border: 2px solid gray;
-	border-radius: 5px;
-	margin: 20px; padding: auto auto;
-	background-color: white;
-	font-size: 10pt; text-align: center;
-	-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
-}
-
-input.personnel {
-	width: 30px; height: 30px;
-	border: 1px solid gray;
-	border-radius: 5px;
-	text-align: center;
-	padding: auto;
-	background-color: white;
-}
-
-</style>
-<body class="pt-5"> 
+<body class="pt-5">
 	<header>
 		<%@ include file="../module/header.jsp" %>
 	</header>
-	<main class="pt-5">
-		<section class="main">
-			<div class="seatfream pt-5">
-				<form>
-					<label class="screen">Screen</label><br>
-					<c:forEach var="list" items="${seatlists }" >
-						<c:choose>
-							<c:when test="${fn: containsIgnoreCase(list.reserved, 'y') }">
-								<label class="seatinfo" for="${list.seatrow }${list.seatcol }" style="background-color: #666666;">
-								X</label>
-							</c:when>
-							<c:otherwise>
-								<label class="seatinfo" id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }" onclick="seatinfo(this.id);">
-								<input class="seatinfo" type="checkbox" id="${list.seatrow }${list.seatcol }" name="${list.seatrow }" value="${list.seatcol }">${list.seatrow }${list.seatcol }</label>
-							</c:otherwise>
-						</c:choose>
-						<c:if test="${(list.seatcol eq 4) || (list.seatcol eq 10)}">
-							&nbsp;&nbsp;&nbsp;
-						</c:if>
-						<c:if test="${list.seatcol eq 14}">
-							<br>
-						</c:if>
+	<section class="reserve-frame pt-5">
+		<c:url var="seat" value="/reserve/reservecheck" />
+		<form action="${seat }" id="seat-form" method="POST">
+		<div class="reserve-window">
+				<%@ include file="../module/ReserveFrame.jsp" %>
+				<div class="main-frame">
+					<div class="seat-info">
+						<label class="info-title">좌석/인원 선택</label>
+					</div>
+						<div class="theater-info">
+							<div class="screen-spot">
+								<label class="screen">Screen</label>
+							</div>
+							
+							<c:forEach var="list" items="${seatlists }" >
+								<c:forEach var="seatcnt" items="${seatcnt }">
+									<c:if test="${seatcnt.key eq 'scnt' }">
+										<c:set var="seatamount" value="${seatcnt.value }" />
+									</c:if>
+								</c:forEach>
+								<c:choose>
+									<c:when test="${fn: containsIgnoreCase(list.reserved, 'y') }">
+											<label class="no-seat" id="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+									</c:when>
+									<c:otherwise>
+										<c:choose>
+											<c:when test="${seatamount%2 == 0 }" >
+												<c:choose>
+													<c:when test="${(list.seatcol eq 4) || (list.seatcol eq 10)}">
+														<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+														<label id="${list.seatrow }${list.seatcol }" style="margin-right : 10px;" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+													</c:when>
+													<c:when test="${list.seatcol eq 1}">
+														<br><input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+														<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+													</c:when>
+													<c:otherwise>
+														<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+														<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+													</c:otherwise>
+												</c:choose>
+											</c:when>
+											<c:otherwise>
+												<c:choose>
+													<c:when test="${(list.seatcol eq 5) || (list.seatcol eq 10)}">
+														<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+														<label id="${list.seatrow }${list.seatcol }" style="margin-right : 10px;" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+													</c:when>
+													<c:when test="${list.seatcol eq 1}">
+														<br><input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+														<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+													</c:when>
+													<c:otherwise>
+														<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+														<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+													</c:otherwise>
+												</c:choose>
+											</c:otherwise>
+										</c:choose>
+									</c:otherwise>
+								</c:choose>
+							</c:forEach>
+						</div>
+						
+					<c:forEach var="movie" items="${moviedata }">
+						<c:set var="rating" value="${movie.rating }" />
 					</c:forEach>
-				</form>
-				
-				<c:forEach var="seatcnt" items="${seatcnt }">
-					<c:if test="${seatcnt.key eq 'scnt' }">
-						<label class="seat">전체 좌석 : ${seatcnt.value }</label>
-					</c:if>
-					<c:if test="${seatcnt.key eq 's_leftcnt' }">
-						<label class="seat">남은 좌석 : ${seatcnt.value }</label>
-					</c:if>
-				</c:forEach>
-				<div class="personnel">
-					<input class="personnel" type="button" value="-" onclick="person_value(document.getElementById('person'), '-')">
-					<input class="personnel" type="number" id="person" min="1" max="5" value="1" onchange="person_add(this, '')" readonly="readonly">
-					<input class="personnel" type="button" value="+" onclick="person_value(document.getElementById('person'), '+')">
+					
+					<div class="seatexample">
+						<span class="seat selected"></span><p class="selected">선택 불가능한 좌석</p>
+						<span class="seat choose"></span><p class="selected">선택 가능한 좌석</p>
+						<span class="seat select"></span><p class="selected">선택된 좌석</p>
+						<c:if test="${rating == 19}">
+							<p class="rating19">19세 이하의 청소년은 부모와 동반하여도 시청 불가능 합니다.</p>
+						</c:if>
+					</div>
+					
+					<div class="personnel-info">
+						<input class="personnel-type" type="text" id="Adult" value="성인" disabled>
+						<div class="peoples-number">
+							<input class="personnel" type="button" value="-" onclick="person_value(document.getElementById('person1'), '-')">
+							<input class="personnel-value" type="text" name= "adult"id="person1" value="0" onchange="person_add(this, '')" disabled>
+							<input class="personnel" type="button" value="+" onclick="person_value(document.getElementById('person1'), '+')">
+						</div>
+						<c:if test="${rating < 19}">
+							<input class="personnel-type" type="text" id="Teenager" value="청소년" disabled>
+							<div class="peoples-number">
+								<input class="personnel" type="button" value="-" onclick="person_value(document.getElementById('person2'), '-')">
+								<input class="personnel-value" type="text" name="teenager" id="person2" value="0" onchange="person_add(this, '')" disabled>
+								<input class="personnel" type="button" value="+" onclick="person_value(document.getElementById('person2'), '+')">
+							</div>
+						</c:if>
+						<div class="payment">
+							<input class="payment" type="button" value="결제하기 >" onclick="send('seat-form');">
+						</div>
+					</div>
 				</div>
 			</div>
-		</section>
-	</main>
+		</form>
+	</section>
+	
 	<footer>
 		<%@ include file="../module/footer.jsp" %>
 	</footer>
 </body>
+<script type="text/javascript">
+	$(document).ready(function() {
+	    $(":checkbox").change(function() {
+	    	var cnt = 0;
+	    	var test2 = 0;
+	    	var test1 = $("#person1").val();
+	    	if($("#person2").val() != null){
+	    		test2 = $("#person2").val();
+	    	}
+	    	cnt = Number(test1) + Number(test2);
+	    	console.log(cnt);
+	    	
+	        if(cnt != 0){
+	        	if( cnt == $(":checkbox:checked").length ) {
+		            $(":checkbox:not(:checked)").attr("disabled", "disabled");
+		        }
+		        else {
+		            $(":checkbox").removeAttr("disabled");
+		        }
+	        } else {
+	        	alert("인원 수를 선택해주세요.");
+	        	$("input[type=checkbox]").prop("checked",false);
+        		$(":checkbox").removeAttr("checked");
+        		$(":checkbox").removeAttr("disabled");
+	        }
+	    });
+	    
+	    $("#person1").change(function(){
+		    $(":checkbox").removeAttr("checked");
+		    $(":checkbox").removeAttr("disabled");
+		});
+		
+	    $("#person2").change(function(){
+		    $(":checkbox").removeAttr("checked");
+		    $(":checkbox").removeAttr("disabled");
+		});
+	    
+	});
+	
+	function person_value(person, updown){
+		if(person.value >= $("input:checked[type='checkbox']").length){
+			if(person.value >= 0 && person.value < 6){
+				switch(updown){
+			        case"+":
+			        	if(person.value < 5 && person.value >= 0){
+			        		person.value = parseInt(person.value) + 1;
+			        		$("input[type=checkbox]").prop("checked",false);
+			        		$(":checkbox").removeAttr("checked");
+			        		$(":checkbox").removeAttr("disabled");
+			        	} else if(person.value == 5){
+			        		alert('최대 5명 선택 가능합니다.');
+			        	}
+			    		break;
+			        case"-":
+			        	if(person.value < 6 && person.value > 0){
+			        		person.value = parseInt(person.value) - 1;
+			        		$("input[type=checkbox]").prop("checked",false);
+			        		$(":checkbox").removeAttr("checked");
+			        		$(":checkbox").removeAttr("disabled");
+			        	} else if(person.value == 0){
+			        		alert('최소 1명이상 예매해야합니다.');
+			        	}
+			            break;
+			    }
+				
+			}
+		}
+	}
+	
+	function send(form_id) {
+		var f = document.getElementById(form_id);
+		if($("input:checked[type='checkbox']").length > 0){
+			f.submit();
+		} else {
+			alert('좌석을 선택해주세요.');
+		}
+	}
+</script>
 </html>

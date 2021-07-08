@@ -16,6 +16,22 @@
 	    SELECT * FROM seat WHERE tid = #{tid} ORDER BY id
 	</select>
 	
+	<select id="pay_all" resultType="_int">
+	    SELECT price FROM pay WHERE id = #{id}
+	</select>
+	
+	<select id="search_Branch" resultType="BranchTheater">
+		SELECT b.location
+			 , b.name AS bname
+			 , t.name AS tname
+		  FROM movie_theater mt
+		  JOIN theater t
+		    ON mt.tid = t.id
+		  JOIN branch b
+		    ON t.bid = b.id
+		 WHERE mt.id = #{tid}
+	</select>
+	
 	<!-- 지역 선택시 지점리스트 -->
 	<select id="branchlist" parameterType="String" resultType="branch">
 		SELECT * FROM branch WHERE location = #{location} ORDER BY name

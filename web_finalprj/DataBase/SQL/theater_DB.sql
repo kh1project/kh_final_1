@@ -13,6 +13,7 @@ ON branch.id = theater.bid;
 
 DROP SEQUENCE theater_seq;
 CREATE SEQUENCE theater_seq;
+--DROP SEQUENCE theater_seq;
 
 INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 1, '1관');
 INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 1, '2관');

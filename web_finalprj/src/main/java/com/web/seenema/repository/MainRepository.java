@@ -1,7 +1,6 @@
 package com.web.seenema.repository;
 
 import java.util.List;
-import java.util.Map;
 
 import com.web.seenema.dto.BoxofficeDTO;
 

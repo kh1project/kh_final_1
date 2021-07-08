@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.web.seenema.movie.dto.MovieDTO;
+import com.web.seenema.movie.dto.MovieImageDTO;
 import com.web.seenema.movie.dto.MovieLikeDTO;
 
 public interface MovieService {
@@ -11,6 +12,7 @@ public interface MovieService {
 	public List<MovieDTO> getCurrentMovies();
 	public List<MovieDTO> getEndMovies();
 	public List<MovieDTO> getPreMovies();
+	public List<MovieDTO> getMovies(int mid) throws Exception;
 	public MovieDTO getMovie(int mid);
 	public List<MovieDTO> getAllMoviesSortByReserve();
 	public Map<Integer, String> getReserveRate();
@@ -19,4 +21,6 @@ public interface MovieService {
 	public List<MovieLikeDTO> getMovieLikeList(int aid);
 	public int movieUnlike(MovieLikeDTO dto);
 	public MovieDTO getLikeCnt(int mid);
+	// 예매 파트에 포스터 가져오기.
+	public List<MovieImageDTO> getPoster(int mid) throws Exception;
 }

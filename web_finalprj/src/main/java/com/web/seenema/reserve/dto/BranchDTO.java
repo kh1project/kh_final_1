@@ -41,5 +41,4 @@ public class BranchDTO {
 		this.cntByloc = cntByloc;
 	}
 	
-	
 }
