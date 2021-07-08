@@ -1,44 +1,74 @@
 package com.web.seenema.account.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.web.seenema.account.dto.AccountDTO;
+import com.web.seenema.account.service.AccountService;
 
 @Controller
 @RequestMapping(value = "/account")
 public class AccountController {
 	
+	@Autowired
+	private AccountService account;
+	
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public ModelAndView reserveGet() {
-		ModelAndView mv = new ModelAndView("account/join");
-		mv.addObject("", "");
-		
-		return mv;
+	public String join() {
+		return "account/join";
 	}
 	
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public ModelAndView reservePost() {
-		ModelAndView mv = new ModelAndView("account/join");
-		mv.addObject("", "");
+	public String join(Model m, @ModelAttribute AccountDTO dto) throws Exception {
+		String forward = "";
 		
-		return mv;
+		boolean result = account.join(dto);
+		
+		if(result) {
+			// 가입 성공 했을 때 로그인 페이지로 리다이렉트
+			forward = "redirect:/account/login";
+		} else {
+			// 가입 실패 했을 때 회원가입 페이지 재전송
+			m.addAttribute("data", dto);
+			m.addAttribute(forward);
+			forward = "account/join";
+		}
+		
+		return forward;
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public ModelAndView loginGet() {
-		ModelAndView mv = new ModelAndView("account/login");
-		mv.addObject("", "");
-		
-		return mv;
+	public String login() {
+		return "account/login";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView loginPost() {
-		ModelAndView mv = new ModelAndView("account/login");
-		mv.addObject("", "");
+	public String login(Model m, @ModelAttribute AccountDTO dto, HttpServletRequest req) throws Exception {
+		String forward = "";
+		account.login(dto);
 		
-		return mv;
+		if(dto.getId() > 0) {
+			// dto.getId() 값이 0 보다 큰 경우 로그인 성공
+			HttpSession session = req.getSession();
+			session.setAttribute("account", dto);
+			session.setAttribute("logined", true);
+			forward = "redirect:/";
+		} else {
+			// dto.getId() 값이 0 보다 크지 않은 경우 로그인 실패
+			m.addAttribute("data", dto);
+			m.addAttribute("error", "로그인 실패");
+			forward = "account/login";
+		}
+		
+		return forward;
 	}
 	
 	/* 로그아웃 컨트롤러 */

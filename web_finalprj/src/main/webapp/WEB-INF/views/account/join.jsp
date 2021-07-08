@@ -8,50 +8,351 @@
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/common.js"></script>
+
+<c:url var="email_check" value="/ajax/account/email" />
+<c:url var="nickname_check" value="/ajax/account/nickname" />
+
+<script type="text/javascript">
+	function emailCheck() {
+		var email = document.getElementById("id_email").value;
+		if(email == "" || email == undefined) {
+			alert("아이디를 입력하세요.");
+			document.getElementById("id_email").focus();
+			return;
+		}
+		$.ajax({
+			url: "${email_check }",
+			type: "get",
+			datatype: "json",
+			data: {
+				email: document.getElementById("id_email").value
+			},
+			success: function(data) {
+				if(data.result == false) {
+					document.getElementById("email_check_res").innerText = "사용 가능한 아이디입니다.";
+				} else {
+					document.getElementById("email_check_res").innerText = "이미 사용중인 아이디입니다.";
+				}
+			}
+		});
+	}
+		var email_check = document.getElementById("email_check_res").innerText;
+		if(email_check == "" || email_check == undefined) {
+			alert("아이디 중복확인을 먼저 진행하세요.");
+			document.getElementById("id_email").focus();
+			return;
+		} else if(email_check != "사용 가능한 아이디입니다.") {
+			alert("해당 아이디로는 가입을 할 수 없습니다.");
+			document.getElementById("id_email").focus();
+			return;
+		}	
+		
+		var password = document.getElementById("id_password");
+		if(password.value == "" || password.value == undefined) {
+			alert("패스워드를 입력하세요.")
+			password.focus();
+			return;
+		}	
+		
+	function send() {
+		var username = document.getElementById("id_username");
+		if(username.value == "" || username.value == undefined) {
+			alert("이름을 입력하세요.")
+			username.focus();
+			return;
+		}
+				
+		var nickname_check = document.getElementById("nickname_check_res").innerText;
+		if(nickname_check == "" || nickname_check == undefined) {
+			alert("닉네임을 입력하세요.");
+			document.getElementById("id_nickname").focus();
+			return;
+		} else if(nickname_check != "사용 가능!!!") {
+			alert("해당 닉네임으로는 가입을 할 수 없습니다.");
+			document.getElementById("id_nickname").focus();
+			return;
+		}
+		
+		var age = document.getElementById("id_age");
+		if(age.value == "" || age.value == undefined) {
+			alert("나이를 입력하세요.")
+			age.focus();
+			return;
+		}
+		
+		var phone = document.getElementById("id_phone");
+		if(phone.value == "" || phone.value == undefined) {
+			alert("연락처를 입력하세요.")
+			phone.focus();
+			return;
+		}
+		
+		document.account_form.submit();
+	}
+</script>
+
+<style>
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    background: #f5f6f7;
+    font-family: Dotum,'돋움',Helvetica,sans-serif;
+}
+#logo {
+    width: 240px;
+    height: 44px;
+    cursor: pointer;
+}
+
+#header {
+    padding-top: 62px;
+    padding-bottom: 20px;
+    text-align: center;
+}
+#wrapper {
+    position: relative;
+    height: 100%;
+}
+
+#content {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 460px;
+}
+
+
+h3 {
+    margin: 19px 0 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.box {
+    display: block;
+    width: 100%;
+    height: 51px;
+    border: solid 1px #dadada;
+    padding: 10px 14px 10px 14px;
+    box-sizing: border-box;
+    background: #fff;
+    position: relative;
+}
+
+.int {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 29px;
+    border: none;
+    background: #fff;
+    font-size: 15px;
+}
+
+input {
+    font-family: Dotum,'돋움',Helvetica,sans-serif;    
+}
+
+.box.int_id {
+    padding-right: 110px;
+}
+
+.box.int_pass {
+    padding-right: 40px;
+}
+
+.box.int_pass_check {
+    padding-right: 40px;
+}
+
+.step_url {
+    position: absolute;
+    top: 16px;
+    right: 5px;
+    font-size: 15px;
+    color: #8e8e8e;
+}
+
+select {
+    width: 100%;
+    height: 29px;
+    font-size: 15px;
+    background: #fff 100% 50% no-repeat;
+    background-size: 20px 8px;
+    -webkit-appearance: none;
+    display: inline-block;
+    text-align: start;
+    border: none;
+    cursor: default;
+    font-family: Dotum,'돋움',Helvetica,sans-serif;
+}
+
+/* 에러메세지 */
+
+.error_next_box {
+    margin-top: 9px;
+    font-size: 12px;
+    color: red;    
+    display: none;
+}
+
+#alertTxt {
+    position: absolute;
+    top: 19px;
+    right: 38px;
+    font-size: 12px;
+    color: red;
+    display: none;
+}
+
+.btn_area {
+    margin: 30px 0 91px;
+}
+
+#btnJoin {
+    width: 100%;
+    padding: 21px 0 17px;
+    border: 0;
+    cursor: pointer;
+    color: #fff;
+    background-color: #8041D9;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: Dotum,'돋움',Helvetica,sans-serif;
+}
+
+#btnCancel {
+    width: 100%;
+    padding: 21px 0 17px;
+    border: 0;
+    cursor: pointer;
+    color: #000000;
+    background-color: #D5D5D5;
+    font-size: 20px;
+    font-weight: 400;
+    font-family: Dotum,'돋움',Helvetica,sans-serif;
+}
+
+</style>
 <title>SEENEMA의 가족이 되어주세요!</title>
 </head>
-<body>
-	<%@ include file="../module/header.jsp" %>
-	<h1>join.jsp 입니다.</h1>
-	<h3>회원가입 페이지 입니다.</h3>
+	<c:url var="main" value="/index" />
 	<c:url var="join" value="/account/join" />
+<body>
+	<header>
+		<%@ include file="../module/header.jsp" %>
+	</header>
+
 	<form name="account_form" action="${join }" method="post">
-		<div>
-			<label for="id_name">* 이름</label>
-			<input id="id_name" type="text" name="name" required>
+
+        <div id="header">
+           	<button type="button" onclick="location.href='${main }'" style="margin-top: 10px;">
+					<img src="#" width="30" height="30" class="d-inline-block align-top" alt="로고">
+			</button>
 		</div>
-		<div>
-			<label for="id_nickname">* 닉네임</label>
-			<input id="id_nickname" type="text" name="nickname" required>
-			<label id="nickname_check_res"></label>
-		</div>
-		<div>
-			<label for="id_email">* 이메일</label>
-			<input id="id_email" type="email" name="email" required>
-			<button type="button">중복확인</button>
-		</div>
-		<div>
-			<label for="id_phone">* 연락처</label>
-			<input id="id_phone" type="tel" name="phone" required>
-		</div>
-		<div>
-			<label for="id_password">* 비밀번호</label>
-			<input id="id_password" type="password" name="password" required>
-		</div>
-		<div>
-			<label>* 성별</label>
-			<input id="id_gender_m" type="radio" name="gender" value="m" checked><label for="id_gender_m"> 남</label>
-			<input id="id_gender_w" type="radio" name="gender" value="w"><label for="id_gender_w"> 여</label>
-		</div>
-		<div>
-			<label for="id_age">* 나이</label>
-			<input id="id_age" type="number" name="age" min="1" max="199" step="1" required>
-		</div>
-		<div>
-			<button type="button" onclick="send();">가입</button>
-			<button type="button" onclick="history.back();">취소</button>
-		</div>
+
+            <div id="content">
+
+                <div>
+                    <h3 class="join_title">
+                        <label for="id_email">아이디</label>
+                    </h3>
+                    <span class="box int_id">
+                        <input type="text" id="id_email" class="int" maxlength="20" name="email" required>
+                        <span class="step_url">@seenema.com</span>
+                    </span>
+                    <span class="error_next_box"></span>
+						<button type="button" onclick="emailCheck();">중복확인</button>
+						<label id="email_check_res"></label>
+                </div>
+
+                <!-- PW1 -->
+                <div>
+                    <h3 class="join_title"><label for="id_password">비밀번호</label></h3>
+                    <span class="box int_pass">
+                        <input type="password" id="id_password" class="int" maxlength="20" name="password" required>
+                        <span id="alertTxt">사용불가</span>
+                    </span>
+                    <span class="error_next_box"></span>
+                </div>
+
+                <!-- PW2 -->
+                <div>
+                    <h3 class="join_title"><label for="id_password2">비밀번호 재확인</label></h3>
+                    <span class="box int_pass_check">
+                        <input type="password" id="id_password2" class="int" maxlength="20" name="password" required>
+                    </span>
+                    <span class="error_next_box"></span>
+                </div>
+
+
+                <div>
+                    <h3 class="join_title"><label for="name">이름</label></h3>
+                    <span class="box int_name">
+                        <input type="text" id="id_name" class="int" name="name" maxlength="20" required>
+                    </span>
+                    <span class="error_next_box"></span>
+                </div>
+                
+
+                <div>
+                    <h3 class="join_title"><label for="name">닉네임</label></h3>
+                    <span class="box int_name">
+                        <input type="text" id="id_nickname" class="int" name="nickname" maxlength="20" required>
+                    </span>
+						<label id="nickname_check_res"></label>
+                    <span class="error_next_box"></span>
+                </div>
+
+
+				<div>
+                    <h3 class="join_title"><label for="name">나이</label></h3>
+                    <span class="box int_name">
+                        <input type="number" id="id_age" class="int" name="age" min="1" max="199" step="1" required>
+                    </span>
+                </div>
+
+                <div>
+                    <h3 class="join_title"><label for="gender" checked>성별</label></h3>
+                    <span class="box gender_code">
+                        <select id="gender" class="sel">
+                            <option>성별</option>
+                            <option value="M" id="id_gender_m" name="gender">남자</option>
+                            <option value="F" id="id_gender_f" name="gender">여자</option>
+                        </select>                            
+                    </span>
+                    <span class="error_next_box">필수 정보입니다.</span>
+                </div>
+
+                <div>
+                    <h3 class="join_title"><label for="id_phone">연락처</label></h3>
+                    <span class="box int_mobile">
+                        <input type="tel" id="id_phone" class="int" name="phone" maxlength="16" placeholder="전화번호 입력" required>
+                    </span>
+                    <span class="error_next_box"></span>    
+                </div>
+
+                <div class="btn_area">
+                    <button type="button" onclick="send();" id="btnJoin">
+                        <span>가입하기</span>
+                    </button>
+                    &nbsp;
+                    <button type="button" onclick="history.back();" id="btnCancel">
+                        <span>취소</span>
+                    </button>
+                </div>
+            </div> 
+
 	</form>
-	<%@ include file="../module/footer.jsp" %>
+	<!-- <footer>
+		<%@ include file="../module/footer.jsp" %>
+	</footer> -->
 </body>
 </html>
