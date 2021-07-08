@@ -11,7 +11,6 @@ div.reserve-window {
 
 div.left-menu{
 	width: 10%; height: 600px;
-	background-color: orange;
 	border: 1px solid #D5D5D5;
 	float:left;
 	text-align: center; line-height: 120px;
@@ -34,7 +33,7 @@ div.left-menu > ul > li {
 div.left-menu > ul > li.active {
 	width: 100%; height: 20%;
 	border: 1px solid #D5D5D5;
-	background-color: #CC3D3D;
+	background-color: #4374D9;
 	color: white; font-weight: bolder;
 }
 

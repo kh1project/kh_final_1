@@ -65,7 +65,7 @@ label.no-seat{
 }
 
 input[name="seat"]:checked + label {
-	background-color: #FF6C6C;
+	background-color: #4374D9;
 	color: white;
 	font-weight: bold;
 }
@@ -102,7 +102,7 @@ span.choose {
 }
 
 span.select {
-	background-color: #FF6C6C;
+	background-color: #4374D9;
 }
 
 p.selected {
