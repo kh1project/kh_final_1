@@ -14,7 +14,7 @@
 
 <c:url var="email_check" value="/ajax/account/email" />
 <c:url var="nickname_check" value="/ajax/account/nickname" />
-
+	
 <script type="text/javascript">
 	function emailCheck() {
 		var email = document.getElementById("id_email").value;

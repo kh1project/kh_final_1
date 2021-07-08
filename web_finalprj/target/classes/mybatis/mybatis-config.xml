@@ -5,6 +5,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.web.seenema.reserve.dto.SeatDTO" alias="seat"></typeAlias>
-		<typeAlias type="com.web.seenema.account.dto.AccountDTO" alias="account" />
+		<typeAlias type="com.web.seenema.account.dto.AccountDTO" alias="account" />	
 	</typeAliases>
 </configuration>
