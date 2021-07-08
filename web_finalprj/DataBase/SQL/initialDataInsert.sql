@@ -804,3 +804,4 @@ INSERT INTO reservation(id, sid, timeid, aid, rdate, rcnt, payment) VALUES(res_s
 -- 포스트테이블 INSERT
 ---------------------------------------
 CREATE SEQUENCE post_seq;
+CREATE SEQUENCE merge_seq;
