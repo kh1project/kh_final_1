@@ -66,6 +66,14 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	}
 	
 	@Override
+	public Integer firstInsertPost(ReviewPostDTO rpdto) throws Exception {
+		boolean result = false;
+		int rs = sqlSession.insert("reviewMapper.firstInsertPost", rpdto);
+		int mpid = rpdto.getMergePost();
+		return mpid; //이거 잘 되는지 확인하기
+	}
+	
+	@Override
 	public boolean insertPost(ReviewPostDTO rpdto) throws Exception {
 		boolean result = false;
 		int rs = sqlSession.insert("reviewMapper.insertPost", rpdto);

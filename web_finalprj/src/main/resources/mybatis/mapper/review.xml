@@ -4,6 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="reviewMapper">
+	<insert id="firstInsertPost" parameterType="reviewpost" useGeneratedKeys="true" keyColumn="mergePost" keyProperty="mergePost">
+		INSERT INTO post(id, mergePost, postimg, posttext)
+			VALUES(post_seq.NEXTVAL, merge_seq.NEXTVAL, #{postimg}, #{posttext}) 
+	</insert>
 	<insert id="insertPost" parameterType="reviewpost">
 		INSERT INTO post(id, mergePost, postimg, posttext)
 			VALUES(post_seq.NEXTVAL, #{mergePost}, #{postimg}, #{posttext}) 

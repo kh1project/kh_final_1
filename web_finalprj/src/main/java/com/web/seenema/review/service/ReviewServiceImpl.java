@@ -89,10 +89,17 @@ public class ReviewServiceImpl implements ReviewService {
 		for(int i = 0; i < postlist.size(); i++) {
 			Map<String, String> post = postlist.get(i);
 			ReviewPostDTO rpdto = new ReviewPostDTO();
-			rpdto.setMergePost(mergeId);
 			rpdto.setPostimg(post.get("postimg"));
 			rpdto.setPosttext(post.get("posttext"));
-			result = dto.insertPost(rpdto);
+			if(i == 0) {
+				mergeId = dto.firstInsertPost(rpdto);
+				if(mergeId > 0) {
+					result = true;
+				}
+			} else {
+				rpdto.setMergePost(mergeId);
+				result = dto.insertPost(rpdto);
+			}			
 			if(result == false) {
 				break;
 			}
@@ -100,8 +107,6 @@ public class ReviewServiceImpl implements ReviewService {
 		List<Integer> mergePost = null;
 		if(result) {
 			mergePost = MergePost(mergeId);
-			mergeId++; //뭔가 mergeId담는데 오류 있음.
-			System.out.println("mergePost select하고 난 후 mergeId(1증가된 상태) : " + mergeId);
 		}
 		return mergePost;
 	}

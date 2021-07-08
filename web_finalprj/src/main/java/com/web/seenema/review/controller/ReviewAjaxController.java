@@ -45,6 +45,7 @@ public class ReviewAjaxController {
 	}
 	
 	@RequestMapping(value = "/addstep2", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@ResponseBody
 	public List<Integer> addstep2(@RequestParam String jsonData) throws Exception {
 		
 		Gson gson = new Gson();
