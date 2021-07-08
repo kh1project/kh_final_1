@@ -1,6 +1,5 @@
 package com.web.seenema.movie.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.web.seenema.movie.dao.MovieDAO;
 import com.web.seenema.movie.dto.MovieDTO;
-import com.web.seenema.movie.dto.MovieLikeDTO;
 import com.web.seenema.movie.dto.MovieImageDTO;
+import com.web.seenema.movie.dto.MovieLikeDTO;
 import com.web.seenema.movie.repository.MovieRepository;
 
 @Service
@@ -28,8 +27,18 @@ public class MovieServiceImpl implements MovieService {
 	MovieDAO dao;
 
 	@Override
-	public List<MovieDTO> getAllMovies() {
-		List<MovieDTO> list = dao.getAllMovies();
+	public List<MovieDTO> getAllMovies(int sort) {
+		
+		List<MovieDTO> list;
+		if(sort == 1)
+			list = dao.getAllMoviesSortByReserve();
+		else if(sort == 2)
+			list = dao.getAllMoviesSortByGcnt();
+		else if(sort == 3)
+			list = dao.getAllMoviesSortByGrade();
+		else
+			list = dao.getAllMovies();		
+		
 		return list;
 	}
 
@@ -64,17 +73,10 @@ public class MovieServiceImpl implements MovieService {
 	}
 	
 	@Override
-	public List<MovieDTO> getAllMoviesSortByReserve() {
-		System.out.println("두번체크 serviceImpl");
-		return dao.getAllMoviesSortByReserve();
-	}
-	
-	@Override
 	public Map<Integer, String> getReserveRate() {
 		Map<Integer, String> map = new HashMap<>();
-		List<Map<Integer, String>> mapList = new ArrayList<>();
 		
-		List<MovieDTO> list = getAllMoviesSortByReserve();
+		List<MovieDTO> list = getAllMovies(1);
 		int rcntAll = 0;
 		for(MovieDTO movie : list) {
 			rcntAll += movie.getRcnt();

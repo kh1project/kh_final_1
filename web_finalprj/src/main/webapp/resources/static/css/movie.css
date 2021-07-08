@@ -3,7 +3,7 @@
 }
 
 .movies {
-	display: inline-block;
+	display: inline-table;
 	width: 230px;
 	height: 450px;
 	margin: 0px 0px 60px 57px;
@@ -24,6 +24,7 @@
 
 .btn-util {
 	display: block;
+	margin: 10px;
 }
 
 .inner-btn {
@@ -46,10 +47,6 @@
 	top: 230px;
 }
 
-.title {
-	text-align: center;
-}
-
 .rating {
 	width: 20px;
 	height: 20px;
@@ -69,6 +66,8 @@
 .page-util{
 	background-color: #edf7f4;
 	height: 43px;
+	top: 8px;
+    position: relative;
 }
 
 .page-util a{
@@ -82,9 +81,12 @@
 }
 
 .title{
+	text-align: center;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	top: 2px;
+    position: relative;
 }
 
 .rank{
@@ -99,4 +101,54 @@
     font-weight: 300;
     color: #fff;
     text-shadow: 2px 2px 2px rgb(0 0 0 / 80%);
+}
+
+#filter-container{
+	margin-top:20px;
+}
+
+#filter-container > h2{
+	display: inline-flex;
+}
+
+.custom-select{
+	width: 200px;
+    float: right;	
+}
+
+.grade{
+	display:inline-block;
+	color: orange;
+}
+
+.info-box{
+	width: 100%;
+    display: inline-block;
+    position: relative;
+    text-align: center;
+}
+
+hr{
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.reserve-rating {
+	display: inline-block;
+}
+
+.grade-box{
+	display: inline-block;
+}
+
+.grade {
+	display: inline-block; 
+}
+
+.partition {
+    height: 14px;
+    background-color: lightgray;
+    width: 2px;
+    margin: 0px 3px -2px 6px;
+    display: inline-block;
 }

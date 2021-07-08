@@ -8,13 +8,12 @@ import com.web.seenema.movie.dto.MovieImageDTO;
 import com.web.seenema.movie.dto.MovieLikeDTO;
 
 public interface MovieService {
-	public List<MovieDTO> getAllMovies();
+	public List<MovieDTO> getAllMovies(int sort);
 	public List<MovieDTO> getCurrentMovies();
 	public List<MovieDTO> getEndMovies();
 	public List<MovieDTO> getPreMovies();
 	public List<MovieDTO> getMovies(int mid) throws Exception;
 	public MovieDTO getMovie(int mid);
-	public List<MovieDTO> getAllMoviesSortByReserve();
 	public Map<Integer, String> getReserveRate();
 	public boolean movieLikeDupCheck(int aid, int mid);
 	public int insertMovieLike(MovieLikeDTO dto);

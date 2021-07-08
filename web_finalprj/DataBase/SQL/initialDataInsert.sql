@@ -805,3 +805,5 @@ INSERT INTO reservation(id, sid, timeid, aid, rdate, rcnt, payment) VALUES(res_s
 ---------------------------------------
 CREATE SEQUENCE post_seq;
 CREATE SEQUENCE merge_seq;
+
+--commit;

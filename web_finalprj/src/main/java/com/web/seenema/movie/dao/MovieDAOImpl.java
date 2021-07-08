@@ -21,7 +21,7 @@ public class MovieDAOImpl implements MovieDAO {
 
 	@Override
 	public List<MovieDTO> getAllMovies() {
-		List<MovieDTO> list = sqlSession.selectList("movieMapper.getAllMovies");
+		List<MovieDTO> list = sqlSession.selectList("movie.getAllMovies");
 		
 		return list;
 	}
@@ -40,7 +40,7 @@ public class MovieDAOImpl implements MovieDAO {
 	
 	@Override
 	public MovieDTO getMovie(int mid) {
-		return sqlSession.selectOne("movieMapper.getMovie", mid);
+		return sqlSession.selectOne("movie.getMovie", mid);
 	}
 	
 	@Override
@@ -51,8 +51,17 @@ public class MovieDAOImpl implements MovieDAO {
 	
 	@Override
 	public List<MovieDTO> getAllMoviesSortByReserve() {		
-		System.out.println("영화 정렬 dao 실행");
-		return sqlSession.selectList("movieMapper.getAllMoviesSortByReserve");
+		return sqlSession.selectList("movie.getAllMoviesSortByReserve");
+	}
+	
+	@Override
+	public List<MovieDTO> getAllMoviesSortByGcnt() {		
+		return sqlSession.selectList("movie.getAllMoviesSortByGcnt");
+	}
+	
+	@Override
+	public List<MovieDTO> getAllMoviesSortByGrade() {		
+		return sqlSession.selectList("movie.getAllMoviesSortByGrade");
 	}
 	
 	@Override
@@ -63,24 +72,24 @@ public class MovieDAOImpl implements MovieDAO {
 	
 	@Override
 	public List<MovieLikeDTO> getMovieLikeList(int aid) {		
-		return sqlSession.selectList("movieMapper.getLikeList", aid);
+		return sqlSession.selectList("movie.getLikeList", aid);
 	}
 	
 	@Override
 	public int insertMovieLike(MovieLikeDTO dto) {
 		System.out.println("insertMovieLike dao 실행");
-		return sqlSession.insert("movieMapper.insertMovieLike", dto);	
+		return sqlSession.insert("movie.insertMovieLike", dto);	
 	}
 	
 	@Override
 	public int deleteMovieLike(MovieLikeDTO dto) {
-		return sqlSession.delete("movieMapper.deleteMovieLike", dto);
+		return sqlSession.delete("movie.deleteMovieLike", dto);
 	}
 	
 	@Override
 	public MovieDTO getLikeCnt(int mid) {
 		System.out.println("두번체크 daoImpl");
-		return sqlSession.selectOne("movieMapper.getLikeCnt", mid);
+		return sqlSession.selectOne("movie.getLikeCnt", mid);
 	}
 	
 }

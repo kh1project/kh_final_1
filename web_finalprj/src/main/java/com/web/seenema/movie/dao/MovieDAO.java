@@ -12,6 +12,8 @@ public interface MovieDAO {
 	public List<MovieDTO> getPreMovies();
 	public MovieDTO getMovie(int mid);
 	public List<MovieDTO> getAllMoviesSortByReserve();
+	public List<MovieDTO> getAllMoviesSortByGcnt();
+	public List<MovieDTO> getAllMoviesSortByGrade();
 	public void movieLike(int aid, int mid);
 	public List<MovieLikeDTO> getMovieLikeList(int aid);
 	public int insertMovieLike(MovieLikeDTO dto);

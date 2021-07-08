@@ -35,7 +35,7 @@
 		<div>
 			<div class="info-container">
 				<img class="bg-poster" alt="movie-id${movie.getId() }-img"
-					src="/resources/imgs/movie/${movie.getId() }/poster/movie_image (1).jpg">
+					src="/resources/images/movie/${movie.getId() }/poster/movie_image (1).jpg">
 				<div class="info">
 					<div class="title ">${movie.getTitle()}</div>
 					<div class="subtitle ">${movie.getSubtitle()}</div>
@@ -99,7 +99,7 @@
 				</p>
 				<img class="rounded img-fluid float-right"
 					alt="${movie.getTitle() }"
-					src="/resources/imgs/movie/${movie.getId() }/poster/movie_image.jpg">
+					src="/resources/images/movie/${movie.getId() }/poster/movie_image.jpg">
 			</div>
 			<div class="content-text">
 				<div class="summary">${movie.getSummary() }</div>
