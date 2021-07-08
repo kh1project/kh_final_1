@@ -1,35 +1,71 @@
 package com.web.seenema.line.controller;
 
-import org.springframework.stereotype.Controller;
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-@Controller
+import com.web.seenema.line.dto.LineAddDTO;
+import com.web.seenema.line.dto.LineDTO;
+import com.web.seenema.line.service.LineService;
+
+@RestController
 @RequestMapping(value = "/lineajax")
 public class LineAjaxController {
 	
-	@RequestMapping(value = "")
-	public ModelAndView ex1() {
-		ModelAndView mv = new ModelAndView("views/ex1");
-		mv.addObject("", "");
-		
-		return mv;
+	@Autowired
+	private LineService service;
+	
+	@RequestMapping(value = "/add")
+	public JSONObject add(@ModelAttribute LineAddDTO dto) {
+				
+		JSONObject json = new JSONObject();
+		if(service.add(dto)) {
+			
+			LineDTO line = service.getLine(dto.getId());
+			String email = line.getEmail().split("@")[0];
+			email = email.substring(0, email.length() - 2);
+			email += "**";
+			line.setEmail(email);
+
+			json.put("res", "success");
+			json.put("line", line);
+		} else {
+			json.put("res", "fail");
+		}
+		return json;
 	}
 	
-	@RequestMapping(value = "/ex5")
-	public ModelAndView ex2() {
-		ModelAndView mv = new ModelAndView("views/ex2");
-		mv.addObject("", "");
+	@RequestMapping(value = "/incGcnt")
+	public JSONObject incGcnt(@RequestParam int lid) {
 		
-		return mv;
+		JSONObject json = new JSONObject();
+		
+		int gcnt = service.incGcnt(lid);
+		if(gcnt != -1) {
+			json.put("res", "success");
+			json.put("gcnt", gcnt);
+		} else {
+			json.put("res", "fail");
+		}
+		return json;
 	}
 	
-	@RequestMapping(value = "/ex6")
-	public ModelAndView ex3() {
-		ModelAndView mv = new ModelAndView("views/ex3");
-		mv.addObject("", "");
+	@RequestMapping(value = "/delete")
+	public JSONObject delete(@RequestParam int lid) {
 		
-		return mv;
+		JSONObject json = new JSONObject();
+		
+		if(service.delete(lid)) {
+			json.put("result", "success");
+			//json.put("lid", lid);
+		} else {
+			json.put("result", "fail");
+		}
+		return json;
 	}
 	
 	@RequestMapping(value = "/ex7")

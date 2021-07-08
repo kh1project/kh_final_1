@@ -15,6 +15,9 @@
 
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/static/css/common.css">
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath() %>/resources/static/css/line.css">
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/static/js/line.js"></script>
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap');
 </style>	
@@ -161,7 +164,11 @@ height: 10px;
 			likeBtn.style.backgroundColor = "transparent";
 			likeBtn.style.color = "white";
 		}
+		
 	}
+	
+	
+
 </script>
 </head>
 <body>
@@ -229,7 +236,7 @@ height: 10px;
 					<div style="margin-bottom: -15px"> 
 						<p>감독 : ${movie.getDirector() }</p><p class="partition"></p> 
 						<p>장르 : ${movie.getGenre() } / ${movie.getRunningtime() }분</p><p class="partition"></p>
-						<p>등급 : ${movie.getRating() }세이상관림가</p><p class="partition"></p>
+						<p>등급 : ${movie.getRating() }세이상관람가</p><p class="partition"></p>
 						<p>개봉일 : ${movie.getPlaydate() }</p>
 					</div>
 						<p>출연진 : ${movie.getActor() }</p>
@@ -241,29 +248,10 @@ height: 10px;
 			여기쯤 인포그래픽이 있으면 좋겟다.
 		</div>
 		<hr>
-		<div class="review">
-			<div class="review-cnt">"영화에 대한"리뷰가 "몇개" 있어요</div>
-			<div class="input-container">리뷰 입력창</div>
-			<!--  반복문 -->
-			<div class="review-list">
-				<div class="user-info">유저정보</div>
-				<div class="review-score">별점</div>
-				<div class="review-context">리뷰 내용</div>
-				<div class="review-date">리뷰작성일</div>
-				<div class="review-goods">따봉</div>
-				<div>줄 늘리기</div>
-				<div>줄 늘리기</div>
-				<div>줄 늘리기</div>
-				<div>줄 늘리기</div>
-				<div>줄 늘리기</div>
-				<div>줄 늘리기</div>
-				<div>줄 늘리기</div>
-				<div>줄 늘리기</div>
-				<div>줄 늘리기</div>
-			</div>
-		</div>
-	</div>
+
 </body>
+
+
 
 <footer>
 	<%@ include file="../module/footer.jsp"%>

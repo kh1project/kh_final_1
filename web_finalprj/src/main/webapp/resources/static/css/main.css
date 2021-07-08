@@ -53,6 +53,7 @@
 
 .summary {
 	visibility: hidden;
+	font-style: normal !important;
 }
 
 .card:hover .summary {

@@ -28,11 +28,10 @@
 					span.heart.innerText = "♥ ";
 					span.heart.style.color = "red";
 				}
-			},
+			}
 			/*error: function(request, status, error) {
 				console.log("error code: " + request.status + "\nmessage: " + request.responseText + "\nerror: " + error);
 			}*/
-			
 		});
 	}
 </script>
