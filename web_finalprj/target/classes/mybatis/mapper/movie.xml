@@ -15,4 +15,31 @@
 	<select id="getPoster" resultType="movieImage">
 		select * from image_files where mid = #{mid} AND path LIKE '%poster%' AND name = 'movie_image.jpg'
 	</select>
+	<select id="getAllMovies" resultType="com.web.seenema.movie.dto.MovieDTO">
+		SELECT * FROM movie
+	</select>
+	
+	<select id="getMovie" resultType="com.web.seenema.movie.dto.MovieDTO">
+		SELECT * FROM movie WHERE id = #{mid}
+	</select>
+	
+	<select id="getAllMoviesSortByReserve" resultType="com.web.seenema.movie.dto.MovieDTO">
+		SELECT * FROM movie ORDER BY rcnt DESC
+	</select>
+	
+	<select id="getLikeList" resultType="com.web.seenema.movie.dto.MovieLikeDTO">
+		SELECT * FROM movielike Where aid = #{aid}
+	</select>
+	
+	<insert id="insertMovieLike" parameterType="com.web.seenema.movie.dto.MovieLikeDTO">
+		INSERT INTO movielike VALUES(#{mid}, #{aid})
+	</insert>
+	
+	<delete id="deleteMovieLike" parameterType="com.web.seenema.movie.dto.MovieLikeDTO">
+		DELETE FROM movieLike WHERE mid = #{mid} AND aid = #{aid} 
+	</delete>
+	
+	<select id="getLikeCnt" resultType="com.web.seenema.movie.dto.MovieDTO">
+		SELECT gcnt FROM movie WHERE id = #{mid}
+	</select>
 </mapper>
