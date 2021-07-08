@@ -15,12 +15,24 @@
 
 .poster {
 	position: relative;
+	overflow: hidden;
 }
 
 .poster img {
 	width: 230px;
 	height: 330px;
+	
 }
+
+.poster img:hover {  
+	transform: scale(1.05);
+    transition: .3s;
+  }
+  
+  .poster img {  
+	transform: scale(1);
+    transition: .3s;
+  }
 
 .btn-util {
 	display: block;
