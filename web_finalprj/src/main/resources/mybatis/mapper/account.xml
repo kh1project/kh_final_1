@@ -8,10 +8,6 @@
 	<select id="myMovieSearch" parameterType="int" resultType="_int">
 		select mid from MOVIE_THEATER MT where MT.id IN (select mtid from time T where T.id IN (select timeid from reservation R where R.aid = #{aid}))
 	</select>
-	
-	<select id="myMovieSearch" parameterType="int" resultType="_int">
-		select mid from MOVIE_THEATER MT where MT.id IN (select mtid from time T where T.id IN (select timeid from reservation R where R.aid = #{aid}))
-	</select>
  
 	<resultMap id="accountMap" type="account">
   	  	<id property="id" column="id" />
