@@ -14,6 +14,7 @@ import com.web.seenema.reserve.dto.BranchDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
 import com.web.seenema.reserve.dto.TableRstepDTO;
+import com.web.seenema.reserve.dto.TimeDTO;
 
 @Repository
 public class ReserveRepositoryImpl implements ReserveRepository{
@@ -32,13 +33,12 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 	}
 
 	@Override
-	public List<TableRstepDTO> selectTimeList() throws Exception {
+	public List<TimeDTO> selectTimeList() throws Exception {
 		return sqlSession.selectList("reserveMapper.timelist");
 	}
 	
 	@Override
 	public List<BranchDTO> selectBranchList(String location) throws Exception {
-		System.out.println("Repository loc : " + location);
 		return sqlSession.selectList("reserveMapper.branchlist", location);
 	}
 

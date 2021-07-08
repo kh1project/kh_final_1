@@ -84,21 +84,22 @@ dl { margin: 0px; }
             </c:choose>
 		    ${param.title } - 시간표</label><hr>
 			<div class="row">
+			  <c:forEach var="TimeDTO" items="${timelist}" varStatus="status">
 			  <div class="col-4">
-			    <a class="btn" role="button" href="#none">
+				<a class="btn" role="button" href="#none">
 			      <dl>
 			        <dd>
-			          <strong>11:30</strong>
-			          <div class="tooltip">종료 13:14</div>
+			          <strong>${TimeDTO.mtid }관</strong>
 			        </dd>
 			        <dd>
-			          <strong>24</strong>
-			           / 32
+			          <strong>${TimeDTO.starttime }</strong>
+			           / ${TimeDTO.endtime }
 			        </dd>
-			        <dd>1관</dd>
+			        <dd>${TimeDTO.id }</dd>
 			      </dl>
 			    </a>
 			  </div>
+			  </c:forEach>
 			  <div class="col-4">
 			    <a class="btn" role="button" href="#none">
 			      <dl>
@@ -129,29 +130,11 @@ dl { margin: 0px; }
 			      </dl>
 			    </a>
 			  </div>
-			  <!-- 
-			  <div class="col">
-			  <c:forEach var="TableRstepDTO" items="${timelist}" varStatus="status">
-				<a class="btn" role="button" href="#none">
-			      <dl>
-			        <dd>
-			          <strong>${TableRstepDTO.time }</strong>
-			        </dd>
-			        <dd>
-			          <strong>${TableRstepDTO.leftseat }</strong>
-			           / ${TableRstepDTO.totalseat }
-			        </dd>
-			        <dd>${TableRstepDTO.branch }</dd>
-			      </dl>
-			    </a>
-			  </c:forEach>
-			  </div>
-			   -->
 			</div>
 		  </div>
 		</div><hr>
-	      <input type="button" onclick="history.back();" value="이전" />
-	      <input type="submit" value="다음" />
+	      <input type="button" onclick="history.back();" value="이전">
+	      <input type="submit" value="다음">
 	  </div>
 	</form>
   <%@ include file="../module/footer.jsp" %>

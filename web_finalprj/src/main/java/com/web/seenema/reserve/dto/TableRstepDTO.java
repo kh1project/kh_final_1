@@ -6,7 +6,7 @@ public class TableRstepDTO {
 	private int mid;
 	private Date date;
 	private int bid;
-	private String loc;
+	private String location;
 	private String branch;
 	private String time;
 	private int totalseat;
@@ -36,12 +36,12 @@ public class TableRstepDTO {
 		this.bid = bid;
 	}
 	
-	public String getLoc() {
-		return loc;
+	public String getLocation() {
+		return location;
 	}
 	
-	public void setLoc(String loc) {
-		this.loc = loc;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 	
 	public String getBranch() {

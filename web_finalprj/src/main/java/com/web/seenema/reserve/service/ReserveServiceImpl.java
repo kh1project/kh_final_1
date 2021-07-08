@@ -13,6 +13,7 @@ import com.web.seenema.reserve.dto.BranchDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
 import com.web.seenema.reserve.dto.TableRstepDTO;
+import com.web.seenema.reserve.dto.TimeDTO;
 import com.web.seenema.reserve.repository.ReserveRepository;
 
 @Service
@@ -41,14 +42,13 @@ public class ReserveServiceImpl implements ReserveService {
 
 	@Override
 	public List<BranchDTO> branchList(String location) throws Exception {
-		System.out.println(location);
 		List<BranchDTO> branchlist = dao.selectBranchList(location);
-		System.out.println(branchlist);
 		return branchlist;
 	}
 
 	@Override
-	public List<TableRstepDTO> timeTableInfo() throws Exception {
+	public List<TimeDTO> timeTableInfo() throws Exception {
+		System.out.println(dao.selectTimeList());
 		return dao.selectTimeList();
 	}
 

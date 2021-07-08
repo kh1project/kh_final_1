@@ -31,7 +31,7 @@
 		SELECT id, title, rating FROM movie ORDER BY grade DESC
 	</select>
 	
-	<select id="timelist" resultType="table">
+	<select id="timelist" resultType="time">
 		SELECT * FROM time
 	</select>
 	

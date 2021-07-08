@@ -8,6 +8,7 @@
 		<typeAlias type="com.web.seenema.reserve.dto.BranchDTO" alias="branch"></typeAlias>
 		<typeAlias type="com.web.seenema.reserve.dto.RstepDTO" alias="rstep"></typeAlias>
 		<typeAlias type="com.web.seenema.reserve.dto.TableRstepDTO" alias="table"></typeAlias>
+		<typeAlias type="com.web.seenema.reserve.dto.TimeDTO" alias="time"></typeAlias>
 		<typeAlias type="com.web.seenema.movie.dto.MovieDTO" alias="movie" />
 		<typeAlias type="com.web.seenema.movie.dto.MyMovieDTO" alias="myMovie" />
 		<typeAlias type="com.web.seenema.movie.dto.MovieImageDTO" alias="movieImage" />

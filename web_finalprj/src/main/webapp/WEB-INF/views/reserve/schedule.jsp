@@ -53,8 +53,7 @@ hr { margin: 3px; }
 	<div class="container">
 	  <div class="row" id="title">
 	  	<div class="col-12">
-	  	  <c:set var="now" value="<%=new java.util.Date()%>" />
-		  <label>${param.location } / ${param.name } / <fmt:formatDate value="${now}" pattern="yyyy-MM-dd (E)" /></label>
+		  <label>${param.location } - ${param.name }</label>
 	  	</div>
 	  </div>
       <div class="col">
@@ -114,8 +113,8 @@ hr { margin: 3px; }
         <input type="hidden" name="name" value="${param.name }">
         <input type="hidden" name="rating" value="${param.rating }">
         <input type="hidden" name="title" value="${param.title }">
-	    <input type="button" onclick="history.back();" value="이전" />
-      	<input type="submit" value="다음" />
+	    <input type="button" onclick="history.back();" value="이전">
+      	<input type="submit" value="다음">
 	</div>
   </form>
   <%@ include file="../module/footer.jsp" %>

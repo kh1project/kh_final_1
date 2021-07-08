@@ -20,6 +20,7 @@ import com.web.seenema.reserve.dto.BranchDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
 import com.web.seenema.reserve.dto.TableRstepDTO;
+import com.web.seenema.reserve.dto.TimeDTO;
 import com.web.seenema.reserve.service.ReserveService;
 
 @Controller
@@ -43,29 +44,9 @@ public class ReserveController {
 		return "reserve/schedule";
 	}
 	
-//	@RequestMapping(value = "/schedule", method = RequestMethod.GET)
-//	public ModelAndView schedule(String loc) throws Exception {
-//		ModelAndView mv = new ModelAndView();
-//
-//		System.out.println("Controller loc : " + loc);
-//		
-//		if(loc == null) {
-//			loc = "서울";
-//		}
-//		List<BranchDTO> branchlist = null;
-//		
-//		branchlist = ress.branchList(loc);
-//
-//		
-//		mv.setViewName("reserve/schedule");
-//		mv.addObject("branchlist", branchlist);
-//		
-//		return mv;
-//	}
-	
 	@RequestMapping(value = "/time")
 	public String timeList(Model m) throws Exception {
-		List<TableRstepDTO> time = ress.timeTableInfo();
+		List<TimeDTO> time = ress.timeTableInfo();
 		m.addAttribute("timelist", time);
 		return "reserve/time";
 	}

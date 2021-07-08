@@ -153,11 +153,13 @@ hr { margin: 3px; }
 			  	<c:forEach var="branchDTO" items="${branchlist}" varStatus="status">
 			  	  <c:choose>
 			  	    <c:when test="${branchDTO.name eq param.name }">
-			  	      <a class="list-group-item list-group-item-action active" id="list-name-list" href="${location }?location=${param.location }&name=${branchDTO.name }" role="tab" aria-controls="home">
+			  	      <a class="list-group-item list-group-item-action active" id="list-name-list"
+			  	        href="${location }?location=${param.location }&name=${branchDTO.name }" role="tab" aria-controls="home">
 				      ${branchDTO.name}</a>
 			  	    </c:when>
 			  	    <c:otherwise>
-		  	    	  <a class="list-group-item list-group-item-action" id="list-name-list" href="${location }?location=${param.location }&name=${branchDTO.name }" role="tab" aria-controls="home">
+		  	    	  <a class="list-group-item list-group-item-action" id="list-name-list"
+		  	    	    href="${location }?location=${param.location }&name=${branchDTO.name }" role="tab" aria-controls="home">
 			          ${branchDTO.name}</a>
 			  	    </c:otherwise>
 			  	  </c:choose>
@@ -177,7 +179,7 @@ hr { margin: 3px; }
        -->
        <input type="hidden" name="location" value="${param.location }">
        <input type="hidden" name="name" value="${param.name }">
-       <input type="submit" value="다음" />
+       <input type="submit" value="다음">
       </div>
 	</div>
   </form>
