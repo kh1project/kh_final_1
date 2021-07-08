@@ -14,6 +14,8 @@ DROP TABLE movie;
 DROP TABLE account;
 DROP TABLE board_type;
 
+
+
 -- 영화 테이블
 CREATE TABLE movie(
     id NUMBER,
@@ -354,4 +356,17 @@ commit;
 --회원 id 1번 테스트용
 --INSERT INTO "WEBADMIN"."ACCOUNT" (ID, NAME, NICKNAME, EMAIL, PHONE, PASSWORD, GENDER, AGE) VALUES ('1', 'test', 'test', 'test', '0', 'test', 'M', '27')
 
+-- 포스트 테이블(이 테이블의 mergePost 값들로 조회한 리스트가 review(board)테이블의 contents 값으로 들어감.)
+CREATE TABLE post (
+	id NUMBER,
+	mergePost NUMBER,
+	postimg NVARCHAR2(1024),
+	posttext NVARCHAR2(1024) 
+);
 
+ALTER TABLE post ADD CONSTRAINT post_id_pk PRIMARY KEY(id);
+
+COMMENT ON COLUMN post.id IS '포스트 식별번호';
+COMMENT ON COLUMN post.mergePost IS '포스트 묶음번호(리뷰게시글 고유번호와 동일한 개념이라고 볼 수 있음. 약간 다름.)';
+COMMENT ON COLUMN post.postimg IS '포스트 이미지';
+COMMENT ON COLUMN post.posttext IS '포스트 내용';

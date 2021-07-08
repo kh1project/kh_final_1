@@ -1,5 +1,17 @@
 @charset "UTF-8";
-.add-imagelist { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-around; align-content: flex-start; }
-.add-imagelist img { width:23%; padding:1%; margin:1%; border:1px solid #ddd; border-radius:5px; height:150px; }
-.add-imagetext {  }
-.add-imagetext img, .add-imagetext textarea { width:100%; }
+
+
+#add-step2 { display:none; }
+.r_movieselect { display:none; }
+.wmwrap { position:relative; cursor:pointer; }
+.wmwrap > img { width:100%; }
+.checkbg { display:none; position:absolute; width:calc(100% - 2rem); height:calc(100% - 3.5rem); background:rgba(0,0,0,.6); z-index:3; }
+.checkbg i { color: #fff; font-size: 2rem; position: absolute; left: calc(50% - 1rem); top: calc(50% - 1rem); }
+.selectImg { width:100%; }
+#add-imagelist { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-around; align-content: flex-start; }
+#add-imagelist img { padding:1%; margin:1%; border:1px solid #ddd; border-radius:5px; height:150px; cursor:pointer; }
+#add-imagelist img:hover { opacity:0.7; }
+.post { background-color:#ddd; }
+.post img, .post textarea { width:100%; }
+.post img { padding:0; }
+.post.selected { background-color:#329eb1; }

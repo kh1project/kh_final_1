@@ -7,8 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.web.seenema.account.service.AccountServiceImpl;
@@ -17,6 +19,7 @@ import com.web.seenema.movie.dto.MovieImageDTO;
 import com.web.seenema.movie.dto.MyMovieDTO;
 import com.web.seenema.movie.service.MovieServiceImpl;
 import com.web.seenema.review.dto.ReviewDTO;
+import com.web.seenema.review.dto.ReviewPostDTO;
 import com.web.seenema.review.service.ReviewServiceImpl;
 
 @Controller
@@ -55,14 +58,6 @@ public class ReviewController {
 		List<List<MyMovieDTO>> mywlist = null;
 		mywlist = account.mywatchList(aid);
 		
-//		System.out.println("---------------reviewController----------------");
-//		System.out.println("mywlist.size() : " + mywlist.size());
-//		for(int i = 0; i < mywlist.size(); i++) {
-//			for(int j = 0; j < mywlist.get(i).size(); j++) {
-//				System.out.println("mywlist의 " + i + "번째 데이터 : [" + mywlist.get(i).get(j).getId() + "]" + mywlist.get(i).get(j).getTitle() + " 의 파일 : " + mywlist.get(i).get(j).getPath() + mywlist.get(i).get(j).getName());
-//			}
-//		}
-		
 		mv.setViewName("review/reviewadd");
 		mv.addObject("mywlist", mywlist);
 		mv.addObject("", "");
@@ -71,31 +66,31 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView reviewAddPost(HttpServletRequest req) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		int SelectMovie = (Integer.parseInt((String)req.getParameter("wm").replace("wm", "")));
+	public String reviewAddPost(Model m, @RequestParam List<String> mergePost, @RequestParam int star) throws Exception {
+		String forward = "";
 		
-		List<MyMovieDTO> mywatch = null;
-		mywatch = account.mywatchSelect(SelectMovie);
-		
-		for(int i = 0; i < mywatch.size(); i++) {
-			System.out.println(mywatch.get(i).getPath() + mywatch.get(i).getName() );
+		int aid = 1; //session에서 aid 받아와야함. 임시데이터.
+		System.out.println("star : " + star);
+		for(int  i = 0; i < mergePost.size(); i++) {
+			System.out.println("mergePost.get(i) : " + mergePost.get(i));
 		}
+		//ajaxcontroller의 addstep2 메서드에서 받은 mergePost,star 값을 이용하여 addReview 한다.
 		
-		mv.setViewName("redirect:/review/add");	
-		mv.addObject("mywatch", mywatch);	//이거 내일 jsp에서 불러다 #add-step2 쪽에 출력하면 됨.
-											//그리고 jsp에서 script 처리할 것. 메가박스처럼.
+//		//addreview 메서드 호출
+//		boolean result = review.addReview(mergePost, star);
+//				
+//		if(result) {
+//			// 작성 성공시 리뷰 리스트로 이동
+//			forward = "redirect:/review";
+//		} else {
+//			// 실패 했을 때 작성 페이지 재전송
+//			m.addAttribute("data", dto);
+//			m.addAttribute(forward);
+//			forward = "account/join";
+//		}
 		
-		return mv;
-	}
-	
-	@RequestMapping(value = "/add2", method = RequestMethod.POST)
-	public ModelAndView reviewAdd2Post(HttpServletRequest req) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		
-		mv.setViewName("review");		
-		
-		return mv;
+		return null;
+		//return forward;
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)

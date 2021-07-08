@@ -19,5 +19,6 @@
 		<typeAlias type="com.web.seenema.pay.dto.PayDTO" alias="pay"></typeAlias>
 		<typeAlias type="com.web.seenema.line.dto.LineDTO" alias="line"></typeAlias>
 		<typeAlias type="com.web.seenema.line.dto.LineAddDTO" alias="lineAddDTO"></typeAlias>
+		<typeAlias type="com.web.seenema.review.dto.ReviewPostDTO" alias="reviewpost"></typeAlias>
 	</typeAliases>
 </configuration>
