@@ -12,157 +12,15 @@
 	href="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
-
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/static/css/common.css">
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap');
-</style>	
-<style>
-
-*{
-	font-family: 'Noto Sans KR', sans-serif;	
-	letter-spacing: 0;
-    line-height: 1.5;
-    font-weight: 400;
-}
-
-.poster {
-	position: absolute;
-	width: 270px;
-	height: 374px;
-	top: 50px;
-	right: 30px;
-}
-
-.rating {
-	width: 23px;
-	height: 23px;
-	border-radius: 11px;
-	top: 23px;
-	left: 8px;
-	position: absolute;
-	text-shadow: 2px 2px 2px rgb(0 0 0/ 80%);
-}
-
-.info-container {
-	height: 520px;
-	margin: 0 0 40px 0;
-	position: relative;
-	overflow: hidden;
-}
-
-.bgcolor {
-	background-color: black;
-	width: 100%;
-	height: 520px;
-	position: absolute;
-}
-
-.bg-poster {
-	position: absolute;
-	width: 100%;
-	opacity: .3;
-}
-
-.title {
-	padding-top: 15px; font-size : 46px;
-	width: 800px;
-	display: block;
-	font-size: 46px;
-}
-
-.util-btn {
-	display: block;
-}
-
-.info {
-	position: relative;
-	z-index: 1;
-	padding-left: 15px;
-}
-
-.info > * {
-	color: white;
-	display: block;
-}
-
-.title {
-	font-weight: 500;
-	text-shadow: 2px 2px 10px rgb(0 0 0 / 70%);
-}
-
-.score-info > div {
-	top: 300px;
-    position: relative;
-	display:inline-block;
-	margin: 0 20px 0 0;
-}
-
-.score-title {
-	font-size: 14px;
-	font-weight: bold;
-	color: #CCCCCC;
-	margin-bottom: -5px;
-}
-
-.score-data{
-	font-size: 32px;
-}
-
-.like-btn {
-	border: 2px solid rgba(255, 255, 255, 0.4);
-	border-radius: 5px;
-	padding: 3px 6px 3px 6px;
-	width: 100px;
-	text-align: center;
-	font-size: 14px;
-}
-
-.movie-textinfo > div p{
-	color: #222;
-}
-
-.movie-textinfo > div > p:before{
-	width: 10px;
-	height: 10px;
-	background-color: black;
-	display: inline-block;
-}
-
-.movie-textinfo > div > p{
-	display: inline-block;
-}
-.partition{
-height: 10px;
-    background-color: lightgray;
-    width: 2px;
-    margin: 0px 10px 0px 16px
-}
-
-.info-graph{
-	margin-bottom: 20px;
-}
-
-.content-text{
-	font-size: 15px;
-}
+@import
+	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap')
+	;
 </style>
-<script>
-	window.onload = function() {
-		const likeBtn = document.querySelector(".like-btn");
-
-		likeBtn.onmouseover = function() {
-			likeBtn.style.backgroundColor = "white";
-			likeBtn.style.color = "black";
-		}
-
-		likeBtn.onmouseout = function() {
-			likeBtn.style.backgroundColor = "transparent";
-			likeBtn.style.color = "white";
-		}
-	}
-</script>
+<link type="text/css" rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/static/css/moviedetail.css">
 </head>
 <body>
 	<header>
@@ -177,14 +35,25 @@ height: 10px;
 					src="/resources/imgs/movie/${movie.getId() }/poster/movie_image (1).jpg">
 				<div class="info">
 					<div class="title ">${movie.getTitle()}</div>
+					<div class="subtitle ">${movie.getSubtitle()}</div>
 					<div class="util-btn">
-						<div class="like-btn">
-							<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-								fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
-						  		<path
-									d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z" />
-							</svg>${movie.getGcnt() }
-						</div>
+						<c:set var="liked" value="false" />
+						<c:forEach var="likeList" items="${likeList }">
+							<c:if test="${movie.getId() eq likeList.getMid() }">
+								<c:set var="liked" value="true" />
+							</c:if>
+						</c:forEach>
+						<c:choose>
+							<c:when test='${liked eq "true" }'>
+								<div class="like-btn" onclick="doUnlike(${movie.getId() })">
+									♥${movie.getGcnt() }</div>
+							</c:when>
+							<c:otherwise>
+								<div class="like-btn" onclick="doLike(${movie.getId() })">
+									♡${movie.getGcnt() }</div>
+							</c:otherwise>
+						</c:choose>
+
 					</div>
 					<div class="score-info">
 						<div class="score">
@@ -194,6 +63,15 @@ height: 10px;
 						<div class="rank">
 							<p class="score-title">예매율</p>
 							<p class="score-data">${reserveRating }%</p>
+						</div>
+						<div class="float-right" id="right-util-btn">
+							<button type="button" class="share">
+								<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+									fill="white" class="bi bi-share svg-btn" viewBox="0 -2 20 20">
+  								<path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z" />
+								</svg>
+							</button>
+							<a class="reserve" href="/reserve?mid=${movie.getId()}">예매하기</a>
 						</div>
 					</div>
 				</div>
@@ -220,26 +98,27 @@ height: 10px;
 					alt="${movie.getTitle() }"
 					src="/resources/imgs/movie/${movie.getId() }/poster/movie_image.jpg">
 			</div>
+
 			<div class="content-text">
-				<div class="reserve">예매</div>
 				<div class="summary">${movie.getSummary() }</div>
 				<hr>
-				<div class="movie-textinfo">			
+				<div class="movie-textinfo">
 					<div>상영타입 : ${movie.getType() }</div>
-					<div style="margin-bottom: -15px"> 
-						<p>감독 : ${movie.getDirector() }</p><p class="partition"></p> 
-						<p>장르 : ${movie.getGenre() } / ${movie.getRunningtime() }분</p><p class="partition"></p>
-						<p>등급 : ${movie.getRating() }세이상관림가</p><p class="partition"></p>
+					<div style="margin-bottom: -15px">
+						<p>감독 : ${movie.getDirector() }</p>
+						<p class="partition"></p>
+						<p>장르 : ${movie.getGenre() } / ${movie.getRunningtime() }분</p>
+						<p class="partition"></p>
+						<p>등급 : ${movie.getRating() }세이상관림가</p>
+						<p class="partition"></p>
 						<p>개봉일 : ${movie.getPlaydate() }</p>
 					</div>
-						<p>출연진 : ${movie.getActor() }</p>
+					<p>출연진 : ${movie.getActor() }</p>
 				</div>
 			</div>
 		</div>
 		<hr>
-		<div class="info-graph">
-			여기쯤 인포그래픽이 있으면 좋겟다.
-		</div>
+		<div class="info-graph">여기쯤 인포그래픽이 있으면 좋겟다.</div>
 		<hr>
 		<div class="review">
 			<div class="review-cnt">"영화에 대한"리뷰가 "몇개" 있어요</div>
@@ -263,6 +142,23 @@ height: 10px;
 			</div>
 		</div>
 	</div>
+	<div id="modal" class="modal-container">
+		<div class="modal-window">
+			<div class="modal-title">
+				<h5>공유하기</h5>
+			</div>
+			<div class="close-btn">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+				  <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+				</svg>
+			</div>
+			<hr>
+			<div class="copybox">
+				<input type="text" readonly value="http://localhost:8080/movie/detail?mid=${movie.getId()}">
+				<button>URL 복사</button>
+			</div>
+		</div>
+	</div>
 </body>
 
 <footer>
@@ -270,4 +166,6 @@ height: 10px;
 </footer>
 
 </body>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/static/js/moviedetail.js"></script>
 </html>

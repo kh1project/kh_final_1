@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.web.seenema.movie.dto.MovieDTO;
+import com.web.seenema.movie.dto.MovieLikeDTO;
 
 @Repository
 public class MovieDAOImpl implements MovieDAO {
@@ -39,8 +40,7 @@ public class MovieDAOImpl implements MovieDAO {
 	
 	@Override
 	public MovieDTO getMovie(int mid) {
-		MovieDTO dto = sqlSession.selectOne("movieMapper.getMovie", mid); 
-		return dto;
+		return sqlSession.selectOne("movieMapper.getMovie", mid);
 	}
 	
 	@Override
@@ -50,11 +50,37 @@ public class MovieDAOImpl implements MovieDAO {
 	}
 	
 	@Override
-	public List<MovieDTO> getAllMoviesSortByReserve() {
-		List<MovieDTO> list = sqlSession.selectList("movieMapper.getAllMoviesSortByReserve");
-		
-		return list;
+	public List<MovieDTO> getAllMoviesSortByReserve() {		
+		System.out.println("영화 정렬 dao 실행");
+		return sqlSession.selectList("movieMapper.getAllMoviesSortByReserve");
 	}
 	
+	@Override
+	public void movieLike(int aid, int mid) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public List<MovieLikeDTO> getMovieLikeList(int aid) {		
+		return sqlSession.selectList("movieMapper.getLikeList", aid);
+	}
+	
+	@Override
+	public int insertMovieLike(MovieLikeDTO dto) {
+		System.out.println("insertMovieLike dao 실행");
+		return sqlSession.insert("movieMapper.insertMovieLike", dto);	
+	}
+	
+	@Override
+	public int deleteMovieLike(MovieLikeDTO dto) {
+		return sqlSession.delete("movieMapper.deleteMovieLike", dto);
+	}
+	
+	@Override
+	public MovieDTO getLikeCnt(int mid) {
+		System.out.println("두번체크 daoImpl");
+		return sqlSession.selectOne("movieMapper.getLikeCnt", mid);
+	}
 	
 }

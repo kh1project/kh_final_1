@@ -5,6 +5,7 @@ import java.sql.Date;
 public class MovieDTO {
 	private int id;
 	private String title;
+	private String subtitle;
 	private String summary;
 	private String type;
 	private String director;
@@ -19,11 +20,12 @@ public class MovieDTO {
 	
 	public MovieDTO() {}
 	
-	public MovieDTO(int id, String title, String summary, String type, String director, String genre, int runningtime, int rating,
+	public MovieDTO(int id, String title, String subtitle, String summary, String type, String director, String genre, int runningtime, int rating,
 			String actor, Date playdate, int rcnt, int gcnt, float grade) {
 		super();
 		this.id = id;
 		this.title = title;
+		this.subtitle = subtitle;
 		this.summary = summary;
 		this.type = type;
 		this.director = director;
@@ -51,6 +53,14 @@ public class MovieDTO {
 	
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public String getSubtitle() {
+		return subtitle;
+	}
+	
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
 	}
 	
 	public String getSummary() {
