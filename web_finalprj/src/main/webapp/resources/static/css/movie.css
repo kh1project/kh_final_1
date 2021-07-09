@@ -3,10 +3,10 @@
 }
 
 .movies {
-	display: inline-table;
-	width: 230px;
-	height: 450px;
-	margin: 0px 0px 60px 57px;
+	display: inline-block;
+    width: 230px;
+    height: 480px;
+    margin: 0px 0px 60px 57px;
 }
 
 .movie-center{

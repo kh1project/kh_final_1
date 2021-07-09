@@ -124,16 +124,16 @@ ul {
 								<c:url var="rating" value="/resources/imgs/static/rating/" />
 								<c:choose>
 									<c:when test="${item.getRating() eq 0 }">
-										<img class="rating" src="${rating }ratingAll_ico1.png">
+										<span class="badge badge-pill badge-success">ALL</span>
 									</c:when>
 									<c:when test="${item.getRating() eq 12 }">
-										<img class="rating" src="${rating }ratingAll_ico2.png">
+										<span class="badge badge-pill badge-primary">12</span>
 									</c:when>
 									<c:when test="${item.getRating() eq 15 }">
-										<img class="rating" src="${rating }ratingAll_ico3.png">
+										<span class="badge badge-pill badge-warning">15</span>
 									</c:when>
 									<c:otherwise>
-										<img class="rating" src="${rating }ratingAll_ico4.png">
+										<span class="badge badge-pill badge-danger">청불</span>
 									</c:otherwise>
 								</c:choose>
 								${item.getTitle() }
