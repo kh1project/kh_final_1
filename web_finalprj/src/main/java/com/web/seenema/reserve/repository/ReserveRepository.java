@@ -13,8 +13,9 @@ import com.web.seenema.reserve.dto.TimeDTO;
 
 public interface ReserveRepository {
 	//public List<Map<String, Object>> selectMovieList() throws Exception;
-	public List<MovieDTO> selectMovieList() throws Exception;
-	public List<TimeDTO> selectTimeList() throws Exception;
+	public List<MovieDTO> selectMovieList(String location, String name) throws Exception;
+	public List<TimeDTO> selectTimeList(String location, String name,
+			int rating, String title, String moviedate) throws Exception;
 	public List<BranchDTO> selectBranchList(String location) throws Exception;
 	public List<TableRstepDTO> selectRestInfo(TableRstepDTO dto) throws Exception;
 	public List<Map<String, Object>> selectSeatCnt(RstepDTO dto) throws Exception;

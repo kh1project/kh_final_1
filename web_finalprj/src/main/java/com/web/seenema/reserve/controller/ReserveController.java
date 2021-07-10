@@ -44,16 +44,19 @@ public class ReserveController {
 	}
 	
 	@RequestMapping(value = "/schedule", method = RequestMethod.GET)
-	public String movieList(Model m) throws Exception {
-		List<MovieDTO> datas = ress.movieList();
+	public String movieList(@RequestParam String location, @RequestParam String name, Model m) throws Exception {
+		List<MovieDTO> datas = ress.movieList(location, name);
 		m.addAttribute("movieAll_list", datas);
 		return "reserve/schedule";
 	}
 	
 	@RequestMapping(value = "/time")
-	public String timeList(Model m) throws Exception {
-		List<TimeDTO> time = ress.timeTableInfo();
+	public String timeList(@RequestParam String location,
+			@RequestParam String name, @RequestParam int rating,
+			@RequestParam String title, @RequestParam String moviedate, Model m) throws Exception {
+		List<TimeDTO> time = ress.timeTableInfo(location, name, rating, title, moviedate);
 		m.addAttribute("timelist", time);
+		System.out.println("controller time" + time);
 		return "reserve/time";
 	}
 	

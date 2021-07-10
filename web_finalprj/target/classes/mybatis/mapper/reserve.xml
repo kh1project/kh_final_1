@@ -42,13 +42,50 @@
 		SELECT * FROM movie_theater WHERE tid = #{tid}
 	</select>
 	
-	<!-- 영화전체리스트 -->
-	<select id="movieAll_list" resultType="movie">
-		SELECT id, title, rating FROM movie ORDER BY grade DESC
+	<!-- 지점 선택시 상영중인 영화 전체 리스트 -->
+	<select id="movieAll_list" parameterType="HashMap" resultType="movie">
+		SELECT DISTINCT 
+			a.mid,
+			b.id,
+			b.rating,
+			b.title,
+			c.bid,
+			d.location,
+			d.name
+		FROM movie_theater a
+		JOIN movie b
+		ON a.mid = b.id
+		JOIN theater c
+		ON a.tid = c.id
+		JOIN branch d
+		ON c.bid = d.id
+		WHERE d.location = #{location} AND d.name = #{name}
 	</select>
 	
-	<select id="timelist" resultType="time">
-		SELECT * FROM time
+	<select id="timelist" parameterType="HashMap" resultType="time">
+		SELECT
+		    m.id,
+		    m.playdate,
+		    th.bid,
+		    th.name,
+		    mt.mid,
+		    mt.tid,
+		    mt.enddate,
+		    t.starttime,
+		    t.endtime,
+			(SELECT count(*) FROM seat s WHERE s.tid = th.id) as seat_count,
+			(SELECT count(*) FROM seat s WHERE s.reserved = 'y') as seat_reserved
+		FROM time t
+		JOIN movie_theater mt
+		ON t.mtid = mt.id
+		JOIN movie m
+		ON mt.mid = m.id
+		JOIN theater th
+		ON mt.tid = th.id
+		JOIN branch b
+		ON th.bid = b.id
+		WHERE b.location = #{location} AND b.name = #{name}
+			AND m.rating = #{rating} AND m.title = #{title} AND TO_CHAR(t.moviedate, 'yyyy-mm-dd') = #{moviedate}
 	</select>
 	
 	<!-- 영화시작시간 -->

@@ -22,34 +22,25 @@ public class ReserveServiceImpl implements ReserveService {
 	@Autowired
 	private ReserveRepository dao;
 
-//	@Override
-//	public List<Map<String, Object>> movieList() throws Exception {
-//		// 영화 리스트 뽑기??
-//		return dao.selectMovieList();
-//	}
-	
 	@Override
-	public List<MovieDTO> movieList() throws Exception {
-		// 영화 리스트 뽑기
-		return dao.selectMovieList();
-	}
-
-	@Override
-	public List<BranchDTO> branchList(int mid, Date date) throws Exception {
-		// 지점 리스트 뽑기??
-		return null;
+	public List<MovieDTO> movieList(String location, String name) throws Exception {
+		// 선택한 지역->지점에서 상영중인 영화 리스트 뽑기
+		return dao.selectMovieList(location, name);
 	}
 
 	@Override
 	public List<BranchDTO> branchList(String location) throws Exception {
+		// 지역 선택시 해당 지역에 있는 지점 리스트 뽑기
 		List<BranchDTO> branchlist = dao.selectBranchList(location);
 		return branchlist;
 	}
 
 	@Override
-	public List<TimeDTO> timeTableInfo() throws Exception {
-		System.out.println(dao.selectTimeList());
-		return dao.selectTimeList();
+	public List<TimeDTO> timeTableInfo(String location, String name,
+			int rating, String title, String moviedate) throws Exception {
+		System.out.println("service " +
+			dao.selectTimeList(location, name, rating, title, moviedate));
+		return dao.selectTimeList(location, name, rating, title, moviedate);
 	}
 
 	@Override

@@ -60,7 +60,6 @@ hr { margin: 3px; }
         <div class="row">
           <div class="col">
 		    <div class="list-group list-group-flush" id="list-tab" role="tablist">
-		  	<!-- 평점 순으로 영화 목록 나열 -->
 		    <c:forEach var="MovieDTO" items="${movieAll_list}" varStatus="status">
 		      <c:choose>
 		        <c:when test="${param.title eq MovieDTO.title }">
@@ -113,13 +112,25 @@ hr { margin: 3px; }
         <input type="hidden" name="name" value="${param.name }">
         <input type="hidden" name="rating" value="${param.rating }">
         <input type="hidden" name="title" value="${param.title }">
+        <input id="idnow" type="hidden" name="moviedate">
 	    <input type="button" onclick="history.back();" value="이전">
       	<input type="submit" value="다음">
 	</div>
   </form>
   <%@ include file="../module/footer.jsp" %>
 <script type="text/javascript">
-
+	var today = new Date();
+	var year = today.getFullYear();
+	var month = today.getMonth() + 1;
+	var day = today.getDate();
+	if(month <= 9) {
+		month = "0" + month;
+	}
+	if(day <= 9) {
+		day = "0" + day;
+	}
+	today = year + "-" + month + "-" + day;
+	document.getElementById("idnow").value = today;
 </script>
 </body>
 </html>
