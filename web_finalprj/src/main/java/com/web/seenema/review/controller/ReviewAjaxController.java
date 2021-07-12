@@ -46,15 +46,15 @@ public class ReviewAjaxController {
 	
 	@RequestMapping(value = "/addstep2", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public List<Integer> addstep2(@RequestParam String jsonData) throws Exception {
+	public int addstep2(@RequestParam String jsonData) throws Exception {
 		
 		Gson gson = new Gson();
 		Type type = new TypeToken<ArrayList<Map<String, String>>>() {}.getType();
 		ArrayList<Map<String, String>> postlist = gson.fromJson(jsonData, type);
 		
-		List<Integer> mergePost = review.addPost(postlist);
+		int mergeId = review.addPost(postlist);
 		//여기서 받은 값을 ReviewController의 /add mothod post로 넘겨줘야함. 우선 다시 ajax로 반환.
-		return mergePost;
+		return mergeId;
 	}
 	
 	@RequestMapping(value = "/ex13")

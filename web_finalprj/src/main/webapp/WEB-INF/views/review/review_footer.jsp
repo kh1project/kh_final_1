@@ -9,14 +9,6 @@
 <script>
 $(document).ready(function(){
 	$('#post1').addClass("selected");
-
-	$('.post.selected textarea').on('keyup', function() {
-	    $('.post.selected .pTextCnt').html("("+$(this).val().length+" / 100)");
-	    if($(this).val().length > 100) {
-		    $(this).val($(this).val().substring(0, 100));
-	    	$('.post.selected .pTextCnt').html("(100 / 100)");
-		}
-	});
 });
 
 var movienum;
@@ -28,7 +20,7 @@ function selectmovie(num) {
 	var ckradio = document.getElementById("wm" + num);
 	if(ckradio.checked) {
 		for(i = 0; i < anotherckbg.length; i++) {
-			anotherckbg[i].style.display = "none";			
+			anotherckbg[i].style.display = "none";
 		}
 		ckbg.style.display = "block";
 	}
@@ -47,7 +39,8 @@ function selectmovie(num) {
 					$("#add-imagelist").append("<img id='smovieimg" + i + "' class='col selectImg' src='/seenema/" + smovieimgs[ele].path + smovieimgs[ele].name + "' onclick='selectImg(" + i + ")'>");
 					i++;
 				}
-				
+				$("#hiddenmid").attr("value", num);
+				$("#hiddentitle").attr("value", smovieimgs[ele].title);
 				document.getElementById("add-step1").style.display = "none";
 				document.getElementById("add-step2").style.display = "block";
 			} else {
@@ -65,6 +58,9 @@ function selectPost(num) {
 
 function selectImg(num) {
 	if(document.getElementsByClassName("selectImg")) {
+		if($(".post.selected").length < 1) {
+			$(".postwrap").find(".post").addClass("selected");
+		}
 		$(".selected .selectImg").remove();
 		$("#smovieimg" + num).clone().prependTo(".post.selected").last(); //last post id를 가져와야 함.
 		$(".selected .selectImg").removeAttr("onclick");
@@ -72,26 +68,73 @@ function selectImg(num) {
 	}
 }
 
+function ptextLengthCk(id) {
+	var ptextid = $("#ptext" + id);
+    ptextid.next().html("("+ptextid.val().length+" / 100)");
+    if(ptextid.val().length > 100) {
+    	ptextid.val($(ptextid).val().substring(0, 100));
+    	ptextid.next().html("(100 / 100)");
+	}
+}
+
+function delPost(id) {
+	if($(".postwrap .post").length > 1) {
+		$("#delBtn" + id).parent().remove();
+	} else {
+		alert("1건 미만인 경우, 삭제할 수 없습니다.");
+	}
+}
+
 var postClass = document.getElementsByClassName("post");
 var postid = 2;
 function addPost(){ 
 	if(postClass) {
-		$("#btn_addpost").before("<div id='post" + postid + "' class='col p-3 post' onclick='selectPost(" + postid + ")'><img class='selectImg' src='' alt='이미지 없음'><textarea placeholder='내용을 작성해 주세요.'></textarea><div class='pTextCnt'>(0 / 100)</div>");
+		$("#btn_addpost").before("<div id='post" + postid + "' class='col post' onclick='selectPost(" + postid + ")'><img class='selectImg' src='<%=request.getContextPath() %>/resources/images/sub/bg-img-select.png' alt='이미지 없음'><textarea placeholder='내용을 작성해 주세요.' id='ptext" + postid + "' onkeyup='ptextLengthCk(" + postid + ");'></textarea><div class='pTextCnt'>(0 / 100)</div><img id='delBtn1' class='delBtn' src='<%=request.getContextPath() %>/resources/images/common/btn-x-close.png' onclick='delPost(1);'>");
 	}
 	postid++;
 } 
+var nullFlag = false;
+
+function nullCheck() {
+	for(i = 0; i < postClass.length; i++) {
+		console.log("---------- 현재 포스터의 개수 : " + postClass.length);
+		var postnum = $("#post" + (i + 1));
+		var postimgSrc = postnum.children("img").attr("src");
+		var posttextVal = postnum.children("textarea").val();
+		
+		console.log("----------현재 " + (i + 1) + "번째 포스터 체크중----------");
+		if(postimgSrc == "/seenema/resources/images/sub/bg-img-select.png"){
+			console.log((i + 1) + "번째 이미지 확인중");
+			alert("이미지를 선택해주세요.");
+			nullFlag = false;
+			console.log((i + 1) + "번째 이미지 없음");
+			return;
+		} else if(posttextVal.length < 1) {
+			console.log((i + 1) + "번째 내용 확인중");
+			alert("내용을 입력해주세요.");
+			nullFlag = false;
+			console.log((i + 1) + "번째 내용 없음");
+			return;
+		}
+	}
+	nullFlag = true;
+	console.log("모든 이미지와 내용이 들어가있음 : nullFlag = true");
+}
 
 function add2send(num) {
 	var param = [];
 	for(i = 0; i < postClass.length; i++) {
-		var postnum = $("#post" + (i + 1))
+		var postnum = $("#post" + (i + 1));
+		var postimgSrc = postnum.children("img").attr("src");
+		var posttextVal = postnum.children("textarea").val();
+		
+		//값 저장
 		var data = {
-			postimg : postnum.children("img").attr("src"),
-			posttext : postnum.children("textarea").val()
+			postimg : postimgSrc,
+			posttext : posttextVal
 		};
 		param.push(data);
 	};
-	
 	var jsonData = JSON.stringify(param);
 	jQuery.ajaxSettings.traditional = true;
 	
@@ -101,21 +144,18 @@ function add2send(num) {
         traditional: true, //배열 및 리스트로 값을 넘기기 위해서는 꼭 선언되어야 한다고 함.
         dataType:'json',
         data: {"jsonData" : jsonData},
-        success: function(mergePost) {
-        	for(i = 0; i < mergePost.length; i++) {
-            	console.log(mergePost[i]);
-        	}
+        success: function(mergeId) {
+        	$("#hiddencontents").attr("value", mergeId);
+        	document.step2form.submit();
         }
     });
 }
 
 function addReview() {
-	//값이 안 들어온거 있는지 먼저 체크하고
-	
-	//ajax로 포스트마다 저장한 리스트 값 가져오고
-	add2send();
-	//submit으로 add로 이동
-	document.step2form.submit();
+	nullCheck();
+	if(nullFlag) { 
+		add2send();
+	}
 }
 </script>
 </html>

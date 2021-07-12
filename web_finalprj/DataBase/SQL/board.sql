@@ -16,9 +16,10 @@ COMMENT ON COLUMN board_type.name IS '게시판 구분명';
 CREATE TABLE board (
     id NUMBER,
     btype NUMBER,
+    mid NUMBER,
     aid NUMBER,
     title NVARCHAR2(256),
-    contents NCLOB,
+    contents NVARCHAR2(1024),
     vcnt NUMBER DEFAULT 0,
     gcnt NUMBER DEFAULT 0,
     bcnt NUMBER DEFAULT 0,
@@ -32,9 +33,17 @@ CREATE TABLE board (
 ALTER TABLE board ADD CONSTRAINT board_id_pk PRIMARY KEY(id);
 ALTER TABLE board ADD CONSTRAINT board_btype_FK FOREIGN KEY(btype) REFERENCES board_type(id);
 ALTER TABLE board ADD CONSTRAINT board_aid_FK FOREIGN KEY(aid) REFERENCES account(id);
+-- NCLOB으로 들어갈 필요가 없어짐.
+ALTER TABLE board DROP (contents);
+ALTER TABLE board ADD contents NVARCHAR2(1024);
+ALTER TABLE board ADD mid NUMBER;
+
+select * from ALL_TAB_COLUMNS where TABLE_NAME = 'board' ;
+select * from board;
 
 COMMENT ON COLUMN board.id IS '게시판 식별번호';
 COMMENT ON COLUMN board.btype IS '게시판 구분 번호';
+COMMENT ON COLUMN board.mid IS '게시판 영화 구분 번호';
 COMMENT ON COLUMN board.aid IS '게시판 작성자명';
 COMMENT ON COLUMN board.title IS '게시판 제목';
 COMMENT ON COLUMN board.contents IS '게시판 내용';
@@ -47,17 +56,18 @@ COMMENT ON COLUMN board.udate IS '게시판 수정일';
 COMMENT ON COLUMN board.nodel IS '게시판 삭제금지';
 COMMENT ON COLUMN board.deleted IS '게시판 삭제 구분';
 
-------------------------------------------------
+------------------------------------------------ 초기 INSERT 문
 CREATE SEQUENCE board_type_seq;
-
 INSERT INTO board_type(id, name) VALUES (board_type_seq.NEXTVAL, '영화리뷰');
 
 CREATE SEQUENCE board_seq;
-
-INSERT INTO board VALUES (board_seq.NEXTVAL, 1, 1, '', '정말 재미있는 영화였습니다.', )
-
 ------------------------------------------------
 select id,title from movie where id = 1;
+SELECT * FROM board WHERE btype = 1;
+
+DROP SEQUENCE board_seq;
+DELETE FROM board WHERE id  <= 30;
+CREATE SEQUENCE board_seq;
 
 -- MyMovieDTO select문
 select a.id, a.title, b.path, b.name

@@ -251,9 +251,10 @@ COMMENT ON COLUMN board_type.name IS '게시판 구분명';
 CREATE TABLE board (
     id NUMBER,
     btype NUMBER,
+    mid NUMBER,
     aid NUMBER,
     title NVARCHAR2(256),
-    contents NCLOB,
+    contents nvarchar2(1024),
     vcnt NUMBER DEFAULT 0,
     gcnt NUMBER DEFAULT 0,
     bcnt NUMBER DEFAULT 0,

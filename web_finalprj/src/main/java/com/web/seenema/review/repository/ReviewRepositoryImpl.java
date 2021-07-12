@@ -11,6 +11,7 @@ import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MyMovieDTO;
 import com.web.seenema.review.dto.ReviewAddDTO;
 import com.web.seenema.review.dto.ReviewDTO;
+import com.web.seenema.review.dto.ReviewListDTO;
 import com.web.seenema.review.dto.ReviewPostDTO;
 import com.web.seenema.review.dto.ReviewSimpleDTO;
 
@@ -21,8 +22,8 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	private SqlSession sqlSession;
 
 	@Override
-	public List<ReviewSimpleDTO> selectReviewList() throws Exception {
-		return null;
+	public List<ReviewListDTO> selectReviewList() throws Exception {
+		return sqlSession.selectList("reviewMapper.selectReviewList");
 	}
 
 	@Override
@@ -49,8 +50,13 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	}
 
 	@Override
-	public boolean insertReview(ReviewAddDTO dto) throws Exception {
-		return false;
+	public boolean insertReview(ReviewAddDTO radto) throws Exception {
+		boolean result = false;
+		int rs = sqlSession.insert("reviewMapper.insertReview", radto);
+		if(rs == 1) {
+			result = true;
+		}
+		return result;
 	}
 
 	@Override
@@ -67,10 +73,9 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	
 	@Override
 	public Integer firstInsertPost(ReviewPostDTO rpdto) throws Exception {
-		boolean result = false;
 		int rs = sqlSession.insert("reviewMapper.firstInsertPost", rpdto);
 		int mpid = rpdto.getMergePost();
-		return mpid; //이거 잘 되는지 확인하기
+		return mpid;
 	}
 	
 	@Override
@@ -84,11 +89,7 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	}
 	
 	@Override
-	public List<Integer> selectMergePost(int mergeId) throws Exception {
-		List<Integer> data = sqlSession.selectList("reviewMapper.selectMergePost", mergeId);
-		for(int i = 0; i < data.size(); i++) {
-			System.out.println("Repository selectMergePost : " + data.get(i));
-		}
-		return data;
+	public List<ReviewPostDTO> selectMergePost(String cont) throws Exception {
+		return sqlSession.selectList("reviewMapper.selectMergePost", cont);
 	}
 }

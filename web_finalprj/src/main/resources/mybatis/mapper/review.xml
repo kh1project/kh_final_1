@@ -12,7 +12,14 @@
 		INSERT INTO post(id, mergePost, postimg, posttext)
 			VALUES(post_seq.NEXTVAL, #{mergePost}, #{postimg}, #{posttext}) 
 	</insert>
-	<select id="selectMergePost" parameterType="int" resultType="Integer">
+	<select id="selectMergePost" parameterType="string" resultType="reviewpost">
 		SELECT * FROM post WHERE mergePost = #{mergeId}
+	</select>
+	<insert id="insertReview" parameterType="reviewadd">
+		INSERT INTO board(id, btype, mid, aid, title, contents)
+			VALUES(board_seq.NEXTVAL, 1, #{mid}, #{aid}, #{title}, #{contents})
+	</insert>
+	<select id="selectReviewList" resultType="reviewlist">
+		SELECT * FROM board WHERE btype = 1
 	</select>
 </mapper>

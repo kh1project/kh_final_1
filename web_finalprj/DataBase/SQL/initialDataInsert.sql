@@ -805,3 +805,14 @@ INSERT INTO reservation(id, sid, timeid, aid, rdate, rcnt, payment) VALUES(res_s
 ---------------------------------------
 CREATE SEQUENCE post_seq;
 CREATE SEQUENCE merge_seq;
+
+---------------------------------------
+-- 게시판 구분 테이블 INSERT
+---------------------------------------
+CREATE SEQUENCE board_type_seq;
+INSERT INTO board_type(id, name) VALUES (board_type_seq.NEXTVAL, '영화리뷰');
+
+---------------------------------------
+-- 게시판 테이블 INSERT
+---------------------------------------
+CREATE SEQUENCE board_seq;

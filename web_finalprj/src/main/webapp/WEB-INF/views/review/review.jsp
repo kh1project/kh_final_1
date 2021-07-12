@@ -6,22 +6,22 @@
 		<section>
 			<div class="row row-cols-lg-6">
 				<div class="col">
-					<div class="p-3 border bg-light">Row column</div>
+					<div class="p-3 border bg-light">최신 영화 순위1</div>
 				</div>
 				<div class="col">
-					<div class="p-3 border bg-light">Row column</div>
+					<div class="p-3 border bg-light">최신 영화 순위2</div>
 				</div>
 				<div class="col">
-					<div class="p-3 border bg-light">Row column</div>
+					<div class="p-3 border bg-light">최신 영화 순위3</div>
 				</div>
 				<div class="col">
-					<div class="p-3 border bg-light">Row column</div>
+					<div class="p-3 border bg-light">최신 영화 순위4</div>
 				</div>
 				<div class="col">
-					<div class="p-3 border bg-light">Row column</div>
+					<div class="p-3 border bg-light">최신 영화 순위5</div>
 				</div>
 				<div class="col">
-					<div class="p-3 border bg-light">Row column</div>
+					<div class="p-3 border bg-light">내가 등록한 포스트 보기(회원정보로연결)</div>
 				</div>
 			</div>
 		</section>
@@ -45,26 +45,45 @@
 			    		</div>
 			    	</div>
 					<div class="row">
-			    		<!-- 리뷰 1개 영역 START -->
-						<div class="col-md-3">
-							<div class="card mb-3 shadow-sm">
-								<svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-								<div class="card-body">
-									<small class="text-muted">sample**</small>
-									<h5>영화제목</h5>
-									<p>영화가 아주 재미있다.</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group">
-											<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-thumbs-up fa-fw"></i></button>
-											<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-thumbs-down fa-fw"></i></button>
-											<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-comment-alt fa-fw"></i></button>
+						<c:forEach var="i" items="${list }" varStatus="loop">
+				    		<!-- 리뷰 1개 영역 START -->
+							<div class="col-md-3">
+								<div class="card mb-3 shadow-sm rlist" data-bs-toggle="modal" data-bs-target="#detail${loop.count }">
+									<div class="card-image"><img src="${i.getImgurl() }"></div>
+									<div class="card-body">
+										<small class="text-muted">${i.getAid() }</small>
+										<h5>${i.getTitle() }</h5>
+										<p>${i.getContents() }</p>
+										<div class="d-flex justify-content-between align-items-center">
+											<div class="btn-group">
+												<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-thumbs-up fa-fw"></i>${i.getGcnt() }</button>
+												<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-thumbs-down fa-fw"></i>${i.getBcnt() }</button>
+												<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-comment-alt fa-fw"></i>${i.getCommcnt() }</button>
+											</div>
+											<small class="text-muted">9 mins</small>
 										</div>
-										<small class="text-muted">9 mins</small>
 									</div>
 								</div>
 							</div>
+							<!-- 리뷰 1개 영역 END -->
+						</c:forEach>
+					</div><!-- Modal -->
+					<div class="modal fade" id="exampleModal">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									asdf
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+									<button type="button" class="btn btn-primary">Save changes</button>
+								</div>
+							</div>
 						</div>
-						<!-- 리뷰 1개 영역 END -->
 					</div>
 				</div>
 			    <div class="tab-pane" id="reviewtab2">

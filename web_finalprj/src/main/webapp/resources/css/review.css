@@ -11,7 +11,12 @@
 #add-imagelist { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-around; align-content: flex-start; }
 #add-imagelist img { padding:1%; margin:1%; border:1px solid #ddd; border-radius:5px; height:150px; cursor:pointer; }
 #add-imagelist img:hover { opacity:0.7; }
-.post { background-color:#ddd; }
-.post img, .post textarea { width:100%; }
-.post img { padding:0; }
+.post { background-color:#ddd; position:relative; padding:1.4rem;}
 .post.selected { background-color:#329eb1; }
+.post .selectImg, .post textarea { width:100%; }
+.post .selectImg { padding:0; }
+.post .delBtn { position:absolute; top:0.3rem; right:0.3rem; cursor:pointer; }
+.card-image { width:100%; height:180px; overflow:hidden; }
+.card-image img { width:100%; min-height:180px; cursor:pointer; }
+.btn-group button:last-child i { margin-right:1px; }
+.card-body > small, .card-body > h5, .card-body > p { cursor:pointer; }

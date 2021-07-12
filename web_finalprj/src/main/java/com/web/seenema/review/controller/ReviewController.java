@@ -18,8 +18,11 @@ import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MovieImageDTO;
 import com.web.seenema.movie.dto.MyMovieDTO;
 import com.web.seenema.movie.service.MovieServiceImpl;
+import com.web.seenema.review.dto.ReviewAddDTO;
 import com.web.seenema.review.dto.ReviewDTO;
+import com.web.seenema.review.dto.ReviewListDTO;
 import com.web.seenema.review.dto.ReviewPostDTO;
+import com.web.seenema.review.dto.ReviewSimpleDTO;
 import com.web.seenema.review.service.ReviewServiceImpl;
 
 @Controller
@@ -34,9 +37,20 @@ public class ReviewController {
 	private ReviewServiceImpl review;
 	
 	@RequestMapping(value = "")
-	public ModelAndView review() {
+	public ModelAndView review() throws Exception {
 		ModelAndView mv = new ModelAndView("review/review");
-		mv.addObject("", "");
+		List<ReviewListDTO> list = review.reviewList();
+		for(int i = 0; i < list.size(); i++) {
+			List<String> firstPost = review.firstContent(list.get(i).getContents());
+			if(firstPost.get(0) == "-1") {
+				System.out.println("리뷰 존재하지 않음");
+			} else {
+				list.get(i).setContents(firstPost.get(0));
+				list.get(i).setImgurl(firstPost.get(1));
+			}
+		}
+		System.out.println(list.get(0));
+		mv.addObject("list", list);
 		
 		return mv;
 	}
@@ -66,31 +80,26 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String reviewAddPost(Model m, @RequestParam List<String> mergePost, @RequestParam int star) throws Exception {
+	public String reviewAddPost(Model m, @ModelAttribute ReviewAddDTO radto) throws Exception {
 		String forward = "";
 		
 		int aid = 1; //session에서 aid 받아와야함. 임시데이터.
-		System.out.println("star : " + star);
-		for(int  i = 0; i < mergePost.size(); i++) {
-			System.out.println("mergePost.get(i) : " + mergePost.get(i));
+		radto.setAid(aid);
+
+		//addreview 메서드 호출
+		boolean result = review.addReview(radto);
+				
+		if(result) {
+			// 작성 성공시 리뷰 리스트로 이동
+			forward = "redirect:/review";
+		} else {
+			// 실패 했을 때 작성 페이지 재전송
+			m.addAttribute("data", radto);
+			m.addAttribute(forward);
+			forward = "review/add";
 		}
-		//ajaxcontroller의 addstep2 메서드에서 받은 mergePost,star 값을 이용하여 addReview 한다.
-		
-//		//addreview 메서드 호출
-//		boolean result = review.addReview(mergePost, star);
-//				
-//		if(result) {
-//			// 작성 성공시 리뷰 리스트로 이동
-//			forward = "redirect:/review";
-//		} else {
-//			// 실패 했을 때 작성 페이지 재전송
-//			m.addAttribute("data", dto);
-//			m.addAttribute(forward);
-//			forward = "account/join";
-//		}
-		
-		return null;
-		//return forward;
+		//forward = "redirect:/review";
+		return forward;
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
