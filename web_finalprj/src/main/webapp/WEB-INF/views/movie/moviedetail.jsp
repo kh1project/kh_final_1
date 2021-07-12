@@ -50,11 +50,29 @@
 						<c:choose>
 							<c:when test='${liked eq "true" }'>
 								<div class="like-btn" onclick="doUnlike(${movie.getId() })">
-									♥${movie.getGcnt() }</div>
+									♥ 
+									<c:choose>
+									<c:when test="${gcnt.get(movie.getId()) eq null}">
+										0
+									</c:when>
+									<c:otherwise>
+										${gcnt.get(movie.getId()) }
+									</c:otherwise>
+									</c:choose>
+								</div>
 							</c:when>
 							<c:otherwise>
 								<div class="like-btn" onclick="doLike(${movie.getId() })">
-									♡${movie.getGcnt() }</div>
+									♡ 
+									<c:choose>
+									<c:when test="${gcnt.get(movie.getId()) eq null}">
+										0
+									</c:when>
+									<c:otherwise>
+										${gcnt.get(movie.getId()) }
+									</c:otherwise>
+									</c:choose>
+								</div>
 							</c:otherwise>
 						</c:choose>
 
