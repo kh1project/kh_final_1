@@ -1,9 +1,18 @@
 package com.web.seenema.reserve.dto;
 
 public class BranchTheaterDTO {
+	private int tid;			// movie_theater - 아이디
 	private String location;	// branch - 지역명
 	private String bname;		// branch - 지점명
 	private String tname;		// theater - 상영관 이름
+	
+	public int getTid() {
+		return tid;
+	}
+	
+	public void setTid(int tid) {
+		this.tid = tid;
+	}
 	
 	public String getLocation() {
 		return location;

@@ -21,7 +21,8 @@
 	</select>
 	
 	<select id="search_Branch" resultType="BranchTheater">
-		SELECT b.location
+		SELECT mt.id AS tid
+			 , b.location
 			 , b.name AS bname
 			 , t.name AS tname
 		  FROM movie_theater mt

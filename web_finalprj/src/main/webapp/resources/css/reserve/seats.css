@@ -25,12 +25,22 @@ div.theater-info {
 	text-align: center;
 }
 
+input.movie-title{
+	margin-top: 10px;
+	border-top: 2px solid #4374D9;
+	border-left: 0; border-right: 0;
+	border-bottom: 2px solid #4374D9;
+	font-weight: bold;
+	text-align: center;
+}
+
 label.screen{
 	width:60%; border: 1px solid #bcbcbc;
 	margin-top: 20px;
 	margin-bottom : 40px;
 	background-color: white;
 }
+
 input.seatinfo-checkbox { display: none; }
 
 label, .no-seat {
@@ -128,19 +138,22 @@ div.personnel-info{
 }
 
 input.personnel-type {
-	border: 0;
+	border: 0; font-weight: bold;
+	background-color: white;
 	text-align: center;
 	width: 100px; height: 20px;
 }
 
 div.peoples-number {
 	display: inline-block;
-	border: 1px solid #D5D5D5;
+	border: 0px;
 	width: 100px;
 }
 
 input.personnel{
 	width: 30%; height: 100%;
+	background-color: #4374D9;
+	color: white; font-weight: bold;
 	border: 0; margin: 0;
 }
 
