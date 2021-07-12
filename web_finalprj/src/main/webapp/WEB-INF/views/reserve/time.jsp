@@ -48,7 +48,13 @@
 		        </c:otherwise>
             </c:choose>
 		    ${param.title } - 시간표</label><hr>
-			<div class="row">
+			<div class="row" id="not">
+			<c:if test="${empty timelist }">
+				<div class="col">
+					<label>상영시간이 존재하지 않습니다.</label>
+				</div>
+			</c:if>
+			<c:if test="${!empty timelist }">
 			  <c:forEach var="TimeDTO" items="${timelist}" varStatus="status">
 		    	<div class="col-4">
 			    	<a class="btn" role="tab" data-toggle="tooltip" data-placement="top" title="${TimeDTO.endtime }"
@@ -66,6 +72,7 @@
 					</a>
 				</div>
 			  </c:forEach>
+			</c:if>
 			</div>
 		  </div>
 		</div>
@@ -97,8 +104,8 @@
 	document.getElementById("idnow").value = today;
 	
 	$(function () {
-		  $('[data-toggle="tooltip"]').tooltip()
-		})
+		  $('[data-toggle="tooltip"]').tooltip();
+		});
 </script>
 </body>
 </html>

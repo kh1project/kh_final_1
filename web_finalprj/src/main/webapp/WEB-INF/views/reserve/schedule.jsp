@@ -20,7 +20,7 @@
   </header>
   <section class="reserve-frame pt-5">
   <c:url var="location" value="/reserve" />
-  <form method="get" action="${location }/time">
+  <form name="form" method="get" action="${location }/time">
 	<div class="reserve-window">
 	<%@ include file="../module/ReserveFrame.jsp" %>
 	  <div class="row" id="title">
@@ -84,7 +84,7 @@
 			<input type="hidden" name="title" value="${param.title }">
 			<input id="idnow" type="hidden" name="moviedate">
 			<input class="backbtn" type="button" onclick="history.back();" value="< 이전">
-			<input class="nextbtn" type="submit" value="다음 >">
+			<input class="nextbtn" type="button" onclick="check_movie();" value="다음 >">
 		</div>
 	  </div>
 	</div>
@@ -106,6 +106,15 @@
 	}
 	today = year + "-" + month + "-" + day;
 	document.getElementById("idnow").value = today;
+	
+	function check_movie() {
+		if(${param.title eq null}) {
+			alert("영화를 선택해주세요.");
+			return false;
+		} else {
+			form.submit();
+		}
+	}
 </script>
 </body>
 </html>

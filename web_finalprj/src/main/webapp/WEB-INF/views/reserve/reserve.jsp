@@ -19,7 +19,7 @@
   </header>
   <section class="reserve-frame pt-5">
   <c:url var="location" value="/reserve" />
-  <form method="get" action="${location }/schedule">
+  <form name="form" method="get" action="${location }/schedule">
 	<div class="reserve-window">
 	<%@ include file="../module/ReserveFrame.jsp" %>
 	  <div class="row" id="title">
@@ -36,71 +36,71 @@
 				<!-- 지역 클릭시 active 활성화 -->
 				<c:choose>
 				  <c:when test="${param.location eq '서울' }">
-			    	<a class="list-group-item py-4 list-group-item-action active" id="list-seoul-list"
+			    	<a class="list-group-item py-4 list-group-item-action active" id="location-list"
 			    	href="${location }?location=서울" role="tab" aria-controls="seoul">서울</a>
 			      </c:when>
 			      <c:otherwise>
-			        <a class="list-group-item py-4 list-group-item-action" id="list-seoul-list"
+			        <a class="list-group-item py-4 list-group-item-action" id="location-list"
 			    	href="${location }?location=서울" role="tab" aria-controls="seoul">서울</a>
 			      </c:otherwise>
 			    </c:choose>
 			    <c:choose>
 			      <c:when test="${param.location eq '경기' }">
-			        <a class="list-group-item py-4 list-group-item-action active" id="list-gyeonggi-list"
+			        <a class="list-group-item py-4 list-group-item-action active" id="location-list"
 				    href="${location }?location=경기" role="tab" aria-controls="gyeonggi">경기</a>
 			      </c:when>
 			      <c:otherwise>
-			        <a class="list-group-item py-4 list-group-item-action" id="list-gyeonggi-list"
+			        <a class="list-group-item py-4 list-group-item-action" id="location-list"
 				    href="${location }?location=경기" role="tab" aria-controls="gyeonggi">경기</a>
 			      </c:otherwise>
 			    </c:choose>
 			    <c:choose>
 			      <c:when test="${param.location eq '인천' }">
-			        <a class="list-group-item py-4 list-group-item-action active" id="list-incheon-list"
+			        <a class="list-group-item py-4 list-group-item-action active" id="location-list"
 				    href="${location }?location=인천" role="tab" aria-controls="incheon">인천</a>
 			      </c:when>
 			      <c:otherwise>
-			        <a class="list-group-item py-4 list-group-item-action" id="list-incheon-list"
+			        <a class="list-group-item py-4 list-group-item-action" id="location-list"
 				    href="${location }?location=인천" role="tab" aria-controls="incheon">인천</a>
 			      </c:otherwise>
 			    </c:choose>
 			    <c:choose>
 			      <c:when test="${param.location eq '대전/충청/세종' }">
-			        <a class="list-group-item py-4 list-group-item-action active" id="list-daejeon-list"
+			        <a class="list-group-item py-4 list-group-item-action active" id="location-list"
 				    href="${location }?location=대전/충청/세종" role="tab" aria-controls="daejeon">대전/충청/세종</a>
 			      </c:when>
 			      <c:otherwise>
-			        <a class="list-group-item py-4 list-group-item-action" id="list-daejeon-list"
+			        <a class="list-group-item py-4 list-group-item-action" id="location-list"
 				    href="${location }?location=대전/충청/세종" role="tab" aria-controls="daejeon">대전/충청/세종</a>
 			      </c:otherwise>
 			    </c:choose>
 			    <c:choose>
 			      <c:when test="${param.location eq '부산/대구/경상' }">
-			        <a class="list-group-item py-4 list-group-item-action active" id="list-busan-list"
+			        <a class="list-group-item py-4 list-group-item-action active" id="location-list"
 				    href="${location }?location=부산/대구/경상" role="tab" aria-controls="busan">부산/대구/경상</a>
 			      </c:when>
 			      <c:otherwise>
-			        <a class="list-group-item py-4 list-group-item-action" id="list-busan-list"
+			        <a class="list-group-item py-4 list-group-item-action" id="location-list"
 				    href="${location }?location=부산/대구/경상" role="tab" aria-controls="busan">부산/대구/경상</a>
 			      </c:otherwise>
 			    </c:choose>
 			    <c:choose>
 			      <c:when test="${param.location eq '광주/전라' }">
-			        <a class="list-group-item py-4 list-group-item-action active" id="list-gwangju-list"
+			        <a class="list-group-item py-4 list-group-item-action active" id="location-list"
 				    href="${location }?location=광주/전라" role="tab" aria-controls="gwangju">광주/전라</a>
 			      </c:when>
 			      <c:otherwise>
-			        <a class="list-group-item py-4 list-group-item-action" id="list-gwangju-list"
+			        <a class="list-group-item py-4 list-group-item-action" id="location-list"
 				    href="${location }?location=광주/전라" role="tab" aria-controls="gwangju">광주/전라</a>
 			      </c:otherwise>
 			    </c:choose>
 			    <c:choose>
 			      <c:when test="${param.location eq '강원' }">
-			        <a class="list-group-item py-4 list-group-item-action active" id="list-gangwon-list"
+			        <a class="list-group-item py-4 list-group-item-action active" id="location-list"
 				    href="${location }?location=강원" role="tab" aria-controls="gangwon">강원</a>
 			      </c:when>
 			      <c:otherwise>
-			        <a class="list-group-item py-4 list-group-item-action" id="list-gangwon-list"
+			        <a class="list-group-item py-4 list-group-item-action" id="location-list"
 				    href="${location }?location=강원" role="tab" aria-controls="gangwon">강원</a>
 			      </c:otherwise>
 			    </c:choose>
@@ -124,12 +124,12 @@
 			  	<c:forEach var="branchDTO" items="${branchlist}" varStatus="status">
 			  	  <c:choose>
 			  	    <c:when test="${branchDTO.name eq param.name }">
-			  	      <a class="list-group-item py-4 list-group-item-action active" id="list-name-list"
+			  	      <a class="list-group-item py-4 list-group-item-action active" id="name-list"
 			  	        href="${location }?location=${param.location }&name=${branchDTO.name }" role="tab" aria-controls="home">
 				      ${branchDTO.name}</a>
 			  	    </c:when>
 			  	    <c:otherwise>
-		  	    	  <a class="list-group-item py-4 list-group-item-action" id="list-name-list"
+		  	    	  <a class="list-group-item py-4 list-group-item-action" id="name-list"
 		  	    	    href="${location }?location=${param.location }&name=${branchDTO.name }" role="tab" aria-controls="home">
 			          ${branchDTO.name}</a>
 			  	    </c:otherwise>
@@ -142,7 +142,7 @@
         <div class="col" id="next">
 	       <input type="hidden" name="location" value="${param.location }">
 	       <input type="hidden" name="name" value="${param.name }">
-	       <input class="nextbtn" type="submit" value="다음 >">
+	       <input class="nextbtn" type="button" onclick="check()" value="다음 >">
 	    </div>
       </div>
 	</div>
@@ -152,7 +152,7 @@
   	<%@ include file="../module/footer.jsp" %>
   </footer>
 <script type="text/javascript">
-$(document).ready(function(){
+/* $(document).ready(function(){
 	$('.list-group-item').click(function(e){
 		$.ajax({
 			url: "/schedule",
@@ -168,7 +168,18 @@ $(document).ready(function(){
 			}
 		});
 	})
-})
+}); */
+function check() {
+	if(${param.location eq ''}) {
+		alert("지역을 선택해주세요.");
+		return false;
+	} else if(${param.name eq null}) {
+		alert("지점을 선택해주세요.");
+		return false;
+	} else {
+		form.submit();
+	}
+}
 </script>
 </body>
 </html>

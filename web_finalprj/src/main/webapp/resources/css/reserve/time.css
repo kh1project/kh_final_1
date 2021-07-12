@@ -36,6 +36,12 @@ div #title {
 	background-color: black;
 	color: white;
 }
+div #not {
+	height: 50px;
+	margin-top: 20px;
+	font-size: 14pt;
+	font-weight: bold;
+}
 label#sub { 
 	font-weight: bold;
 	margin-top: 10px;

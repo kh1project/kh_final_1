@@ -108,7 +108,7 @@
 				    </div>
 				    <div class="cover">
 				        <button class="btn btn1 btn-outline-light" onclick="like(${item.id }, this);"><span name="heart">♡ </span><span name="gcnt">${item.gcnt }</span></button>
-				        <a href="<c:url value="/reserve" />" class="btn btn2 btn-primary">예매하기</a>
+				        <a href="<c:url value="/reserve?location=" />" class="btn btn2 btn-primary">예매하기</a>
 					</div>
 				  </div> 
 			  </c:forEach>
