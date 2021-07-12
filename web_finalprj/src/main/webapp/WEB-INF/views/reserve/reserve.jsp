@@ -9,10 +9,12 @@
 <title>예매 - SEENEMA</title>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 </head>
 <style type="text/css">
 hr { margin: 3px; }
+.container {}
 .row { text-align: center; }
 .col { text-align: center; background-color: white; }
 .list-group {
@@ -44,10 +46,14 @@ hr { margin: 3px; }
     background-color: #2f3542;
 </style>
 <body class="pt-5">
-  <%@ include file="../module/header.jsp" %>
+  <header>
+  	<%@ include file="../module/header.jsp" %>
+  </header>
+  <section class="reserve-frame pt-5">
   <c:url var="location" value="/reserve" />
   <form method="get" action="${location }/schedule">
 	<div class="container">
+	<%@ include file="../module/ReserveFrame.jsp" %>
 	  <div class="row" id="title">
 	  	<div class="col-6">
 	  	  <label>지역</label>
@@ -176,7 +182,10 @@ hr { margin: 3px; }
       </div>
 	</div>
   </form>
-  <%@ include file="../module/footer.jsp" %>
+  </section>
+  <footer>
+  	<%@ include file="../module/footer.jsp" %>
+  </footer>
 <script type="text/javascript">
 $(document).ready(function(){
 	$('.list-group-item').click(function(e){

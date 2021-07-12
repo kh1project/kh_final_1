@@ -37,11 +37,6 @@
 		SELECT * FROM branch WHERE location = #{location} ORDER BY name
 	</select>
 	
-	<!-- 영화상영관(1관, 2관) 리스트 -->
-	<select id="theaterlist">
-		SELECT * FROM movie_theater WHERE tid = #{tid}
-	</select>
-	
 	<!-- 지점 선택시 상영중인 영화 전체 리스트 -->
 	<select id="movieAll_list" parameterType="HashMap" resultType="movie">
 		SELECT DISTINCT 
@@ -88,13 +83,4 @@
 			AND m.rating = #{rating} AND m.title = #{title} AND TO_CHAR(t.moviedate, 'yyyy-mm-dd') = #{moviedate}
 	</select>
 	
-	<!-- 영화시작시간 -->
-	<select id="timestart">
-		SELECT starttime FROM time WHERE mtid = #{mtid} AND moviedate = #{moviedate}
-	</select>
-	
-	<!-- 영화종료시간 -->
-	<select id="timeend">
-		SELECT endtime FROM time WHERE mtid = #{mtid} AND moviedate = #{moviedate}
-	</select>
 </mapper>

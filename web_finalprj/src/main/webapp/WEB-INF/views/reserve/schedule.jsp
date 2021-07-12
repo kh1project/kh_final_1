@@ -10,6 +10,7 @@
 <title>상영시간표</title>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 </head>
 <style type="text/css">
@@ -27,6 +28,9 @@ hr { margin: 3px; }
 }
 .list-group-item {
 	width: 100%;
+}
+#schedule_form {
+	height: 665px;
 }
 #title {
 	font-weight: bold;
@@ -47,18 +51,22 @@ hr { margin: 3px; }
     background-color: #2f3542;
 </style>
 <body class="pt-5">
-  <%@ include file="../module/header.jsp" %>
+  <header>
+  	<%@ include file="../module/header.jsp" %>
+  </header>
+  <section class="reserve-frame pt-5">
   <c:url var="location" value="/reserve" />
   <form method="get" action="${location }/time">
 	<div class="container">
+	<%@ include file="../module/ReserveFrame.jsp" %>
 	  <div class="row" id="title">
 	  	<div class="col-12">
 		  <label>${param.location } - ${param.name }</label>
 	  	</div>
 	  </div>
-      <div class="col">
+      <div class="col-12">
         <div class="row">
-          <div class="col">
+          <div class="col-12" id="schedule_form">
 		    <div class="list-group list-group-flush" id="list-tab" role="tablist">
 		    <c:forEach var="MovieDTO" items="${movieAll_list}" varStatus="status">
 		      <c:choose>
@@ -106,18 +114,21 @@ hr { margin: 3px; }
 		    </c:forEach>
 		  </div>
 		</div>
+		<input type="hidden" name="location" value="${param.location }">
+		<input type="hidden" name="name" value="${param.name }">
+		<input type="hidden" name="rating" value="${param.rating }">
+		<input type="hidden" name="title" value="${param.title }">
+		<input id="idnow" type="hidden" name="moviedate">
+		<input type="button" onclick="history.back();" value="이전">
+		<input type="submit" value="다음">
 	  </div>
 	  </div>
-	  	<input type="hidden" name="location" value="${param.location }">
-        <input type="hidden" name="name" value="${param.name }">
-        <input type="hidden" name="rating" value="${param.rating }">
-        <input type="hidden" name="title" value="${param.title }">
-        <input id="idnow" type="hidden" name="moviedate">
-	    <input type="button" onclick="history.back();" value="이전">
-      	<input type="submit" value="다음">
 	</div>
   </form>
-  <%@ include file="../module/footer.jsp" %>
+  </section>
+  <footer>
+  	<%@ include file="../module/footer.jsp" %>
+  </footer>
 <script type="text/javascript">
 	var today = new Date();
 	var year = today.getFullYear();

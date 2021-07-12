@@ -1,4 +1,5 @@
 SELECT * FROM theater;
+SELECT * FROM branch;
 --SELECT * FROM branch WHERE location = '서울';
 
 -- 지점의 상영관 조회

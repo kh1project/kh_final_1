@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,7 @@
 <title>예매 - SEENEMA</title>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 </head>
 <!-- button { opacity: 0.25 } 버튼 투명하게 설정할 수 있음 -->
@@ -24,7 +26,7 @@ dl { margin: 0px; }
 	border-radius: 1ex;
 	background-color: lightgray;
 }
-.row { text-align: center; }
+.row { text-align: center; height: auto;}
 .col { text-align: center; background-color: white; }
 .list-group {
     max-height: 800px;
@@ -35,6 +37,9 @@ dl { margin: 0px; }
 }
 .list-group-item {
 	width: 100%;
+}
+#time_form {
+	height: 660px;
 }
 #title {
 	font-weight: bold;
@@ -55,17 +60,21 @@ dl { margin: 0px; }
     background-color: #2f3542;
 </style>
 <body class="pt-5">
-  <%@ include file="../module/header.jsp" %>
+  <header>
+  	<%@ include file="../module/header.jsp" %>
+  </header>
+  <section class="reserve-frame pt-5">
   <c:url var="location" value="/reserve" />
   <form method="get" action="${location }/seats">
 	  <div class="container">
+	  <%@ include file="../module/ReserveFrame.jsp" %>
 		<div class="row" id="title">
 		  <div class="col-12">
 		  	<c:set var="now" value="<%=new java.util.Date()%>" />
 			<label><fmt:formatDate value="${now}" pattern="yyyy-MM-dd (E)" /></label>
 		  </div>
 		</div>
-		<div class="row">
+		<div class="row" id="time_form">
 		  <div class="col">
 		    <label id="sub">
 		    <c:choose>
@@ -86,7 +95,8 @@ dl { margin: 0px; }
 			<div class="row">
 			  <c:forEach var="TimeDTO" items="${timelist}" varStatus="status">
 		    	<div class="col-4">
-			    	<a class="btn" role="button" href="#none">
+			    	<a class="btn" role="tab" data-toggle="tooltip" data-placement="top" title="${TimeDTO.endtime }"
+			    	  href="${location }/seats?location=${param.location }&name=${param.name }&rating=${param.rating }&title=${fn:replace(param.title, '#', '%23') }&moviedate=${param.moviedate }&starttime=${TimeDTO.starttime }&endtime=${TimeDTO.endtime }">
 				      <dl>
 				        <dt>
 				          <strong>${TimeDTO.starttime }</strong>
@@ -103,14 +113,36 @@ dl { margin: 0px; }
 			</div>
 		  </div>
 		</div><hr>
-	      <input type="button" onclick="history.back();" value="이전">
-	      <input type="submit" value="다음">
+		<input type="hidden" name="location" value="${param.location }">
+		<input type="hidden" name="name" value="${param.name }">
+		<input type="hidden" name="rating" value="${param.rating }">
+        <input type="hidden" name="title" value="${param.title }">
+        <input type="hidden" name="starttime" value="${param.startime }">
+        <input type="hidden" name="endtime" value="${param.endtime }">
+        <input id="idnow" type="hidden" name="moviedate">
 	  </div>
 	</form>
-  <%@ include file="../module/footer.jsp" %>
-  
+	</section>
+  <footer>
+  	<%@ include file="../module/footer.jsp" %>
+  </footer>
 <script type="text/javascript">
+	var today = new Date();
+	var year = today.getFullYear();
+	var month = today.getMonth() + 1;
+	var day = today.getDate();
+	if(month <= 9) {
+		month = "0" + month;
+	}
+	if(day <= 9) {
+		day = "0" + day;
+	}
+	today = year + "-" + month + "-" + day;
+	document.getElementById("idnow").value = today;
 	
+	$(function () {
+		  $('[data-toggle="tooltip"]').tooltip()
+		})
 </script>
 </body>
 </html>
