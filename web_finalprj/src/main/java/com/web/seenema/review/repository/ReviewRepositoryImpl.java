@@ -3,6 +3,7 @@ package com.web.seenema.review.repository;
 import java.util.*;
 
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -61,8 +62,13 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 
 	@Override
 	public boolean updateReview(ReviewDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		int rs = sqlSession.update("reviewMapper.updateReview", dto);
+		if(rs == 1) {
+			result = true;
+		}
+		System.out.println("[Repo] updateReview result : " + result);
+		return result;
 	}
 
 	@Override
@@ -77,6 +83,14 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 		int mpid = rpdto.getMergePost();
 		return mpid;
 	}
+
+	@Override
+	public int firstUpdatePost(ReviewPostDTO post) throws Exception {
+		int rs = sqlSession.update("reviewMapper.firstUpdatePost", post);
+		int mpid = post.getMergePost();
+		System.out.println("firstUpdatePost 정상동작");
+		return mpid;
+	}
 	
 	@Override
 	public boolean insertPost(ReviewPostDTO rpdto) throws Exception {
@@ -89,7 +103,29 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	}
 	
 	@Override
+	public boolean updatePost(ReviewPostDTO post) throws Exception {
+		boolean result = false;
+		int rs = sqlSession.update("reviewMapper.updatePost", post);
+		if(rs == 1) {
+			result = true;
+		}
+		System.out.println("updatePost 정상동작");
+		return result;
+	}
+	
+	@Override
 	public List<ReviewPostDTO> selectMergePost(String cont) throws Exception {
 		return sqlSession.selectList("reviewMapper.selectMergePost", cont);
+	}
+	
+	@Override
+	public boolean rollbackPost(int mergeId) throws Exception {
+		boolean result = false;
+		int rs = sqlSession.delete("reviewMapper.rollbackPost", mergeId);
+		if(rs == 1) {
+			result = true;
+		}
+		System.out.println("rollbackPost 정상동작");
+		return result;
 	}
 }

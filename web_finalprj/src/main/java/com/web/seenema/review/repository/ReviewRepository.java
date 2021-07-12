@@ -23,5 +23,8 @@ public interface ReviewRepository {
     public Integer firstInsertPost(ReviewPostDTO rpdto) throws Exception;
     public boolean insertPost(ReviewPostDTO rpdto) throws Exception;
     public List<ReviewPostDTO> selectMergePost(String cont) throws Exception;
+    public int firstUpdatePost(ReviewPostDTO post) throws Exception;
+    public boolean updatePost(ReviewPostDTO post) throws Exception;
+    public boolean rollbackPost(int mergeId) throws Exception;
 
 }

@@ -25,4 +25,31 @@
 	<select id="selectReview" parameterType="int" resultType="review">
 		SELECT * FROM board WHERE id = ${rid}
 	</select>
+	<update id="firstUpdatePost" parameterType="reviewpost">
+		UPDATE post
+		   SET mergePost = merge_seq.NEXTVAL
+		     , postimg = #{postimg}
+		     , posttext = #{posttext}
+		 WHERE id = #{id}
+		 <selectKey keyColumn="mergePost" keyProperty="mergePost" resultType="int" order="AFTER">
+		 	SELECT mergePost FROM post WHERE id = #{id}
+		 </selectKey>
+	</update>
+	<update id="updatePost" parameterType="reviewpost">
+		UPDATE post
+		   SET mergePost = #{mergePost}
+		     , postimg = #{postimg}
+		     , posttext = #{posttext}
+		 WHERE id = #{id}
+	</update>
+	<delete id="rollbackPost" parameterType="string">
+		DELETE FROM post WHERE mergePost = ${mergeId}
+	</delete>
+	<update id="updateReview" parameterType="review">
+		UPDATE board
+		   SET contents = #{contents}
+		     , star = #{star}
+		     , udate = SYSDATE
+		 WHERE id = #{id}
+	</update>
 </mapper>

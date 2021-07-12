@@ -101,24 +101,55 @@ public class ReviewController {
 			m.addAttribute(forward);
 			forward = "review/add";
 		}
-		//forward = "redirect:/review";
 		return forward;
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public ModelAndView reviewUpdateGet(Model m, int rid) {
+	public ModelAndView reviewUpdateGet(Model m, int rid) throws Exception {
 		ModelAndView mv = new ModelAndView("review/reviewupdate");
-		mv.addObject("", "");
+		ReviewDTO data = review.reviewOne(rid);
+		List<ReviewPostDTO> contlist = review.MergePost(data.getContents());
+		mv.addObject("data", data);
+		mv.addObject("contlist", contlist);
 		
 		return mv;
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public ModelAndView reviewUpdatePost(ReviewDTO dto) {
-		ModelAndView mv = new ModelAndView("review/reviewupdate");
-		mv.addObject("", "");
+	public String reviewUpdatePost(Model m, @ModelAttribute ReviewDTO dto) throws Exception {
+		String forward = "";
 		
-		return mv;
+		int aid = 1; //session에서 aid 받아와야함. 임시데이터.
+		dto.setAid(aid);
+		
+		System.out.println("Update Controller 정상 진입 확인");
+		System.out.println("-------------------------");
+		System.out.println("dto.getContents() : " + dto.getContents());
+		System.out.println("dto.getStar() : " + dto.getStar());
+		System.out.println("dto.getId() : " + dto.getId());
+		System.out.println("-------------------------");
+
+		//updateReview 메서드 호출
+		boolean result = review.updateReview(dto);
+		System.out.println("updateReview 정상 동작 확인");
+		System.out.println("-------------------------");
+		System.out.println("업뎃 후 dto.getContents() : " + dto.getContents());
+		System.out.println("업뎃 후 dto.getStar() : " + dto.getStar());
+		System.out.println("업뎃 후 dto.getId() : " + dto.getId());
+		System.out.println("-------------------------");
+				
+		if(result) {
+			// 수정 성공시 리뷰 리스트로 이동
+			System.out.println("update 성공");
+			forward = "redirect:/review/detail?rid=" + dto.getId();
+		} else {
+			// 실패 했을 때 수정 페이지 재전송
+			System.out.println("update 실패");
+			m.addAttribute("data", dto);
+			m.addAttribute(forward);
+			forward = "redirect:/review";
+		}
+		return forward;
 	}
 	
 	@RequestMapping(value = "/delete")

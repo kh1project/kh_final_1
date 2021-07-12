@@ -66,7 +66,7 @@ select id,title from movie where id = 1;
 SELECT * FROM board WHERE btype = 1 ORDER BY id DESC;
 
 DROP SEQUENCE board_seq;
-DELETE FROM board WHERE id  <= 30;
+DELETE FROM board WHERE id  <= 100;
 CREATE SEQUENCE board_seq;
 
 -- MyMovieDTO select문

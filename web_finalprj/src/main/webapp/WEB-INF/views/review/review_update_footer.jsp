@@ -10,6 +10,9 @@
 <script>
 $(document).ready(function(){
 	$('#post1').addClass("selected");
+	if(window.location.pathname == "<%=request.getContextPath() %>/review/update") {
+		selectmovie(${data.getMid()});
+	}
 });
 
 var movienum;
@@ -159,10 +162,53 @@ function add2send() {
     });
 }
 
+function updatesend() {
+	var param = [];
+	for(i = 0; i < postClass.length; i++) {
+		var postnum = $("#"+postClass[i].id);
+		console.log("postnum : " + postnum);
+		var postimgSrc = postnum.children("img").attr("src");
+		var posttextVal = postnum.children("textarea").val();
+		
+		//값 저장
+		var data = {
+			postimg : postimgSrc,
+			posttext : posttextVal
+		};
+		param.push(data);
+	};
+	var jsonData = JSON.stringify(param);
+	jQuery.ajaxSettings.traditional = true;
+	
+	$.ajax({
+        url : '${updatestep}',
+        type: 'POST',
+        traditional: true, //배열 및 리스트로 값을 넘기기 위해서는 꼭 선언되어야 한다고 함.
+        dataType:'json',
+        data: {
+        		"jsonData" : jsonData,
+        		"boardId" : ${data.getId() },
+        		"existingCont" : ${data.getContents() }
+        	  },
+        success: function(mergeId) {
+        	$("#hiddencontents").attr("value", mergeId);
+        	console.log("mergeId : " + mergeId);
+        	document.step2form.submit();
+        }
+    });
+}
+
 function addReview() {
 	nullCheck();
 	if(nullFlag) { 
 		add2send();
+	}
+}
+
+function updateReview() {
+	nullCheck();
+	if(nullFlag) { 
+		updatesend();
 	}
 }
 </script>

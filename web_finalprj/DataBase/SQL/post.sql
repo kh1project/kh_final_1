@@ -18,8 +18,10 @@ CREATE SEQUENCE post_seq;
 CREATE SEQUENCE merge_seq;
 
 SELECT * FROM post;
-DELETE FROM post WHERE id  <= 30;
+DELETE FROM post WHERE id  <= 200;
+SELECT mergePost FROM post WHERE id <= 30;
 
+merge_seq.CURRVAL;
 
 
 
