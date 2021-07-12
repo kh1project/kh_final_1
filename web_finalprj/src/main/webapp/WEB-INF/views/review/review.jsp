@@ -48,12 +48,12 @@
 						<c:forEach var="i" items="${list }" varStatus="loop">
 				    		<!-- 리뷰 1개 영역 START -->
 							<div class="col-md-3">
-								<div class="card mb-3 shadow-sm rlist" data-bs-toggle="modal" data-bs-target="#detail${loop.count }">
-									<div class="card-image"><img src="${i.getImgurl() }"></div>
+								<div class="card mb-3 shadow-sm rlist">
+									<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><div class="card-image"><img src="${i.getImgurl() }"></div></a>
 									<div class="card-body">
-										<small class="text-muted">${i.getAid() }</small>
-										<h5>${i.getTitle() }</h5>
-										<p>${i.getContents() }</p>
+										<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><small class="text-muted">${i.getAid() }</small></a>
+										<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><h5>${i.getTitle() }</h5></a>
+										<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><p>${i.getContents() }</p></a>
 										<div class="d-flex justify-content-between align-items-center">
 											<div class="btn-group">
 												<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-thumbs-up fa-fw"></i>${i.getGcnt() }</button>
@@ -67,23 +67,6 @@
 							</div>
 							<!-- 리뷰 1개 영역 END -->
 						</c:forEach>
-					</div><!-- Modal -->
-					<div class="modal fade" id="exampleModal">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									asdf
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-									<button type="button" class="btn btn-primary">Save changes</button>
-								</div>
-							</div>
-						</div>
 					</div>
 				</div>
 			    <div class="tab-pane" id="reviewtab2">

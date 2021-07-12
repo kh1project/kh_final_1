@@ -28,7 +28,7 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 
 	@Override
 	public ReviewDTO selectReview(int rid) throws Exception {
-		return null;
+		return sqlSession.selectOne("reviewMapper.selectReview", rid);
 	}
 
 	@Override

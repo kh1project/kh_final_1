@@ -20,6 +20,9 @@
 			VALUES(board_seq.NEXTVAL, 1, #{mid}, #{aid}, #{title}, #{contents})
 	</insert>
 	<select id="selectReviewList" resultType="reviewlist">
-		SELECT * FROM board WHERE btype = 1
+		SELECT * FROM board WHERE btype = 1 ORDER BY id DESC
+	</select>
+	<select id="selectReview" parameterType="int" resultType="review">
+		SELECT * FROM board WHERE id = ${rid}
 	</select>
 </mapper>

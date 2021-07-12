@@ -55,10 +55,11 @@ public class ReviewController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/detail")
-	public ModelAndView reviewDetail(int rid) {
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public ModelAndView reviewDetail(int rid) throws Exception {
 		ModelAndView mv = new ModelAndView("review/reviewdetail");
-		mv.addObject("", "");
+		ReviewDTO data = review.reviewOne(rid);
+		mv.addObject("data", data);
 		
 		return mv;
 	}

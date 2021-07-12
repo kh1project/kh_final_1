@@ -63,7 +63,7 @@ INSERT INTO board_type(id, name) VALUES (board_type_seq.NEXTVAL, '영화리뷰')
 CREATE SEQUENCE board_seq;
 ------------------------------------------------
 select id,title from movie where id = 1;
-SELECT * FROM board WHERE btype = 1;
+SELECT * FROM board WHERE btype = 1 ORDER BY id DESC;
 
 DROP SEQUENCE board_seq;
 DELETE FROM board WHERE id  <= 30;

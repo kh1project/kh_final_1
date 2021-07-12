@@ -35,8 +35,8 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public ReviewDTO reviewOne(int rid) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		ReviewDTO data = dto.selectReview(rid);
+		return data;
 	}
 
 	@Override
