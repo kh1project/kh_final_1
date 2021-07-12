@@ -123,36 +123,45 @@
 		</div>
 		<hr>
 		<div class="info-graph">
-			여기쯤 인포그래픽이 있으면 좋겟다.
 			<div id="gen-graph">
+				<div class="gen-title">연령별 선호도</div>
 				<div class="gen-box">
-					<div class="percent p10">xx%</div>
+					<div class="percent p10 small">
+						10<span class="small">%</span>
+					</div>
 					<div class="bar-box gen10">
 						<div class="bar bar10"></div>
 					</div>
-					<div class="gen">10대</div>
+					<div class="gen small">10대</div>
 				</div>
 				<div class="gen-box">
-					<div class="percent p20">xx%</div>
+					<div class="percent p20 small">
+						10<span class="small">%</span>
+					</div>
 					<div class="bar-box gen20">
 						<div class="bar bar20"></div>
 					</div>
-					<div class="gen">20대</div>
+					<div class="gen small">20대</div>
 				</div>
 				<div class="gen-box">
-					<div class="percent p30">xx%</div>
+					<div class="percent p30 small">
+						10<span class="small">%</span>
+					</div>
 					<div class="bar-box gen30">
 						<div class="bar bar30"></div>
 					</div>
-					<div class="gen">30대</div>
+					<div class="gen small">30대</div>
 				</div>
 				<div class="gen-box">
-					<div class="percent p40">xx%</div>
+					<div class="percent p40 small">
+						10<span class="small">%</span>
+					</div>
 					<div class="bar-box gen40">
 						<div class="bar bar40"></div>
 					</div>
-					<div class="gen">40대</div>
+					<div class="gen small">40대</div>
 				</div>
+				<div class="underline"></div>
 			</div>
 		</div>
 		<hr>

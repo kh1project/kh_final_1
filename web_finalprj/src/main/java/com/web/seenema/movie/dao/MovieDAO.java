@@ -3,6 +3,7 @@ package com.web.seenema.movie.dao;
 import java.util.List;
 
 import com.web.seenema.movie.dto.MovieDTO;
+import com.web.seenema.movie.dto.MovieGcntDTO;
 import com.web.seenema.movie.dto.MovieLikeDTO;
 
 public interface MovieDAO {
@@ -19,4 +20,5 @@ public interface MovieDAO {
 	public int insertMovieLike(MovieLikeDTO dto);
 	public int deleteMovieLike(MovieLikeDTO dto);
 	public MovieDTO getLikeCnt(int mid);
+	public List<MovieGcntDTO> getGcnt();
 }

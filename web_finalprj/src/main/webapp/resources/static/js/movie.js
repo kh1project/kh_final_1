@@ -17,7 +17,7 @@
 				"mid" : mid
 			},
 			success: function(data){
-				document.querySelector("#unlike-"+mid).innerHTML = "<span class=\"btn btn-outline-dark\" onclick=\"iHateIt("+mid+")\">♥"+data.gcnt+"</span>";
+				document.querySelector("#unlike-"+mid).innerHTML = "<span class=\"btn btn-outline-dark\" onclick=\"iHateIt("+mid+")\">♥ "+data+"</span>";
 				document.querySelector("#unlike-"+mid).id = "like-"+mid;
 			},
 			error: function(){
@@ -36,7 +36,7 @@
 				"mid" : mid
 			},
 			success: function(data){
-				document.querySelector("#like-"+mid).innerHTML = "<span class=\"btn btn-outline-dark\" onclick=\"iLikeIt("+mid+")\">♡"+data.gcnt+"</span>";
+				document.querySelector("#like-"+mid).innerHTML = "<span class=\"btn btn-outline-dark\" onclick=\"iLikeIt("+mid+")\">♡ "+data+"</span>";
 				document.querySelector("#like-"+mid).id = "unlike-"+mid;
 			},
 			error: function(){

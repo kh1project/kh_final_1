@@ -17,7 +17,7 @@ public class MovieAjaxController {
 	MovieService service;
 	
 	@RequestMapping(value = "/like")
-	public MovieDTO movieLike(
+	public int movieLike(
 			@RequestParam("userid") int aid,
 			@RequestParam("mid") int mid) {
 		
@@ -34,13 +34,16 @@ public class MovieAjaxController {
 				service.insertMovieLike(dto);
 			}
 			System.out.println("저장성공. 영화 ID -> "+mid);
-		}		
-
-		return service.getLikeCnt(mid);
+		}	
+		
+		if(service.getGcnt().get(mid) == null)
+			return 0;
+		else
+			return service.getGcnt().get(mid);
 	}
 	
 	@RequestMapping(value = "/unlike")
-	public MovieDTO movieUnlike(
+	public int movieUnlike(
 			@RequestParam("userid") int aid,
 			@RequestParam("mid") int mid) {
 		MovieLikeDTO dto = new MovieLikeDTO();
@@ -54,7 +57,10 @@ public class MovieAjaxController {
 		else
 			System.out.println(aid+"번 영화 like 취소 실패");
 
-		return service.getLikeCnt(mid);
+		if(service.getGcnt().get(mid) == null)
+			return 0;
+		else
+			return service.getGcnt().get(mid);
 	}
 	
 }

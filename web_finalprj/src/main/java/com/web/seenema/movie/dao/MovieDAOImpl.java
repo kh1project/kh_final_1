@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.web.seenema.movie.dto.MovieDTO;
+import com.web.seenema.movie.dto.MovieGcntDTO;
 import com.web.seenema.movie.dto.MovieLikeDTO;
 
 @Repository
@@ -66,7 +67,6 @@ public class MovieDAOImpl implements MovieDAO {
 	
 	@Override
 	public void movieLike(int aid, int mid) {
-		// TODO Auto-generated method stub
 		
 	}
 	
@@ -77,7 +77,6 @@ public class MovieDAOImpl implements MovieDAO {
 	
 	@Override
 	public int insertMovieLike(MovieLikeDTO dto) {
-		System.out.println("insertMovieLike dao 실행");
 		return sqlSession.insert("movie.insertMovieLike", dto);	
 	}
 	
@@ -88,8 +87,12 @@ public class MovieDAOImpl implements MovieDAO {
 	
 	@Override
 	public MovieDTO getLikeCnt(int mid) {
-		System.out.println("두번체크 daoImpl");
 		return sqlSession.selectOne("movie.getLikeCnt", mid);
+	}
+	
+	@Override
+	public List<MovieGcntDTO> getGcnt() {
+		return sqlSession.selectList("movie.getGcnt");
 	}
 	
 }

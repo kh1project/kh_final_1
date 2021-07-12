@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import com.web.seenema.movie.dao.MovieDAO;
 import com.web.seenema.movie.dto.MovieDTO;
+import com.web.seenema.movie.dto.MovieGcntDTO;
 import com.web.seenema.movie.dto.MovieImageDTO;
 import com.web.seenema.movie.dto.MovieLikeDTO;
 import com.web.seenema.movie.repository.MovieRepository;
@@ -188,5 +189,14 @@ public class MovieServiceImpl implements MovieService {
 		
 		
 		return audi;
+	}
+	
+	@Override
+	public Map<Integer, Integer> getGcnt() {
+		Map<Integer, Integer> res = new HashMap<>();
+		for(MovieGcntDTO item : dao.getGcnt()) 
+			res.put(item.getMid(), item.getGcnt());
+		
+		return res;
 	}
 }

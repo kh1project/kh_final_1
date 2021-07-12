@@ -53,10 +53,13 @@ public class MovieController {
 		session.setAttribute("id", 1);
 		List<MovieLikeDTO> likeList = service.getMovieLikeList((int) session.getAttribute("id"));
 		
+		Map<Integer, Integer> gcnt = service.getGcnt();
+		
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("reserveRating", reserveRating);
 		model.addAttribute("likeList", likeList);
 		model.addAttribute("sort", num);
+		model.addAttribute("gcnt", gcnt);
 		
 		return "movie/movie";
 	}
