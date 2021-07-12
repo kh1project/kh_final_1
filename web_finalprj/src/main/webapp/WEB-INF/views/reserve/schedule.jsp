@@ -11,45 +11,9 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/schedule.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 </head>
-<style type="text/css">
-hr { margin: 3px; }
-.row { text-align: center; }
-.col {
-	text-align: center; background-color: white;
-}
-.list-group {
-    max-height: 800px;
-    margin-bottom: 10px;
-    overflow: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-}
-.list-group-item {
-	width: 100%;
-}
-#schedule_form {
-	height: 665px;
-}
-#title {
-	font-weight: bold;
-	margin-top: 5px;
-	padding: 10px;
-	background-color: black;
-	color: white;
-}
-#sub { 
-	font-weight: bold;
-	margin-top: 10px;
-}
-::-webkit-scrollbar {
-  width: 10px;
-  
-}
-::-webkit-scrollbar-thumb {
-    background-color: #2f3542;
-</style>
 <body class="pt-5">
   <header>
   	<%@ include file="../module/header.jsp" %>
@@ -57,21 +21,20 @@ hr { margin: 3px; }
   <section class="reserve-frame pt-5">
   <c:url var="location" value="/reserve" />
   <form method="get" action="${location }/time">
-	<div class="container">
+	<div class="reserve-window">
 	<%@ include file="../module/ReserveFrame.jsp" %>
 	  <div class="row" id="title">
 	  	<div class="col-12">
 		  <label>${param.location } - ${param.name }</label>
 	  	</div>
 	  </div>
-      <div class="col-12">
-        <div class="row">
-          <div class="col-12" id="schedule_form">
-		    <div class="list-group list-group-flush" id="list-tab" role="tablist">
+        <div class="row" id="schedule_form">
+        <div class="col-12">
+		  <div class="list-group list-group-flush" id="list-tab" role="tablist">
 		    <c:forEach var="MovieDTO" items="${movieAll_list}" varStatus="status">
 		      <c:choose>
 		        <c:when test="${param.title eq MovieDTO.title }">
-			      <a class="list-group-item list-group-item-action active" id="list-seoul-list"
+			      <a class="list-group-item py-4 list-group-item-action active" id="list-seoul-list"
 			        href="?location=${param.location }&name=${param.name }&rating=${MovieDTO.rating }&title=${fn:replace(MovieDTO.title, '#', '%23') }" role="tab" aria-controls="home">
 				      <!-- 등급제한에 따라 뱃지 표시 -->
 				      <c:choose>
@@ -91,7 +54,7 @@ hr { margin: 3px; }
 		          ${MovieDTO.title}</a>
 		        </c:when>
 		        <c:otherwise>
-		        <a class="list-group-item list-group-item-action" id="list-seoul-list"
+		        <a class="list-group-item py-4 list-group-item-action" id="list-seoul-list"
 		          href="?location=${param.location }&name=${param.name }&rating=${MovieDTO.rating }&title=${fn:replace(MovieDTO.title, '#', '%23') }" role="tab" aria-controls="home">
 				      <!-- 등급제한에 따라 뱃지 표시 -->
 				      <c:choose>
@@ -114,14 +77,15 @@ hr { margin: 3px; }
 		    </c:forEach>
 		  </div>
 		</div>
-		<input type="hidden" name="location" value="${param.location }">
-		<input type="hidden" name="name" value="${param.name }">
-		<input type="hidden" name="rating" value="${param.rating }">
-		<input type="hidden" name="title" value="${param.title }">
-		<input id="idnow" type="hidden" name="moviedate">
-		<input type="button" onclick="history.back();" value="이전">
-		<input type="submit" value="다음">
-	  </div>
+		<div class="col" id="next">
+			<input type="hidden" name="location" value="${param.location }">
+			<input type="hidden" name="name" value="${param.name }">
+			<input type="hidden" name="rating" value="${param.rating }">
+			<input type="hidden" name="title" value="${param.title }">
+			<input id="idnow" type="hidden" name="moviedate">
+			<input class="backbtn" type="button" onclick="history.back();" value="< 이전">
+			<input class="nextbtn" type="submit" value="다음 >">
+		</div>
 	  </div>
 	</div>
   </form>

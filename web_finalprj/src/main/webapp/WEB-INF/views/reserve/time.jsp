@@ -11,54 +11,10 @@
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/time.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 </head>
 <!-- button { opacity: 0.25 } 버튼 투명하게 설정할 수 있음 -->
-<style type="text/css">
-hr { margin: 3px; }
-dl { margin: 0px; }
-.btn {
-	display: inline-block;
-	width: 65%;
-	text-align: center;
-	border-style: hidden;
-	border-collapse: separate;
-	border-radius: 1ex;
-	background-color: lightgray;
-}
-.row { text-align: center; height: auto;}
-.col { text-align: center; background-color: white; }
-.list-group {
-    max-height: 800px;
-    margin-bottom: 10px;
-    overflow: auto;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-}
-.list-group-item {
-	width: 100%;
-}
-#time_form {
-	height: 660px;
-}
-#title {
-	font-weight: bold;
-	margin-top: 5px;
-	padding: 10px;
-	background-color: black;
-	color: white;
-}
-#sub { 
-	font-weight: bold;
-	margin-top: 10px;
-}
-::-webkit-scrollbar {
-  width: 10px;
-  
-}
-::-webkit-scrollbar-thumb {
-    background-color: #2f3542;
-</style>
 <body class="pt-5">
   <header>
   	<%@ include file="../module/header.jsp" %>
@@ -66,12 +22,12 @@ dl { margin: 0px; }
   <section class="reserve-frame pt-5">
   <c:url var="location" value="/reserve" />
   <form method="get" action="${location }/seats">
-	  <div class="container">
+	  <div class="reserve-window">
 	  <%@ include file="../module/ReserveFrame.jsp" %>
 		<div class="row" id="title">
 		  <div class="col-12">
 		  	<c:set var="now" value="<%=new java.util.Date()%>" />
-			<label><fmt:formatDate value="${now}" pattern="yyyy-MM-dd (E)" /></label>
+			<label class="time_info"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd (E)" /></label>
 		  </div>
 		</div>
 		<div class="row" id="time_form">
@@ -112,7 +68,7 @@ dl { margin: 0px; }
 			  </c:forEach>
 			</div>
 		  </div>
-		</div><hr>
+		</div>
 		<input type="hidden" name="location" value="${param.location }">
 		<input type="hidden" name="name" value="${param.name }">
 		<input type="hidden" name="rating" value="${param.rating }">
