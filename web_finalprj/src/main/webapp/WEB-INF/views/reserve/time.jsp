@@ -85,51 +85,21 @@ dl { margin: 0px; }
 		    ${param.title } - 시간표</label><hr>
 			<div class="row">
 			  <c:forEach var="TimeDTO" items="${timelist}" varStatus="status">
-			  <div class="col-4">
-				<a class="btn" role="button" href="#none">
-			      <dl>
-			        <dd>
-			          <strong>${TimeDTO.mtid }관</strong>
-			        </dd>
-			        <dd>
-			          <strong>${TimeDTO.starttime }</strong>
-			           / ${TimeDTO.endtime }
-			        </dd>
-			        <dd>${TimeDTO.id }</dd>
-			      </dl>
-			    </a>
-			  </div>
+		    	<div class="col-4">
+			    	<a class="btn" role="button" href="#none">
+				      <dl>
+				        <dt>
+				          <strong>${TimeDTO.starttime }</strong>
+				        </dt>
+				        <dd>
+				          <strong>${TimeDTO.seat_reserved }</strong>
+				           / ${TimeDTO.seat_count }
+				        </dd>
+				        <dd>${TimeDTO.name }</dd>
+				      </dl>
+					</a>
+				</div>
 			  </c:forEach>
-			  <div class="col-4">
-			    <a class="btn" role="button" href="#none">
-			      <dl>
-			        <dd>
-			          <strong>13:04</strong>
-			          <div class="tooltip">종료 15:08</div>
-			        </dd>
-			        <dd>
-			          <strong>24</strong>
-			           / 32
-			        </dd>
-			        <dd>1관</dd>
-			      </dl>
-			    </a>
-			  </div>
-			  <div class="col-4">
-			    <a class="btn" role="button" href="#none">
-			      <dl>
-			        <dd>
-			          <strong>13:34</strong>
-			          <div class="tooltip">종료 15:18</div>
-			        </dd>
-			        <dd>
-			          <strong>24</strong>
-			           / 32
-			        </dd>
-			        <dd>1관</dd>
-			      </dl>
-			    </a>
-			  </div>
 			</div>
 		  </div>
 		</div><hr>
@@ -138,5 +108,9 @@ dl { margin: 0px; }
 	  </div>
 	</form>
   <%@ include file="../module/footer.jsp" %>
+  
+<script type="text/javascript">
+	
+</script>
 </body>
 </html>

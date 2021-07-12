@@ -6,6 +6,7 @@ DROP TABLE reservation;
 DROP TABLE seat;
 DROP TABLE movie;
 
+
 -- 영화관(지점) 테이블
 CREATE TABLE branch (
     id number,
@@ -21,7 +22,9 @@ COMMENT ON COLUMN branch.id IS '영화관(지점) 식별번호';
 COMMENT ON COLUMN branch.location IS '영화관의 지역명';
 COMMENT ON COLUMN branch.name IS '영화관의 지점명';
 
--- 상영관 테이블
+-- 지점별 상영관 테이블
+-- a지점에 1/2관
+-- b지점에 1/2관
 CREATE TABLE theater (
     id NUMBER,
     bid NUMBER,
@@ -58,6 +61,7 @@ COMMENT ON COLUMN time.starttime IS '영화의 상영 시작시간';
 COMMENT ON COLUMN time.endtime IS '영화의 상영 종료시간';
 
 -- 영화 상영관 테이블
+-- 특정 영화관(1/2관)에서 상영하는 영화
 CREATE TABLE movie_theater (
    id NUMBER,
    mid NUMBER,
@@ -174,4 +178,4 @@ COMMENT ON COLUMN Image_files.mid IS '어떤 영화의 첨부 파일인지 식�
 COMMENT ON COLUMN Image_files.name IS '이미지 첨부파일의 파일명';
 COMMENT ON COLUMN Image_files.path IS '이미지의 실제 저장 경로(위치)';
 
-commit
+commit;

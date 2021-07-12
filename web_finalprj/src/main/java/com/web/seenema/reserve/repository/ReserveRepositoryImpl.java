@@ -28,13 +28,24 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 //	}
 	
 	@Override
-	public List<MovieDTO> selectMovieList() throws Exception {
-		return sqlSession.selectList("reserveMapper.movieAll_list");
+	public List<MovieDTO> selectMovieList(String location, String name) throws Exception {
+		Map<String, Object> data = new HashMap<>();
+		data.put("location", location);
+		data.put("name", name);
+		return sqlSession.selectList("reserveMapper.movieAll_list", data);
 	}
 
 	@Override
-	public List<TimeDTO> selectTimeList() throws Exception {
-		return sqlSession.selectList("reserveMapper.timelist");
+	public List<TimeDTO> selectTimeList(String location, String name,
+			int rating, String title, String moviedate) throws Exception {
+		Map<String, Object> data = new HashMap<>();
+		data.put("location", location);
+		data.put("name", name);
+		data.put("rating", rating);
+		data.put("title", title);
+		data.put("moviedate", moviedate);
+		System.out.println("repo" + data);
+		return sqlSession.selectList("reserveMapper.timelist", data);
 	}
 	
 	@Override

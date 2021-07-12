@@ -170,13 +170,6 @@ hr { margin: 3px; }
         </div>
       </div>
       <div>
-      <!-- 
-        <form method="get" action="${location }/schedule" target="_self">
-        	<input type="hidden" name="location" value="${param.location }">
-        	<input type="hidden" name="name" value="${param.name }">
-	      	<input type="submit" value="다음" />
-        </form>
-       -->
        <input type="hidden" name="location" value="${param.location }">
        <input type="hidden" name="name" value="${param.name }">
        <input type="submit" value="다음">
