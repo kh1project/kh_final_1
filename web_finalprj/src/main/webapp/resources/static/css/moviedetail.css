@@ -25,14 +25,19 @@
 	right: 30px;
 }
 
+.poster img{
+	-webkit-user-drag: none;
+}
+
 .rating {
-	width: 23px;
-	height: 23px;
-	border-radius: 11px;
 	top: 23px;
 	left: 8px;
 	position: absolute;
-	text-shadow: 2px 2px 2px rgb(0 0 0/ 80%);
+}
+
+/* 부트스트랩 기본속성 수정 */
+.badge-pill{
+	padding: 4px;
 }
 
 .info-container {
@@ -53,6 +58,7 @@
 	position: absolute;
 	width: 100%;
 	opacity: .3;
+	-webkit-user-drag: none;
 }
 
 .title {
@@ -85,6 +91,11 @@
 
 .subtitle {
 	margin-bottom: 15px;
+}
+
+.score-info{
+    position: relative;
+    bottom: 20px;
 }
 
 .score-info>div {
@@ -178,7 +189,7 @@
 
 #modal{
 	display: none;
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     align-items: center;
@@ -233,4 +244,29 @@
     border-radius: 4px;
     font-weight: lighter;
 	
+}
+
+#gen-graph > *{
+	display: inline-block;
+}
+
+#gen-graph .bar{
+	width: 10px;
+    height: 100%;
+    background: red;
+    border-radius: 5px;
+    bottom: -5px;
+    position: absolute;
+}
+
+#gen-graph .gen-box{
+	text-align: center;
+}
+
+#gen-graph .bar-box{
+	position: relative;
+    width: 10px;
+    height: 50px;
+    overflow: hidden;
+    display: inline-block;
 }

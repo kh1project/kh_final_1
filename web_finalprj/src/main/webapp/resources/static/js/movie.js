@@ -45,6 +45,13 @@
 		})
 	}
 	
+	window.onload = function(){
+		let filter = document.querySelector(".custom-select")
+		filter.onchange = function(){
+			window.location = "/movie?sort="+filter.value;
+		}
+	}
+	
 	/* <span class="inner-btn unlike" id="unlike-${item.getId() }"
 		onmouseover="mouseoverUnlike(${item.getId() })" 
 		onmouseout="mouseoutUnlike(${item.getId() })" 

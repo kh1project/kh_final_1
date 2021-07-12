@@ -20,7 +20,7 @@ import com.web.seenema.movie.dto.MovieLikeDTO;
 import com.web.seenema.movie.service.MovieService;
 
 @Controller
-@RequestMapping(value = "/movie")
+@RequestMapping(value = "/")
 public class MovieController {
 	
 	@Autowired
@@ -33,8 +33,20 @@ public class MovieController {
 	private LineService lineService;
 	
 	@RequestMapping(value = "/movie")
-	public String movie(Model model, HttpServletRequest request) {
-		List<MovieDTO> movieList = service.getAllMoviesSortByReserve();
+	public String movie(Model model, HttpServletRequest request, @RequestParam(required = false) String sort) {
+		
+		List<MovieDTO> movieList;
+		int num = 1;
+		// 1 -> 예매율순  2 -> 추천순  3 -> 별점순
+		if(sort == null)
+			movieList = service.getAllMovies(num);
+		else {
+			num = Integer.parseInt(sort);
+			movieList = service.getAllMovies(num);
+		}
+		
+		
+		
 		Map<Integer, String> reserveRating = service.getReserveRate();
 		
 		HttpSession session = request.getSession();
@@ -44,6 +56,8 @@ public class MovieController {
 		model.addAttribute("movieList", movieList);
 		model.addAttribute("reserveRating", reserveRating);
 		model.addAttribute("likeList", likeList);
+		model.addAttribute("sort", num);
+		
 		return "movie/movie";
 	}
 	

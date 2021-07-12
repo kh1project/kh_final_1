@@ -1,7 +1,5 @@
 package com.web.seenema.movie.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,12 +55,6 @@ public class MovieAjaxController {
 			System.out.println(aid+"번 영화 like 취소 실패");
 
 		return service.getLikeCnt(mid);
-	}
-	
-	@RequestMapping(value = "/test")
-	public List<MovieDTO> test() {		
-
-		return service.getAllMovies();
 	}
 	
 }

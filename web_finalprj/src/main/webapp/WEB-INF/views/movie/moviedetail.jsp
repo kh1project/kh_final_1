@@ -15,8 +15,9 @@
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/static/css/common.css">
 <link type="text/css" rel="stylesheet"
-	href="<%=request.getContextPath() %>/resources/static/css/line.css">
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/static/js/line.js"></script>
+	href="<%=request.getContextPath()%>/resources/static/css/line.css">
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/static/js/line.js"></script>
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap')
@@ -35,7 +36,7 @@
 		<div>
 			<div class="info-container">
 				<img class="bg-poster" alt="movie-id${movie.getId() }-img"
-					src="/resources/imgs/movie/${movie.getId() }/poster/movie_image (1).jpg">
+					src="/resources/images/movie/${movie.getId() }/poster/movie_image (1).jpg">
 				<div class="info">
 					<div class="title ">${movie.getTitle()}</div>
 					<div class="subtitle ">${movie.getSubtitle()}</div>
@@ -71,7 +72,8 @@
 							<button type="button" class="share">
 								<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
 									fill="white" class="bi bi-share svg-btn" viewBox="0 -2 20 20">
-  								<path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z" />
+  								<path
+										d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z" />
 								</svg>
 							</button>
 							<a class="reserve" href="/reserve?mid=${movie.getId()}">예매하기</a>
@@ -84,22 +86,22 @@
 					<c:url var="rating" value="/resources/imgs/static/rating/" />
 					<c:choose>
 						<c:when test="${movie.getRating() eq 0 }">
-							<img class="rating" src="${rating }ratingAll_ico1.png">
+							<span class="rating badge badge-pill badge-success">ALL</span>
 						</c:when>
 						<c:when test="${movie.getRating() eq 12 }">
-							<img class="rating" src="${rating }ratingAll_ico2.png">
+							<span class="rating badge badge-pill badge-primary">12</span>
 						</c:when>
 						<c:when test="${movie.getRating() eq 15 }">
-							<img class="rating" src="${rating }ratingAll_ico3.png">
+							<span class="rating badge badge-pill badge-warning">15</span>
 						</c:when>
 						<c:otherwise>
-							<img class="rating" src="${rating }ratingAll_ico4.png">
+							<span class="rating badge badge-pill badge-danger">청불</span>
 						</c:otherwise>
 					</c:choose>
 				</p>
 				<img class="rounded img-fluid float-right"
 					alt="${movie.getTitle() }"
-					src="/resources/imgs/movie/${movie.getId() }/poster/movie_image.jpg">
+					src="/resources/images/movie/${movie.getId() }/poster/movie_image.jpg">
 			</div>
 			<div class="content-text">
 				<div class="summary">${movie.getSummary() }</div>
@@ -120,7 +122,39 @@
 			</div>
 		</div>
 		<hr>
-		<div class="info-graph">여기쯤 인포그래픽이 있으면 좋겟다.</div>
+		<div class="info-graph">
+			여기쯤 인포그래픽이 있으면 좋겟다.
+			<div id="gen-graph">
+				<div class="gen-box">
+					<div class="percent p10">xx%</div>
+					<div class="bar-box gen10">
+						<div class="bar bar10"></div>
+					</div>
+					<div class="gen">10대</div>
+				</div>
+				<div class="gen-box">
+					<div class="percent p20">xx%</div>
+					<div class="bar-box gen20">
+						<div class="bar bar20"></div>
+					</div>
+					<div class="gen">20대</div>
+				</div>
+				<div class="gen-box">
+					<div class="percent p30">xx%</div>
+					<div class="bar-box gen30">
+						<div class="bar bar30"></div>
+					</div>
+					<div class="gen">30대</div>
+				</div>
+				<div class="gen-box">
+					<div class="percent p40">xx%</div>
+					<div class="bar-box gen40">
+						<div class="bar bar40"></div>
+					</div>
+					<div class="gen">40대</div>
+				</div>
+			</div>
+		</div>
 		<hr>
 		<div class="review">
 			<div class="review-cnt">"영화에 대한"리뷰가 "몇개" 있어요</div>
@@ -150,13 +184,16 @@
 				<h5>공유하기</h5>
 			</div>
 			<div class="close-btn">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
-				  <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+					fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+				  <path
+						d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />
 				</svg>
 			</div>
 			<hr>
 			<div class="copybox">
-				<input type="text" readonly value="http://localhost:8080/movie/detail?mid=${movie.getId()}">
+				<input type="text" readonly
+					value="http://localhost:8080/movie/detail?mid=${movie.getId()}">
 				<button>URL 복사</button>
 			</div>
 		</div>
