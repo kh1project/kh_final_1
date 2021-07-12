@@ -15,6 +15,7 @@
 	<select id="getPoster" resultType="movieImage">
 		select * from image_files where mid = #{mid} AND path LIKE '%poster%' AND name = 'movie_image.jpg'
 	</select>
+	
 	<select id="getAllMovies" resultType="com.web.seenema.movie.dto.MovieDTO">
 		SELECT * FROM movie
 	</select>
