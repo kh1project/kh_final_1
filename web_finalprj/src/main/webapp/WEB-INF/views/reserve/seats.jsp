@@ -19,19 +19,31 @@
 	</header>
 	<section class="reserve-frame pt-5">
 		<c:url var="seat" value="/reserve/reservecheck" />
-		<form action="${seat }" id="seat-form" method="POST">
+		<form action="${seat }" id="seat-form" method="post" onsubmit="return send()">
 		<div class="reserve-window">
 				<%@ include file="../module/ReserveFrame.jsp" %>
 				<div class="main-frame">
+					
+					<c:forEach var="movie" items="${moviedata }">
+						<c:set var="mid" value="${movie.id }" />
+						<c:set var="title" value="${movie.title }" />
+						<c:set var="rating" value="${movie.rating }" />
+					</c:forEach>
+					
 					<div class="seat-info">
 						<label class="info-title">좌석/인원 선택</label>
 					</div>
 						<div class="theater-info">
+							<div class="title-sopt">
+								<input type="hidden" class="movie-id" name="mid" value="${mid }" readonly>
+								<input type="text" class="movie-title" name="movietitle" value="${title }" readonly>
+							</div>
 							<div class="screen-spot">
 								<label class="screen">Screen</label>
 							</div>
 							
 							<c:forEach var="list" items="${seatlists }" >
+								<input type="hidden" class="theater" name="theater" value="${list.tid }" readonly>
 								<c:forEach var="seatcnt" items="${seatcnt }">
 									<c:if test="${seatcnt.key eq 'scnt' }">
 										<c:set var="seatamount" value="${seatcnt.value }" />
@@ -80,10 +92,6 @@
 								</c:choose>
 							</c:forEach>
 						</div>
-						
-					<c:forEach var="movie" items="${moviedata }">
-						<c:set var="rating" value="${movie.rating }" />
-					</c:forEach>
 					
 					<div class="seatexample">
 						<span class="seat selected"></span><p class="selected">선택 불가능한 좌석</p>
@@ -98,14 +106,14 @@
 						<input class="personnel-type" type="text" id="Adult" value="성인" disabled>
 						<div class="peoples-number">
 							<input class="personnel" type="button" value="-" onclick="person_value(document.getElementById('person1'), '-')">
-							<input class="personnel-value" type="text" name= "adult"id="person1" value="0" onchange="person_add(this, '')" disabled>
+							<input class="personnel-value" type="text" name="adult" id="person1" value="0" onchange="person_add(this, '')" readonly>
 							<input class="personnel" type="button" value="+" onclick="person_value(document.getElementById('person1'), '+')">
 						</div>
 						<c:if test="${rating < 19}">
 							<input class="personnel-type" type="text" id="Teenager" value="청소년" disabled>
 							<div class="peoples-number">
 								<input class="personnel" type="button" value="-" onclick="person_value(document.getElementById('person2'), '-')">
-								<input class="personnel-value" type="text" name="teenager" id="person2" value="0" onchange="person_add(this, '')" disabled>
+								<input class="personnel-value" type="text" name="teenager" id="person2" value="0" onchange="person_add(this, '')" readonly>
 								<input class="personnel" type="button" value="+" onclick="person_value(document.getElementById('person2'), '+')">
 							</div>
 						</c:if>
@@ -193,10 +201,23 @@
 	
 	function send(form_id) {
 		var f = document.getElementById(form_id);
-		if($("input:checked[type='checkbox']").length > 0){
+		
+		var cnt = 0;
+		var adult = parseInt(document.getElementById('person1').value);
+		var teen = 0;
+		
+		if(document.getElementById('person2') != null){
+			teen = parseInt(document.getElementById('person2').value);
+		}
+		
+		cnt = adult + teen;
+		
+		if($("input:checked[type='checkbox']").length == cnt){
 			f.submit();
+			return true;
 		} else {
 			alert('좌석을 선택해주세요.');
+			return false;
 		}
 	}
 </script>

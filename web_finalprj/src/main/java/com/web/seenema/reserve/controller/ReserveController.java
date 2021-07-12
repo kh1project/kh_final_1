@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,12 +60,11 @@ public class ReserveController {
 	}
 	
 	@RequestMapping(value = "/seats", method = RequestMethod.GET)
-	public ModelAndView seats() throws Exception {
-		int mid = 1; // 임시 영화 번호
+	public ModelAndView seats(HttpServletRequest req) throws Exception {
 		int tid = 1; // 임시 상영관 번호
+		int mid = 1; // 임시 영화 번호
 		
 		MovieTheaterDTO mtdto = new MovieTheaterDTO();
-		
 		// 상영관 정보 가져오기.
 		mtdto.setTid(tid);
 		
@@ -88,13 +86,11 @@ public class ReserveController {
 	public ModelAndView reservecheck(HttpServletRequest req, HttpServletResponse response) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve/reservecheck");
 		
-		int mid = 1; // 임시 영화 번호
-		int tid = 1; // 임시 상영관 번호
+		int mid = Integer.parseInt(req.getParameter("mid"));
+		int tid = Integer.parseInt(req.getParameter("theater"));
 		
-		MovieTheaterDTO mtdto = new MovieTheaterDTO();
 		List<BranchTheaterDTO> btlist = ress.getmovieTheater(tid);
 		
-		mtdto.setTid(tid);
 		List<MovieDTO> moviedata = movies.getMovies(mid);
 		List<MovieImageDTO> poster = movies.getPoster(mid);
 		
@@ -131,14 +127,15 @@ public class ReserveController {
 			peple = teenager + adult;
 		}
 		
-		int payment = adultPrice + teenPrice;
+		int price = adultPrice + teenPrice;
+		System.out.println(price);
 		
 		mv.addObject("poster", poster);
 		mv.addObject("moviedata", moviedata);
 		mv.addObject("btlist", btlist);
 		mv.addObject("peple", peple);
 		mv.addObject("Seat", Seat);
-		mv.addObject("payment", payment);
+		mv.addObject("price", price);
 		
 		return mv;
 	}
