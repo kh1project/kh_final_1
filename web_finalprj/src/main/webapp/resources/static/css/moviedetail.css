@@ -245,3 +245,28 @@
     font-weight: lighter;
 	
 }
+
+#gen-graph > *{
+	display: inline-block;
+}
+
+#gen-graph .bar{
+	width: 10px;
+    height: 100%;
+    background: red;
+    border-radius: 5px;
+    bottom: -5px;
+    position: absolute;
+}
+
+#gen-graph .gen-box{
+	text-align: center;
+}
+
+#gen-graph .bar-box{
+	position: relative;
+    width: 10px;
+    height: 50px;
+    overflow: hidden;
+    display: inline-block;
+}

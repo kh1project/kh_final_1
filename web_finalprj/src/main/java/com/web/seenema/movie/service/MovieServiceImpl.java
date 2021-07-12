@@ -1,9 +1,22 @@
 package com.web.seenema.movie.service;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -128,5 +141,52 @@ public class MovieServiceImpl implements MovieService {
 		List<MovieImageDTO> movieimg = mdao.getPoster(mid);
 		return movieimg;
 	}
+	@Override
+	public int getAudi() {
+		int audi = 0;
+		String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+		String[] dateArr = date.split("-");
+		
+		int today = Integer.parseInt(dateArr[0]+dateArr[1]+dateArr[2])-1;
 
+		String key = "544a0cd847e7e0c5266d9fb2fa54d39b";
+		
+		try {
+			URL url = new URL("https://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json"
+					+ "?key="+key
+					+ "&targetDt="+today);
+			
+			BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
+
+			String result = br.readLine();
+			JSONParser jsonParser = new JSONParser();
+			JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
+			JSONObject boxOfficeResult = (JSONObject) jsonObject.get("boxOfficeResult");
+			JSONArray dailyBoxOfficeList = (JSONArray) boxOfficeResult.get("dailyBoxOfficeList");
+
+//			API 키값 참고
+//			https://www.kobis.or.kr/kobisopenapi/homepg/apiservice/searchServiceInfo.do
+//			지금 시점에 API 사용하려면 수정할게 많음. 
+//			프로젝트 마무리 하고 시간 남으면 쓰는게 좋을듯.
+			for(int i = 0; i < dailyBoxOfficeList.size(); i++) {
+				JSONObject temp = (JSONObject) dailyBoxOfficeList.get(i);
+				
+				audi = Integer.parseInt((String) temp.get("audiAcc")); 
+				
+				System.out.println(i+"번 인덱스: "+audi);
+			}
+			
+		} catch (MalformedURLException e) {
+			e.getMessage();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return audi;
+	}
 }
