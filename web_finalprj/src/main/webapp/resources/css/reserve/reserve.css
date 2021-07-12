@@ -37,7 +37,7 @@ div.left-menu > ul > li.active {
 	color: white; font-weight: bolder;
 }
 
-li.choice-time, li.choice-movie {
+li.choice-movie, li.choice-schedule, li.choice-time {
 	cursor: pointer;
 }
 
