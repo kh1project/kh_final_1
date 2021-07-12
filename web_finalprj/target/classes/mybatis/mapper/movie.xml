@@ -24,15 +24,18 @@
 	</select>
 	
 	<select id="getAllMoviesSortByReserve" resultType="com.web.seenema.movie.dto.MovieDTO">
-		SELECT * FROM movie ORDER BY rcnt DESC
+		SELECT id,title, rating, playdate, rcnt, gcnt, grade FROM movie ORDER BY rcnt DESC
 	</select>
 	
 	<select id="getAllMoviesSortByGcnt" resultType="com.web.seenema.movie.dto.MovieDTO">
-		SELECT * FROM movie ORDER BY gcnt DESC
+		SELECT m.id, m.title, m.rating, m.playdate, m.rcnt, m.grade, count(ml.mid) gcnt FROM movie m 
+		LEFT OUTER JOIN movielike ml ON ml.mid = m.id 
+		GROUP BY ml.mid, m.id, m.title, m.rating, m.playdate, m.rcnt, m.grade 
+		ORDER BY gcnt DESC
 	</select>
 	
 	<select id="getAllMoviesSortByGrade" resultType="com.web.seenema.movie.dto.MovieDTO">
-		SELECT * FROM movie ORDER BY grade DESC
+		SELECT id,title, rating, playdate, rcnt, gcnt, grade FROM movie ORDER BY grade DESC
 	</select>
 	
 	<select id="getLikeList" resultType="com.web.seenema.movie.dto.MovieLikeDTO">
