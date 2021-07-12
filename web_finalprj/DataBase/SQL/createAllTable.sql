@@ -196,30 +196,36 @@ COMMENT ON COLUMN account.logindate IS '회원 로그인일';
 COMMENT ON COLUMN account.expiredate IS '회원 탈퇴일';
 
 
+-- 테이블 수정 - totalpay를 통해 총 결제 금액 저장 컬럼 생성.
+-- 예매 정보에서 예매 id -> 예매번호로 변경
 -- 예매 테이블
 CREATE TABLE reservation(
-    id NUMBER,
+    id VARCHAR2(64),
     sid NUMBER,
     timeid NUMBER,
     aid NUMBER,
     rdate date DEFAULT SYSDATE,
     cdate date DEFAULT NULL,
     rcnt NUMBER DEFAULT 1,
+    totalpay NUMBER,
     payment CHAR(1)
 );
 
+ALTER TABLE reservation MODIFY id VARCHAR2(64);
 ALTER TABLE reservation ADD CONSTRAINT reservation PRIMARY KEY(sid);
 ALTER TABLE reservation ADD CONSTRAINT reservation_sid_FK FOREIGN KEY(sid) REFERENCES seat(id);
 ALTER TABLE reservation ADD CONSTRAINT reservation_timeid_FK FOREIGN KEY(timeid) REFERENCES time(id);
 ALTER TABLE reservation ADD CONSTRAINT reservation_aid_FK FOREIGN KEY(aid) REFERENCES account(id);
+ALTER TABLE reservation MODIFY totalpay CONSTRAINT reservation_totalpay_nn NOT NULL;
 
-COMMENT ON COLUMN reservation.id IS '예매 식별번호';
+COMMENT ON COLUMN reservation.id IS '예매 번호';
 COMMENT ON COLUMN reservation.sid IS '예매 좌석 식별번호';
 COMMENT ON COLUMN reservation.timeid IS '예매 시간 식별번호';
 COMMENT ON COLUMN reservation.aid IS '예매자 식별번호';
 COMMENT ON COLUMN reservation.rdate IS '예매 일시';
 COMMENT ON COLUMN reservation.cdate IS '취소 일시';
 COMMENT ON COLUMN reservation.rcnt IS '예매 인원';
+COMMENT ON COLUMN reservation.totalpay IS '결제 금액';
 COMMENT ON COLUMN reservation.payment IS '결제 방법';
 
 

@@ -23,7 +23,7 @@ div.left-menu > ul {
 }
 
 div.left-menu > ul > li {
-	width: 100%; height: 20%;
+	width: 100%; height: 120px;
 	border: 1px solid #D5D5D5;
 	outline: none;
 	background-color: #353535;
@@ -31,7 +31,7 @@ div.left-menu > ul > li {
 }
 
 div.left-menu > ul > li.active {
-	width: 100%; height: 20%;
+	width: 100%; height: 120px;
 	border: 1px solid #D5D5D5;
 	background-color: #4374D9;
 	color: white; font-weight: bolder;

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.reserve.dto.BranchDTO;
 import com.web.seenema.reserve.dto.BranchTheaterDTO;
+import com.web.seenema.reserve.dto.ReservationDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
 import com.web.seenema.reserve.dto.TableRstepDTO;
@@ -70,6 +71,21 @@ public class ReserveServiceImpl implements ReserveService {
 	public List<BranchTheaterDTO> getmovieTheater(int tid) throws Exception {
 		List<BranchTheaterDTO> data = dao.selectMovieTheater(tid);
 		return data;
+	}
+
+	@Override
+	public List<SeatDTO> checkseat(int tid, char row, int col) throws Exception {
+		return dao.selectSeat(tid, row, col);
+	}
+
+	@Override
+	public int updateSeat(int tid, char row, int col) {
+		return dao.updateSeat(tid, row, col);
+	}
+
+	@Override
+	public int insertReserve(ReservationDTO resDTO) {
+		return dao.insertReserve(resDTO);
 	}
 	
 }

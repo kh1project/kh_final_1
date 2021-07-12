@@ -21,6 +21,13 @@
 	<section class="reserve-frame pt-5">
 		<div class="reserve-window">
 			<%@ include file="../module/ReserveFrame.jsp" %>
+			
+			<div class="main-frame">
+				<div class="seat-info">
+					<label class="info-title">예매 정보 확인</label>
+				</div>
+				<h1>${orderid }</h1>
+			</div>
 		</div>
 	</section>
 	
