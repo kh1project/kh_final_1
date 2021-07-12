@@ -59,7 +59,9 @@ public class ReviewController {
 	public ModelAndView reviewDetail(int rid) throws Exception {
 		ModelAndView mv = new ModelAndView("review/reviewdetail");
 		ReviewDTO data = review.reviewOne(rid);
+		List<ReviewPostDTO> contlist = review.MergePost(data.getContents());
 		mv.addObject("data", data);
+		mv.addObject("contlist", contlist);
 		
 		return mv;
 	}

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="review_header.jsp"></jsp:include>
-		<div><h1>무비포스트</h1><a href="<%=request.getContextPath() %>/review/add">무비포스트 작성</a></div>
+		<div><h1>영화 리뷰</h1><a href="<%=request.getContextPath() %>/review/add">영화 리뷰 작성</a></div>
 		<section>
 			<div class="row row-cols-lg-6">
 				<div class="col">
@@ -21,7 +21,7 @@
 					<div class="p-3 border bg-light">최신 영화 순위5</div>
 				</div>
 				<div class="col">
-					<div class="p-3 border bg-light">내가 등록한 포스트 보기(회원정보로연결)</div>
+					<div class="p-3 border bg-light">내가 등록한 리뷰 보기(회원정보로연결)</div>
 				</div>
 			</div>
 		</section>
