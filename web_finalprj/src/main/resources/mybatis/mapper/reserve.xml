@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="reserveMapper">
+	<insert id="reserveInsert" parameterType="reservation">
+	  	INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+			VALUES(#{id}, #{sid}, #{timeid}, ${aid}, #{rdate}, ${rcnt}, #{totalpay}, #{payment})
+	</insert>
+
+	<update id="updateSeat" parameterType="seat">
+	    UPDATE seat
+	       SET reserved = 'y'
+	     WHERE tid = #{tid}
+	       AND seatrow = #{row}
+	       AND seatcol = #{col}
+	</update>
+
+	<select id="checkseat" parameterType="HashMap" resultType="seat">
+    	SELECT reserved FROM seat WHERE tid = #{tid} AND seatrow = #{row} AND seatcol = #{col}
+	</select>
+	
+	<select id="seatcnt" resultType="_int">
+    	SELECT count(*) FROM seat WHERE tid = #{tid}
+	</select>
+	
+	<select id="s_leftcnt" resultType="_int">
+		SELECT count(*) FROM seat WHERE tid = #{tid} AND reserved = 'n'
+	</select>
+	
+	<select id="seat_all" resultType="seat">
+	    SELECT * FROM seat WHERE tid = #{tid} ORDER BY id
+	</select>
+	
+	<select id="pay_all" resultType="_int">
+	    SELECT price FROM pay WHERE id = #{id}
+	</select>
+	
+	<select id="search_Branch" resultType="BranchTheater">
+		SELECT mt.id AS tid
+			 , b.location
+			 , b.name AS bname
+			 , t.name AS tname
+		  FROM movie_theater mt
+		  JOIN theater t
+		    ON mt.tid = t.id
+		  JOIN branch b
+		    ON t.bid = b.id
+		 WHERE mt.id = #{tid}
+	</select>
+	
+	<!-- 지역 선택시 지점리스트 -->
+	<select id="branchlist" parameterType="String" resultType="branch">
+		SELECT * FROM branch WHERE location = #{location} ORDER BY name
+	</select>
+	
+	<!-- 지점 선택시 상영중인 영화 전체 리스트 -->
+	<select id="movieAll_list" parameterType="HashMap" resultType="movie">
+		SELECT DISTINCT 
+			a.mid,
+			b.id,
+			b.rating,
+			b.title,
+			c.bid,
+			d.location,
+			d.name
+		FROM movie_theater a
+		JOIN movie b
+		ON a.mid = b.id
+		JOIN theater c
+		ON a.tid = c.id
+		JOIN branch d
+		ON c.bid = d.id
+		WHERE d.location = #{location} AND d.name = #{name}
+	</select>
+	
+	<select id="timelist" parameterType="HashMap" resultType="time">
+		SELECT
+		    m.id,
+		    m.playdate,
+		    th.bid,
+		    th.name,
+		    mt.mid,
+		    mt.tid,
+		    mt.enddate,
+		    t.starttime,
+		    t.endtime,
+			(SELECT count(*) FROM seat s WHERE s.tid = th.id) as seat_count,
+			(SELECT count(*) FROM seat s WHERE s.reserved = 'y') as seat_reserved
+		FROM time t
+		JOIN movie_theater mt
+		ON t.mtid = mt.id
+		JOIN movie m
+		ON mt.mid = m.id
+		JOIN theater th
+		ON mt.tid = th.id
+		JOIN branch b
+		ON th.bid = b.id
+		WHERE b.location = #{location} AND b.name = #{name}
+			AND m.rating = #{rating} AND m.title = #{title} AND TO_CHAR(t.moviedate, 'yyyy-mm-dd') = #{moviedate}
+	</select>
+	
+</mapper>
