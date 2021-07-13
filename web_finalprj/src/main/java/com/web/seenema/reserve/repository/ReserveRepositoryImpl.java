@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.reserve.dto.BranchDTO;
 import com.web.seenema.reserve.dto.BranchTheaterDTO;
+import com.web.seenema.reserve.dto.ReservationDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
 import com.web.seenema.reserve.dto.TableRstepDTO;
@@ -114,6 +115,22 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 		List<BranchTheaterDTO> mtlist = sqlSession.selectList("reserveMapper.search_Branch", tid);
 		
 		return mtlist;
+	}
+
+	@Override
+	public List<SeatDTO> selectSeat(SeatDTO seatdto) {
+		return sqlSession.selectList("reserveMapper.checkseat", seatdto);
+	}
+
+	@Override
+	public int updateSeat(SeatDTO seatdto) {
+		return sqlSession.update("reserveMapper.updateSeat", seatdto);
+	}
+
+	@Override
+	public int insertReserve(ReservationDTO resdto) {
+		System.out.println(resdto.getSid());
+		return sqlSession.insert("reserveMapper.reserveInsert", resdto);
 	}
 
 }

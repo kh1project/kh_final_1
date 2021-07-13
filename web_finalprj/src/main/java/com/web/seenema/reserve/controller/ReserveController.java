@@ -64,10 +64,7 @@ public class ReserveController {
 		int tid = 1; // 임시 상영관 번호
 		int mid = 1; // 임시 영화 번호
 		
-		MovieTheaterDTO mtdto = new MovieTheaterDTO();
 		// 상영관 정보 가져오기.
-		mtdto.setTid(tid);
-		
 		List<SeatDTO> seatlists = ress.seatList(tid);
 		Map<String, Object> seatcnt = ress.seatcntlist(tid);
 		

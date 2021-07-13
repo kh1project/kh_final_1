@@ -6,6 +6,7 @@ import java.util.Map;
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.reserve.dto.BranchDTO;
 import com.web.seenema.reserve.dto.BranchTheaterDTO;
+import com.web.seenema.reserve.dto.ReservationDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
 import com.web.seenema.reserve.dto.TableRstepDTO;
@@ -27,4 +28,7 @@ public interface ReserveRepository {
 	public List<SeatDTO> selectSeatAll(int tid) throws Exception;
 	public int searchprice(int id) throws Exception;
 	public List<BranchTheaterDTO> selectMovieTheater(int tid) throws Exception;
+	public List<SeatDTO> selectSeat(SeatDTO seatdto);
+	public int updateSeat(SeatDTO seatdto);
+	public int insertReserve(ReservationDTO resdto);
 }
