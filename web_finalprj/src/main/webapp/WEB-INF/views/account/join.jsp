@@ -9,7 +9,7 @@
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/common.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/resources/static/js/common.js"></script>
 
 <c:url var="email_check" value="/accountAjax/email" />
 <c:url var="nickname_check" value="/accountAjax/nickname" />
