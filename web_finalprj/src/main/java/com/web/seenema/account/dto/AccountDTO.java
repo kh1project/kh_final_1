@@ -96,12 +96,8 @@ public class AccountDTO {
 	
 	@Override
 	public String toString() {
-		String str = "";
-		str += "Account: {id: " + id + ", username: " + username
-			+  ", nickname: " + nickname + ", email: " + email
-			+  ", joindate: " + joindate
-			+  "}";
-		return str;
+		return "AccountDTO [id=" + id + ", username=" + username
+				+ ", nickname=" + nickname + ", email=" + email + "]";
 	}
 
 }

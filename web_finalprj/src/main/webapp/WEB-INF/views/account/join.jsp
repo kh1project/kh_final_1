@@ -11,8 +11,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/resources/js/common.js"></script>
 
-<c:url var="email_check" value="/ajax/account/email" />
-<c:url var="nickname_check" value="/ajax/account/nickname" />
+<c:url var="email_check" value="/accountAjax/email" />
+<c:url var="nickname_check" value="/accountAjax/nickname" />
 	
 <script type="text/javascript">
 	function emailCheck() {
@@ -38,6 +38,7 @@
 			}
 		});
 	}
+	<!-- 
 		var email_check = document.getElementById("email_check_res").innerText;
 		if(email_check == "" || email_check == undefined) {
 			alert("아이디 중복확인을 먼저 진행하세요.");
@@ -54,7 +55,8 @@
 			alert("패스워드를 입력하세요.")
 			password.focus();
 			return;
-		}	
+		}
+		-->
 		
 	function send() {
 		var username = document.getElementById("id_username");
@@ -69,9 +71,27 @@
 			alert("닉네임을 입력하세요.");
 			document.getElementById("id_nickname").focus();
 			return;
-		} else if(nickname_check != "사용 가능!!!") {
+		} else if(nickname_check != "사용 가능한 닉네임입니다.") {
 			alert("해당 닉네임으로는 가입을 할 수 없습니다.");
 			document.getElementById("id_nickname").focus();
+			return;
+		}
+		
+		var email_check = document.getElementById("email_check_res").innerText;
+		if(email_check == "" || email_check == undefined) {
+			alert("아이디 중복확인을 먼저 진행하세요.");
+			document.getElementById("id_email").focus();
+			return;
+		} else if(email_check != "사용 가능한 아이디입니다.") {
+			alert("해당 아이디로는 가입을 할 수 없습니다.");
+			document.getElementById("id_email").focus();
+			return;
+		}	
+		
+		var password = document.getElementById("id_password");
+		if(password.value == "" || password.value == undefined) {
+			alert("패스워드를 입력하세요.")
+			password.focus();
 			return;
 		}
 		
@@ -91,6 +111,7 @@
 		
 		document.account_form.submit();
 	}
+	
 </script>
 
 <style>
@@ -193,24 +214,6 @@ select {
     font-family: Dotum,'돋움',Helvetica,sans-serif;
 }
 
-/* 에러메세지 */
-
-.error_next_box {
-    margin-top: 9px;
-    font-size: 12px;
-    color: red;    
-    display: none;
-}
-
-#alertTxt {
-    position: absolute;
-    top: 19px;
-    right: 38px;
-    font-size: 12px;
-    color: red;
-    display: none;
-}
-
 .btn_area {
     margin: 30px 0 91px;
 }
@@ -267,7 +270,6 @@ select {
                         <input type="text" id="id_email" class="int" maxlength="20" name="email" required>
                         <span class="step_url">@seenema.com</span>
                     </span>
-                    <span class="error_next_box"></span>
 						<button type="button" onclick="emailCheck();">중복확인</button>
 						<label id="email_check_res"></label>
                 </div>
@@ -277,37 +279,35 @@ select {
                     <h3 class="join_title"><label for="id_password">비밀번호</label></h3>
                     <span class="box int_pass">
                         <input type="password" id="id_password" class="int" maxlength="20" name="password" required>
-                        <span id="alertTxt">사용불가</span>
                     </span>
-                    <span class="error_next_box"></span>
                 </div>
 
-                <!-- PW2 -->
+                <!-- PW2 
                 <div>
                     <h3 class="join_title"><label for="id_password2">비밀번호 재확인</label></h3>
                     <span class="box int_pass_check">
                         <input type="password" id="id_password2" class="int" maxlength="20" name="password" required>
                     </span>
-                    <span class="error_next_box"></span>
-                </div>
+                </div>  -->
 
 
                 <div>
-                    <h3 class="join_title"><label for="name">이름</label></h3>
+                    <h3 class="join_title"><label for="id_username">이름</label></h3>
                     <span class="box int_name">
-                        <input type="text" id="id_name" class="int" name="name" maxlength="20" required>
+                        <input type="text" id="id_username" class="int" name="username" maxlength="20" required>
                     </span>
-                    <span class="error_next_box"></span>
                 </div>
                 
 
                 <div>
-                    <h3 class="join_title"><label for="name">닉네임</label></h3>
+                    <h3 class="join_title"><label for="id_nickname">닉네임</label></h3>
                     <span class="box int_name">
-                        <input type="text" id="id_nickname" class="int" name="nickname" maxlength="20" required>
+                        <input type="text" id="id_nickname" class="int" name="nickname" maxlength="20"
+                        oninput="nicknameCheck('${nickname_check }', this.value);" required>
+                        <label id="nickname_check_res"></label>
                     </span>
-						<label id="nickname_check_res"></label>
-                    <span class="error_next_box"></span>
+	                  <!--   <button type="button" onclick="nicknameCheck();">중복확인</button> 
+						<label id="nickname_check_res"></label> -->
                 </div>
 
 
@@ -327,15 +327,13 @@ select {
                             <option value="F" id="id_gender_f" name="gender">여자</option>
                         </select>                            
                     </span>
-                    <span class="error_next_box">필수 정보입니다.</span>
                 </div>
 
                 <div>
                     <h3 class="join_title"><label for="id_phone">연락처</label></h3>
                     <span class="box int_mobile">
                         <input type="tel" id="id_phone" class="int" name="phone" maxlength="16" placeholder="전화번호 입력" required>
-                    </span>
-                    <span class="error_next_box"></span>    
+                    </span>  
                 </div>
 
                 <div class="btn_area">

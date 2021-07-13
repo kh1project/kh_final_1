@@ -51,6 +51,9 @@ public class AccountRepositoryImpl implements AccountRepository {
 		int rs = sqlSession.insert("accountMapper.insertAccount", dto);
 		if(rs == 1) {
 			result = true;
+			sqlSession.commit();
+		} else {
+			sqlSession.rollback();
 		}
 		return result;
 	}
