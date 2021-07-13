@@ -12,7 +12,7 @@ dl { margin: 0px; }
 	background-color: lightgray;
 }
 .row { text-align: center; height: auto;}
-.col { text-align: center; background-color: white; }
+.col-4 { margin-bottom: 15px; }
 .list-group {
     max-height: 800px;
     margin-bottom: 10px;
