@@ -12,11 +12,17 @@ COMMENT ON COLUMN post.mergePost IS '포스트 묶음번호(리뷰게시글 고�
 COMMENT ON COLUMN post.postimg IS '포스트 이미지';
 COMMENT ON COLUMN post.posttext IS '포스트 내용';
 
-CREATE SEQUENCE post_seq;
-CREATE SEQUENCE merge_seq;
 DROP SEQUENCE merge_seq;
 DROP SEQUENCE post_seq;
+CREATE SEQUENCE post_seq;
+CREATE SEQUENCE merge_seq;
 
 SELECT * FROM post;
-DELETE FROM post WHERE id  <= 30;
+DELETE FROM post WHERE id  <= 200;
+SELECT mergePost FROM post WHERE id <= 30;
+
+merge_seq.CURRVAL;
+
+
+
 DROP TABLE post;

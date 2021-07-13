@@ -1,17 +1,18 @@
 package com.web.seenema.review.dto;
 
-import java.util.*;
+import java.util.Date;
 
-public class ReviewSimpleDTO {
+public class ReviewListDTO {
 	private int id;
-    private int mid;    
-    private int aid;    
-    private String nickname;    
-    private String title;    
-    private String contents;    
-    private int gcnt;    
-    private int bcnt;    
-    private Date cdate;    
+	private int aid;
+	private String nickname;
+	private int mid;
+	private String title;
+	private String imgurl;
+	private String contents;
+	private Date cdate;   
+    private int gcnt;  
+    private int bcnt;
     private int commcnt;
     
 	public int getId() {
@@ -19,12 +20,6 @@ public class ReviewSimpleDTO {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getMid() {
-		return mid;
-	}
-	public void setMid(int mid) {
-		this.mid = mid;
 	}
 	public int getAid() {
 		return aid;
@@ -38,17 +33,35 @@ public class ReviewSimpleDTO {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
+	public int getMid() {
+		return mid;
+	}
+	public void setMid(int mid) {
+		this.mid = mid;
+	}
 	public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public String getImgurl() {
+		return imgurl;
+	}
+	public void setImgurl(String imgurl) {
+		this.imgurl = imgurl;
+	}
 	public String getContents() {
 		return contents;
 	}
 	public void setContents(String contents) {
 		this.contents = contents;
+	}
+	public Date getCdate() {
+		return cdate;
+	}
+	public void setCdate(Date cdate) {
+		this.cdate = cdate;
 	}
 	public int getGcnt() {
 		return gcnt;
@@ -62,23 +75,15 @@ public class ReviewSimpleDTO {
 	public void setBcnt(int bcnt) {
 		this.bcnt = bcnt;
 	}
-	public Date getCdate() {
-		return cdate;
-	}
-	public void setCdate(Date cdate) {
-		this.cdate = cdate;
-	}
 	public int getCommcnt() {
 		return commcnt;
 	}
 	public void setCommcnt(int commcnt) {
 		this.commcnt = commcnt;
 	}
-	
 	@Override
 	public String toString() {
-		return "ReviewSimpleDTO [id=" + id + ", mid=" + mid + ", aid=" + aid + ", nickname=" + nickname + ", title="
-				+ title + ", contents=" + contents + ", gcnt=" + gcnt + ", bcnt=" + bcnt + ", cdate=" + cdate
-				+ ", commcnt=" + commcnt + "]";
+		return "ReviewListDTO [id=" + id + ", aid=" + aid + ", nickname=" + nickname + ", mid=" + mid + ", title="
+				+ title + ", imgurl=" + imgurl + ", contents=" + contents + ", cdate=" + cdate + "]";
 	}
 }

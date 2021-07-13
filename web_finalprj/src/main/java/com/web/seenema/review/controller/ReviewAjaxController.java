@@ -46,40 +46,45 @@ public class ReviewAjaxController {
 	
 	@RequestMapping(value = "/addstep2", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public List<Integer> addstep2(@RequestParam String jsonData) throws Exception {
+	public int addstep2(@RequestParam String jsonData) throws Exception {
 		
 		Gson gson = new Gson();
 		Type type = new TypeToken<ArrayList<Map<String, String>>>() {}.getType();
 		ArrayList<Map<String, String>> postlist = gson.fromJson(jsonData, type);
 		
-		List<Integer> mergePost = review.addPost(postlist);
-		//여기서 받은 값을 ReviewController의 /add mothod post로 넘겨줘야함. 우선 다시 ajax로 반환.
-		return mergePost;
+		int mergeId = review.addPost(postlist);
+		return mergeId;
 	}
 	
-	@RequestMapping(value = "/ex13")
-	public ModelAndView ex3() {
-		ModelAndView mv = new ModelAndView("views/ex3");
-		mv.addObject("", "");
+	@RequestMapping(value = "/updatestep", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public int updatestep(@RequestParam String jsonData, @RequestParam String existingCont, @RequestParam String boardId) throws Exception {
 		
-		return mv;
-	}
-	
-	@RequestMapping(value = "/ex14")
-	public ModelAndView ex4() {
-		ModelAndView mv = new ModelAndView("views/ex4");
-		mv.addObject("", "");
+		Gson gson = new Gson();
+		Type type = new TypeToken<ArrayList<Map<String, String>>>() {}.getType();
+		ArrayList<Map<String, String>> postlist = gson.fromJson(jsonData, type);
 		
-		return mv;
+		for(int i = 0; i < postlist.size(); i++) {
+			System.out.println("[AjaxController] : " + i + "번째 이미지 : " + postlist.get(i).get("postimg"));
+			System.out.println("[AjaxController] : " + i + "번째 텍스트 : " + postlist.get(i).get("posttext"));
+		}
+		int mergeId = review.updatePost(postlist, existingCont, boardId);
+		System.out.println("포스트 다 수정된 후 mergeId : " + mergeId);
+		return mergeId;
 	}
 	
-	@RequestMapping(value = "/ex5")
-	public ModelAndView ex5() {
-		ModelAndView mv = new ModelAndView("views/ex5");
-		mv.addObject("", "");
-		
-		return mv;
+	@RequestMapping(value = "/upGcnt", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public int upGcnt(@RequestParam int id) throws Exception {
+		int gval = review.updateGcnt(id);
+		return gval;
 	}
 	
+	@RequestMapping(value = "/upBcnt", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public int upBcnt(@RequestParam int id) throws Exception {
+		int bval = review.updateBcnt(id);
+		return bval;
+	}
 }
 

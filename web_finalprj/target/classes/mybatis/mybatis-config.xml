@@ -21,5 +21,9 @@
 		<typeAlias type="com.web.seenema.line.dto.LineAddDTO" alias="lineAddDTO"></typeAlias>
 		<typeAlias type="com.web.seenema.review.dto.ReviewPostDTO" alias="reviewpost"></typeAlias>
 		<typeAlias type="com.web.seenema.account.dto.AccountDTO" alias="account"></typeAlias>
+		<typeAlias type="com.web.seenema.review.dto.ReviewAddDTO" alias="reviewadd"></typeAlias>
+		<typeAlias type="com.web.seenema.review.dto.ReviewSimpleDTO" alias="reviewsimple"></typeAlias>
+		<typeAlias type="com.web.seenema.review.dto.ReviewListDTO" alias="reviewlist"></typeAlias>
+		<typeAlias type="com.web.seenema.review.dto.ReviewDTO" alias="review"></typeAlias>
 	</typeAliases>
 </configuration>
