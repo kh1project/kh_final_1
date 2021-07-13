@@ -21,7 +21,8 @@ public interface ReserveService {
 	public int totalprice(RstepDTO dto) throws Exception;
 	public int getprice(int id) throws Exception;
 	public List<BranchTheaterDTO> getmovieTheater(int tid) throws Exception;
-	public List<SeatDTO> checkseat(int tid, char row, int col) throws Exception;
-	public int updateSeat(int tid, char row, int col);
-	public int insertReserve(ReservationDTO resDTO);
+	public List<SeatDTO> checkseat(SeatDTO seatdto) throws Exception;
+	public int updateSeat(SeatDTO seatdto) throws Exception;
+	public int insertReserve(ReservationDTO resDTO) throws Exception;
+	public int getSeatid(String string) throws Exception;
 }

@@ -33,6 +33,7 @@ import com.web.seenema.account.dto.AccountDTO;
 import com.web.seenema.account.service.AccountService;
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.service.MovieService;
+import com.web.seenema.pay.dto.PaymentDTO;
 import com.web.seenema.reserve.dto.BranchTheaterDTO;
 import com.web.seenema.reserve.dto.ReservationDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
@@ -52,25 +53,13 @@ public class KakaoPayController {
 	private AccountService account;
 	
 	@RequestMapping(value = "",  method= RequestMethod.POST)
-	public String payment(
-			@RequestParam String movieid, // 영화 아이디
-			@RequestParam String movie_theater, // 지점-상영관 아이디
-			@RequestParam String peple, // 인원
-			@RequestParam String seat, // 좌석
-			@RequestParam String total, // 가격
-			@RequestParam String methodPay, // 결제 수단
-			HttpServletRequest req
-			) throws Exception {
+	public String payment(HttpServletRequest req,
+			Model m, @ModelAttribute PaymentDTO paydto) throws Exception {
 		String forward = "";
 		// 주문자가 결제 요청한 상품의 정보를 확인 후 카카오페이 서버에 상품관련 결제준비 정보 전송
-		
 		HttpSession session = req.getSession();
 		
 		// 상품 정보를 확인하기 위한 코드 작성 시작
-		int mid = Integer.parseInt(movieid);
-		int mtid = Integer.parseInt(movie_theater);
-		List<BranchTheaterDTO> btlist = ress.getmovieTheater(mtid);
-		List<MovieDTO> moviedata = movies.getMovies(mid);
 		
 		Date today = new Date();
 		SimpleDateFormat rdate = new SimpleDateFormat("yy/MM/dd");
@@ -80,26 +69,20 @@ public class KakaoPayController {
 		// accountid 가져오기
 		AccountDTO adto = (AccountDTO)session.getAttribute("account");
 		
-		String[] seats = new String[5];
 		
 		// 예매번호 : 년월일 + 시간(아직 시간 정보 가져오지 않음) + 영화정보 + 좌석정보
-		if(Integer.parseInt(peple) > 1) {
-			seats = seat.split(", ");
-			orderid = date.format(today) + mid + seats[1];
-		} else {
-			orderid = date.format(today) + mid + seat;
-		}
+		
 		// 상품 정보를 확인하기 위한 코드 작성 끝
 		
 		// 카카오페이 서버 결제준비 정보 전송 시작
 		MultiValueMap<String, String> param = new LinkedMultiValueMap<String, String>();
 		param.add("cid", "TC0ONETIME");
-		param.add("partner_order_id", orderid);
-		param.add("partner_user_id", adto.getNickname());
-		param.add("item_name", moviedata.get(0).getTitle());
+		param.add("partner_order_id", "1");
+		param.add("partner_user_id", "admin");
+		param.add("item_name", "test");
 		param.add("quantity", "1");
-		param.add("total_amount", total);
-		int tax_free = (Integer.parseInt(total) / 10 * 9);
+		param.add("total_amount", "16000");
+		int tax_free = (Integer.parseInt("16000") / 10 * 9);
 		param.add("tax_free_amount", Integer.toString(tax_free));
 		param.add("approval_url", "http://localhost/seenema/kakaopay/success");
 		param.add("cancel_url", "http://localhost/seenema/kakaopay/cancel");
@@ -131,13 +114,14 @@ public class KakaoPayController {
 		// 임시로 작성한 코드(WAS 전역 메모리에 저장) 반드시 데이터베이스로 저장하도록 해야함.
 		req.getServletContext().setAttribute("tid", tid);
 		req.getServletContext().setAttribute("partner_order_id", orderid);
-		req.getServletContext().setAttribute("partner_user_id", adto.getNickname());
-		req.getServletContext().setAttribute("moviedata", moviedata);
-		req.getServletContext().setAttribute("btlist", btlist);
-		req.getServletContext().setAttribute("seat", seat);
-		req.getServletContext().setAttribute("peple", peple);
-		req.getServletContext().setAttribute("totalpay", total);
-		req.getServletContext().setAttribute("methodPay", methodPay);
+		req.getServletContext().setAttribute("partner_user_id", "admin");
+		
+		ReservationDTO resdto = new ReservationDTO();
+		resdto.setId(orderid);
+		resdto.setAid(1);
+		resdto.setSid(2);
+		
+		m.addAttribute("", "");
 		
 		forward = "redirect:" + redirect_pc;
 		// 카카오페이 서버 결제준비 정보 전송 끝
@@ -151,14 +135,10 @@ public class KakaoPayController {
 		String forward = "";
 		HttpSession session = req.getSession();
 		
-		// 예매저장에 필요한 정보.
-		String rid = (String)req.getServletContext().getAttribute("partner_order_id");
-		List<MovieDTO> moviedata = (List<MovieDTO>) req.getServletContext().getAttribute("moviedata");
-		List<BranchTheaterDTO> btlist = (List<BranchTheaterDTO>)req.getServletContext().getAttribute("btlist");
-		String seat = (String)req.getServletContext().getAttribute("seat");
-		String peple = (String)req.getServletContext().getAttribute("peple");
-		String totalpay = (String)req.getServletContext().getAttribute("totalpay");
-		String methodPay = (String)req.getServletContext().getAttribute("methodPay");
+		System.out.println(resDTO.getId());
+		System.out.println(resDTO.getAid());
+		System.out.println(resDTO.getPayment());
+		System.out.println(resDTO.getSid());
 		
 		// 좌석 정보
 		String[] seats = new String[5];
@@ -166,54 +146,19 @@ public class KakaoPayController {
 		int col = 0;
 		
 		int seatRes = 0;
-		int reserveRes = 0;
+		int insertres = 0;
 		
 		// accountid 가져오기
 		AccountDTO adto = (AccountDTO)session.getAttribute("account");
 		
 		// 예매 하기.
-		if(Integer.parseInt(peple) > 1) {
-			seats = seat.split(", ");
-			for(int i = 0; i < seats.length; i++) {
-				String s = seats[i];
-				row = s.charAt(0);
-				col = Integer.parseInt(s.substring(1, s.length()));
-				List<SeatDTO> seatlist = ress.checkseat(btlist.get(0).getTid(), row, col);
-				if(seatlist.get(0).getReserved() == 'n') {
-					System.out.println("좌석 검색 성공");
-					seatRes = ress.updateSeat(btlist.get(0).getTid(), row, col);
-					if(seatRes == 1) {
-						System.out.println("좌석 정보 업데이트 성공");
-						
-						resDTO.setId(rid);
-						resDTO.setSid(seatlist.get(0).getId());
-						resDTO.setTimeid(1);
-						resDTO.setAid(adto.getId());
-						resDTO.setRcnt(Integer.parseInt(peple));
-						resDTO.setPayment(methodPay.charAt(0));
-						
-						reserveRes = ress.insertReserve(resDTO);
-						if(reserveRes == 1) {
-							System.out.println("예매 정보 저장 성공");
-						} else {
-							System.out.println("예매 정보 저장 실패");
-						}
-					} else {
-						System.out.println("좌석 정보 업데이트 실패");
-					}
-				} else {
-					System.out.println("좌석 검색 실패");
-				}
-			}
-		} else {
-			
-		}
+		
 		
 		MultiValueMap<String, String> param = new LinkedMultiValueMap<String, String>();
 		param.add("cid", "TC0ONETIME");
 		param.add("tid", (String)req.getServletContext().getAttribute("tid"));
-		param.add("partner_order_id", rid);
-		param.add("partner_user_id", adto.getNickname());
+		param.add("partner_order_id", "1");
+		param.add("partner_user_id", "admin");
 		param.add("pg_token", pg_token);
 		
 		RestTemplate rest = new RestTemplate();

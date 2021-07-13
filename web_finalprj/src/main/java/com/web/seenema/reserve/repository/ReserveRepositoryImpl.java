@@ -136,8 +136,9 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 	}
 
 	@Override
-	public int insertReserve(ReservationDTO resDTO) {
-		return sqlSession.insert("reserveMapper.reserveInsert", resDTO);
+	public int insertReserve(ReservationDTO resdto) {
+		System.out.println(resdto.getSid());
+		return sqlSession.insert("reserveMapper.reserveInsert", resdto);
 	}
 
 }
