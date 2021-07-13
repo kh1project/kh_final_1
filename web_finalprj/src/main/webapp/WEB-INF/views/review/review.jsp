@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <jsp:include page="review_header.jsp"></jsp:include>
 		<div><h1>영화 리뷰</h1><a href="<%=request.getContextPath() %>/review/add">영화 리뷰 작성</a></div>
 		<section>
@@ -45,28 +46,33 @@
 			    		</div>
 			    	</div>
 					<div class="row">
-						<c:forEach var="i" items="${list }" varStatus="loop">
-				    		<!-- 리뷰 1개 영역 START -->
-							<div class="col-md-3">
-								<div class="card mb-3 shadow-sm rlist">
-									<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><div class="card-image"><img src="${i.getImgurl() }"></div></a>
-									<div class="card-body">
-										<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><small class="text-muted">${i.getAid() }</small></a>
-										<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><h5>${i.getTitle() }</h5></a>
-										<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><p>${i.getContents() }</p></a>
-										<div class="d-flex justify-content-between align-items-center">
-											<div class="btn-group">
-												<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-thumbs-up fa-fw"></i>${i.getGcnt() }</button>
-												<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-thumbs-down fa-fw"></i>${i.getBcnt() }</button>
-												<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-comment-alt fa-fw"></i>${i.getCommcnt() }</button>
+						<c:if test="${list == null}">
+							<h1>리뷰 리스트가 존재하지 않습니다.</h1>
+						</c:if>
+						<c:if test="${list != null }">
+							<c:forEach var="i" items="${list }" varStatus="loop">
+						   		<!-- 리뷰 1개 영역 START -->
+								<div class="col-md-3">
+									<div class="card mb-3 shadow-sm rlist">
+										<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><div class="card-image"><img src="${i.getImgurl() }"></div></a>
+										<div class="card-body">
+											<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><small class="text-muted">${i.getAid() }</small></a>
+											<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><h5>${i.getTitle() }</h5></a>
+											<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><p>${i.getContents() }</p></a>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="btn-group">
+													<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-thumbs-up fa-fw"></i>${i.getGcnt() }</button>
+													<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-thumbs-down fa-fw"></i>${i.getBcnt() }</button>
+													<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-comment-alt fa-fw"></i>${i.getCommcnt() }</button>
+												</div>
+												<small class="text-muted">9 mins</small>
 											</div>
-											<small class="text-muted">9 mins</small>
 										</div>
 									</div>
 								</div>
-							</div>
-							<!-- 리뷰 1개 영역 END -->
-						</c:forEach>
+								<!-- 리뷰 1개 영역 END -->
+							</c:forEach>
+						</c:if>
 					</div>
 				</div>
 			    <div class="tab-pane" id="reviewtab2">

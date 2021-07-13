@@ -40,30 +40,39 @@ public class ReviewController {
 	public ModelAndView review() throws Exception {
 		ModelAndView mv = new ModelAndView("review/review");
 		List<ReviewListDTO> list = review.reviewList();
-		for(int i = 0; i < list.size(); i++) {
-			List<String> firstPost = review.firstContent(list.get(i).getContents());
-			if(firstPost.get(0) == "-1") {
-				System.out.println("리뷰 존재하지 않음");
-			} else {
-				list.get(i).setContents(firstPost.get(0));
-				list.get(i).setImgurl(firstPost.get(1));
+		if(list.size() > 0) {
+			for(int i = 0; i < list.size(); i++) {
+				List<String> firstPost = review.firstContent(list.get(i).getContents());
+				if(firstPost.get(0) == "-1") {
+					System.out.println("리뷰 존재하지 않음");
+				} else {
+					list.get(i).setContents(firstPost.get(0));
+					list.get(i).setImgurl(firstPost.get(1));
+				}
 			}
+			mv.addObject("list", list);
+		} else {
+			mv.addObject("list", null);
 		}
-		System.out.println(list.get(0));
-		mv.addObject("list", list);
 		
 		return mv;
 	}
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public ModelAndView reviewDetail(int rid) throws Exception {
-		ModelAndView mv = new ModelAndView("review/reviewdetail");
-		ReviewDTO data = review.reviewOne(rid);
-		List<ReviewPostDTO> contlist = review.MergePost(data.getContents());
-		mv.addObject("data", data);
-		mv.addObject("contlist", contlist);
+	public String reviewDetail(Model m, int rid) throws Exception {
+		String forward = "";
 		
-		return mv;
+		ReviewDTO data = review.reviewOne(rid);
+		if(data != null) {
+			List<ReviewPostDTO> contlist = review.MergePost(data.getContents());
+			m.addAttribute("data", data);
+			m.addAttribute("contlist", contlist);
+			forward = "review/reviewdetail";
+		} else {
+			forward = "redirect:/review";
+		}
+		
+		return forward;
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -105,14 +114,19 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public ModelAndView reviewUpdateGet(Model m, int rid) throws Exception {
-		ModelAndView mv = new ModelAndView("review/reviewupdate");
+	public String reviewUpdateGet(Model m, int rid) throws Exception {
+		String forward = "";
 		ReviewDTO data = review.reviewOne(rid);
-		List<ReviewPostDTO> contlist = review.MergePost(data.getContents());
-		mv.addObject("data", data);
-		mv.addObject("contlist", contlist);
+		if(data != null) {
+			List<ReviewPostDTO> contlist = review.MergePost(data.getContents());
+			m.addAttribute("data", data);
+			m.addAttribute("contlist", contlist);
+			forward = "review/reviewupdate";
+		} else {
+			forward = "redirect:/review";
+		}
 		
-		return mv;
+		return forward;
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -143,21 +157,36 @@ public class ReviewController {
 			System.out.println("update 성공");
 			forward = "redirect:/review/detail?rid=" + dto.getId();
 		} else {
-			// 실패 했을 때 수정 페이지 재전송
+			// 실패 했을 때
 			System.out.println("update 실패");
 			m.addAttribute("data", dto);
 			m.addAttribute(forward);
-			forward = "redirect:/review";
+			forward = "redirect:/review/update?rid=" + dto.getId();
 		}
 		return forward;
 	}
 	
 	@RequestMapping(value = "/delete")
-	public ModelAndView reviewDelete(int rid) {
+	public String reviewDelete(Model m, int rid) throws Exception {
+		String forward = "";
+		
+		int aid = 1; //session에서 aid 받아와야함. 임시데이터.
+		
 		ModelAndView mv = new ModelAndView("review/review.jsp");
+		
+		boolean result = review.deleteReview(rid);
+		if(result) {
+			//삭제 성공시 리뷰 리스트로 이동
+			System.out.println("delete 성공");
+			forward = "redirect:/review";
+		} else {
+			System.out.println("delete 실패");
+			forward = "redirect:/review/detail?rid=" + rid;
+		}
+		
 		mv.addObject("", "");
 		
-		return mv;
+		return forward;
 	}
 	
 }

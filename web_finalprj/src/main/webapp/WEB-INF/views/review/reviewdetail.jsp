@@ -4,7 +4,7 @@
 <jsp:include page="review_header.jsp"></jsp:include>
 	<div class="page-title">영화 리뷰 상세</div>
 	<h3>${data.getTitle() }</h3>
-	<p>작성자 : ${data.getAid() }<a href="<%=request.getContextPath() %>/review/update?rid=${data.getId() }">수정</a><a href="<%=request.getContextPath() %>/review/delete?rid=${data.getId() }">삭제</a></p>
+	<p>작성자 : ${data.getAid() }<a href="<%=request.getContextPath() %>/review/update?rid=${data.getId() }">수정</a> <a href="<%=request.getContextPath() %>/review/delete?rid=${data.getId() }">삭제</a> <a href="javascript:;" onclick="history.back();">목록</a></p>
 	
 	<c:forEach var="i" items="${contlist }" varStatus="loop">
 		<div>

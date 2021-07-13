@@ -63,8 +63,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Override
 	public boolean deleteReview(int rid) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		return dto.deleteReview(rid);
 	}
 
 	@Override
@@ -126,7 +125,7 @@ public class ReviewServiceImpl implements ReviewService {
 		if(pastSize - nowSize >= 0) { loopCnt = pastSize; } else { loopCnt = nowSize; } //횟수 저장. 같거나 과거가 더 많으면 과거사이즈, 현재가 더 많으면 현재사이즈.
 		System.out.println("loopCnt" + loopCnt);
 		
-		//포스트가 DB에 들어가는 순서가 if 문 순서대로 가고 있는 것 같음.. 해결 필요!
+		//포스트가 DB에 들어가는 순서가 포스트 순서가 아님.. 해결 필요!
 		//기존 저장되어있던 머지아이디를 가지고와서, 그것과 이번 수정한 파일을 비교해본다.
 		for(int i = 0; i < loopCnt; i++) { //과거,현재 중 사이즈가 더 큰 것만큼 반복.
 			System.out.println("===========================================");
@@ -135,7 +134,6 @@ public class ReviewServiceImpl implements ReviewService {
 			ReviewPostDTO ppost = null;
 			ReviewPostDTO npost = null;
 			if(i < pastSize) { //반복횟수가 과거사이즈보다 크거나 같은 경우에만 과거 포스트 DTO 생성.
-				//과거포스트 2 - 현재 0 = ㅇㅇ, 과거포스트 2 - 현재 1 = ㅇㅇ, 
 				//(현재 갯수가 더 많은 경우)
 				System.out.println("현재 카운트 i " + i + " < 과거 사이즈 pastSize " + pastSize);
 				ppost = existingList.get(i);

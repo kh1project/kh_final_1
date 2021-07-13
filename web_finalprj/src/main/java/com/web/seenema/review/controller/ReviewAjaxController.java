@@ -73,21 +73,5 @@ public class ReviewAjaxController {
 		return mergeId;
 	}
 	
-	@RequestMapping(value = "/ex14")
-	public ModelAndView ex4() {
-		ModelAndView mv = new ModelAndView("views/ex4");
-		mv.addObject("", "");
-		
-		return mv;
-	}
-	
-	@RequestMapping(value = "/ex5")
-	public ModelAndView ex5() {
-		ModelAndView mv = new ModelAndView("views/ex5");
-		mv.addObject("", "");
-		
-		return mv;
-	}
-	
 }
 

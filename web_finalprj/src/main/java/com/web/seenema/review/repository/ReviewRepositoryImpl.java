@@ -73,8 +73,12 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 
 	@Override
 	public boolean deleteReview(int rid) throws Exception {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = false;
+		int rs = sqlSession.update("reviewMapper.deleteReview", rid);
+		if(rs == 1) {
+			result = true;
+		}
+		return result;
 	}
 	
 	@Override
