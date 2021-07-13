@@ -153,7 +153,6 @@ public class KakaoPayController {
 		
 		// 예매 하기.
 		
-		
 		MultiValueMap<String, String> param = new LinkedMultiValueMap<String, String>();
 		param.add("cid", "TC0ONETIME");
 		param.add("tid", (String)req.getServletContext().getAttribute("tid"));
