@@ -118,21 +118,13 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 	}
 
 	@Override
-	public List<SeatDTO> selectSeat(int tid, char row, int col) {
-		Map<String, Object> data = new HashMap<>();
-			data.put("tid", tid);
-			data.put("row", row);
-			data.put("col", col);
-		return sqlSession.selectList("reserveMapper.checkseat", data);
+	public List<SeatDTO> selectSeat(SeatDTO seatdto) {
+		return sqlSession.selectList("reserveMapper.checkseat", seatdto);
 	}
 
 	@Override
-	public int updateSeat(int tid, char row, int col) {
-		Map<String, Object> data = new HashMap<>();
-			data.put("tid", tid);
-			data.put("row", row);
-			data.put("col", col);
-		return sqlSession.update("reserveMapper.updateSeat", data);
+	public int updateSeat(SeatDTO seatdto) {
+		return sqlSession.update("reserveMapper.updateSeat", seatdto);
 	}
 
 	@Override

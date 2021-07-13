@@ -28,7 +28,7 @@ public interface ReserveRepository {
 	public List<SeatDTO> selectSeatAll(int tid) throws Exception;
 	public int searchprice(int id) throws Exception;
 	public List<BranchTheaterDTO> selectMovieTheater(int tid) throws Exception;
-	public List<SeatDTO> selectSeat(int tid, char row, int col);
-	public int updateSeat(int tid, char row, int col);
+	public List<SeatDTO> selectSeat(SeatDTO seatdto);
+	public int updateSeat(SeatDTO seatdto);
 	public int insertReserve(ReservationDTO resdto);
 }

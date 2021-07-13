@@ -74,18 +74,24 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public List<SeatDTO> checkseat(int tid, char row, int col) throws Exception {
-		return dao.selectSeat(tid, row, col);
+	public List<SeatDTO> checkseat(SeatDTO seatdto) throws Exception {
+		return dao.selectSeat(seatdto);
 	}
 
 	@Override
-	public int updateSeat(int tid, char row, int col) {
-		return dao.updateSeat(tid, row, col);
+	public int updateSeat(SeatDTO seatdto) {
+		return dao.updateSeat(seatdto);
 	}
 
 	@Override
 	public int insertReserve(ReservationDTO resDTO) {
 		return dao.insertReserve(resDTO);
+	}
+
+	@Override
+	public int getSeatid(String string) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 }
