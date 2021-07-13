@@ -36,7 +36,7 @@
 						<div class="theater-info">
 							<div class="title-sopt">
 								<input type="hidden" class="movie-id" name="mid" value="${mid }" readonly>
-								<input type="text" class="movie-title" name="movietitle" value="${title }" readonly>
+								<input type="text" class="movie-title" name="movietitle" value="${param.title }" readonly>
 							</div>
 							<div class="screen-spot">
 								<label class="screen">Screen</label>

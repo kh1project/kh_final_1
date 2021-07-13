@@ -58,7 +58,7 @@
 			  <c:forEach var="TimeDTO" items="${timelist}" varStatus="status">
 		    	<div class="col-4">
 			    	<a class="btn" role="tab" data-toggle="tooltip" data-placement="top" title="${TimeDTO.endtime }"
-			    	  href="${location }/seats?location=${param.location }&name=${param.name }&rating=${param.rating }&title=${fn:replace(param.title, '#', '%23') }&moviedate=${param.moviedate }&starttime=${TimeDTO.starttime }&endtime=${TimeDTO.endtime }">
+			    	  href="${location }/seats?location=${param.location }&name=${param.name }&rating=${param.rating }&title=${fn:replace(param.title, '#', '%23') }&moviedate=${param.moviedate }&tid=${TimeDTO.tid }&starttime=${TimeDTO.starttime }&endtime=${TimeDTO.endtime }">
 				      <dl>
 				        <dt>
 				          <strong>${TimeDTO.starttime }</strong>
@@ -80,6 +80,7 @@
 		<input type="hidden" name="name" value="${param.name }">
 		<input type="hidden" name="rating" value="${param.rating }">
         <input type="hidden" name="title" value="${param.title }">
+        <input type="hidden" name="tid" value="${param.tid }">
         <input type="hidden" name="starttime" value="${param.startime }">
         <input type="hidden" name="endtime" value="${param.endtime }">
         <input id="idnow" type="hidden" name="moviedate">
