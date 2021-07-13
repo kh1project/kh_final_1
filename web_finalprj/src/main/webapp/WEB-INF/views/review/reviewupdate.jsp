@@ -2,12 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="review_header.jsp"></jsp:include>
-		<div class="page-title">영화 리뷰 수정</div>
+	<div class="page-title"><div class="container"><h1>영화 리뷰 수정</h1></div></div>
+	<div class="container">
 		<c:url var="update" value="/review/update" />
 		<div id="update">
+		<div class="add-step-header">원하시는 예고편/스틸컷을 선택해주세요!</div>
 		<form action="${update }" name="step2form" method="post">
 			<div class="row">
-				<div class="col-6">
+				<div class="col-6 postimagewrap">
 					<div id="add-imagelist" class="row">
 					</div>
 				</div>
@@ -28,8 +30,10 @@
 					<input id="hiddenid" type="hidden" name="id" value="${data.getId() }">
 				</div>
 			</div>
-			<button id="btn_step2submit" type="button" onclick="updateReview()">수정</button>
-			<button type="button">취소</button>	
+			<div class="btn_wrap">
+				<button type="button" onclick="history.back(-1);">취소</button>
+				<button id="btn_step2submit" type="button" onclick="updateReview()">수정</button>
+			</div>
 		</form>
 	</div>
 <jsp:include page="review_update_footer.jsp"></jsp:include>

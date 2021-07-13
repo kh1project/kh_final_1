@@ -4,7 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="review_header.jsp"></jsp:include>
-		<div><h1>영화 리뷰</h1><a href="<%=request.getContextPath() %>/review/add">영화 리뷰 작성</a></div>
+		<div class="page-title"><div class="container"><h1>영화 리뷰</h1><a href="<%=request.getContextPath() %>/review/add">영화 리뷰 작성</a></div></div>
+		<div class="container">
 		<%-- 임시 주석.. <section>
 			<div class="row row-cols-lg-6">
 				<div class="col">
@@ -35,15 +36,15 @@
 			</ul>
 			<div class="tab-content">
 			    <div class="tab-pane active" id="reviewtab1">
-			    	<div>
-			    		<h5></h5>
-			    		<div>
+			    	<div class="tab-header">
+			    		<h5>전체 <span>${listsize } </span>건</h5>
+			    		<div class="tab-header-right">
 			    			<span>최신순</span>
 			    			<span>공감순</span>
-			    		</div>
-			    		<div>
-			    			<input type="text" placeholder="제목, 장르, 감독, 배우, 아이디">
-			    			<button type="button"><i class="fas fa-search fa-fw"></i></button>
+				    		<div class="tab-header-search">
+				    			<input type="text" placeholder="제목, 장르, 감독, 배우, 아이디">
+				    			<button type="button"><i class="fas fa-search fa-fw"></i></button>
+				    		</div>
 			    		</div>
 			    	</div>
 					<div class="row">

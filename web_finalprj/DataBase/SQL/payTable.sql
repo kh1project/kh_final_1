@@ -3,7 +3,6 @@ CREATE TABLE pay (
     price NUMBER
 );
 
-
 ALTER TABLE pay ADD CONSTRAINT pay_id_pk PRIMARY KEY(id);
 ALTER TABLE pay MODIFY price CONSTRAINT pay_price_nn NOT NULL;
 

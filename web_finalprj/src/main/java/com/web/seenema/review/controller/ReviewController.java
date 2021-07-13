@@ -51,6 +51,7 @@ public class ReviewController {
 				}
 			}
 			mv.addObject("list", list);
+			mv.addObject("listsize", list.size());
 		} else {
 			mv.addObject("list", null);
 		}

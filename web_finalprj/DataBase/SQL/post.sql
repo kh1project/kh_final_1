@@ -8,7 +8,7 @@ CREATE TABLE post (
 ALTER TABLE post ADD CONSTRAINT post_id_pk PRIMARY KEY(id);
 
 COMMENT ON COLUMN post.id IS '포스트 식별번호';
-COMMENT ON COLUMN post.mergePost IS '포스트 묶음번호(리뷰게시글 고유번호와 동일한 개념이라고 볼 수 있음. 약간 다름.)';
+COMMENT ON COLUMN post.mergePost IS '포스트 묶음번호';
 COMMENT ON COLUMN post.postimg IS '포스트 이미지';
 COMMENT ON COLUMN post.posttext IS '포스트 내용';
 
