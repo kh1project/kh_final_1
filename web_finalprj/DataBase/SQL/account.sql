@@ -3,7 +3,7 @@ CREATE TABLE account (
     id NUMBER,
     email VARCHAR2(128),
     password VARCHAR2(64),
-    name VARCHAR2(64),
+    username VARCHAR2(64),
     nickname VARCHAR2(64),
     age NUMBER,
     gender CHAR(1),

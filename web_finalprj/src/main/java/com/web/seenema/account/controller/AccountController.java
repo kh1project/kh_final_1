@@ -80,7 +80,7 @@ public class AccountController {
 	
 	/* 로그아웃 컨트롤러 */
 	@RequestMapping(value = "/logout")
-	public String idontknow(Model model, HttpServletRequest request) {
+	public String logout(Model model, HttpServletRequest request) {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
