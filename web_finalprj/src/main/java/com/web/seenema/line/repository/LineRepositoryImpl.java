@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.web.seenema.line.dto.SettingDataDTO;
 import com.web.seenema.line.dto.LineAddDTO;
 import com.web.seenema.line.dto.LineDTO;
 
@@ -14,11 +15,6 @@ public class LineRepositoryImpl implements LineRepository {
 
 	@Autowired
 	private SqlSession sqlSession;
-	
-	@Override
-	public List<LineDTO> selectLinelist(int mid) {
-		return sqlSession.selectList("lineMapper.linelist", mid);
-	}
 
 	@Override
 	public boolean insertLine(LineAddDTO dto) {
@@ -54,5 +50,4 @@ public class LineRepositoryImpl implements LineRepository {
 		}
 		return result;
 	}
-
 }

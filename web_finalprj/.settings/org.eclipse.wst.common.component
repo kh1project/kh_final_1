@@ -51,7 +51,11 @@
         
         
         <property name="java-output-path" value="target/classes"/>
+<<<<<<< HEAD
 		<property name="context-root" value="seenema"/>
+=======
+        <property name="context-root" value="seenema"/>
+>>>>>>> refs/remotes/origin/v1.0_김아영
                                                         	
     
     
