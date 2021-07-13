@@ -63,12 +63,13 @@ public class AccountServiceImpl implements AccountService {
 		AccountDTO data = dao.checkUser(dto);
 		if(data != null) {
 			dto.setId(data.getId());
-			dto.setUsername(data.getUsername());
-			dto.setNickname(data.getNickname());
 			dto.setEmail(data.getEmail());
 			dto.setPassword("");
-			dto.setGender(data.getGender());
+			dto.setUsername(data.getUsername());
+			dto.setNickname(data.getNickname());
 			dto.setAge(data.getAge());
+			dto.setGender(data.getGender());
+			dto.setPhone(data.getPhone());
 			dto.setLogindate(data.getLogindate());
 			dto.setJoindate(data.getJoindate());			
 		} else {
