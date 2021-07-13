@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.web.seenema.line.dto.LineAddDTO;
 import com.web.seenema.line.dto.LineDTO;
+import com.web.seenema.line.dto.SettingDataDTO;
 import com.web.seenema.line.repository.LineRepositoryImpl;
 
 @Service
@@ -15,10 +16,6 @@ public class LineServiceImpl implements LineService {
 	@Autowired
 	private LineRepositoryImpl repository;
 	
-	@Override
-	public List<LineDTO> linelist(int mid) {
-		return repository.selectLinelist(mid);
-	}
 
 	@Override
 	public boolean add(LineAddDTO dto) {
