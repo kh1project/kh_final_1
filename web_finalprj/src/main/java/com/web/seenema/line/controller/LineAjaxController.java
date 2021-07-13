@@ -116,30 +116,30 @@ public class LineAjaxController {
 		int max_pgNum = 0;
 		int mid = 0;
 		// 전체 데이터 수								// 한 페이지에 출력하고픈 데이터 수량
-				int totalrow = service.totalRow(mid);		int list_cnt = 10;
+		int totalrow = service.totalRow(mid);		int list_cnt = 10;
 
-				// 한 페이지에 출력하고픈 페이지 수량(홀수 전제)		// 계산에 자주 쓰이는 값을 변수로
-				int pg_cnt = 3;							int half_pg_cnt = pg_cnt / 2;
+		// 한 페이지에 출력하고픈 페이지 수량(홀수 전제)		// 계산에 자주 쓰이는 값을 변수로
+		int pg_cnt = 3;							int half_pg_cnt = pg_cnt / 2;
+		
+		//---------------------------------------------------------------------//
+		
+		// pgDatas 추출
+		int start = 10 * (pgNum - 1) + 1;
+		int end;
+		if(pgNum == max_pgNum) {
+			end = totalrow;
+		} else {
+			end = start + 9;
+		}
+		SettingDataDTO init = new SettingDataDTO(mid, start, end);
+		List<LineDTO> pgDatas = service.getPgDatas(init);
+		
+		//---------------------------------------------------------------------//
 				
-				//---------------------------------------------------------------------//
-				
-				// pgDatas 추출
-				int start = 10 * (pgNum - 1) + 1;
-				int end;
-				if(pgNum == max_pgNum) {
-					end = totalrow;
-				} else {
-					end = start + 9;
-				}
-				SettingDataDTO init = new SettingDataDTO(mid, start, end);
-				List<LineDTO> pgDatas = service.getPgDatas(init);
-				
-				//---------------------------------------------------------------------//
-						
-				JSONObject json = new JSONObject();
-				json.put("pgDatas", pgDatas);
-				//json.put("list_cnt", list_cnt);
-				//json.put("max_pgNum", max_pgNum);
+		JSONObject json = new JSONObject();
+		json.put("pgDatas", pgDatas);
+		//json.put("list_cnt", list_cnt);
+		//json.put("max_pgNum", max_pgNum);
 	}
 	
 }
