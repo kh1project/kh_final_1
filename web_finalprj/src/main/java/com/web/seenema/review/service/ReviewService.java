@@ -25,5 +25,7 @@ public interface ReviewService {
 	public List<ReviewPostDTO> MergePost(String cont) throws Exception;
 	public List<String> firstContent(String mid) throws Exception;
 	public int updatePost(ArrayList<Map<String, String>> postlist, String existingCont, String boardId) throws Exception;
+	public int updateGcnt(int id) throws Exception;
+	public int updateBcnt(int id) throws Exception;
     
 }

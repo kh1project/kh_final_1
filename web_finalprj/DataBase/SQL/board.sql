@@ -69,6 +69,9 @@ DROP SEQUENCE board_seq;
 DELETE FROM board WHERE id  <= 100;
 CREATE SEQUENCE board_seq;
 
+-- 좋아요 확인
+UPDATE board SET gcnt = 1 WHERE id = 1;
+
 -- MyMovieDTO select문
 select a.id, a.title, b.path, b.name
   from movie a, Image_files b

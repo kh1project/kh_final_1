@@ -73,5 +73,18 @@ public class ReviewAjaxController {
 		return mergeId;
 	}
 	
+	@RequestMapping(value = "/upGcnt", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public int upGcnt(@RequestParam int id) throws Exception {
+		int gval = review.updateGcnt(id);
+		return gval;
+	}
+	
+	@RequestMapping(value = "/upBcnt", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
+	@ResponseBody
+	public int upBcnt(@RequestParam int id) throws Exception {
+		int bval = review.updateBcnt(id);
+		return bval;
+	}
 }
 

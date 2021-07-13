@@ -57,4 +57,20 @@
 		   SET deleted = 'Y'
 		 WHERE id = #{id}
 	</update>
+	<update id="updateGcnt" parameterType="review">
+		UPDATE board
+		   SET gcnt = #{gcnt}
+		 WHERE id = #{id}
+		 <selectKey keyColumn="gcnt" keyProperty="gcnt" resultType="int" order="AFTER">
+		 	SELECT gcnt FROM board WHERE id = #{id}
+		 </selectKey>
+	</update>
+	<update id="updateBcnt" parameterType="review">
+		UPDATE board
+		   SET bcnt = #{bcnt}
+		 WHERE id = #{id}
+		 <selectKey keyColumn="bcnt" keyProperty="bcnt" resultType="int" order="AFTER">
+		 	SELECT bcnt FROM board WHERE id = #{id}
+		 </selectKey>
+	</update>
 </mapper>

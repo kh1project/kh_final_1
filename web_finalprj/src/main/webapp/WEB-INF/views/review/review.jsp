@@ -2,9 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="review_header.jsp"></jsp:include>
 		<div><h1>영화 리뷰</h1><a href="<%=request.getContextPath() %>/review/add">영화 리뷰 작성</a></div>
-		<section>
+		<%-- 임시 주석.. <section>
 			<div class="row row-cols-lg-6">
 				<div class="col">
 					<div class="p-3 border bg-light">최신 영화 순위1</div>
@@ -25,7 +26,7 @@
 					<div class="p-3 border bg-light">내가 등록한 리뷰 보기(회원정보로연결)</div>
 				</div>
 			</div>
-		</section>
+		</section> --%>
 		<section>
 			<ul class="nav nav-tabs" id="rowTab">
 			    <li class="active"><a href="#reviewtab1" data-toggle="tab">모든 영화</a></li>
@@ -61,11 +62,12 @@
 											<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><p>${i.getContents() }</p></a>
 											<div class="d-flex justify-content-between align-items-center">
 												<div class="btn-group">
-													<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-thumbs-up fa-fw"></i>${i.getGcnt() }</button>
-													<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-thumbs-down fa-fw"></i>${i.getBcnt() }</button>
-													<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-comment-alt fa-fw"></i>${i.getCommcnt() }</button>
+													<button type="button" class="btn btn-sm btn-outline-secondary btn-gcnt" data-id="${i.getId() }"><i class="far fa-thumbs-up fa-fw"></i><span>${i.getGcnt() }</span></button>
+													<button type="button" class="btn btn-sm btn-outline-secondary btn-bcnt" data-id="${i.getId() }"><i class="far fa-thumbs-down fa-fw"></i><span>${i.getBcnt() }</span></button>
+													<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-comment-alt fa-fw"></i><span>${i.getCommcnt() }</span></button>
 												</div>
-												<small class="text-muted">9 mins</small>
+												<fmt:formatDate var="cdate" value="${i.getCdate() }" pattern="yyyy-MM-dd HH:mm:ss.SSS" />
+												<small class="text-muted cdate" data-cdate="${cdate }"></small>
 											</div>
 										</div>
 									</div>

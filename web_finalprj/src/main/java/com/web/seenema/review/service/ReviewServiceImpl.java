@@ -233,4 +233,18 @@ public class ReviewServiceImpl implements ReviewService {
 		}
 		return firstPost;
 	}
+
+	@Override
+	public int updateGcnt(int id) throws Exception {
+		ReviewDTO rdto = dto.selectReview(id);
+		rdto.setGcnt(rdto.getGcnt() + 1);
+		return dto.updateGcnt(rdto);
+	}
+
+	@Override
+	public int updateBcnt(int id) throws Exception {
+		ReviewDTO rdto = dto.selectReview(id);
+		rdto.setBcnt(rdto.getBcnt() + 1);
+		return dto.updateBcnt(rdto);
+	}
 }

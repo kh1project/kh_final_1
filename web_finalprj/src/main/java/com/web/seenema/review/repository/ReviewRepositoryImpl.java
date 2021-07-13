@@ -132,4 +132,24 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 		System.out.println("rollbackPost 정상동작");
 		return result;
 	}
+	
+	@Override
+	public int updateGcnt(ReviewDTO rdto) throws Exception {
+		int rs = sqlSession.update("reviewMapper.updateGcnt", rdto);
+		int data = rdto.getGcnt();
+		if(rs == 1) {
+			System.out.println("[Repo] updateGcnt 정상동작 - data : " + data);
+		}
+		return data;
+	}
+	
+	@Override
+	public int updateBcnt(ReviewDTO rdto) throws Exception {
+		int rs = sqlSession.update("reviewMapper.updateBcnt", rdto);
+		int data = rdto.getBcnt();
+		if(rs == 1) {
+			System.out.println("[Repo] updateBcnt 정상동작 - data : " + data);
+		}
+		return data;
+	}
 }

@@ -26,5 +26,7 @@ public interface ReviewRepository {
     public int firstUpdatePost(ReviewPostDTO post) throws Exception;
     public boolean updatePost(ReviewPostDTO post) throws Exception;
     public boolean rollbackPost(int mergeId) throws Exception;
+    public int updateGcnt(ReviewDTO rdto) throws Exception;
+    public int updateBcnt(ReviewDTO rdto) throws Exception;
 
 }

@@ -48,4 +48,4 @@
 			<button type="button">취소</button>	
 		</form>
 	</div>
-<jsp:include page="review_footer.jsp"></jsp:include>
+<jsp:include page="review_add_footer.jsp"></jsp:include>
