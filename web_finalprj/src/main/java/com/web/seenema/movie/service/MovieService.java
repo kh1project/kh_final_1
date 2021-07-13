@@ -23,4 +23,6 @@ public interface MovieService {
 	// 예매 파트에 포스터 가져오기.
 	public List<MovieImageDTO> getPoster(int mid) throws Exception;
 	public int getAudi();
+	public Map<Integer, Integer> getGcnt();
+	public int getLastMovieNum();
 }

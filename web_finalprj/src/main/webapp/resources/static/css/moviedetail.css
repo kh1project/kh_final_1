@@ -94,7 +94,7 @@
 }
 
 .score-info{
-    position: relative;
+    
     bottom: 20px;
 }
 
@@ -145,7 +145,7 @@
 	height: 10px;
 	background-color: lightgray;
 	width: 2px;
-	margin: 0px 10px 0px 16px
+	margin: 0px 10px 0px 10px
 }
 
 .info-graph {
@@ -246,8 +246,20 @@
 	
 }
 
-#gen-graph > *{
-	display: inline-block;
+#gen-graph{
+	height: 200px;
+	position: relative;
+	width: fit-content;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+#gen-graph .bar-box{
+	position: relative;
+    width: 10px;
+    height: 105px;
+    overflow: hidden;
+    display: inline-block;
 }
 
 #gen-graph .bar{
@@ -261,12 +273,21 @@
 
 #gen-graph .gen-box{
 	text-align: center;
+	width: 50px;
+	display: inline-block;
 }
 
-#gen-graph .bar-box{
-	position: relative;
-    width: 10px;
-    height: 50px;
-    overflow: hidden;
-    display: inline-block;
+.underline {
+    border: 1px solid black;
+    position: absolute;
+    bottom: 50px;
+    left: 7px;
+    width: 200px;
+}
+
+.gen-title{
+    display: block;
+    text-align: center;
+    top: -10px;
+    position: relative;
 }

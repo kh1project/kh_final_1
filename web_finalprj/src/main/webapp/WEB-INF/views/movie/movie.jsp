@@ -159,14 +159,30 @@ ul {
 									<c:when test='${liked eq "true" }'>
 										<span id="like-${item.getId() }"> <span
 											class="btn btn-outline-dark"
-											onclick="iHateIt(${item.getId() })"> ♥${item.getGcnt() }
+											onclick="iHateIt(${item.getId() })"> ♥
+											<c:choose>
+											<c:when test="${gcnt.get(item.getId()) eq null}">
+												0
+											</c:when>
+											<c:otherwise>
+												${gcnt.get(item.getId()) }
+											</c:otherwise>
+											</c:choose>
 										</span>
 										</span>
 									</c:when>
 									<c:otherwise>
 										<span id="unlike-${item.getId() }"> <span
 											class="btn btn-outline-dark"
-											onclick="iLikeIt(${item.getId() })"> ♡${item.getGcnt() }
+											onclick="iLikeIt(${item.getId() })"> ♡
+											<c:choose>
+											<c:when test="${gcnt.get(item.getId()) eq null}">
+												0
+											</c:when>
+											<c:otherwise>
+												${gcnt.get(item.getId()) }
+											</c:otherwise>
+											</c:choose>
 										</span>
 										</span>
 									</c:otherwise>

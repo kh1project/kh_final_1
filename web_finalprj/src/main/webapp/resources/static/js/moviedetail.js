@@ -39,8 +39,11 @@ function doLike(mid) {
 			"mid": mid
 		},
 		success: function(data) {
+			if(data == -1)
+	                return alert("로그인이 필요한 기능입니다.");
+	                
 			document.querySelector('.util-btn').innerHTML =
-				"<div class=\"like-btn\" onclick=\"doUnlike(" + mid + ")\">♥" + data.gcnt + "</div>";
+				"<div class=\"like-btn\" onclick=\"doUnlike(" + mid + ")\">♥ " + data + "</div>";
 			const likeBtn = document.querySelector(".like-btn");
 			likeBtn.onmouseover = function() {
 				likeBtn.style.backgroundColor = "white";
@@ -67,8 +70,11 @@ function doUnlike(mid) {
 			"mid": mid
 		},
 		success: function(data) {
+			if(data == -1)
+	                return alert("로그인이 필요한 기능입니다.");
+                
 			document.querySelector('.util-btn').innerHTML =
-				"<div class=\"like-btn\" onclick=\"doLike(" + mid + ")\">♡" + data.gcnt + "</div>";
+				"<div class=\"like-btn\" onclick=\"doLike(" + mid + ")\">♡ " + data + "</div>";
 			const likeBtn = document.querySelector(".like-btn");
 			likeBtn.onmouseover = function() {
 				likeBtn.style.backgroundColor = "white";
