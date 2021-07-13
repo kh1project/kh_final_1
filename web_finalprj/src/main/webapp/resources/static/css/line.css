@@ -41,6 +41,12 @@
 	/*height: 64px;*/
 }
 
+.starForm {
+	text-align: left;
+	text-indent: 165px;
+	height: 35px;
+}
+
 .currcnt-outer {
 	position: relative;
 }
@@ -48,7 +54,7 @@
 .currcnt {
 	position: absolute;
 	left: 910px;
-	bottom: 80px;
+	bottom: 48px;
 }
 
 
