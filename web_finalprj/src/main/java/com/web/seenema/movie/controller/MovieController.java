@@ -66,11 +66,11 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value = "/movie/detail")
-	public String movieDetail(Model model, @RequestParam(required=false) String StringMid, HttpServletRequest request) {
-		int mid = 1;
-		if(StringMid != null)
-			mid = Integer.parseInt(StringMid);
+	public String movieDetail(Model model, @RequestParam(required=false) Integer mid, HttpServletRequest request) {
 		
+		if(mid == null) {
+			mid = 1;
+		}
 		
 		
 		MovieDTO dto = mdao.getMovie(mid); // 영화정보 1개 가져오기
