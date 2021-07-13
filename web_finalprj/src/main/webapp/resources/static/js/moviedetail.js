@@ -31,7 +31,7 @@ window.onload = function() {
 
 function doLike(mid) {
 	$.ajax({
-		url: "/movieajax/like",
+		url: "/seenema/movieajax/like",
 		type: "post",
 		datatype: "json",
 		data: {
@@ -62,7 +62,7 @@ function doLike(mid) {
 
 function doUnlike(mid) {
 	$.ajax({
-		url: "/movieajax/unlike",
+		url: "/seenema/movieajax/unlike",
 		type: "post",
 		datatype: "json",
 		data: {

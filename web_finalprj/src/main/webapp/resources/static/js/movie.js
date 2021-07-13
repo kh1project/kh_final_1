@@ -9,7 +9,7 @@
 	
 function iLikeIt(mid){
     $.ajax({
-        url: "/movieajax/like", 
+        url: "/seenema/movieajax/like", 
         type: "post",
         datatype: "json",
         data: {
@@ -31,7 +31,7 @@ function iLikeIt(mid){
 
 function iHateIt(mid){
     $.ajax({
-        url: "/movieajax/unlike", 
+        url: "/seenema/movieajax/unlike", 
         type: "post",
         datatype: "json",
         data: {
@@ -54,7 +54,7 @@ function iHateIt(mid){
 window.onload = function(){
     let filter = document.querySelector(".custom-select")
     filter.onchange = function(){
-        window.location = "/movie?sort="+filter.value;
+        window.location = "/seenema/movie?sort="+filter.value;
     }
 }
 

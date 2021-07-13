@@ -1,20 +1,53 @@
+--*************************************
+-- 모든 테이블 조회, 모든 SEQUENCE 조회
+SELECT * FROM tab;
+SELECT * FROM USER_SEQUENCES;
+SELECT * FROM all_objects WHERE object_type = 'SEQUENCE';
+--*************************************
+
+--*************************************
+-- 모든 TABLE 삭제 (생성 역순)
+DROP TABLE post;
+DROP TABLE movielike;
+DROP TABLE comments;
+DROP TABLE attach_files;
+DROP TABLE board;
+DROP TABLE board_type;
+DROP TABLE account_type;
 DROP TABLE reservation;
+DROP TABLE account;
 DROP TABLE seat;
 DROP TABLE time;
-DROP TABLE movie_theater;
 DROP TABLE image_files;
-DROP TABLE account_type;
-DROP TABLE attach_files;
-DROP TABLE comments;
-DROP TABLE board;
-DROP TABLE movielike;
+DROP TABLE movie_theater;
 DROP TABLE theater;
 DROP TABLE branch;
+--DROP TABLE line;
 DROP TABLE movie;
-DROP TABLE account;
-DROP TABLE board_type;
+DROP TABLE pay;
 
+--*************************************
 
+--*************************************
+-- 모든 SEQUENCE 삭제
+DROP SEQUENCE board_seq;
+DROP SEQUENCE board_type_seq;
+DROP SEQUENCE branch_seq;
+DROP SEQUENCE image_files_seq;
+DROP SEQUENCE merge_seq;
+DROP SEQUENCE movie_seq;
+DROP SEQUENCE movie_t_seq;
+DROP SEQUENCE post_seq;
+DROP SEQUENCE res_seq;
+DROP SEQUENCE seat_seq;
+DROP SEQUENCE theater_seq;
+--DROP SEQUENCE time_seq;
+DROP SEQUENCE pay_seq;
+--DROP SEQUENCE line_seq;
+
+--*************************************
+--*************************************
+-- ▼▼▼▼▼ 여기서부터 모든 TABLE 생성
 
 -- 영화 테이블
 CREATE TABLE movie(
@@ -126,6 +159,7 @@ CREATE TABLE time (
 -- endtime 컬럼 추가
 -- ALTER TABLE time ADD endtime VARCHAR(20);
 
+
 ALTER TABLE time ADD CONSTRAINT time_id_pk PRIMARY KEY(id);
 ALTER TABLE time ADD CONSTRAINT time_mtid_FK FOREIGN KEY(mtid) REFERENCES movie_theater(id);
 ALTER TABLE time MODIFY moviedate CONSTRAINT time_moviedate_nn NOT NULL;
@@ -162,7 +196,7 @@ COMMENT ON COLUMN seat.reserved IS '좌석 예약 여부';
 -- 회원 테이블
 CREATE TABLE account (
     id NUMBER,
-    name VARCHAR2(64),
+    username VARCHAR2(64),
     nickname VARCHAR2(64),
     email VARCHAR2(128),
     phone VARCHAR2(64),
@@ -277,9 +311,10 @@ ALTER TABLE board ADD CONSTRAINT board_aid_FK FOREIGN KEY(aid) REFERENCES accoun
 
 COMMENT ON COLUMN board.id IS '게시판 식별번호';
 COMMENT ON COLUMN board.btype IS '게시판 구분 번호';
+COMMENT ON COLUMN board.mid IS '게시판 영화 구분 번호';
 COMMENT ON COLUMN board.aid IS '게시판 작성자명';
 COMMENT ON COLUMN board.title IS '게시판 제목';
-COMMENT ON COLUMN board.contents IS '게시판 내용';
+COMMENT ON COLUMN board.contents IS '게시판 내용(post의 mergeid)';
 COMMENT ON COLUMN board.vcnt IS '게시판 조회수';
 COMMENT ON COLUMN board.gcnt IS '게시판 추천';
 COMMENT ON COLUMN board.bcnt IS '게시판 비추천';
@@ -348,7 +383,7 @@ COMMENT ON COLUMN comments.block IS '댓글 블록';
 
 
 --좋아요 저장용
-CREATE TABLE movielike(
+CREATE TABLE movielike (
 	mid NUMBER ,
 	aid NUMBER
 );
@@ -357,8 +392,6 @@ alter table movielike add constraint movielike_aid_fk foreign key(aid) reference
 
 COMMENT ON COLUMN movielike.mid IS '영화 식별번호';
 COMMENT ON COLUMN movielike.aid IS '계정 식별번호';
-
-commit;
 
 --회원 id 1번 테스트용
 --INSERT INTO "WEBADMIN"."ACCOUNT" (ID, NAME, NICKNAME, EMAIL, PHONE, PASSWORD, GENDER, AGE) VALUES ('1', 'test', 'test', 'test', '0', 'test', 'M', '27')
@@ -374,6 +407,49 @@ CREATE TABLE post (
 ALTER TABLE post ADD CONSTRAINT post_id_pk PRIMARY KEY(id);
 
 COMMENT ON COLUMN post.id IS '포스트 식별번호';
-COMMENT ON COLUMN post.mergePost IS '포스트 묶음번호(리뷰게시글 고유번호와 동일한 개념이라고 볼 수 있음. 약간 다름.)';
+COMMENT ON COLUMN post.mergePost IS '포스트 묶음번호';
 COMMENT ON COLUMN post.postimg IS '포스트 이미지';
 COMMENT ON COLUMN post.posttext IS '포스트 내용';
+
+--PAY table 생성
+-- ㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ
+--ㅁ-ㄴㅇㅁㄴ
+CREATE TABLE pay (
+    id NUMBER,
+    price NUMBER
+);
+
+ALTER TABLE pay ADD CONSTRAINT pay_id_pk PRIMARY KEY(id);
+ALTER TABLE pay MODIFY price CONSTRAINT pay_price_nn NOT NULL;
+
+COMMENT ON COLUMN pay.id IS '나이 식별번호';
+COMMENT ON COLUMN pay.price IS '영화가격';
+
+CREATE SEQUENCE pay_seq;
+
+
+-- 한줄평 테이블
+CREATE TABLE line (
+    id NUMBER,
+    mid NUMBER,
+    aid NUMBER,
+    contents NVARCHAR2(1024),
+    gcnt NUMBER DEFAULT 0,
+    star NUMBER DEFAULT 1,
+    cdate DATE DEFAULT SYSDATE,
+    deleted CHAR(1) DEFAULT 'N'
+);
+
+ALTER TABLE line ADD CONSTRAINT line_id_pk PRIMARY KEY(id);
+ALTER TABLE line ADD CONSTRAINT line_mid_FK FOREIGN KEY(mid) REFERENCES movie(id);
+ALTER TABLE line ADD CONSTRAINT line_aid_FK FOREIGN KEY(aid) REFERENCES account(id);
+
+COMMENT ON COLUMN line.id IS '한줄평 식별번호';
+COMMENT ON COLUMN line.mid IS '한줄평 대상 영화 식별';
+COMMENT ON COLUMN line.aid IS '한줄평 작성자 식별';
+COMMENT ON COLUMN line.contents IS '한줄평 내용';
+COMMENT ON COLUMN line.gcnt IS '한줄평 추천수';
+COMMENT ON COLUMN line.star IS '한줄평 별점';
+COMMENT ON COLUMN line.cdate IS '한줄평 작성일';
+COMMENT ON COLUMN line.deleted IS '한줄평 삭제 구분';
+

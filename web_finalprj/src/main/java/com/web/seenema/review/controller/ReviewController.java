@@ -100,6 +100,7 @@ public class ReviewController {
 
 		//addreview 메서드 호출
 		boolean result = review.addReview(radto);
+		System.out.println("board저장");
 				
 		if(result) {
 			// 작성 성공시 리뷰 리스트로 이동
@@ -108,7 +109,7 @@ public class ReviewController {
 			// 실패 했을 때 작성 페이지 재전송
 			m.addAttribute("data", radto);
 			m.addAttribute(forward);
-			forward = "review/add";
+			forward = "forward:/review/add";
 		}
 		return forward;
 	}

@@ -1,8 +1,8 @@
 -- 초기데이터 전부 삽입하는 sql
 
----------------------------------------
+--*************************************
 -- 영화테이블 INSERT
----------------------------------------
+--*************************************
 CREATE SEQUENCE movie_seq;
 -- DROP SEQUENCE movie_seq;
 
@@ -417,11 +417,9 @@ INSERT INTO movie(id, title, subtitle, summary, type, director, genre, runningti
 '공승연(진아 역), 정다은(수진 역), 서현우(성훈 역), 김모범(옆집남자 역), 김혜나(팀장 역), 변진수(성훈친구2 역), 정성민(성훈 친구3 역)', 
 to_date('21/05/19','YY/MM/DD'), 12275, 378, 8.74);
 
-commit;
-
----------------------------------------
+--*************************************
 -- 영화관테이블 INSERT
----------------------------------------
+--*************************************
 CREATE SEQUENCE branch_seq;
 
 -- 서울 지점.
@@ -459,9 +457,9 @@ INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '강원', '�
 INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '강원', '속초');
 INSERT INTO branch(id, location, name) VALUES (branch_seq.NEXTVAL, '강원', '원주');
 
----------------------------------------
+--*************************************
 -- 상영관테이블 INSERT
----------------------------------------
+--*************************************
 CREATE SEQUENCE theater_seq;
 -- DROP SEQUENCE theater_seq;
 
@@ -528,9 +526,9 @@ INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 20, '2관');
 INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 21, '1관');
 INSERT INTO theater(id, bid, name) VALUES(theater_seq.NEXTVAL, 21, '2관');
 
----------------------------------------
+--*************************************
 -- 영화상영관테이블 INSERT
----------------------------------------
+--*************************************
 CREATE SEQUENCE movie_t_seq;
 
 -- 위왓치유(ID : 1) / 강남 1관(ID : 1)
@@ -563,11 +561,9 @@ INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 3, 
 -- 그레타 툰베리(ID : 3) / 송광주하남 2관(ID : 34)
 INSERT INTO movie_theater(id, mid, tid, enddate) VALUES(movie_t_seq.NEXTVAL, 3, 34, TO_DATE('21/10/21','YY/MM/DD'));
 
-COMMIT;
-
----------------------------------------
+--*************************************
 -- 영화이미지테이블 INSERT
----------------------------------------
+--*************************************
 CREATE SEQUENCE Image_files_seq;
 
 -- 위왓치유
@@ -634,9 +630,9 @@ INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 
 INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (14).jpg', '/resources/images/movie/3/stillcut/');
 INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 'movie_image (15).jpg', '/resources/images/movie/3/stillcut/');
 
----------------------------------------
+--*************************************
 -- 시간테이블 INSERT
----------------------------------------
+--*************************************
 CREATE SEQUENCE time_seq;
 
 INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/06/28', 'YY/MM/DD'), '11:30:00', '13:14:00');
@@ -654,9 +650,9 @@ INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVA
 INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/01', 'YY/MM/DD'), '11:30:00', '13:14:00');
 INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/01', 'YY/MM/DD'), '13:34:00', '15:18:00');
 
----------------------------------------
+--*************************************
 -- 좌석테이블 INSERT
----------------------------------------
+--*************************************
 CREATE SEQUENCE seat_seq;
 
 -- 강남 1관 A
@@ -785,34 +781,53 @@ INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 
 INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 13, 'n');
 INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 14, 'n');
 
----------------------------------------
+--*************************************
 -- 회원테이블 INSERT (SEQUENCE 없는 상태)
----------------------------------------
+--*************************************
+CREATE SEQUENCE account_seq;
 INSERT INTO ACCOUNT (id, name, nickname, email, phone, password, gender, age, joindate) VALUES(1, '어드민', '어드민', 'admin@admin.com', '010-1234-1234', 'admin', 'F', 25, SYSDATE);
 
----------------------------------------
+--*************************************
 -- 예매테이블 INSERT
----------------------------------------
+--*************************************
 CREATE SEQUENCE res_seq;
 
-INSERT INTO reservation(id, sid, timeid, aid, rdate, rcnt, payment) VALUES(res_seq.NEXTVAL, 1, 1, 1, SYSDATE, 1, 'k');
-INSERT INTO reservation(id, sid, timeid, aid, rdate, rcnt, payment) VALUES(res_seq.NEXTVAL, 3, 2, 1, SYSDATE, 1, 'k');
-INSERT INTO reservation(id, sid, timeid, aid, rdate, rcnt, payment) VALUES(res_seq.NEXTVAL, 8, 8, 1, SYSDATE, 1, 'k');
-INSERT INTO reservation(id, sid, timeid, aid, rdate, rcnt, payment) VALUES(res_seq.NEXTVAL, 5, 10, 1, SYSDATE, 1, 'k');
+INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+	VALUES(res_seq.NEXTVAL, 1, 1, 1, SYSDATE, 1, 13000, 'k');
+INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+	VALUES(res_seq.NEXTVAL, 3, 2, 1, SYSDATE, 1, 13000, 'k');
+INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+	VALUES(res_seq.NEXTVAL, 8, 8, 1, SYSDATE, 1, 13000, 'k');
+INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+	VALUES(res_seq.NEXTVAL, 5, 10, 1, SYSDATE, 1, 13000, 'k');
 
----------------------------------------
+--*************************************
 -- 포스트테이블 INSERT
----------------------------------------
+--*************************************
 CREATE SEQUENCE post_seq;
 CREATE SEQUENCE merge_seq;
 
----------------------------------------
+--*************************************
 -- 게시판 구분 테이블 INSERT
----------------------------------------
+--*************************************
 CREATE SEQUENCE board_type_seq;
 INSERT INTO board_type(id, name) VALUES (board_type_seq.NEXTVAL, '영화리뷰');
 
----------------------------------------
+--*************************************
 -- 게시판 테이블 INSERT
----------------------------------------
+--*************************************
 CREATE SEQUENCE board_seq;
+
+
+--*************************************
+-- PAY 테이블 INSERT
+--*************************************
+
+INSERT INTO pay(id, price) VALUES(pay_seq.NEXTVAL, 10000);
+INSERT INTO pay(id, price) VALUES(pay_seq.NEXTVAL, 13000);
+
+
+--*************************************
+-- line 테이블 INSERT
+--*************************************
+CREATE SEQUENCE line_seq;

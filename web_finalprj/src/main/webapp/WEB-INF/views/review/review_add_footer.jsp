@@ -155,7 +155,10 @@ function add2send() {
         	$("#hiddencontents").attr("value", mergeId);
         	console.log("mergeId : " + mergeId);
         	document.step2form.submit();
-        }
+        },
+		error: function(){
+			console.log("add2send err");
+		}
     });
 }
 

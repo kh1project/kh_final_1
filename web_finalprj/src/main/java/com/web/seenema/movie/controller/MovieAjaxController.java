@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.web.seenema.account.dto.AccountDTO;
 import com.web.seenema.movie.dto.MovieLikeDTO;
 import com.web.seenema.movie.service.MovieService;
 
@@ -22,7 +23,12 @@ public class MovieAjaxController {
 	public int movieLike(@RequestParam("mid") int mid, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
-		int aid = (int) session.getAttribute("id");
+		
+		int aid = 0;
+		if(session.getAttribute("account") != null) {
+			AccountDTO adto = (AccountDTO) session.getAttribute("account");
+			aid = adto.getId();
+		}
 		
 		//로그인 체크
 		if(aid == 0)
@@ -39,7 +45,16 @@ public class MovieAjaxController {
 	
 	@RequestMapping(value = "/unlike")
 	public int movieUnlike(@RequestParam("userid") int aid,
-							@RequestParam("mid") int mid) {
+							@RequestParam("mid") int mid,
+							HttpServletRequest request) {
+
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("account") != null) {
+			AccountDTO adto = (AccountDTO) session.getAttribute("account");
+			aid = adto.getId();
+		}
+		
 		//로그인 체크
 		if(aid == 0)
 			return -1;
