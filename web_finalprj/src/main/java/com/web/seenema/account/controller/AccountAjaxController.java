@@ -55,12 +55,12 @@ public class AccountAjaxController {
 			return json.toJSONString();
 		}
 	
-	@RequestMapping(value = "/ex3")
-	public ModelAndView ex3() {
-		ModelAndView mv = new ModelAndView("views/ex3");
-		mv.addObject("", "");
-		
-		return mv;
-	}
+//	@RequestMapping(value = "/ex3")
+//	public ModelAndView ex3() {
+//		ModelAndView mv = new ModelAndView("views/ex3");
+//		mv.addObject("", "");
+//		
+//		return mv;
+//	}
 
 }
