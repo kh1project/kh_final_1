@@ -6,7 +6,7 @@ hr { margin: 3px; }
 	text-align: center; background-color: white;
 }
 .list-group {
-	height: 580px;
+	height: 570px;
     max-height: 800px;
     margin-bottom: 10px;
     overflow: auto;
@@ -28,6 +28,12 @@ div #title {
 	padding: 10px;
 	background-color: black;
 	color: white;
+}
+div #not {
+	height: 560px;
+	margin-top: 20px;
+	font-size: 14pt;
+	font-weight: bold;
 }
 div #next {
 	text-align: right;

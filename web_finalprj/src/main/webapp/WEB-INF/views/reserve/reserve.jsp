@@ -152,23 +152,6 @@
   	<%@ include file="../module/footer.jsp" %>
   </footer>
 <script type="text/javascript">
-/* $(document).ready(function(){
-	$('.list-group-item').click(function(e){
-		$.ajax({
-			url: "/schedule",
-			type: "get",
-			datatype: "json",
-			data: {
-				location: e.target.innerText
-			},
-			success: function(data) {
-				if(data.res == "success") {
-					console.log("확인");
-				}
-			}
-		});
-	})
-}); */
 function check() {
 	if(${param.location eq ''}) {
 		alert("지역을 선택해주세요.");

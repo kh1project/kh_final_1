@@ -29,7 +29,13 @@
 	  	</div>
 	  </div>
         <div class="row" id="schedule_form">
-        <div class="col-12">
+        <c:if test="${empty movieAll_list }">
+          <div class="col-12" id="not">
+          	<label>상영중인 영화가 없습니다.</label>
+          </div>
+        </c:if>
+        <c:if test="${!empty movieAll_list }">
+          <div class="col-12">
 		  <div class="list-group list-group-flush" id="list-tab" role="tablist">
 		    <c:forEach var="MovieDTO" items="${movieAll_list}" varStatus="status">
 		      <c:choose>
@@ -77,6 +83,7 @@
 		    </c:forEach>
 		  </div>
 		</div>
+        </c:if>
 		<div class="col" id="next">
 			<input type="hidden" name="location" value="${param.location }">
 			<input type="hidden" name="name" value="${param.name }">
