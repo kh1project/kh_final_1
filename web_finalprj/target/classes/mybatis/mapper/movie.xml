@@ -58,4 +58,11 @@
 		SELECT count(mid) gcnt, mid FROM movielike GROUP BY mid
 	</select>
 	
+	<select id="getLastMovieNum" resultType="com.web.seenema.movie.dto.MovieDTO">
+		SELECT id 
+		FROM (SELECT  rownum , id 
+		FROM (SELECT id, title FROM movie ORDER BY id DESC) WHERE rownum = 1)
+	</select>
+	
+	
 </mapper>

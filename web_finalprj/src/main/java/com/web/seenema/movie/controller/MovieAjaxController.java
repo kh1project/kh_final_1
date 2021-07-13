@@ -52,4 +52,10 @@ public class MovieAjaxController {
 			return service.getGcnt().get(mid);
 	}
 	
+	@RequestMapping(value = "/detailfilter")
+	public int DetailFilter(@RequestParam("mid") String mid) {
+		
+		return 0;
+	}
+	
 }

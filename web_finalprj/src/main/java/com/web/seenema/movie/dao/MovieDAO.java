@@ -21,4 +21,5 @@ public interface MovieDAO {
 	public int deleteMovieLike(MovieLikeDTO dto);
 	public MovieDTO getLikeCnt(int mid);
 	public List<MovieGcntDTO> getGcnt();
+	public int getLastMovieNum();
 }

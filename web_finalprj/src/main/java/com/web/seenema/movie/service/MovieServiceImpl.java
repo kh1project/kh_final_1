@@ -118,7 +118,6 @@ public class MovieServiceImpl implements MovieService {
 	
 	@Override
 	public int insertMovieLike(MovieLikeDTO dto) {
-		System.out.println("insertMovieLike service 실행");
 		return dao.insertMovieLike(dto);
 	}
 	
@@ -198,5 +197,10 @@ public class MovieServiceImpl implements MovieService {
 			res.put(item.getMid(), item.getGcnt());
 		
 		return res;
+	}
+	
+	@Override
+	public int getLastMovieNum() {
+		return dao.getLastMovieNum();
 	}
 }

@@ -24,4 +24,5 @@ public interface MovieService {
 	public List<MovieImageDTO> getPoster(int mid) throws Exception;
 	public int getAudi();
 	public Map<Integer, Integer> getGcnt();
+	public int getLastMovieNum();
 }

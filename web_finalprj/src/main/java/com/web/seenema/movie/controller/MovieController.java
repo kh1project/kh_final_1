@@ -64,13 +64,20 @@ public class MovieController {
 		return "movie/movie";
 	}
 	
+	
 	@RequestMapping(value = "/movie/detail")
-	public String movieDetail(Model model, @RequestParam("mid") int mid, HttpServletRequest request) {
+	public String movieDetail(Model model, @RequestParam(required=false) String StringMid, HttpServletRequest request) {
+		int mid = 1;
+		if(StringMid != null)
+			mid = Integer.parseInt(StringMid);
+		
+		
+		
 		MovieDTO dto = mdao.getMovie(mid); // 영화정보 1개 가져오기
 		Map<Integer, String> reserveRating = service.getReserveRate(); //예매율 
 		HttpSession session = request.getSession(); // 로그인 세션 가져오기
 		List<MovieLikeDTO> likeList = service.getMovieLikeList((int) session.getAttribute("id")); // 좋아요 받은 영화 리스트 가져오기
-		Map<Integer, Integer> gcnt = service.getGcnt(); // 좋아요 갯수 가져오기 
+		Map<Integer, Integer> gcnt = service.getGcnt(); // 좋아요 갯수 가져오기(전체)
 		
 		model.addAttribute("movie", dto);		
 		model.addAttribute("reserveRating", reserveRating.get(mid));
@@ -94,11 +101,29 @@ public class MovieController {
 		return "movie/moviedetail";
 	}
 	
+	@RequestMapping(value = "/movie/edit")
+	public String movieEdit(Model model, @RequestParam("mid") int mid) {		
+		
+		
+		return "movie/movieEdit";
+	}
 	
-	@RequestMapping(value = "/testview")
-	public String testview() {		
-
-		return "movie/test";
+	@RequestMapping(value = "/movie/add")
+	public String movieAdd(Model model) {
+		int movieNum = service.getLastMovieNum()+1;
+		//movie 테이블 마지막 시퀀스 +1
+		model.addAttribute("mid", movieNum);
+		
+		return "movie/movieadd";
+	}
+	
+	@RequestMapping(value = "/movie/getinfo")
+	public String getinfo(Model model) {
+		int movieNum = service.getLastMovieNum()+1;
+		//movie 테이블 마지막 시퀀스 +1
+		model.addAttribute("mid", movieNum);
+		
+		return "redirect:/movie/detail";
 	}
 	
 }

@@ -95,4 +95,10 @@ public class MovieDAOImpl implements MovieDAO {
 		return sqlSession.selectList("movie.getGcnt");
 	}
 	
+	@Override
+	public int getLastMovieNum() {
+		MovieDTO dto = sqlSession.selectOne("movie.getLastMovieNum");
+		
+		return dto.getId();
+	}
 }
