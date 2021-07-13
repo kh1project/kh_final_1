@@ -67,9 +67,8 @@
 			</c:when>
 			<c:when test="${fn:endsWith(path, 'reservecheck.jsp') }">
 				<li class="choice-movie" onclick="location.href='<%=request.getContextPath() %>/reserve?location='">지점</li>
-				<li class="choice-schedule" onclick="location.href='<%=request.getContextPath() %>/reserve/schedule?location=${param.location }&name=${param.name }'">영화</li>
-				<li class="choice-time"
-					onclick="location.href='<%=request.getContextPath() %>/reserve/time?location=${param.location }&name=${param.name }&rating=${param.rating }&title=${fn:replace(param.title, '#', '%23') }&moviedate=${param.moviedate }'">상영시간</li>
+				<li class="choice-schedule">영화</li>
+				<li class="choice-time">상영시간</li>
 				<li class="choice-seat">좌석</li>
 				<li class="choice-payment active">결제</li>
 				<li class="choice-paySuccess">결제완료</li>

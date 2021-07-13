@@ -32,6 +32,7 @@ input.movie-title{
 	border-bottom: 2px solid #4374D9;
 	font-weight: bold;
 	text-align: center;
+	width: 250px;
 }
 
 label.screen{
