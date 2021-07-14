@@ -64,8 +64,9 @@ function paging(ele, mid, totalrow, max_page) {
 		},
 		success: function(data) {
 			
+						/* 수정해야 함: 2개 동시 순회: console.log(Object.values(data.pgdatas)[0]);*/
 			for(var pgdata of data.pgdatas) {
-				console.log(pgdata.id);
+
 				email[i].innerText = pgdata.email;
 				star[i].innerHTML = pgdata.star;
 				contents[i].innerHTML = pgdata.contents;
@@ -109,4 +110,6 @@ function star(cnt) {
 			}
 		}
 	}
+	
+	document.querySelector('.starForm').firstChild.value = cnt;
 }

@@ -78,22 +78,22 @@ public class MovieController {
 		
 		
 		MovieDTO dto = mdao.getMovie(mid); // 영화정보 1개 가져오기
-		Map<Integer, String> reserveRating = service.getReserveRate(); //예매율 
-		HttpSession session = request.getSession(); // 로그인 세션 가져오기
-		Map<Integer, Integer> gcnt = service.getGcnt(); // 좋아요 갯수 가져오기(전체)
-		
-		int aid = 0;
-		
-		if(session.getAttribute("account") != null) {
-			AccountDTO adto = (AccountDTO) session.getAttribute("account");
-			aid = adto.getId();
-		}
-		List<MovieLikeDTO> likeList = service.getMovieLikeList(aid); // 좋아요 받은 영화 리스트 가져오기
-		
+//		Map<Integer, String> reserveRating = service.getReserveRate(); //예매율 
+//		HttpSession session = request.getSession(); // 로그인 세션 가져오기
+//		Map<Integer, Integer> gcnt = service.getGcnt(); // 좋아요 갯수 가져오기(전체)
+//		
+//		int aid = 0;
+//		
+//		if(session.getAttribute("account") != null) {
+//			AccountDTO adto = (AccountDTO) session.getAttribute("account");
+//			aid = adto.getId();
+//		}
+//		List<MovieLikeDTO> likeList = service.getMovieLikeList(aid); // 좋아요 받은 영화 리스트 가져오기
+//		
 		model.addAttribute("movie", dto);		
-		model.addAttribute("reserveRating", reserveRating.get(mid));
-		model.addAttribute("likeList", likeList);
-		model.addAttribute("gcnt", gcnt);
+//		model.addAttribute("reserveRating", reserveRating.get(mid));
+//		model.addAttribute("likeList", likeList);
+//		model.addAttribute("gcnt", gcnt);
 		
 		/** 아영님 코드 시작 */
 		// 1page 에 출력할 한줄평 데이터
