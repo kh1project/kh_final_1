@@ -51,6 +51,7 @@ public class ReviewController {
 				}
 			}
 			mv.addObject("list", list);
+			mv.addObject("listsize", list.size());
 		} else {
 			mv.addObject("list", null);
 		}
@@ -63,7 +64,9 @@ public class ReviewController {
 		String forward = "";
 		
 		ReviewDTO data = review.reviewOne(rid);
+		int vcnt = review.updateVcnt(rid);
 		if(data != null) {
+			data.setVcnt(vcnt);
 			List<ReviewPostDTO> contlist = review.MergePost(data.getContents());
 			m.addAttribute("data", data);
 			m.addAttribute("contlist", contlist);

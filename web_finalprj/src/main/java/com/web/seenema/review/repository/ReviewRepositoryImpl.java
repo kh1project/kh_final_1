@@ -152,4 +152,14 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 		}
 		return data;
 	}
+
+	@Override
+	public int updateVcnt(ReviewDTO rdto) throws Exception {
+		int rs = sqlSession.update("reviewMapper.updateVcnt", rdto);
+		int data = rdto.getVcnt();
+		if(rs == 1) {
+			System.out.println("[Repo] updateVcnt 정상동작 - data : " + data);
+		}
+		return data;
+	}
 }

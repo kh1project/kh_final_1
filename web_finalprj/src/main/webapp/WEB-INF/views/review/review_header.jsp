@@ -17,4 +17,11 @@
 	<header>
 		<jsp:include page="../module/header.jsp"></jsp:include>
 	</header>
-	<div class="container">
+	<container id="container">
+		<div class="page-util">
+			<div class="container">
+				<i class="fas fa-home"></i>
+				<i class="fas fa-angle-right"></i>
+				<span class="page-util-text"> <a href="<%=request.getContextPath()%>/review"> 영화 리뷰 </a></span>
+			</div>
+		</div>

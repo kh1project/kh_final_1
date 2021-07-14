@@ -247,4 +247,12 @@ public class ReviewServiceImpl implements ReviewService {
 		rdto.setBcnt(rdto.getBcnt() + 1);
 		return dto.updateBcnt(rdto);
 	}
+	
+	@Override
+	public int updateVcnt(int id) throws Exception {
+		ReviewDTO rdto = dto.selectReview(id);
+		rdto.setVcnt(rdto.getVcnt() + 1);
+		return dto.updateVcnt(rdto);
+		
+	}
 }

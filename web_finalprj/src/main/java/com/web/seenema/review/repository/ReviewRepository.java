@@ -28,5 +28,6 @@ public interface ReviewRepository {
     public boolean rollbackPost(int mergeId) throws Exception;
     public int updateGcnt(ReviewDTO rdto) throws Exception;
     public int updateBcnt(ReviewDTO rdto) throws Exception;
+    public int updateVcnt(ReviewDTO rdto) throws Exception;
 
 }

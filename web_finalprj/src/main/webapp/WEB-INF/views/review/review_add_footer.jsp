@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-	</div>
+		</div>
+	</container>
 	<jsp:include page="../module/footer.jsp"></jsp:include>
 </body>
 <c:url var="addstep1" value="/reviewajax/addstep1" />
@@ -10,6 +11,8 @@
 <script>
 $(document).ready(function(){
 	$('#post1').addClass("selected");
+	const step2wrap = $('#add-step2 > form > .row > .col-6');
+	$(step2wrap).css("height", window.innerHeight - 300);
 });
 
 var movienum;
@@ -24,7 +27,7 @@ function selectmovie(num) {
 			for(i = 0; i < anotherckbg.length; i++) {
 				anotherckbg[i].style.display = "none";
 			}
-			ckbg.style.display = "block";
+			ckbg.style.opacity = "1";
 		}
 	}
 	
@@ -75,16 +78,16 @@ function selectImg(num) {
 
 function ptextLengthCk(id) {
 	var ptextid = $("#ptext" + id);
-    ptextid.next().html("("+ptextid.val().length+" / 100)");
-    if(ptextid.val().length > 100) {
-    	ptextid.val($(ptextid).val().substring(0, 100));
-    	ptextid.next().html("(100 / 100)");
+    ptextid.next().html("("+ptextid.val().length+" / 80)");
+    if(ptextid.val().length > 80) {
+    	ptextid.val($(ptextid).val().substring(0, 80));
+    	ptextid.next().html("(80 / 80)");
 	}
 }
 
 function delPost(id) {
 	if($(".postwrap .post").length > 1) {
-		$("#delBtn" + id).parent().remove();
+		$("#post" + id).remove();
 	} else {
 		alert("1건 미만인 경우, 삭제할 수 없습니다.");
 	}
@@ -94,7 +97,7 @@ var postClass = document.getElementsByClassName("post");
 var postid = (document.getElementsByClassName("post").length + 1);
 function addPost(){ 
 	if(postClass) {
-		$("#btn_addpost").before("<div id='post" + postid + "' class='col post' onclick='selectPost(" + postid + ")'><img class='selectImg' src='<%=request.getContextPath() %>/resources/images/sub/bg-img-select.png' alt='이미지 없음'><textarea placeholder='내용을 작성해 주세요.' id='ptext" + postid + "' onkeyup='ptextLengthCk(" + postid + ");'></textarea><div class='pTextCnt'>(0 / 100)</div><img id='delBtn1' class='delBtn' src='<%=request.getContextPath() %>/resources/images/common/btn-x-close.png' onclick='delPost(1);'>");
+		$("#btn_addpost").before("<div id='post" + postid + "' class='col post' onclick='selectPost(" + postid + ")'><img class='selectImg' src='<%=request.getContextPath() %>/resources/images/sub/bg-img-select.png' alt='이미지 없음'><textarea placeholder='내용을 작성해 주세요.' id='ptext" + postid + "' onkeyup='ptextLengthCk(" + postid + ");'></textarea><div class='pTextCnt'>(0 / 80)</div><img id='delBtn" + postid + "' class='delBtn' src='<%=request.getContextPath() %>/resources/images/common/btn-x-close.png' onclick='delPost(" + postid + ");'>");
 	}
 	postid++;
 } 
@@ -131,7 +134,7 @@ function nullCheck() {
 function add2send() {
 	var param = [];
 	for(i = 0; i < postClass.length; i++) {
-		var postnum = $("#post" + (i + 1));
+		var postnum = $("#"+postClass[i].id);
 		var postimgSrc = postnum.children("img").attr("src");
 		var posttextVal = postnum.children("textarea").val();
 		
