@@ -125,20 +125,6 @@
 		    <version>05Nov2002</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
-		<dependency>
-		    <groupId>com.googlecode.json-simple</groupId>
-		    <artifactId>json-simple</artifactId>
-		    <version>1.1.1</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
-		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis</artifactId>
-		    <version>3.5.7</version>
-		</dependency>
-		
 		<!-- Spring JDBC -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
@@ -163,12 +149,6 @@
 		    <groupId>com.googlecode.json-simple</groupId>
 		    <artifactId>json-simple</artifactId>
 		    <version>1.1.1</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.11.0</version>
 		</dependency>
 
 		<!-- JSON 자바 객체를 손쉽게 JSON 형태로 변환(반대 작업도 가능) -->
@@ -236,7 +216,8 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
-            <!-- web.xml is missing and <failOnMissingWebXml> is set to true : 오류나서 추가 -->
+            <!--
+            web.xml is missing and <failOnMissingWebXml> is set to true : 오류나서 추가
             <plugin>
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-war-plugin</artifactId>
@@ -246,6 +227,18 @@
 					<warName>sample</warName>
                 <failOnMissingWebXml>false</failOnMissingWebXml>
                </configuration>
+            </plugin>
+             -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>http://localhost/manager/text</url>
+                    <username>meven_deploy</username>
+                    <password>meven_deploy</password>
+                    <path>/</path>
+                </configuration>
             </plugin>
         </plugins>
     </build>
