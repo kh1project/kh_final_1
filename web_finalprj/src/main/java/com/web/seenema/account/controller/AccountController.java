@@ -67,7 +67,7 @@ public class AccountController {
 			HttpSession session = req.getSession();
 			session.setAttribute("account", dto);
 			session.setAttribute("logined", true);
-			forward = "redirect:/";
+			forward = "redirect:/index";
 		} else {
 			// dto.getId() 값이 0 보다 크지 않은 경우 로그인 실패
 			m.addAttribute("data", dto);
