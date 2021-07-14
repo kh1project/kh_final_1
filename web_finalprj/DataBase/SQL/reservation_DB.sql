@@ -33,3 +33,6 @@ SELECT m.rating
   JOIN seat s
     ON t.id = s.tid
  WHERE s.tid = 1;
+ 
+ INSERT INTO reservation(id, orderid, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+		VALUES(res_seq.NEXTVAL, 'orderid', 200, 3, 1, TO_DATE('2021-07-14', 'yyyy-mm-dd'), 1, 26000, 'k');

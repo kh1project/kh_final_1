@@ -3,7 +3,8 @@ package com.web.seenema.reserve.dto;
 import java.sql.Date;
 
 public class ReservationDTO {
-	private String id;
+	private int id;
+	private String orderid;
 	private int sid;
 	private int timeid;
 	private int aid;
@@ -12,11 +13,18 @@ public class ReservationDTO {
 	private int rcnt;
 	private int totalpay;
 	private char payment;
-	public String getId() {
+	
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
+	}
+	public String getOrderid() {
+		return orderid;
+	}
+	public void setOrderid(String orderid) {
+		this.orderid = orderid;
 	}
 	public int getSid() {
 		return sid;
