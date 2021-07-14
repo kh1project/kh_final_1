@@ -163,6 +163,7 @@ body{
 	</header>
 	<c:url var="main" value="/index" />
 	<c:url var="login" value="/account/login" />
+	<c:url var="join" value="/account/join" />
 	<form action="${login }" method="post">
 	
 	<div class="main-container">
@@ -183,14 +184,14 @@ body{
 				<input id="id_email" name="email" type="text" placeholder="아이디" required></input>
 			</div>
 			<div class="login-input-wrap password-wrap">	
-				<input type="id_password" name="password" type="password" placeholder="비밀번호" id="password" required></input>
+				<input id="id_password" name="password" type="password" placeholder="비밀번호" required></input>
 			</div>
 			<div>
 				<label style="color: red;">${error }</label>
 			</div>
 			<div class="login-button-wrap">
 				<button type="submit" class="loginButton">로그인</button>
-				<c:url var="main" value="/" />
+				<c:url var="main" value="/index" />
 			</div>
 			<div class="login-stay-sign-in">
 				<div class="sort1">
@@ -200,7 +201,8 @@ body{
 		</section>
 		<section class="Easy-sgin-in-wrap">
 			<ul class="sign-button-list">
-				<li><button type="button" class="moveRegister" style="margin-top: 10px;"></i><span>회원가입</span></button></li>
+				<li><button type="button" class="moveRegister" onclick="location.href='${join }'"
+				text-align: center style="margin-top: 10px;"></i><span>회원가입</span></button></li>
 			</ul>
 		</section>
 		</div>

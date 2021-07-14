@@ -37,24 +37,6 @@
 			}
 		});
 	}
-
-		// var email_check = document.getElementById("email_check_res").innerText;
-		// if(email_check == "" || email_check == undefined) {
-		// 	alert("아이디 중복확인을 먼저 진행하세요.");
-		// 	document.getElementById("id_email").focus();
-		// 	return;
-		// } else if(email_check != "사용 가능한 아이디입니다.") {
-		// 	alert("해당 아이디로는 가입을 할 수 없습니다.");
-		// 	document.getElementById("id_email").focus();
-		// 	return;
-		// }	
-		
-		// var password = document.getElementById("id_password");
-		// if(password.value == "" || password.value == undefined) {
-		// 	alert("패스워드를 입력하세요.")
-		// 	password.focus();
-		// 	return;
-		// }
 	
 </script>
 
@@ -226,14 +208,6 @@ select {
                     </span>
                 </div>
 
-                <!-- PW2 
-                <div>
-                    <h3 class="join_title"><label for="id_password2">비밀번호 재확인</label></h3>
-                    <span class="box int_pass_check">
-                        <input type="password" id="id_password2" class="int" maxlength="20" name="password" required>
-                    </span>
-                </div>  -->
-
 
                 <div>
                     <h3 class="join_title"><label for="id_username">이름</label></h3>
@@ -250,8 +224,7 @@ select {
                         oninput="nicknameCheck('${nickname_check }', this.value);" required>
                         <label id="nickname_check_res"></label>
                     </span>
-	                  <!--   <button type="button" onclick="nicknameCheck();">중복확인</button> 
-						<label id="nickname_check_res"></label> -->
+
                 </div>
 
 
@@ -299,13 +272,27 @@ select {
 </body>
 <script>
 function send() {
+	var email = document.getElementById("id_email");
+	if(email.value == "" || email.value == undefined) {
+		alert("아이디를 입력하세요.")
+		email.focus();
+		return;
+	}
+		
+	var password = document.getElementById("id_password");
+	if(password.value == "" || password.value == undefined) {
+		alert("비밀번호를 입력하세요.")
+		password.focus();
+		return;
+	}		
+	
 	var username = document.getElementById("id_username");
 	if(username.value == "" || username.value == undefined) {
 		alert("이름을 입력하세요.")
 		username.focus();
 		return;
 	}
-			
+
 	var nickname_check = document.getElementById("nickname_check_res").innerText;
 	if(nickname_check == "" || nickname_check == undefined) {
 		alert("닉네임을 입력하세요.");
@@ -327,13 +314,6 @@ function send() {
 		document.getElementById("id_email").focus();
 		return;
 	}	
-	
-	var password = document.getElementById("id_password");
-	if(password.value == "" || password.value == undefined) {
-		alert("패스워드를 입력하세요.")
-		password.focus();
-		return;
-	}
 	
 	var age = document.getElementById("id_age");
 	if(age.value == "" || age.value == undefined) {
