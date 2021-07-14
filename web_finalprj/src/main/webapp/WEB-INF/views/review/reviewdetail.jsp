@@ -6,8 +6,9 @@
 	<div class="container">
 		<div class="review-detail-wrap">
 			<div class="review-detail-header">
-				<h3>${data.getTitle() }<span>${data.getCdate() }</span></h3>
-			<p>작성자 : ${data.getAid() }<a href="<%=request.getContextPath() %>/review/update?rid=${data.getId() }">수정</a> <a href="<%=request.getContextPath() %>/review/delete?rid=${data.getId() }">삭제</a> <a href="javascript:;" onclick="history.back();">목록</a></p>
+				<h3>${data.getTitle() }<fmt:formatDate var="cdate" value="${data.getCdate() }" pattern="yyyy/MM/dd HH:mm:ss.SSS" />
+												<small class="text-muted cdate" data-id="${data.getId() }" data-cdate="${cdate }"></small></h3>
+			<p>작성자 : ${data.getAid() } 조회수 : ${data.getVcnt() } <a href="<%=request.getContextPath() %>/review/update?rid=${data.getId() }">수정</a> <a href="<%=request.getContextPath() %>/review/delete?rid=${data.getId() }">삭제</a> <a href="javascript:;" onclick="history.back();">목록</a></p>
 			</div>
 			
 			<c:forEach var="i" items="${contlist }" varStatus="loop">

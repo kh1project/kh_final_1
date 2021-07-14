@@ -27,5 +27,6 @@ public interface ReviewService {
 	public int updatePost(ArrayList<Map<String, String>> postlist, String existingCont, String boardId) throws Exception;
 	public int updateGcnt(int id) throws Exception;
 	public int updateBcnt(int id) throws Exception;
+	public int updateVcnt(int id) throws Exception;
     
 }

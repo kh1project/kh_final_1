@@ -36,7 +36,7 @@
 					<div id="post1" class="col post" onclick="selectPost(1)">
 						<img class="selectImg" src="<%=request.getContextPath() %>/resources/images/sub/bg-img-select.png" alt="이미지 없음">
 						<textarea placeholder="내용을 작성해 주세요." id="ptext1" onkeyup="ptextLengthCk(1);"></textarea>
-						<div class="pTextCnt">(0 / 100)</div>
+						<div class="pTextCnt">(0 / 80)</div>
 						<img id="delBtn1" class="delBtn" src="<%=request.getContextPath() %>/resources/images/common/btn-x-close.png" onclick="delPost(1);">
 					</div>
 					<!-- 이미지1, 텍스트1 묶음 END -->

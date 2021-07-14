@@ -81,10 +81,10 @@ function selectImg(num) {
 
 function ptextLengthCk(id) {
 	var ptextid = $("#ptext" + id);
-    ptextid.next().html("("+ptextid.val().length+" / 100)");
-    if(ptextid.val().length > 100) {
-    	ptextid.val($(ptextid).val().substring(0, 100));
-    	ptextid.next().html("(100 / 100)");
+    ptextid.next().html("("+ptextid.val().length+" / 80)");
+    if(ptextid.val().length > 80) {
+    	ptextid.val($(ptextid).val().substring(0, 80));
+    	ptextid.next().html("(80 / 80)");
 	}
 }
 
@@ -100,7 +100,7 @@ var postClass = document.getElementsByClassName("post");
 var postid = (document.getElementsByClassName("post").length + 1);
 function addPost(){ 
 	if(postClass) {
-		$("#btn_addpost").before("<div id='post" + postid + "' class='col post' onclick='selectPost(" + postid + ")'><img class='selectImg' src='<%=request.getContextPath() %>/resources/images/sub/bg-img-select.png' alt='이미지 없음'><textarea placeholder='내용을 작성해 주세요.' id='ptext" + postid + "' onkeyup='ptextLengthCk(" + postid + ");'></textarea><div class='pTextCnt'>(0 / 100)</div><img id='delBtn" + postid + "' class='delBtn' src='<%=request.getContextPath() %>/resources/images/common/btn-x-close.png' onclick='delPost(" + postid + ");'>");
+		$("#btn_addpost").before("<div id='post" + postid + "' class='col post' onclick='selectPost(" + postid + ")'><img class='selectImg' src='<%=request.getContextPath() %>/resources/images/sub/bg-img-select.png' alt='이미지 없음'><textarea placeholder='내용을 작성해 주세요.' id='ptext" + postid + "' onkeyup='ptextLengthCk(" + postid + ");'></textarea><div class='pTextCnt'>(0 / 80)</div><img id='delBtn" + postid + "' class='delBtn' src='<%=request.getContextPath() %>/resources/images/common/btn-x-close.png' onclick='delPost(" + postid + ");'>");
 	}
 	postid++;
 } 

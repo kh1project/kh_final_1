@@ -20,7 +20,7 @@
 						<div id="post${loop.count }" class="col post" onclick="selectPost(${loop.count })">
 							<img class="selectImg" src="${i.getPostimg() }" alt="이미지 없음">
 							<textarea placeholder="내용을 작성해 주세요." id="ptext${loop.count }" onkeyup="ptextLengthCk(${loop.count });">${i.getPosttext() }</textarea>
-							<div class="pTextCnt">(0 / 100)</div>
+							<div class="pTextCnt">(0 / 80)</div>
 							<img id="delBtn${loop.count }" class="delBtn" src="<%=request.getContextPath() %>/resources/images/common/btn-x-close.png" onclick="delPost(${loop.count });">
 						</div>
 						<%-- 이미지1, 텍스트1 묶음 END --%>

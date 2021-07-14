@@ -73,4 +73,12 @@
 		 	SELECT bcnt FROM board WHERE id = #{id}
 		 </selectKey>
 	</update>
+	<update id="updateVcnt" parameterType="review">
+		UPDATE board
+		   SET vcnt = #{vcnt}
+		 WHERE id = #{id}
+		 <selectKey keyColumn="vcnt" keyProperty="vcnt" resultType="int" order="AFTER">
+		 	SELECT vcnt FROM board WHERE id = #{id}
+		 </selectKey>
+	</update>
 </mapper>

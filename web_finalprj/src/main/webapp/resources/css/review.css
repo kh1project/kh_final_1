@@ -28,7 +28,7 @@
 .card-image:hover { opacity:.9; }
 .card-image img { width:100%; min-height:180px; cursor:pointer; }
 
-.tab-header { display:flex; justify-content: space-between; align-items:center; padding:1rem 0; }
+.tab-header { display:flex; justify-content: space-between; align-items:center; padding:1.2rem 0 3rem; }
 .tab-header h5 span { color:#01738b; font-weight:600; }
 .tab-header-right { display:flex; }
 .tab-header-right span {line-height:42px; padding:0 .3rem; }
@@ -62,7 +62,7 @@
 .post .selectImg, .post textarea { width:100%; }
 .post .selectImg { padding:0; }
 .post .delBtn { position:absolute; top:0.3rem; right:0.3rem; cursor:pointer; }
-.post textarea { border:0; padding:.5rem 1rem 1.5rem; resize:none; border:1px solid #e5e5e5; border-top:0; }
+.post textarea { border:0; padding:.5rem 1rem .5rem; resize:none; border:1px solid #e5e5e5; border-top:0; height:90px; }
 .post.selected textarea { border-color:#fff; }
 .pTextCnt { font-size:12px; position:absolute; bottom:28px; right:28px; color:#aaa; }
 
@@ -74,6 +74,6 @@
 #update .btn_wrap button:last-child { background-color:#503396; color:#fff; }
 
 .review-detail-wrap { border:1px solid #ddd; border-radius:.5rem; padding:1.5rem 0; max-width:60%; min-width:800px; margin:0 auto; }
-.review-post-wrap { background-color:#e8e8e8; padding:2rem 3.5rem; }
+.review-post-wrap { background-color:#eaeaea; padding:2rem 3.5rem; }
 .review-post-wrap img { width:100%; }
 .review-detail-header { position:flex; justify-content: space-between; align-items: center; padding:0 2rem; }
