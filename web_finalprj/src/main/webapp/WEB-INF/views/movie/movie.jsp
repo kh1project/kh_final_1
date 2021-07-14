@@ -9,18 +9,20 @@
 <head>
 <meta charset="UTF-8">
 <title>박스오피스 - SEENEMA</title>
+<!-- jstl context path -->
+<c:url var="root" value="/" /> 
 <script type="text/javascript"
-	src="<%=request.getContextPath()%>/resources/jquery/js/jquery-3.6.0.min.js"></script>
+	src="${root}resources/jquery/js/jquery-3.6.0.min.js"></script>
 <link type="text/css" rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
+	href="${root}resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <script type="text/javascript"
-	src="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
+	src="${root}resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <link type="text/css" rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/static/css/movie.css">
+	href="${root}resources/static/css/movie.css">
 <link type="text/css" rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/static/css/common.css">
+	href="${root}resources/static/css/common.css">
 <script type="text/javascript"
-	src="<%=request.getContextPath()%>/resources/static/js/movie.js"></script>
+	src="${root}resources/static/js/movie.js"></script>
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap')
@@ -47,7 +49,7 @@ ul {
 }
 </style>
 </head>
-<body class="pt-5">
+<body>
 	<!-- ----------------</header>---------------- -->
 	<header>
 		<%@ include file="../module/header.jsp"%>
@@ -83,29 +85,29 @@ ul {
 			<div id="filter-container">
 				<h2>전체영화</h2>
 				<select class="custom-select">
-				<c:choose>
-				<c:when test="${sort eq 1 }">
-					<option class="reserve-sort" selected value="1">예매율</option>
-					<option class="score-sort" value="2">추천</option>
-					<option class="recommend-sort" value="3">별점</option>
-				</c:when>
-				<c:when test="${sort eq 2 }">
-					<option class="reserve-sort" value="1">예매율</option>
-					<option class="score-sort" selected value="2">추천</option>
-					<option class="recommend-sort" value="3">별점</option>
-				</c:when>
-				<c:when test="${sort eq 3 }">
-					<option class="reserve-sort" value="1">예매율</option>
-					<option class="score-sort" value="2">추천</option>
-					<option class="recommend-sort" selected value="3">별점</option>
-				</c:when>
-				<c:otherwise>
-					<option class="reserve-sort" selected value="1">예매율</option>
-					<option class="score-sort" value="2">추천</option>
-					<option class="recommend-sort" value="3">별점</option>
-				</c:otherwise>
-				</c:choose>
-				</select> 
+					<c:choose>
+						<c:when test="${sort eq 1 }">
+							<option class="reserve-sort" selected value="1">예매율</option>
+							<option class="score-sort" value="2">추천</option>
+							<option class="recommend-sort" value="3">별점</option>
+						</c:when>
+						<c:when test="${sort eq 2 }">
+							<option class="reserve-sort" value="1">예매율</option>
+							<option class="score-sort" selected value="2">추천</option>
+							<option class="recommend-sort" value="3">별점</option>
+						</c:when>
+						<c:when test="${sort eq 3 }">
+							<option class="reserve-sort" value="1">예매율</option>
+							<option class="score-sort" value="2">추천</option>
+							<option class="recommend-sort" selected value="3">별점</option>
+						</c:when>
+						<c:otherwise>
+							<option class="reserve-sort" selected value="1">예매율</option>
+							<option class="score-sort" value="2">추천</option>
+							<option class="recommend-sort" value="3">별점</option>
+						</c:otherwise>
+					</c:choose>
+				</select>
 			</div>
 			<br>
 			<div class="movie-center">
@@ -115,8 +117,9 @@ ul {
 					<div class="movies shadow bg-white rounded">
 						<div class="poster">
 							<div class="rank">${numRank = numRank+1 }</div>
-							<a href="<%=request.getContextPath()%>/movie/detail?mid=${item.getId() }"><img
-								src="<%=request.getContextPath()%>/resources/images/movie/${item.getId() }/poster/movie_image.jpg"
+							<a
+								href="${root}movie/detail?mid=${item.getId() }"><img
+								src="${root}resources/images/movie/${item.getId() }/poster/movie_image.jpg"
 								alt="${item.getTitle() }"></a>
 						</div>
 						<div class="title-box">
@@ -143,9 +146,10 @@ ul {
 						<div class="info-box">
 							<div class="reserve-rating">예매율
 								${reserveRating.get(item.getId()) }%</div>
-								<p class="partition"></p>
+							<p class="partition"></p>
 							<div class="grade-box">
-								<div class = "grade">★</div> ${item.getGrade()}
+								<div class="grade">★</div>
+								${item.getGrade()}
 							</div>
 							<div class="rate-date">개봉일 ${item.playdate }</div>
 							<div class="btn-util" id="btns-${item.getId() }">
@@ -159,30 +163,28 @@ ul {
 									<c:when test='${liked eq "true" }'>
 										<span id="like-${item.getId() }"> <span
 											class="btn btn-outline-dark"
-											onclick="iHateIt(${item.getId() })"> ♥
-											<c:choose>
-											<c:when test="${gcnt.get(item.getId()) eq null}">
+											onclick="iHateIt(${item.getId() })"> ♥ <c:choose>
+													<c:when test="${gcnt.get(item.getId()) eq null}">
 												0
 											</c:when>
-											<c:otherwise>
+													<c:otherwise>
 												${gcnt.get(item.getId()) }
 											</c:otherwise>
-											</c:choose>
+												</c:choose>
 										</span>
 										</span>
 									</c:when>
 									<c:otherwise>
 										<span id="unlike-${item.getId() }"> <span
 											class="btn btn-outline-dark"
-											onclick="iLikeIt(${item.getId() })"> ♡
-											<c:choose>
-											<c:when test="${gcnt.get(item.getId()) eq null}">
+											onclick="iLikeIt(${item.getId() })"> ♡ <c:choose>
+													<c:when test="${gcnt.get(item.getId()) eq null}">
 												0
 											</c:when>
-											<c:otherwise>
+													<c:otherwise>
 												${gcnt.get(item.getId()) }
 											</c:otherwise>
-											</c:choose>
+												</c:choose>
 										</span>
 										</span>
 									</c:otherwise>

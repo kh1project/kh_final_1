@@ -122,76 +122,14 @@
 					src="${root }resources/images/movie/${movie.getId() }/poster/movie_image.jpg">
 			</div>
 			<div id="info-menu" class="pt-5">
-				<div class="menues pb-5">
-					<span class="menu-selected">영화 정보</span>
-					<span class="menu">한줄평</span>
+				<div class="menues">
+					<span class="menu">영화 정보</span>
+					<span class="menu-selected">한줄평</span>
 					<span class="menu">무비포스트</span>
 					<span class="menu">스틸컷</span>
 				</div>
 			</div>
-			<div class="content-text">
-				<div class="summary">${movie.getSummary() }</div>
-				<hr>
-				<div class="movie-textinfo">
-					<div>상영타입 : ${movie.getType() }</div>
-					<div style="margin-bottom: -15px">
-						<p>감독 : ${movie.getDirector() }</p>
-						<p class="partition"></p>
-						<p>장르 : ${movie.getGenre() } / ${movie.getRunningtime() }분</p>
-						<p class="partition"></p>
-						<p>등급 : ${movie.getRating() }세이상관람가</p>
-						<p class="partition"></p>
-						<p>개봉일 : ${movie.getPlaydate() }</p>
-					</div>
-					<p>출연진 : ${movie.getActor() }</p>
-				</div>
-			</div>
-		</div>
-		<hr>
-		<div class="info-graph">
-			<div id="gen-graph">
-				<div class="gen-title">연령별 선호도</div>
-				<div class="gen-box">
-					<div class="percent p10 small">
-						10<span class="small">%</span>
-					</div>
-					<div class="bar-box gen10">
-						<div class="bar bar10"></div>
-					</div>
-					<div class="gen small">10대</div>
-				</div>
-				<div class="gen-box">
-					<div class="percent p20 small">
-						10<span class="small">%</span>
-					</div>
-					<div class="bar-box gen20">
-						<div class="bar bar20"></div>
-					</div>
-					<div class="gen small">20대</div>
-				</div>
-				<div class="gen-box">
-					<div class="percent p30 small">
-						10<span class="small">%</span>
-					</div>
-					<div class="bar-box gen30">
-						<div class="bar bar30"></div>
-					</div>
-					<div class="gen small">30대</div>
-				</div>
-				<div class="gen-box">
-					<div class="percent p40 small">
-						10<span class="small">%</span>
-					</div>
-					<div class="bar-box gen40">
-						<div class="bar bar40"></div>
-					</div>
-					<div class="gen small">40대</div>
-				</div>
-				<div class="underline"></div>
-			</div>
-		</div>
-		<hr>
-		
+		</div>		
 		<!-- 아영 코드 시작 -->
 		<div class="line-cnt mt-5"><h4><span id="title">${movie.title }</span> 에 대한 리뷰가 <span id="linecnt">${initPagingInfo.totalrow }</span><span id="extra">개</span> 있어요!</h4></div>
 		<div class="form-group input-container">

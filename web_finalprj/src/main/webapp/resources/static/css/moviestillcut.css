@@ -1,0 +1,62 @@
+#stillcut .colored{
+	color: #5b24ad;
+    font-weight: 600;
+}
+
+#stillcut .image-box{
+	margin-left: -13px;
+}
+
+#stillcut .movie-poster{
+	width: 260px;
+	max-height: 370px;
+	display: inline-block;
+	overflow: hidden;
+    margin: 0px 0px 15px 15px;
+	cursor: pointer;
+}
+
+#stillcut .movie-stillcut{
+	width: 260px;
+	max-height: 370px;
+	display: inline-block;
+	overflow: hidden;
+	margin: 0px 0px 15px 15px;
+	cursor: pointer;
+}
+
+#stillcut img{
+	width: inherit;
+    height: inherit;
+    transform: scale(1);
+    transition: .3s;
+}
+
+#stillcut img:hover{
+	width: inherit;
+    height: inherit;	
+    transform: scale(1.05);
+    transition: .3s;
+}
+
+#crs .crs-bg{
+    display: none;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,.8);
+    position: fixed;
+    z-index: 1030;
+    text-align: center;
+}
+
+#crs .crs-imagebox{
+	max-height: 640px;
+	max-width: 100%;
+}
+
+#crs .crs-window{
+	display: inline-block;
+    position: relative;
+    margin-top: 5%;
+}

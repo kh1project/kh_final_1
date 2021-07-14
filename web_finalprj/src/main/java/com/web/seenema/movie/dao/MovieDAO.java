@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MovieGcntDTO;
+import com.web.seenema.movie.dto.MovieImageDTO;
 import com.web.seenema.movie.dto.MovieLikeDTO;
 
 public interface MovieDAO {
@@ -21,5 +22,7 @@ public interface MovieDAO {
 	public int deleteMovieLike(MovieLikeDTO dto);
 	public MovieDTO getLikeCnt(int mid);
 	public List<MovieGcntDTO> getGcnt();
-	public int getLastMovieNum();
+	public MovieDTO getLastMovieNum();
+	public List<MovieImageDTO> getMoviePosters(Integer mid);
+	public List<MovieImageDTO> getMovieStillcuts(Integer mid);
 }
