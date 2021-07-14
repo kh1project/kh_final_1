@@ -129,26 +129,3 @@ INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 
 INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 12, 'n');
 INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 13, 'n');
 INSERT INTO seat(id, tid, seatrow, seatcol, reserved) VALUES (seat_seq.NEXTVAL, 1, 'G', 14, 'n');
-
-SELECT count(*) FROM seat WHERE tid = 1 AND reserved = 'n';
-SELECT * FROM seat;
-
-SELECT a.id
-	 , b.id
-	 , d.location
-	 , d.name
-	 , c.name
-	 , a.seatrow
-	 , a.seatcol
-	 , a.reserved
-  FROM seat a
-  JOIN movie_theater b
-    ON a.tid = b.id
-  JOIN theater c
-    ON b.tid = c.id
-  JOIN branch d
-    ON c.bid = d.id
- WHERE a.tid = 1
- ORDER BY a.id;
-
-SELECT * FROM seat WHERE tid = 1 ORDER BY id;

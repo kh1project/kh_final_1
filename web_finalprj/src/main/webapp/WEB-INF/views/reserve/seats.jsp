@@ -19,7 +19,7 @@
 	</header>
 	<section class="reserve-frame pt-5">
 		<c:url var="seat" value="/reserve/reservecheck" />
-		<form action="${seat }" id="seat-form" method="post" onsubmit="return send()">
+		<form action="${seat }" id="seat-form" method="get" onsubmit="return send()">
 		<div class="reserve-window">
 				<%@ include file="../module/ReserveFrame.jsp" %>
 				<div class="main-frame">
@@ -30,20 +30,37 @@
 						<c:set var="rating" value="${movie.rating }" />
 					</c:forEach>
 					
+					<c:forEach var="btlist" items="${btlist }">
+						<c:set var="location" value="${btlist.location }" />
+						<c:set var="spot" value="${btlist.name }" />
+						<c:set var="theater" value="${btlist.tname }" />
+					</c:forEach>
+					
+					<c:forEach var="timelist" items="${timelist }">
+						<c:set var="moviedate" value="${timelist.moviedate }" />
+						<c:set var="starttime" value="${timelist.starttime }" />
+						<c:set var="endtime" value="${timelist.endtime }" />
+					</c:forEach>
+					
 					<div class="seat-info">
 						<label class="info-title">좌석/인원 선택</label>
 					</div>
 						<div class="theater-info">
-							<div class="title-sopt">
-								<input type="hidden" class="movie-id" name="mid" value="${mid }" readonly>
-								<input type="text" class="movie-title" name="movietitle" value="${param.title }" readonly>
+							<div class="title-spot">
+								<input type="text" class="movie-title" name="title" value="${title }" readonly>
+								<input type="hidden" class="movie-location" name="location" value="${location }" readonly>
+								<input type="hidden" class="movie-spot" name="name" value="${spot }" readonly>
+								<input type="hidden" class="movie-theater" name="tname" value="${theater }" readonly>
+								<input type="hidden" class="movie-moviedate" name="moviedate" value="${moviedate }" readonly>
+								<input type="hidden" class="movie-starttime" name="starttime" value="${starttime }" readonly>
+								<input type="hidden" class="movie-endtime" name="endtime" value="${endtime }" readonly>
+								<input type="hidden" class="movie-rating" name="rating" value="${rating }" readonly>
 							</div>
 							<div class="screen-spot">
 								<label class="screen">Screen</label>
 							</div>
 							
 							<c:forEach var="list" items="${seatlists }" >
-								<input type="hidden" class="theater" name="theater" value="${list.tid }" readonly>
 								<c:forEach var="seatcnt" items="${seatcnt }">
 									<c:if test="${seatcnt.key eq 'scnt' }">
 										<c:set var="seatamount" value="${seatcnt.value }" />

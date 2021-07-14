@@ -76,13 +76,16 @@ img {
 	margin: 10px; width: 150px;
 }
 
+hr {
+	margon-top: 5px;
+	margin-bottom: 5px;
+}
 div.info > label{
 	display: inline;
-	margin-left: 10px;
 }
 
 div.info > label.list{
-	width: 30%; margin-bottom: 0px;
+	width: 100%; margin-bottom: 0px;
 	font-size: 10pt;
 	font-weight: bold;
 	float: left;
@@ -100,6 +103,26 @@ input.title {
 	display: inline;
 	width: 100px; border: 0;
 	font-size: 10pt; margin: 5px;
+}
+
+input.peple {
+	width: 80px;
+}
+
+p.p-peple{
+	display: inline;	
+	font-size: 10px;
+}
+
+p.p-time {
+	float: left;
+	width: 20px;
+	margin-left: 10px;
+}
+
+input.starttime, input.endtime{
+	float: left;
+	width: 70px;
 }
 
 label.type, label.seatinfo{

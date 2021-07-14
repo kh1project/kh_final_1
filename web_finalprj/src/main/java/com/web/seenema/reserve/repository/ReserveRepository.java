@@ -9,8 +9,10 @@ import com.web.seenema.reserve.dto.BranchTheaterDTO;
 import com.web.seenema.reserve.dto.ReservationDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
+import com.web.seenema.reserve.dto.SeatSelectDTO;
 import com.web.seenema.reserve.dto.TableRstepDTO;
 import com.web.seenema.reserve.dto.TimeDTO;
+import com.web.seenema.reserve.dto.TimeInfoDTO;
 
 public interface ReserveRepository {
 	//public List<Map<String, Object>> selectMovieList() throws Exception;
@@ -28,7 +30,11 @@ public interface ReserveRepository {
 	public List<SeatDTO> selectSeatAll(int tid) throws Exception;
 	public int searchprice(int id) throws Exception;
 	public List<BranchTheaterDTO> selectMovieTheater(int tid) throws Exception;
-	public List<SeatDTO> selectSeat(SeatDTO seatdto);
-	public int updateSeat(SeatDTO seatdto);
-	public int insertReserve(ReservationDTO resdto);
+	public int selectSeat(int id) throws Exception;
+	public int updateSeat(SeatDTO seatdto) throws Exception;
+	public int insertReserve(ReservationDTO resdto) throws Exception;
+	public int getMovieId(String title) throws Exception;
+	public int getBranchTheater(String location, String name, String tname) throws Exception;
+	public int getMTid(int mid, String location, String name, String tname) throws Exception;
+	List<TimeInfoDTO> getTimelist(int mtid, String moviedate, String starttime, String endtime) throws Exception;
 }
