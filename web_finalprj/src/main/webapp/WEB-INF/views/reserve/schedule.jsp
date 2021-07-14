@@ -91,8 +91,8 @@
 			<input type="hidden" name="rating" value="${param.rating }">
 			<input type="hidden" name="title" value="${param.title }">
 			<input id="idnow" type="hidden" name="moviedate">
-			<input class="backbtn" type="button" onclick="history.back();" value="< 이전">
-			<input class="nextbtn" type="button" onclick="check_movie();" value="다음 >">
+			<input class="btn btn-outline-primary" type="button" onclick="history.back();" value="< 이전">
+			<input class="btn btn-outline-primary" type="button" onclick="check_movie();" value="다음 >">
 		</div>
 	  </div>
 	</div>

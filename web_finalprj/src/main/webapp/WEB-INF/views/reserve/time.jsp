@@ -14,8 +14,9 @@
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/time.css">
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/static/css/common.css">
+<!-- 툴팁 활성화시 필요! -->
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.bundle.min.js"></script>
 </head>
-<!-- button { opacity: 0.25 } 버튼 투명하게 설정할 수 있음 -->
 <body class="pt-5">
   <header>
   	<%@ include file="../module/header.jsp" %>
@@ -58,7 +59,7 @@
 			<c:if test="${!empty timelist }">
 			  <c:forEach var="TimeDTO" items="${timelist}" varStatus="status">
 		    	<div class="col-4">
-			    	<a class="btn" role="tab" data-toggle="tooltip" data-placement="top" title="${TimeDTO.endtime }"
+			    	<a class="btn btn-primary" id="tooltip" type="button" data-toggle="tooltip" data-placement="top" title="${TimeDTO.endtime }"
 			    	  href="${location }/seats?location=${param.location }&name=${param.name }&rating=${param.rating }&title=${fn:replace(param.title, '#', '%23') }&moviedate=${param.moviedate }&tid=${TimeDTO.tid }&starttime=${TimeDTO.starttime }&endtime=${TimeDTO.endtime }">
 				      <dl>
 				        <dt>
@@ -105,8 +106,8 @@
 	today = year + "-" + month + "-" + day;
 	document.getElementById("idnow").value = today;
 	
-	$(function () {
-		  $('[data-toggle="tooltip"]').tooltip();
+	$(document).ready(function () {
+		  $("[data-toggle='tooltip']").tooltip();
 		});
 </script>
 </body>

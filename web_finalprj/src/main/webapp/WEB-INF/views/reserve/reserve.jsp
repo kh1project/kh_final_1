@@ -143,7 +143,7 @@
         <div class="col" id="next">
 	       <input type="hidden" name="location" value="${param.location }">
 	       <input type="hidden" name="name" value="${param.name }">
-	       <input class="nextbtn" type="button" onclick="check()" value="다음 >">
+	       <input class="btn btn-outline-primary" type="button" onclick="check()" value="다음 >">
 	    </div>
       </div>
 	</div>
