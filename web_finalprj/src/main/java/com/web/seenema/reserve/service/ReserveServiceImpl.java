@@ -13,8 +13,10 @@ import com.web.seenema.reserve.dto.BranchTheaterDTO;
 import com.web.seenema.reserve.dto.ReservationDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
+import com.web.seenema.reserve.dto.SeatSelectDTO;
 import com.web.seenema.reserve.dto.TableRstepDTO;
 import com.web.seenema.reserve.dto.TimeDTO;
+import com.web.seenema.reserve.dto.TimeInfoDTO;
 import com.web.seenema.reserve.repository.ReserveRepository;
 
 @Service
@@ -74,24 +76,38 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public List<SeatDTO> checkseat(SeatDTO seatdto) throws Exception {
-		return dao.selectSeat(seatdto);
+	public int selectSeat(int id) throws Exception {
+		return dao.selectSeat(id);
 	}
 
 	@Override
-	public int updateSeat(SeatDTO seatdto) {
+	public int updateSeat(SeatDTO seatdto) throws Exception{
 		return dao.updateSeat(seatdto);
 	}
 
 	@Override
-	public int insertReserve(ReservationDTO resDTO) {
+	public int insertReserve(ReservationDTO resDTO) throws Exception{
 		return dao.insertReserve(resDTO);
 	}
 
 	@Override
-	public int getSeatid(String string) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getMovieId(String title) throws Exception {
+		return dao.getMovieId(title);
+	}
+
+	@Override
+	public int getmtid(int mid, String location, String name, String tname) throws Exception {
+		return dao.getMTid(mid, location, name, tname);
+	}
+	
+	@Override
+	public int getBranchTheater(String location, String name, String tname) throws Exception {
+		return dao.getBranchTheater(location, name, tname);
+	}
+
+	@Override
+	public List<TimeInfoDTO> getTimelist(int mtid, String moviedate, String starttime, String endtime) throws Exception {
+		return dao.getTimelist(mtid, moviedate, starttime, endtime);
 	}
 	
 }

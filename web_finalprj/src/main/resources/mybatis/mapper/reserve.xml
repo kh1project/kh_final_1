@@ -4,33 +4,70 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="reserveMapper">
+
+	<select id="getTimeid" parameterType="HashMap" resultType="timeinfo">
+		SELECT * FROM time
+		 WHERE mtid = #{mtid}
+		   AND TO_CHAR(moviedate, 'yyyy-mm-dd') = #{moviedate}
+		   AND starttime = #{starttime}
+		   AND endtime = #{endtime}
+	</select>
+	
+	<select id="getMid" resultType="_int">
+		SELECT id FROM movie WHERE TITLE = #{title}
+	</select>
+	
+	<select id="getMTid" parameterType="HashMap" resultType="_int">
+		SELECT mt.id
+		  FROM movie_theater mt
+		  JOIN theater t
+		    ON mt.tid = t.id
+		  JOIN branch b
+		    ON t.bid = b.id
+		  JOIN movie m
+		    ON m.id = mt.mid
+		 WHERE mt.mid = 1 AND b.name = #{name} AND b.location = #{location} AND t.name = #{tname}
+	</select>
+
 	<insert id="reserveInsert" parameterType="reservation">
 	  	INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
 			VALUES(#{id}, #{sid}, #{timeid}, ${aid}, #{rdate}, ${rcnt}, #{totalpay}, #{payment})
 	</insert>
 
 	<update id="updateSeat" parameterType="seat">
-	    UPDATE seat
-	       SET reserved = 'y'
-	     WHERE tid = #{tid}
-	       AND seatrow = #{row}
-	       AND seatcol = #{col}
+	    UPDATE (
+			SELECT * FROM seat s, time t
+			WHERE s.tid = t.id AND t.mtid = #{tid} AND s.seatrow = #{seatrow} AND s.seatcol = #{seatcol}
+		) SET reserved = 'y'
 	</update>
 
-	<select id="checkseat" parameterType="HashMap" resultType="seat">
-    	SELECT reserved FROM seat WHERE tid = #{tid} AND seatrow = #{row} AND seatcol = #{col}
+	<select id="checkseat" resultType="_int">
+    	SELECT * FROM seat
+    	 WHERE id = #{id} AND reserved = 'n'
 	</select>
 	
 	<select id="seatcnt" resultType="_int">
-    	SELECT count(*) FROM seat WHERE tid = #{tid}
+    	SELECT count(*)
+    	  FROM seat
+    	  JOIN time t
+    	    ON t.id = seat.tid
+    	 WHERE t.mtid = #{tid}
 	</select>
 	
 	<select id="s_leftcnt" resultType="_int">
-		SELECT count(*) FROM seat WHERE tid = #{tid} AND reserved = 'n'
+		SELECT count(*)
+		  FROM seat
+		  JOIN time t
+    	    ON t.id = seat.tid
+    	 WHERE t.mtid = #{tid}
+    	   AND reserved = 'n'
 	</select>
 	
 	<select id="seat_all" resultType="seat">
-	    SELECT * FROM seat WHERE tid = #{tid} ORDER BY id
+	    SELECT *
+	      FROM seat
+    	 WHERE tid = #{tid}
+    	 ORDER BY id
 	</select>
 	
 	<select id="pay_all" resultType="_int">
@@ -40,7 +77,7 @@
 	<select id="search_Branch" resultType="BranchTheater">
 		SELECT mt.id AS tid
 			 , b.location
-			 , b.name AS bname
+			 , b.name
 			 , t.name AS tname
 		  FROM movie_theater mt
 		  JOIN theater t

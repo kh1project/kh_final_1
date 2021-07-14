@@ -14,8 +14,10 @@ import com.web.seenema.reserve.dto.BranchTheaterDTO;
 import com.web.seenema.reserve.dto.ReservationDTO;
 import com.web.seenema.reserve.dto.RstepDTO;
 import com.web.seenema.reserve.dto.SeatDTO;
+import com.web.seenema.reserve.dto.SeatSelectDTO;
 import com.web.seenema.reserve.dto.TableRstepDTO;
 import com.web.seenema.reserve.dto.TimeDTO;
+import com.web.seenema.reserve.dto.TimeInfoDTO;
 
 @Repository
 public class ReserveRepositoryImpl implements ReserveRepository{
@@ -118,19 +120,55 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 	}
 
 	@Override
-	public List<SeatDTO> selectSeat(SeatDTO seatdto) {
-		return sqlSession.selectList("reserveMapper.checkseat", seatdto);
+	public int selectSeat(int id) throws Exception {
+		return sqlSession.selectOne("reserveMapper.checkseat", id);
 	}
 
 	@Override
-	public int updateSeat(SeatDTO seatdto) {
+	public int updateSeat(SeatDTO seatdto) throws Exception{
 		return sqlSession.update("reserveMapper.updateSeat", seatdto);
 	}
 
 	@Override
-	public int insertReserve(ReservationDTO resdto) {
+	public int insertReserve(ReservationDTO resdto) throws Exception{
 		System.out.println(resdto.getSid());
 		return sqlSession.insert("reserveMapper.reserveInsert", resdto);
+	}
+
+	@Override
+	public int getBranchTheater(String location, String name, String tname) throws Exception {
+		Map<String, Object> data = new HashMap<>();
+			data.put("location", location);
+			data.put("name", name);
+			data.put("tname", tname);
+		return sqlSession.selectOne("reserveMapper.getTid", data);
+	}
+
+	@Override
+	public int getMovieId(String title) throws Exception {
+		return sqlSession.selectOne("reserveMapper.getMid", title);
+	}
+
+	@Override
+	public int getMTid(int mid, String location, String name, String tname) {
+		Map<String, Object> data = new HashMap<>();
+		data.put("mid", mid);
+		data.put("location", location);
+		data.put("name", name);
+		data.put("tname", tname);
+		
+		return sqlSession.selectOne("reserveMapper.getMTid", data);
+	}
+
+	@Override
+	public List<TimeInfoDTO> getTimelist(int mtid, String moviedate, String starttime, String endtime) throws Exception {
+		Map<String, Object> data = new HashMap<>();
+		data.put("mtid", mtid);
+		data.put("moviedate", moviedate);
+		data.put("starttime", starttime);
+		data.put("endtime", endtime);
+		
+		return sqlSession.selectList("reserveMapper.getTimeid", data);
 	}
 
 }

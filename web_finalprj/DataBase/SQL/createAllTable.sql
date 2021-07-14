@@ -148,12 +148,13 @@ CREATE TABLE seat(
 );
 
 ALTER TABLE seat ADD CONSTRAINT seat_id_pk PRIMARY KEY(id);
+ALTER TABLE seat ADD CONSTRAINT seat_tid_FK FOREIGN KEY(tid) REFERENCES time(id);
 ALTER TABLE seat MODIFY seatrow CONSTRAINT seat_row_nn NOT NULL;
 ALTER TABLE seat MODIFY seatcol CONSTRAINT seat_col_nn NOT NULL;
 ALTER TABLE seat ADD CONSTRAINT seat_reserved_CK CHECK(reserved IN('n', 'y'));
 
 COMMENT ON COLUMN seat.id IS '좌석 식별번호';
-COMMENT ON COLUMN seat.tid IS '상영관 식별번호';
+COMMENT ON COLUMN seat.tid IS '시간 식별번호';
 COMMENT ON COLUMN seat.seatrow IS '좌석의 행';
 COMMENT ON COLUMN seat.seatcol IS '좌석의 열';
 COMMENT ON COLUMN seat.reserved IS '좌석 예약 여부';
@@ -200,7 +201,8 @@ COMMENT ON COLUMN account.expiredate IS '회원 탈퇴일';
 -- 예매 정보에서 예매 id -> 예매번호로 변경
 -- 예매 테이블
 CREATE TABLE reservation(
-    id VARCHAR2(64),
+    id NUMBER,
+    orderid VACHAR2(64), 
     sid NUMBER,
     timeid NUMBER,
     aid NUMBER,
@@ -211,14 +213,15 @@ CREATE TABLE reservation(
     payment CHAR(1)
 );
 
-ALTER TABLE reservation MODIFY id VARCHAR2(64);
 ALTER TABLE reservation ADD CONSTRAINT reservation PRIMARY KEY(sid);
+ALTER TABLE reservation MODIFY orderid CONSTRAINT reservation_orderid_nn NOT NULL;
 ALTER TABLE reservation ADD CONSTRAINT reservation_sid_FK FOREIGN KEY(sid) REFERENCES seat(id);
 ALTER TABLE reservation ADD CONSTRAINT reservation_timeid_FK FOREIGN KEY(timeid) REFERENCES time(id);
 ALTER TABLE reservation ADD CONSTRAINT reservation_aid_FK FOREIGN KEY(aid) REFERENCES account(id);
 ALTER TABLE reservation MODIFY totalpay CONSTRAINT reservation_totalpay_nn NOT NULL;
 
-COMMENT ON COLUMN reservation.id IS '예매 번호';
+COMMENT ON COLUMN reservation.id IS '예매 식별번호';
+COMMENT ON COLUMN reservation.orderid IS '예매 번호';
 COMMENT ON COLUMN reservation.sid IS '예매 좌석 식별번호';
 COMMENT ON COLUMN reservation.timeid IS '예매 시간 식별번호';
 COMMENT ON COLUMN reservation.aid IS '예매자 식별번호';

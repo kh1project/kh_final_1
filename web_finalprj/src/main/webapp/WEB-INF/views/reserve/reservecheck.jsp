@@ -34,13 +34,19 @@
 			<c:forEach var="btlist" items="${btlist }">
 				<c:set var="tid" value="${btlist.tid }" />
 				<c:set var="location" value="${btlist.location }" />
-				<c:set var="spot" value="${btlist.bname }" />
+				<c:set var="spot" value="${btlist.name }" />
 				<c:set var="theater" value="${btlist.tname }" />
 			</c:forEach>
 			
 			<c:forEach var="poster" items="${poster }">
 				<c:set var="posterId" value="${poster.id }" />
 				<c:set var="postername" value="${poster.name }" />
+			</c:forEach>
+			
+			<c:forEach var="timelist" items="${timelist }">
+				<c:set var="moviedate" value="${timelist.moviedate }" />
+				<c:set var="starttime" value="${timelist.starttime }" />
+				<c:set var="endtime" value="${timelist.endtime }" />
 			</c:forEach>
 			
 			<div class="center-frame">
@@ -61,19 +67,24 @@
 								</c:choose>
 							
 								<label class="rating-${age }">${age }</label>
-								<input type="hidden" name="movieid" class="info movie" value="${mid }">
-								<input type="text" class="info title" name="movieTitle" value="${title }" readonly>
+								<input type="text" class="info title" name="title" value="${title }" readonly>
 								<label class="type">${type }</label>
 								<hr>
 							<div class="info">
 								<label class="list">영화관</label>
-								<input type="hidden" name="movie_theater" class="info theater" value="${tid }">
 								<input type="text" name="location" class="info cinema" value="${location }" readonly>
-								<input type="text" name="spot" class="info cinema" value="${spot }" readonly>
-								<input type="text" name="theater" class="info cinema" value="${theater }" readonly>
-								<label class="list">인원</label><input type="text" name="peple" class="info peple" value="${peple }" readonly>
+								<input type="text" name="name" class="info cinema" value="${spot }" readonly>
+								<input type="text" name="tname" class="info cinema" value="${theater }" readonly>
+								<label class="list">인원</label><input type="text" name="peple" class="info peple" value="${peple }" readonly><p class="p-peple">명</p>
+								<hr>
+								<label class="list">상영일</label><input type="text" name="moviedate" class="info moviedate" value="${moviedate }" readonly>
+								<hr>
+								<label class="list">상영시간</label>
+								<input type="text" name="starttime" class="info starttime" value="${starttime }" readonly><p class="p-time">~</p>
+								<input type="text" name="endtime" class="info endtime" value="${endtime }" readonly>
 								<hr>
 								<label class="list">좌석</label><input type="text" name="seat" class="info seat" value="${Seat }" readonly>
+								
 							</div>
 						</div>
 				</div>

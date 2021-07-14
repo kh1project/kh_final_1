@@ -8,16 +8,14 @@ INSERT INTO ACCOUNT (id, name, nickname, email, phone, password, gender, age, jo
 
 -- 결제 금액 컬럼 추가로 인한 수정.
 -- 예약정보 넣기
-INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
-	VALUES(res_seq.NEXTVAL, 1, 1, 1, SYSDATE, 1, 13000, 'k');
-INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
-	VALUES(res_seq.NEXTVAL, 3, 2, 1, SYSDATE, 1, 13000, 'k');
-INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
-	VALUES(res_seq.NEXTVAL, 8, 8, 1, SYSDATE, 1, 13000, 'k');
-INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
-	VALUES(res_seq.NEXTVAL, 5, 10, 1, SYSDATE, 1, 13000, 'k');
-	
-select * from reservation where aid = 1;
+INSERT INTO reservation(id, orderid, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+	VALUES(res_seq.NEXTVAL, '21071411A1', 1, 1, 1, SYSDATE, 1, 13000, 'k');
+INSERT INTO reservation(id, orderid, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+	VALUES(res_seq.NEXTVAL, '21071421A3', 3, 2, 1, SYSDATE, 1, 13000, 'k');
+INSERT INTO reservation(id, orderid, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+	VALUES(res_seq.NEXTVAL, '21071482A8', 8, 8, 1, SYSDATE, 1, 13000, 'k');
+INSERT INTO reservation(id, orderid, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+	VALUES(res_seq.NEXTVAL, '21071482A5', 5, 10, 1, SYSDATE, 1, 13000, 'k');
 
 -- aid로 내가 본 영화의 mid를 가져온다.
 select mid
