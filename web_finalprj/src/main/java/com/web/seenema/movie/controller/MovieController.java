@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.web.seenema.account.dto.AccountDTO;
 import com.web.seenema.line.dto.LineDTO;
 import com.web.seenema.line.dto.PagingInfoDTO;
 import com.web.seenema.line.service.LinePagingService;
@@ -47,13 +48,16 @@ public class MovieController {
 		}
 		
 		Map<Integer, String> reserveRating = service.getReserveRate();
-		
 		HttpSession session = request.getSession();
-		session.setAttribute("id", 0);
-		//id 0이면 로그인 안한거!
 		
-		List<MovieLikeDTO> likeList = service.getMovieLikeList((int) session.getAttribute("id"));
+		int aid = 0;
 		
+		if(session.getAttribute("account") != null) {
+			AccountDTO dto = (AccountDTO) session.getAttribute("account");
+			aid = dto.getId();
+		}	
+		
+		List<MovieLikeDTO> likeList = service.getMovieLikeList(aid);
 		Map<Integer, Integer> gcnt = service.getGcnt();
 		
 		model.addAttribute("movieList", movieList);
@@ -76,8 +80,15 @@ public class MovieController {
 		MovieDTO dto = mdao.getMovie(mid); // 영화정보 1개 가져오기
 		Map<Integer, String> reserveRating = service.getReserveRate(); //예매율 
 		HttpSession session = request.getSession(); // 로그인 세션 가져오기
-		List<MovieLikeDTO> likeList = service.getMovieLikeList((int) session.getAttribute("id")); // 좋아요 받은 영화 리스트 가져오기
 		Map<Integer, Integer> gcnt = service.getGcnt(); // 좋아요 갯수 가져오기(전체)
+		
+		int aid = 0;
+		
+		if(session.getAttribute("account") != null) {
+			AccountDTO adto = (AccountDTO) session.getAttribute("account");
+			aid = adto.getId();
+		}
+		List<MovieLikeDTO> likeList = service.getMovieLikeList(aid); // 좋아요 받은 영화 리스트 가져오기
 		
 		model.addAttribute("movie", dto);		
 		model.addAttribute("reserveRating", reserveRating.get(mid));

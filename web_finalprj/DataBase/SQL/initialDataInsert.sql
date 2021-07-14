@@ -795,29 +795,29 @@ INSERT INTO Image_files(id, mid, name, path) VALUES(Image_files_seq.NEXTVAL, 3, 
 --*************************************
 CREATE SEQUENCE time_seq;
 
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/07/13', 'YY/MM/DD'), '11:30:00', '13:14:00');
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/07/13', 'YY/MM/DD'), '13:34:00', '15:18:00');
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/07/13', 'YY/MM/DD'), '17:40:00', '19:10:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/07/14', 'YY/MM/DD'), '11:30:00', '13:14:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/07/14', 'YY/MM/DD'), '13:34:00', '15:18:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 1, TO_DATE('21/07/14', 'YY/MM/DD'), '17:40:00', '19:10:00');
 
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 2, TO_DATE('21/07/13', 'YY/MM/DD'), '11:40:00', '13:24:00');
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 2, TO_DATE('21/07/13', 'YY/MM/DD'), '13:44:00', '15:28:00');
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 2, TO_DATE('21/07/13', 'YY/MM/DD'), '17:40:00', '19:10:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 2, TO_DATE('21/07/14', 'YY/MM/DD'), '11:40:00', '13:24:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 2, TO_DATE('21/07/14', 'YY/MM/DD'), '13:44:00', '15:28:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 2, TO_DATE('21/07/14', 'YY/MM/DD'), '17:40:00', '19:10:00');
 
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/13', 'YY/MM/DD'), '11:20:00', '13:04:00');
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/13', 'YY/MM/DD'), '13:04:00', '15:08:00');
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/13', 'YY/MM/DD'), '17:40:00', '19:10:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/14', 'YY/MM/DD'), '11:20:00', '13:04:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/14', 'YY/MM/DD'), '13:04:00', '15:08:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 3, TO_DATE('21/07/14', 'YY/MM/DD'), '17:40:00', '19:10:00');
 
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 4, TO_DATE('21/07/13', 'YY/MM/DD'), '11:30:00', '13:14:00');
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 4, TO_DATE('21/07/13', 'YY/MM/DD'), '13:34:00', '15:18:00');
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 4, TO_DATE('21/07/13', 'YY/MM/DD'), '17:40:00', '19:10:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 4, TO_DATE('21/07/14', 'YY/MM/DD'), '11:30:00', '13:14:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 4, TO_DATE('21/07/14', 'YY/MM/DD'), '13:34:00', '15:18:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 4, TO_DATE('21/07/14', 'YY/MM/DD'), '17:40:00', '19:10:00');
 
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 5, TO_DATE('21/07/13', 'YY/MM/DD'), '11:30:00', '13:14:00');
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 5, TO_DATE('21/07/13', 'YY/MM/DD'), '13:34:00', '15:18:00');
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 5, TO_DATE('21/07/13', 'YY/MM/DD'), '17:40:00', '19:10:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 5, TO_DATE('21/07/14', 'YY/MM/DD'), '11:30:00', '13:14:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 5, TO_DATE('21/07/14', 'YY/MM/DD'), '13:34:00', '15:18:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 5, TO_DATE('21/07/14', 'YY/MM/DD'), '17:40:00', '19:10:00');
 
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 6, TO_DATE('21/07/13', 'YY/MM/DD'), '11:30:00', '13:14:00');
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 6, TO_DATE('21/07/13', 'YY/MM/DD'), '13:34:00', '15:18:00');
-INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 6, TO_DATE('21/07/13', 'YY/MM/DD'), '17:40:00', '19:10:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 6, TO_DATE('21/07/14', 'YY/MM/DD'), '11:30:00', '13:14:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 6, TO_DATE('21/07/14', 'YY/MM/DD'), '13:34:00', '15:18:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 6, TO_DATE('21/07/14', 'YY/MM/DD'), '17:40:00', '19:10:00');
 
 --*************************************
 -- 좌석테이블 INSERT

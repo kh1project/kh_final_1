@@ -1,5 +1,6 @@
 package com.web.seenema.account.controller;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -30,8 +31,14 @@ public class AccountController {
 	public String join(Model m, @ModelAttribute AccountDTO dto) throws Exception {
 		String forward = "";
 		
+        System.out.println("이메일 -> "+dto.getEmail());
+		System.out.println("암호 -> "+dto.getPassword());
+		System.out.println("이름 -> "+dto.getUsername());
+		System.out.println("닉네임 -> "+dto.getNickname());
+		System.out.println("나이 -> "+dto.getAge());
+		System.out.println("성별 -> "+dto.getGender());
+		System.out.println("연락처 -> "+dto.getPhone());
 		boolean result = account.join(dto);
-		
 		if(result) {
 			// 가입 성공 했을 때 로그인 페이지로 리다이렉트
 			forward = "redirect:/account/login";
@@ -72,12 +79,12 @@ public class AccountController {
 	}
 	
 	/* 로그아웃 컨트롤러 */
-	@RequestMapping(value = "/모르겠어유")
-	public ModelAndView idontknow() {
-		ModelAndView mv = new ModelAndView("account/idontknow");
-		mv.addObject("", "");
+	@RequestMapping(value = "/logout")
+	public String idontknow(Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		session.invalidate();
 		
-		return mv;
+		return "redirect:/index";
 	}
 	
 	@RequestMapping(value = "/mypage")

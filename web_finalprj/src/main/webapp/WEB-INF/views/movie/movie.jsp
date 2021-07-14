@@ -115,8 +115,8 @@ ul {
 					<div class="movies shadow bg-white rounded">
 						<div class="poster">
 							<div class="rank">${numRank = numRank+1 }</div>
-							<a href="/movie/detail?mid=${item.getId() }"><img
-								src="/resources/images/movie/${item.getId() }/poster/movie_image.jpg"
+							<a href="<%=request.getContextPath()%>/movie/detail?mid=${item.getId() }"><img
+								src="<%=request.getContextPath()%>/resources/images/movie/${item.getId() }/poster/movie_image.jpg"
 								alt="${item.getTitle() }"></a>
 						</div>
 						<div class="title-box">
@@ -188,7 +188,7 @@ ul {
 									</c:otherwise>
 								</c:choose>
 								<span class="btn btn-outline-dark" id="reserve-${item.getId() }"
-									onclick="window.location.href = '/reserve?mid=${item.getId()}';">
+									onclick="window.location.href = '/seenema/reserve?location=';">
 									예매 </span>
 							</div>
 						</div>

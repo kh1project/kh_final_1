@@ -18,6 +18,8 @@
 	href="<%=request.getContextPath()%>/resources/static/css/line.css">
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/static/js/line.js"></script>
+	<script type="text/javascript"
+	src="<%=request.getContextPath()%>/resources/static/js/moviedetail.js"></script>
 <style>
 @import
 	url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;500&display=swap')
@@ -42,7 +44,7 @@
 		<div>
 			<div class="info-container">
 				<img class="bg-poster" alt="movie-id${movie.getId() }-img"
-					src="/resources/images/movie/${movie.getId() }/poster/movie_image (1).jpg">
+					src="<%=request.getContextPath()%>/resources/images/movie/${movie.getId() }/poster/movie_image (1).jpg">
 				<div class="info">
 					<div class="title ">${movie.getTitle()}</div>
 					<div class="subtitle ">${movie.getSubtitle()}</div>
@@ -100,7 +102,7 @@
 										d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z" />
 								</svg>
 							</button>
-							<a class="reserve" href="/reserve?mid=${movie.getId()}">예매하기</a>
+							<a class="reserve" href="/seenema/reserve?location=">예매하기</a>
 						</div>
 					</div>
 				</div>
@@ -125,7 +127,7 @@
 				</p>
 				<img class="rounded img-fluid float-right"
 					alt="${movie.getTitle() }"
-					src="/resources/images/movie/${movie.getId() }/poster/movie_image.jpg">
+					src="<%=request.getContextPath()%>/resources/images/movie/${movie.getId() }/poster/movie_image.jpg">
 			</div>
 			<div class="content-text">
 				<div class="summary">${movie.getSummary() }</div>
