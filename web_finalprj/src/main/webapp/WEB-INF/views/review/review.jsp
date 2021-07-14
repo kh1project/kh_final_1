@@ -68,7 +68,7 @@
 													<button type="button" class="btn btn-sm btn-outline-secondary"><i class="far fa-comment-alt fa-fw"></i><span>${i.getCommcnt() }</span></button>
 												</div>
 												<fmt:formatDate var="cdate" value="${i.getCdate() }" pattern="yyyy-MM-dd HH:mm:ss.SSS" />
-												<small class="text-muted cdate" data-id="${i.getId() }" data-cdate="${cdate }"></small>
+												<small class="text-muted cdate" data-id="${i.getId() }" data-cdate="${cdate }">${cdate }</small>
 											</div>
 										</div>
 									</div>

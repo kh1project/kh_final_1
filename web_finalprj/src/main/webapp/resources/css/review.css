@@ -73,7 +73,24 @@
 #add-step2 .btn_wrap button:last-child,
 #update .btn_wrap button:last-child { background-color:#503396; color:#fff; }
 
-.review-detail-wrap { border:1px solid #ddd; border-radius:.5rem; padding:1.5rem 0; max-width:60%; min-width:800px; margin:0 auto; }
-.review-post-wrap { background-color:#eaeaea; padding:2rem 3.5rem; }
-.review-post-wrap img { width:100%; }
-.review-detail-header { position:flex; justify-content: space-between; align-items: center; padding:0 2rem; }
+.review-detail-wrap { border:1px solid #ddd; border-radius:.5rem; padding:2rem 0 1rem; max-width:60%; min-width:800px; margin:0 auto; }
+.review-post-wrap { background-color:#eaeaea; padding:2rem 3.5rem; display: flex; flex-direction: column; align-items: center; }
+.review-post-wrap + .review-post-wrap { padding-top:0; }
+.review-post-wrap img { max-width:100%; margin-bottom:.5rem; }
+.review-detail-header { display:flex; justify-content: space-between; align-items: center; padding:0 2rem 2rem; }
+.review-detail-header h3,
+.review-detail-header p { margin:0; }
+.review-detail-header h3 { display:flex; flex-direction: column; align-content: flex-start; }
+.review-detail-header h3 small { color:#999; font-size:.9rem; padding-top:.3rem;}
+.review-detail-header > div { display:flex; flex-direction: column; align-content: flex-end; }
+.review-detail-header > div * { color:#999; }
+.review-detail-header > div p { text-align:right; }
+.review-detail-header > div p + p { margin-top:.5rem; }
+.review-detail-header > div span { margin-left:10px; }
+.review-detail-header > div a { border: 1px solid #ddd; padding: 0 .8rem; margin-left: 5px; font-size: .9rem; border-radius: 2rem;}
+.review-detail-header > div a:hover { background-color:#4397a9; color:#fff; border-color:#4397a9; }
+.review-detail-header > div i { margin-right:3px; }
+.detail-btn-wrap { display:flex; justify-content:center; padding-top:1rem; }
+.detail-btn-wrap button { border:0; background:none; }
+.btn-gcnt .fa-thumbs-up,
+.btn-bcnt .fa-thumbs-down { color:#999; }
