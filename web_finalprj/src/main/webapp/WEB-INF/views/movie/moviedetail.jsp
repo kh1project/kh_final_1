@@ -12,6 +12,7 @@
 	href="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
 <link type="text/css" rel="stylesheet"
 	href="<%=request.getContextPath()%>/resources/static/css/common.css">
 <link type="text/css" rel="stylesheet"
@@ -188,16 +189,15 @@
 		<div class="line-cnt mt-5"><h4><span id="title">${movie.title }</span> 에 대한 리뷰가 <span id="linecnt">${initPagingInfo.totalrow }</span><span id="extra">개</span> 있어요!</h4></div>
 		<div class="form-group input-container">
 			<div class="starForm">
+				<input type="hidden" value="">
 				<c:forEach begin="1" end="5" varStatus="i" >
 					<span id="${i.index }" onclick="star(${i.index });">
-						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
-					  		<path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-						</svg>
+						<i class="far fa-star"></i>
 					</span>
 				</c:forEach>
 			</div>
 			<textarea class="form-control input" name="line" placeholder="한줄평을 입력해주세요." rows="2" oninput="realtimeCheckcnt(this);"></textarea>
-			<button type="button" class="btn btn-primary submit" onclick="submit(${movie.id }, 1, 3);">한줄평 등록</button>					
+			<button type="button" class="btn btn-primary submit" onclick="submit(${movie.id }, 1);">한줄평 등록</button>					
 		</div>
 		<div class="currcnt-outer">
 			<div class="currcnt">
@@ -315,7 +315,7 @@ window.onload = function() {
 }
 
 
-function submit(mid, aid, star) {
+function submit(mid, aid) {
 	// check Valid
 	var ele = document.getElementsByName('line');
 	if(ele[0].value.length == 0) {
@@ -330,6 +330,8 @@ function submit(mid, aid, star) {
 	
 	var contents = document.getElementsByName('line')[0].value;
 	var linecnt = document.getElementById('linecnt');
+	
+	var star = document.querySelector('.starForm').firstChild.value;
 
 	// submit
 	$.ajax({
@@ -347,6 +349,12 @@ function submit(mid, aid, star) {
 				document.getElementsByName('line')[0].value = '';
 				document.getElementById('currcnt').innerText = '0';
 				linecnt.innerText = Number(linecnt.innerText) + 1;
+				for(let i = 1; i <= star; i++) {
+					document.getElementById(star).innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"><path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/></svg>';
+				}
+				
+				document.querySelectorAll('.lineone-outer')[9].remove();
+				document.querySelectorAll('.line-date')[9].remove();
 				
 				var div = document.createElement('div');
 				div.innerHTML = "<div class='user-info'><span></span></div>";
@@ -377,10 +385,6 @@ function submit(mid, aid, star) {
 			}
 		}
 	});
-	
-	if(linecnt.innerText > 10) {
-		
-	}
 }
 </script>
 </html>

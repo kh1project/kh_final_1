@@ -8,8 +8,9 @@
 <title>SEENEMA - movie theater</title>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/static/css/font.css">
-<link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/static/css/main.css">
-<link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/static/css/mainheader.css">
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/static/css/index.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" />
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <c:url var="url" value="/mainAjax" />
@@ -47,7 +48,7 @@
 </style>
 -->
 <body class="pt-5">
-    <%@ include file="./mainheader.jsp" %>
+    <%@ include file="./module/header.jsp" %>
 	<div>
 	  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 	    <ol class="carousel-indicators">

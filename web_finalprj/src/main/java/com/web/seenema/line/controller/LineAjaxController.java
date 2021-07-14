@@ -1,5 +1,7 @@
 package com.web.seenema.line.controller;
 
+import java.io.IOException;
+import java.sql.Date;
 import java.util.List;
 
 import org.json.simple.JSONObject;
@@ -66,6 +68,7 @@ public class LineAjaxController {
 	public JSONObject add(@ModelAttribute LineAddDTO dto) {
 				
 		JSONObject json = new JSONObject();
+		
 		if(service.add(dto)) {
 			
 			LineDTO line = service.getLine(dto.getId());
@@ -111,7 +114,7 @@ public class LineAjaxController {
 		return json;
 	}
 	
-//	오류난 부분 해결 후 주석해제 필요
+	// 메소드명 변경 필요
 	public void temp() {
 		int pgNum = 0;
 		int max_pgNum = 0;
@@ -142,6 +145,5 @@ public class LineAjaxController {
 		//json.put("list_cnt", list_cnt);
 		//json.put("max_pgNum", max_pgNum);
 	}
-	
 }
 
