@@ -1,10 +1,18 @@
 package com.web.seenema.review.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class ReviewListDTO {
 	private int id;
+	private int btype;
 	private int aid;
+	public int getBtype() {
+		return btype;
+	}
+	public void setBtype(int btype) {
+		this.btype = btype;
+	}
 	private String nickname;
 	private int mid;
 	private String title;
@@ -60,6 +68,11 @@ public class ReviewListDTO {
 	public Date getCdate() {
 		return cdate;
 	}
+	public String getCdateFM() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String formatdate = format.format(cdate);
+		return formatdate;
+	}
 	public void setCdate(Date cdate) {
 		this.cdate = cdate;
 	}
@@ -83,7 +96,8 @@ public class ReviewListDTO {
 	}
 	@Override
 	public String toString() {
-		return "ReviewListDTO [id=" + id + ", aid=" + aid + ", nickname=" + nickname + ", mid=" + mid + ", title="
-				+ title + ", imgurl=" + imgurl + ", contents=" + contents + ", cdate=" + cdate + "]";
+		return "ReviewListDTO [id=" + id + ", btype=" + btype + ", aid=" + aid + ", nickname=" + nickname + ", mid="
+				+ mid + ", title=" + title + ", imgurl=" + imgurl + ", contents=" + contents + ", cdate=" + cdate
+				+ ", gcnt=" + gcnt + ", bcnt=" + bcnt + ", commcnt=" + commcnt + "]";
 	}
 }

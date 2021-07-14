@@ -307,6 +307,7 @@ CREATE TABLE board (
 ALTER TABLE board ADD CONSTRAINT board_id_pk PRIMARY KEY(id);
 ALTER TABLE board ADD CONSTRAINT board_btype_FK FOREIGN KEY(btype) REFERENCES board_type(id);
 ALTER TABLE board ADD CONSTRAINT board_aid_FK FOREIGN KEY(aid) REFERENCES account(id);
+ALTER TABLE board ADD CONSTRAINT board_mid_FK FOREIGN KEY(mid) REFERENCES movie(id);
 
 COMMENT ON COLUMN board.id IS '게시판 식별번호';
 COMMENT ON COLUMN board.btype IS '게시판 구분 번호';
@@ -446,3 +447,10 @@ ALTER TABLE pay MODIFY price CONSTRAINT pay_price_nn NOT NULL;
 
 COMMENT ON COLUMN pay.id IS '나이 식별번호';
 COMMENT ON COLUMN pay.price IS '영화가격';
+
+-- 회원 액션 테이블(로그인 연동처리는 시간되면 구현하기로..)
+--CREATE TABLE account_action (
+--	aid NUMBER,
+--	reviewGcnt NUMBER,
+--	reviewBcnt NUMBER,
+--);

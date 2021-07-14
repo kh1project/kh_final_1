@@ -7,8 +7,29 @@
 </body>
 <c:url var="upGcnt" value="/reviewajax/upGcnt" />
 <c:url var="upBcnt" value="/reviewajax/upBcnt" />
+<c:url var="orderby" value="/review" />
 <script>
 $(function(){
+	
+	var nowPath = window.location.pathname;
+	
+	if(nowPath == "<%=request.getContextPath() %>/review") {
+		if(window.location.search == "?sort=like") {
+			$(".orderlike").addClass("on");
+		} else if(window.location.search == "" || window.location.search == null) {
+			$(".orderdate").addClass("on");
+		}
+	}
+	
+	$(".orderdate").on('click', function(e){
+		e.preventDefault();
+		location.href=nowPath;
+	});
+	$(".orderlike").on('click', function(e){
+		e.preventDefault();
+		location.href=nowPath + "?sort=like";
+	});
+	
 	$(".btn-gcnt").on('click', function(e){
 		e.preventDefault();
 		const btn_gcnt = $(this).children('span');
@@ -26,7 +47,6 @@ $(function(){
 			}
 		});
 	});
-	
 
 	$(".btn-bcnt").on('click', function(e){
 		e.preventDefault();
@@ -46,15 +66,17 @@ $(function(){
 		});
 	});
 	
-	const txt_date = $(".cdate").attr("data-cdate");
-	$(".cdate").html(timeForToday(txt_date));
+	var cdate = document.getElementsByClassName("cdate");
+	for(i = 0; i < cdate.length; i++) {
+		const dataid = $("#" + cdate[i].id);
+		const getdata = dataid.attr("data-cdate");
+		$(dataid).html(timeForToday(getdata));		
+	}
 });
 
 function timeForToday(value) {
     const today = new Date();
-    console.log("today : " + today);
     const timeValue = new Date(value);
-    console.log("timeValue : " + timeValue);
     const formatDate = (current_datetime)=>{
         let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate();
         return formatted_date;
@@ -73,7 +95,7 @@ function timeForToday(value) {
 
     const betweenTimeDay = Math.floor(betweenTime / 60 / 24);
     if (betweenTimeDay < 8) {
-        return betweenTimeHour + '일전';
+        return betweenTimeDay + '일전';
     }
 
     return formatDate(timeValue);

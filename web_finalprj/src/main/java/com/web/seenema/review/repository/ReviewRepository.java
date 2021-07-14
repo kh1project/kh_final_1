@@ -2,6 +2,7 @@ package com.web.seenema.review.repository;
 
 import java.util.*;
 
+import com.web.seenema.board.dto.BoardSearchDTO;
 import com.web.seenema.comment.dto.CommentSimpleDTO;
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.review.dto.ReviewAddDTO;
@@ -13,6 +14,11 @@ import com.web.seenema.review.dto.ReviewSimpleDTO;
 public interface ReviewRepository {
 
     public List<ReviewListDTO> selectReviewList() throws Exception;
+    public List<ReviewListDTO> selectOrderbyLikeList() throws Exception;
+    public List<ReviewListDTO> selectReviewSearchList(BoardSearchDTO search) throws Exception;
+    public List<ReviewListDTO> selectReviewSeenList(int aid) throws Exception;
+    public List<ReviewListDTO> selectOrderbyLikeSeenList(int aid) throws Exception;
+    public List<ReviewListDTO> selectReviewSearchSeenList(BoardSearchDTO search) throws Exception;
     public ReviewDTO selectReview(int rid) throws Exception;
     public List<CommentSimpleDTO> selectCommList(int rid) throws Exception;
     public List<Integer> selectWatchList(int aid) throws Exception;

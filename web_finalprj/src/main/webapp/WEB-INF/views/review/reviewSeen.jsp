@@ -30,9 +30,9 @@
 		</section> --%>
 		<section>
 			<ul class="nav nav-tabs" id="rowTab">
-			    <li class="active"><a href="<%=request.getContextPath() %>/review">모든 영화</a></li>
+			    <li><a href="<%=request.getContextPath() %>/review">모든 영화</a></li>
 			    <%-- 임시 주석 <li><a href="#reviewtab2" data-toggle="tab">현재 상영작</a></li>--%>
-			    <li><a href="<%=request.getContextPath() %>/review/seen">내가 본 영화</a></li>
+			    <li class="active"><a href="<%=request.getContextPath() %>/review/seen">내가 본 영화</a></li>
 			</ul>
 			<div class="tab-content">
 			    <div class="tab-pane active" id="reviewtab1">

@@ -1,8 +1,12 @@
 package com.web.seenema.review.controller;
 
+import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,19 +14,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.web.seenema.account.dto.AccountDTO;
 import com.web.seenema.account.service.AccountServiceImpl;
-import com.web.seenema.movie.dto.MovieDTO;
-import com.web.seenema.movie.dto.MovieImageDTO;
+import com.web.seenema.board.dto.BoardSearchDTO;
 import com.web.seenema.movie.dto.MyMovieDTO;
 import com.web.seenema.movie.service.MovieServiceImpl;
 import com.web.seenema.review.dto.ReviewAddDTO;
 import com.web.seenema.review.dto.ReviewDTO;
 import com.web.seenema.review.dto.ReviewListDTO;
 import com.web.seenema.review.dto.ReviewPostDTO;
-import com.web.seenema.review.dto.ReviewSimpleDTO;
 import com.web.seenema.review.service.ReviewServiceImpl;
 
 @Controller
@@ -37,9 +39,20 @@ public class ReviewController {
 	private ReviewServiceImpl review;
 	
 	@RequestMapping(value = "")
-	public ModelAndView review() throws Exception {
+	public ModelAndView review(HttpServletRequest req, @ModelAttribute String sort, @ModelAttribute BoardSearchDTO search) throws Exception {
 		ModelAndView mv = new ModelAndView("review/review");
-		List<ReviewListDTO> list = review.reviewList();
+		
+		List<ReviewListDTO> list = null;
+		if(search.getBtype() == 0) {
+			if(sort != null && sort.equals("like")) {
+				list = review.reviewList();
+			} else {
+				list = review.reviewLikeList();
+			}
+		} else {
+			list = review.reviewSearchList(search);
+		}
+		
 		if(list.size() > 0) {
 			for(int i = 0; i < list.size(); i++) {
 				List<String> firstPost = review.firstContent(list.get(i).getContents());
@@ -52,20 +65,89 @@ public class ReviewController {
 			}
 			mv.addObject("list", list);
 			mv.addObject("listsize", list.size());
+			mv.addObject("btype", list.get(0).getBtype());
 		} else {
 			mv.addObject("list", null);
 		}
+		return mv;
+	}
+	
+	@RequestMapping(value = "/seen")
+	public ModelAndView reviewShow(HttpServletRequest req, @ModelAttribute String sort, @ModelAttribute BoardSearchDTO search) throws Exception {
+		ModelAndView mv = new ModelAndView("review/reviewSeen");
 		
+		HttpSession session = req.getSession();
+		int aid = 0;
+		
+		if(session.getAttribute("account") != null) {
+			AccountDTO dto = (AccountDTO) session.getAttribute("account");
+			aid = dto.getId();
+		}
+		
+		List<ReviewListDTO> list = null;
+		if(search.getBtype() == 0) {
+			if(sort != null && sort.equals("like")) {
+				list = review.reviewSeenList(aid);
+			} else {
+				list = review.reviewLikeSeenList(aid);
+			}
+		} else {
+			list = review.reviewSearchSeenList(search);
+		}
+		
+		if(list.size() > 0) {
+			for(int i = 0; i < list.size(); i++) {
+				List<String> firstPost = review.firstContent(list.get(i).getContents());
+				if(firstPost.get(0) == "-1") {
+					System.out.println("리뷰 존재하지 않음");
+				} else {
+					list.get(i).setContents(firstPost.get(0));
+					list.get(i).setImgurl(firstPost.get(1));
+				}
+			}
+			mv.addObject("list", list);
+			mv.addObject("listsize", list.size());
+			mv.addObject("btype", list.get(0).getBtype());
+		} else {
+			mv.addObject("list", null);
+		}
 		return mv;
 	}
 	
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public String reviewDetail(Model m, int rid) throws Exception {
+	public String reviewDetail(Model m, HttpServletRequest req, HttpServletResponse resp, int rid) throws Exception {
 		String forward = "";
+		Cookie[] cookies = req.getCookies();
+		int vcheck = 0;
 		
 		ReviewDTO data = review.reviewOne(rid);
-		int vcnt = review.updateVcnt(rid);
+		
 		if(data != null) {
+			int vcnt = data.getVcnt();
+			
+			for(Cookie cookie : cookies) {
+				if(cookie.getName().equals("vcnt")) {
+					String[] cookielist = cookie.getValue().split("_");
+					int[] nums = Arrays.stream(cookielist).mapToInt(Integer::parseInt).toArray();
+					for(int i = 0; i < cookielist.length; i++) {
+						if(rid == nums[i]) {
+							vcheck = 1; break;
+						}
+					}
+					if(vcheck == 0) {
+						vcheck = 1;
+						cookie.setValue(cookie.getValue() + "_" + (String.valueOf(rid)));
+						resp.addCookie(cookie);
+						vcnt = review.updateVcnt(rid);
+					}
+				}
+			}
+			if(vcheck == 0) {
+				Cookie cookie1 = new Cookie("vcnt", (String.valueOf(rid)));
+				resp.addCookie(cookie1);
+				vcnt = review.updateVcnt(rid);
+			}
+			
 			data.setVcnt(vcnt);
 			List<ReviewPostDTO> contlist = review.MergePost(data.getContents());
 			m.addAttribute("data", data);

@@ -70,7 +70,7 @@ function selectPost(num) {
 function selectImg(num) {
 	if(document.getElementsByClassName("selectImg")) {
 		if($(".post.selected").length < 1) {
-			$(".postwrap").find(".post").addClass("selected");
+			$(".postwrap").find(".post").first().addClass("selected");
 		}
 		$(".selected .selectImg").remove();
 		$("#smovieimg" + num).clone().prependTo(".post.selected").last(); //last post id를 가져와야 함.

@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,8 +19,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import com.web.seenema.account.dto.AccountDTO;
 import com.web.seenema.account.service.AccountServiceImpl;
 import com.web.seenema.movie.dto.MyMovieDTO;
+import com.web.seenema.review.dto.ReviewListDTO;
 import com.web.seenema.review.dto.ReviewPostDTO;
 import com.web.seenema.review.service.ReviewServiceImpl;
 
@@ -36,9 +41,9 @@ public class ReviewAjaxController {
 		
 		List<MyMovieDTO> smovieimgs = account.mywatchSelect(selectmovie);
 		
-//		for(int i = 0; i < smovieimgs.size(); i++) {
-//			System.out.println(smovieimgs.get(i).getPath() + smovieimgs.get(i).getName() );
-//		}
+		for(int i = 0; i < smovieimgs.size(); i++) {
+			System.out.println(smovieimgs.get(i));
+		}
 		//왜 요청이 두번씩 되는지?
 				
 		return smovieimgs;
@@ -75,7 +80,16 @@ public class ReviewAjaxController {
 	
 	@RequestMapping(value = "/upGcnt", method = RequestMethod.POST, produces = "application/json; charset=utf-8")
 	@ResponseBody
-	public int upGcnt(@RequestParam int id) throws Exception {
+	public int upGcnt(HttpServletRequest req, @RequestParam int id) throws Exception {
+		
+		HttpSession session = req.getSession();
+		int aid = 0;
+		
+		if(session.getAttribute("account") != null) {
+			AccountDTO dto = (AccountDTO)session.getAttribute("account");
+			aid = dto.getId();
+		}
+		
 		int gval = review.updateGcnt(id);
 		return gval;
 	}
