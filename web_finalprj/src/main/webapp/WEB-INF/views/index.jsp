@@ -9,6 +9,7 @@
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/static/css/font.css">
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/static/css/main.css">
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/static/css/mainheader.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <c:url var="url" value="/mainAjax" />
@@ -46,8 +47,7 @@
 </style>
 -->
 <body class="pt-5">
-    <%@ include file="./module/header.jsp" %>
-
+    <%@ include file="./mainheader.jsp" %>
 	<div>
 	  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 	    <ol class="carousel-indicators">

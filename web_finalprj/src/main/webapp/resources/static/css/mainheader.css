@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+body {
+	position: relative;
+}
+
+.mainheader {
+	position: absolute;
+	background-color: black;
+	z-index: 1;
+	width: 100%;
+	height: 170px;
+	top: 0px;
+}
