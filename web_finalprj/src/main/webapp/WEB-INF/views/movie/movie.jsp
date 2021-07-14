@@ -58,7 +58,7 @@ ul {
 	<div class="page-util">
 		<div class="inner-wrap">
 
-			<span class="svg"> <a href="/index"> <svg
+			<span class="svg"> <a href="<%=request.getContextPath()%>/index"> <svg
 						xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 						fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
 					  <path fill-rule="evenodd"

@@ -10,9 +10,10 @@
 <title>상영시간표 - SEENEMA</title>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/time.css">
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/static/css/common.css">
 </head>
 <!-- button { opacity: 0.25 } 버튼 투명하게 설정할 수 있음 -->
 <body class="pt-5">
