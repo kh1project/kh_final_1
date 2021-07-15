@@ -7,7 +7,7 @@
 <title>나의 SEENEMA</title>
 </head>
 <body>
-	<h1>user.jsp 입니다.</h1>
+	<h1>mypage.jsp 입니다.</h1>
 	<h3>마이 페이지 입니다.</h3>
 </body>
 </html>

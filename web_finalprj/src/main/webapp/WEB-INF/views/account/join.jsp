@@ -182,7 +182,8 @@ select {
 
         <div id="header">
            	<button type="button" onclick="location.href='${main }'" style="margin-top: 10px;">
-					<img src="#" width="30" height="30" class="d-inline-block align-top" alt="로고">
+					<img src="<%=request.getContextPath() %>/resources/images/common/logo.png"
+					 width="30" height="30" class="d-inline-block align-top" alt="로고">
 			</button>
 		</div>
 
@@ -194,10 +195,9 @@ select {
                     </h3>
                     <span class="box int_id">
                         <input type="text" id="id_email" class="int" maxlength="20" name="email" required>
-                        <span class="step_url">@seenema.com</span>
                     </span>
-						<button type="button" onclick="emailCheck();">중복확인</button>
-						<label id="email_check_res"></label>
+						<button type="button" onclick="emailCheck();" class="btn btn-outline-secondary" style="margin-top: 1px;">중복확인</button>
+						<label id="email_check_res" style="padding-top: 10px; padding-left:5px; color:red"></label>
                 </div>
 
                 <!-- PW1 -->
@@ -222,12 +222,11 @@ select {
                     <span class="box int_name">
                         <input type="text" id="id_nickname" class="int" name="nickname" maxlength="20"
                         oninput="nicknameCheck('${nickname_check }', this.value);" required>
-                        <label id="nickname_check_res"></label>
+                        <label id="nickname_check_res" style="padding-top: 15px; color:red"></label>
                     </span>
 
                 </div>
-
-
+				&nbsp;
 				<div>
                     <h3 class="join_title"><label for="name">나이</label></h3>
                     <span class="box int_name">
@@ -255,7 +254,7 @@ select {
                 </div>
 
                 <div class="btn_area">
-                    <button type="button" onclick="send(); return ;" id="btnJoin">
+                    <button type="button" onclick="send(); return ; " id="btnJoin">
                         <span>가입하기</span>
                     </button>
                     &nbsp;
