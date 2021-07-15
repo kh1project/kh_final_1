@@ -24,9 +24,10 @@
      </header>
 <body class="pt-5">
      <div class="inner-wrap">
-           <form class="pt-5" action="${root}/movie/add/register" method="POST" enctype="multipart/form-data">
+           <form class="pt-5" action="${root}movie/add/register" method="POST" enctype="multipart/form-data">
                 <label for="mid">영화 등록번호</label>
-                <input class="form-control" id="mid" name="mid" type="text" placeholder="영화 등록번호" value="${mid }" readonly></input>
+                <!-- 아래 input name을 mid에서 id로 바꿨습니다. -->
+                <input class="form-control" id="mid" name="id" type="text" placeholder="영화 등록번호" value="${mid }" readonly></input>
                 <div>
                      <div class="info-container pt-5">
                            <div class="input-group mb-3">
@@ -34,7 +35,7 @@
                                      <span class="input-group-text" id="inputGroupFileAddon01">포스터 등록</span>
                                 </div>
                                 <div class="custom-file">
-                                     <input type="file" class="custom-file-input" id="poster" name="poster" required aria-describedby="inputGroupFileAddon01" multiple>
+                                     <input type="file" class="custom-file-input" id="poster" name="poster" required aria-describedby="inputGroupFileAddon01" accept="image/*" multiple>
                                      <label class="custom-file-label" for="poster">선택된 파일 없음</label>
                                 </div>
                            </div>
@@ -43,11 +44,11 @@
                                      <span class="input-group-text" id="inputGroupFileAddon02">스틸컷 등록</span>
                                 </div>
                                 <div class="custom-file">
-                                     <input type="file" class="custom-file-input" id="stillcut" name="stillcut" required aria-describedby="inputGroupFileAddon02" multiple>
+                                     <input type="file" class="custom-file-input" id="stillcut" name="stillcut" required aria-describedby="inputGroupFileAddon02" accept="image/*" multiple>
                                      <label class="custom-file-label" for="stillcut">선택된 파일 없음</label>
                                 </div>
                            </div>
-                           <div class="select-poster">
+                           <%-- 임시 주석 <div class="select-poster">
                                 <span>
                                      <label for="mainposter">포스터 선택</label>
                                      <select class="custom-select" id="mainposter" name="mainposter" required>
@@ -59,8 +60,7 @@
                                            <option selected disabled value="">서브 포스터</option>
                                      </select>
                                 </span>
-                           </div>
-                           
+                           </div> --%>
                            <div>
                                 <label for="title">영화 제목</label>
                                 <input type="text" class="form-control" id="title" name="title" placeholder="영화 제목" required></input>
@@ -71,7 +71,7 @@
                            </div>
                      </div>
                 </div>
-                <div class="content-text">
+                <%-- 임시주석 <div class="content-text">
                      <div class="summary">
                            <label for="summary">줄거리</label>
                            <textarea class="form-control" id="summary" name="summary" cols="30" rows="10" required></textarea>
@@ -119,7 +119,7 @@
                                 <input type="text" class="form-control" id="actor" name="actor" placeholder="경영왕 이경영" required></input>
                            </p>
                      </div>
-                </div>
+                </div> --%>
                 <button type="submit" class="btn btn-primary">등록</button>
            </form>
      </div>
