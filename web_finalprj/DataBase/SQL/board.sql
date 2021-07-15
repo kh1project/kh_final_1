@@ -74,7 +74,27 @@ SELECT * FROM board WHERE btype = 1 AND deleted = 'N' AND nodel = 'N' AND mid IN
 		  LEFT OUTER JOIN reservation e ON d.id = e.timeid
 		 WHERE b.id = 1
       GROUP BY a.mid) ORDER BY id DESC;
+
+-- nodel이 n일 경우에만 deleted y로 테스트
+UPDATE board
+   SET contents = CASE
+  	   WHEN nodel = 'N' THEN 23 ELSE END
+  	  ,star = CASE
+  	   WHEN nodel = 'N' THEN 10 END
+	  ,udate = CASE
+	   WHEN nodel  = 'N' THEN SYSDATE END
+ WHERE id = 23
  
+ UPDATE board
+   SET contents = CASE
+  	   WHEN nodel = 'N' THEN 22 ELSE contents END
+  	  ,star = CASE
+  	   WHEN nodel = 'N' THEN 1 ELSE star END
+	  ,udate = CASE
+	   WHEN nodel  = 'N' THEN SYSDATE ELSE udate END
+ WHERE id = 22
+ 
+ update board set nodel = 'Y' where id = 22;
 
 DROP SEQUENCE board_seq;
 DELETE FROM board WHERE id  <= 100;

@@ -2,8 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="review_header.jsp"></jsp:include>
+	<input type="hidden" id="error" name="error" value="${error }"/>
+	<input type="hidden" id="sessionAid" name="sessionAid" value="${sessionAid }"/>
 	<div class="page-title"><div class="container"><h1>영화 리뷰 작성</h1></div></div>
-	<div class="container">
+	<div id="pageContainer" class="container">
+	
 		<div id="add-step1">
 			<div class="add-step-header">리뷰를 작성하실 영화를 선택해주세요!<span>등록가능한 영화 <strong>${mywlist.size() } </strong>건</span></div>
 	

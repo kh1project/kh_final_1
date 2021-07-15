@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="review_header.jsp"></jsp:include>
+	<input type="hidden" id="sessionAid" name="sessionAid" value="${sessionAid }"/>
 	<div class="page-title"><div class="container"><h1>영화 리뷰 보기</h1></div></div>
 	<div class="container">
 		<div class="review-detail-wrap">
@@ -11,7 +12,13 @@
 					<small id="cdate" class="cdate" data-cdate="${data.getCdateFM() }"></small>
 				</h3>
 				<div>
-					<p><a href="<%=request.getContextPath() %>/review/update?rid=${data.getId() }">수정</a> <a href="<%=request.getContextPath() %>/review/delete?rid=${data.getId() }">삭제</a> <a href="javascript:;" onclick="history.back();">목록</a></p>
+					<p>
+						<c:if test="${sessionAid } == ${data.getAid() }">
+							<a href="javascript:;" onclick="reviewUpdate()">수정</a>
+							<a href="javascript:;" onclick="reviewDelete()">삭제</a>
+						</c:if>
+						<a href="javascript:;" onclick="history.back();">목록</a>
+					</p>
 					<p><span><i class="far fa-user-circle"></i>${data.getAid() }</span>
 					<span><i class="far fa-eye"></i>${data.getVcnt() }</span></p>
 				</div>

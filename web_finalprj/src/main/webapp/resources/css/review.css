@@ -83,13 +83,13 @@
 .review-detail-header h3,
 .review-detail-header p { margin:0; }
 .review-detail-header h3 { display:flex; flex-direction: column; align-content: flex-start; }
-.review-detail-header h3 small { color:#999; font-size:.9rem; padding-top:.3rem;}
+.review-detail-header h3 small { color:#999; font-size:.85rem; padding-top:.3rem;}
 .review-detail-header > div { display:flex; flex-direction: column; align-content: flex-end; }
 .review-detail-header > div * { color:#999; }
 .review-detail-header > div p { text-align:right; }
 .review-detail-header > div p + p { margin-top:.5rem; }
 .review-detail-header > div span { margin-left:10px; }
-.review-detail-header > div a { border: 1px solid #ddd; padding: 0 .8rem; margin-left: 5px; font-size: .9rem; border-radius: 2rem;}
+.review-detail-header > div a { border: 1px solid #ddd; padding: 0 .8rem; margin-left: 5px; font-size: .85rem; border-radius: 2rem;}
 .review-detail-header > div a:hover { background-color:#4397a9; color:#fff; border-color:#4397a9; }
 .review-detail-header > div i { margin-right:3px; }
 .detail-btn-wrap { display:flex; justify-content:center; padding-top:1rem; }

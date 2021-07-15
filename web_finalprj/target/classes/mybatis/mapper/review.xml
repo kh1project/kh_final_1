@@ -83,7 +83,9 @@
 	</update>
 	<update id="deleteReview" parameterType="int">
 		UPDATE board
-		   SET deleted = 'Y'
+		   SET deleted = CASE
+		  	   WHEN nodel = 'N' THEN 'Y'
+		  	   ELSE 'N'
 		 WHERE id = #{id}
 	</update>
 	<update id="updateGcnt" parameterType="review">

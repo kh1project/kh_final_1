@@ -39,8 +39,13 @@ public class ReviewController {
 	private ReviewServiceImpl review;
 	
 	@RequestMapping(value = "")
-	public ModelAndView review(HttpServletRequest req, @ModelAttribute String sort, @ModelAttribute BoardSearchDTO search) throws Exception {
-		ModelAndView mv = new ModelAndView("review/review");
+	public String review(Model m, HttpServletRequest req, @ModelAttribute String sort, @ModelAttribute BoardSearchDTO search) throws Exception {
+		HttpSession session = req.getSession();
+		int aid = 0;
+		if(session.getAttribute("account") != null) {
+			AccountDTO dto = (AccountDTO) session.getAttribute("account");
+			aid = dto.getId();
+		}
 		
 		List<ReviewListDTO> list = null;
 		if(search.getBtype() == 0) {
@@ -63,13 +68,16 @@ public class ReviewController {
 					list.get(i).setImgurl(firstPost.get(1));
 				}
 			}
-			mv.addObject("list", list);
-			mv.addObject("listsize", list.size());
-			mv.addObject("btype", list.get(0).getBtype());
+			m.addAttribute("list", list);
+			m.addAttribute("listsize", list.size());
+			m.addAttribute("btype", list.get(0).getBtype());
 		} else {
-			mv.addObject("list", null);
+			m.addAttribute("list", null);
 		}
-		return mv;
+		
+		m.addAttribute("sessionAid", aid);
+		
+		return "review/review";
 	}
 	
 	@RequestMapping(value = "/seen")
@@ -78,7 +86,6 @@ public class ReviewController {
 		
 		HttpSession session = req.getSession();
 		int aid = 0;
-		
 		if(session.getAttribute("account") != null) {
 			AccountDTO dto = (AccountDTO) session.getAttribute("account");
 			aid = dto.getId();
@@ -117,6 +124,14 @@ public class ReviewController {
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String reviewDetail(Model m, HttpServletRequest req, HttpServletResponse resp, int rid) throws Exception {
 		String forward = "";
+		
+		HttpSession session = req.getSession();
+		int aid = 0;
+		if(session.getAttribute("account") != null) {
+			AccountDTO dto = (AccountDTO) session.getAttribute("account");
+			aid = dto.getId();
+		}
+		
 		Cookie[] cookies = req.getCookies();
 		int vcheck = 0;
 		
@@ -157,23 +172,31 @@ public class ReviewController {
 			forward = "redirect:/review";
 		}
 		
+		m.addAttribute("sessionAid", aid);
+		
 		return forward;
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public ModelAndView reviewAddGet() throws Exception {
-		ModelAndView mv = new ModelAndView();
+	public String reviewAddGet(Model m, HttpServletRequest req) throws Exception {
+		HttpSession session = req.getSession();
+		int aid = 0;
+		if(session.getAttribute("account") != null) {
+			AccountDTO dto = (AccountDTO) session.getAttribute("account");
+			aid = dto.getId();
+		}
+		if(aid == 0) {
+			return "redirect:/review";
+		} else {
+			List<List<MyMovieDTO>> mywlist = null;
+			mywlist = account.mywatchList(aid);
+			
+			m.addAttribute("mywlist", mywlist);			
+		}
 		
-		int aid = 1; //session에서 aid 받아와야함. 임시데이터.
+		m.addAttribute("sessionAid", aid);
 		
-		List<List<MyMovieDTO>> mywlist = null;
-		mywlist = account.mywatchList(aid);
-		
-		mv.setViewName("review/reviewadd");
-		mv.addObject("mywlist", mywlist);
-		mv.addObject("", "");
-		
-		return mv;
+		return "review/reviewadd";
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -200,10 +223,23 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public String reviewUpdateGet(Model m, int rid) throws Exception {
+	public String reviewUpdateGet(Model m, HttpServletRequest req, int rid) throws Exception {
 		String forward = "";
+		
+		HttpSession session = req.getSession();
+		int aid = 0;
+		if(session.getAttribute("account") != null) {
+			AccountDTO dto = (AccountDTO) session.getAttribute("account");
+			aid = dto.getId();
+		}
+		
 		ReviewDTO data = review.reviewOne(rid);
 		if(data != null) {
+			if(aid == 0 || aid != data.getAid()) {
+				return "redirect:/review";
+			} else if(aid == data.getAid() && data.getNodel().equals("Y")) {
+				m.addAttribute("blockerror", "해당 게시물은 블럭 처리되었습니다.");
+			}
 			List<ReviewPostDTO> contlist = review.MergePost(data.getContents());
 			m.addAttribute("data", data);
 			m.addAttribute("contlist", contlist);
@@ -216,11 +252,18 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String reviewUpdatePost(Model m, @ModelAttribute ReviewDTO dto) throws Exception {
+	public String reviewUpdatePost(Model m, HttpServletRequest req, @ModelAttribute ReviewDTO dto) throws Exception {
 		String forward = "";
 		
-		int aid = 1; //session에서 aid 받아와야함. 임시데이터.
-		dto.setAid(aid);
+		HttpSession session = req.getSession();
+		int aid = 0;
+		if(session.getAttribute("account") != null) {
+			AccountDTO adto = (AccountDTO) session.getAttribute("account");
+			aid = adto.getId();
+		}
+		if(aid == 0 || aid != dto.getAid()) {
+			return "redirect:/review";
+		}
 		
 		System.out.println("Update Controller 정상 진입 확인");
 		System.out.println("-------------------------");
@@ -253,12 +296,18 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/delete")
-	public String reviewDelete(Model m, int rid) throws Exception {
+	public String reviewDelete(Model m, HttpServletRequest req, int rid) throws Exception {
 		String forward = "";
-		
-		int aid = 1; //session에서 aid 받아와야함. 임시데이터.
-		
-		ModelAndView mv = new ModelAndView("review/review.jsp");
+		HttpSession session = req.getSession();
+		int aid = 0;
+		if(session.getAttribute("account") != null) {
+			AccountDTO dto = (AccountDTO) session.getAttribute("account");
+			aid = dto.getId();
+		}
+		ReviewDTO data = review.reviewOne(rid);
+		if(aid == 0 || aid != data.getAid()) {
+			return "redirect:/review";
+		}
 		
 		boolean result = review.deleteReview(rid);
 		if(result) {
@@ -269,8 +318,6 @@ public class ReviewController {
 			System.out.println("delete 실패");
 			forward = "redirect:/review/detail?rid=" + rid;
 		}
-		
-		mv.addObject("", "");
 		
 		return forward;
 	}

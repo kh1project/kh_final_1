@@ -16,6 +16,11 @@ $(document).ready(function(){
 	}
 	const updatewrap = $('#update > form > .row > .col-6');
 	$(updatewrap).css("height", window.innerHeight - 300);
+	const blockerror = $("#blockerror").val();
+	if(blockerror == null || blockerror == "") {
+		alert(${blockerror});
+		location.replace(<%=request.getContextPath() %>/review);
+	}
 });
 
 var movienum;
