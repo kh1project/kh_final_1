@@ -26,7 +26,6 @@
 		<typeAlias type="com.web.seenema.review.dto.ReviewPostDTO" alias="reviewpost" />
 		<typeAlias type="com.web.seenema.account.dto.AccountDTO" alias="account" />
 		<typeAlias type="com.web.seenema.review.dto.ReviewAddDTO" alias="reviewadd" />
-		<typeAlias type="com.web.seenema.review.dto.ReviewSimpleDTO" alias="reviewsimple" />
 		<typeAlias type="com.web.seenema.review.dto.ReviewListDTO" alias="reviewlist" />
 		<typeAlias type="com.web.seenema.review.dto.ReviewDTO" alias="review" />
 		<typeAlias type="com.web.seenema.board.dto.BoardSearchDTO" alias="boardSearch" />

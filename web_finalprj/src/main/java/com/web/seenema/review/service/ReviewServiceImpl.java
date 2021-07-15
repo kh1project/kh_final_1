@@ -16,7 +16,6 @@ import com.web.seenema.review.dto.ReviewAddDTO;
 import com.web.seenema.review.dto.ReviewDTO;
 import com.web.seenema.review.dto.ReviewListDTO;
 import com.web.seenema.review.dto.ReviewPostDTO;
-import com.web.seenema.review.dto.ReviewSimpleDTO;
 import com.web.seenema.review.repository.ReviewRepositoryImpl;
 
 @Service
