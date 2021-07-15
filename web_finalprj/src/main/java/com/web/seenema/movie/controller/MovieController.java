@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.web.seenema.account.dto.AccountDTO;
 import com.web.seenema.line.dto.LineDTO;
@@ -276,6 +277,15 @@ public class MovieController {
 	
 	@RequestMapping(value = "/movie/add")
 	public String movieAdd(Model model) {
+		int movieNum = service.getLastMovieNum()+1;
+		//movie 테이블 마지막 시퀀스 +1
+		model.addAttribute("mid", movieNum);
+		
+		return "movie/movieadd";
+	}
+	
+	@RequestMapping(value = "/movie/add/register")
+	public String movieAdd(Model model, @RequestParam("poster") MultipartFile[] poster, @RequestParam("stillcut") MultipartFile[] stillcut) {
 		int movieNum = service.getLastMovieNum()+1;
 		//movie 테이블 마지막 시퀀스 +1
 		model.addAttribute("mid", movieNum);
