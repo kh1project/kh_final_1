@@ -65,5 +65,13 @@
 		FROM (SELECT id, title FROM movie ORDER BY id DESC) WHERE rownum = 1)
 	</select>
 	
+	<select id="getMoviePosters" resultType="com.web.seenema.movie.dto.MovieImageDTO">
+		SELECT * FROM image_files WHERE mid = #{mid} AND path LIKE '%poster%'
+	</select>
+	
+	<select id="getMovieStillcuts" resultType="com.web.seenema.movie.dto.MovieImageDTO">
+		SELECT * FROM image_files WHERE mid = #{mid} AND path LIKE '%stillcut%'
+	</select>
+	
 	
 </mapper>

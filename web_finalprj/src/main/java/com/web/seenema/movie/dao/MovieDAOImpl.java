@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MovieGcntDTO;
+import com.web.seenema.movie.dto.MovieImageDTO;
 import com.web.seenema.movie.dto.MovieLikeDTO;
 
 @Repository
@@ -96,9 +97,17 @@ public class MovieDAOImpl implements MovieDAO {
 	}
 	
 	@Override
-	public int getLastMovieNum() {
-		MovieDTO dto = sqlSession.selectOne("movie.getLastMovieNum");
-		
-		return dto.getId();
+	public MovieDTO getLastMovieNum() {
+		return sqlSession.selectOne("movie.getLastMovieNum");
+	}
+	
+	@Override
+	public List<MovieImageDTO> getMoviePosters(Integer mid) {
+		return sqlSession.selectList("movie.getMoviePosters", mid);
+	}
+	
+	@Override
+	public List<MovieImageDTO> getMovieStillcuts(Integer mid) {
+		return sqlSession.selectList("movie.getMovieStillcuts", mid);
 	}
 }

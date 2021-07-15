@@ -201,6 +201,18 @@ public class MovieServiceImpl implements MovieService {
 	
 	@Override
 	public int getLastMovieNum() {
-		return dao.getLastMovieNum();
+		MovieDTO mdto = dao.getLastMovieNum();
+				
+		return mdto.getId();
+	}
+	
+	@Override
+	public List<MovieImageDTO> getMoviePosters(Integer mid) {
+		return dao.getMoviePosters(mid);
+	}
+	
+	@Override
+	public List<MovieImageDTO> getMovieStillcuts(Integer mid) {
+		return dao.getMovieStillcuts(mid);
 	}
 }

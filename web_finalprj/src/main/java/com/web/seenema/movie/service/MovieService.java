@@ -25,4 +25,6 @@ public interface MovieService {
 	public int getAudi();
 	public Map<Integer, Integer> getGcnt();
 	public int getLastMovieNum();
+	public List<MovieImageDTO> getMoviePosters(Integer mid);
+	public List<MovieImageDTO> getMovieStillcuts(Integer mid);
 }
