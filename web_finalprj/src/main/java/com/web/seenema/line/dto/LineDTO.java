@@ -12,7 +12,7 @@ public class LineDTO {
 	private String contents;
 	private int gcnt;
 	private int star;
-	//@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
+	//@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
 	private Date cdate;
 	private String deleted;
 	
