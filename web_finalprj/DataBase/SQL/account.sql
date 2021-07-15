@@ -42,6 +42,9 @@ CREATE TABLE account_type (
     name VARCHAR2(64)
 );
 
+select * from account;
+ALTER TABLE account RENAME COLUMN name to USERNAME;
+
 ALTER TABLE account_type ADD CONSTRAINT account_t_id_pk PRIMARY KEY(id);
 
 COMMENT ON COLUMN account_type.id IS '회원 구분 식별번호';

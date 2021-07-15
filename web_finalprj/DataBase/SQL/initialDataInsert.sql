@@ -819,7 +819,7 @@ INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVA
 INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 6, TO_DATE('21/07/14', 'YY/MM/DD'), '13:34:00', '15:18:00');
 INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 6, TO_DATE('21/07/14', 'YY/MM/DD'), '17:40:00', '19:10:00');
 
---UPDATE time SET moviedate = TO_DATE('21/07/14', 'YY/MM/DD');
+--UPDATE time SET moviedate = TO_DATE('21/07/15', 'YY/MM/DD');
 
 
 --*************************************
