@@ -91,7 +91,6 @@
 			<input type="hidden" name="rating" value="${param.rating }">
 			<input type="hidden" name="title" value="${param.title }">
 			<input id="idnow" type="hidden" name="moviedate">
-			<input class="btn btn-outline-primary" type="button" onclick="history.back();" value="< 이전">
 			<input class="btn btn-outline-primary" type="button" onclick="check_movie();" value="다음 >">
 		</div>
 	  </div>
@@ -117,7 +116,7 @@
 	
 	function check_movie() {
 		if(${param.title eq null}) {
-			alert("영화를 선택해주세요.");
+			alert("관람하실 영화를 선택해주세요.");
 			return false;
 		} else {
 			form.submit();

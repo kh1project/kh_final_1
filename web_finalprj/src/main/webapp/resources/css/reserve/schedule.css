@@ -43,6 +43,9 @@ label#sub {
 	font-weight: bold;
 	margin-top: 10px;
 }
+input.btn.btn-outline-primary {
+    font-weight: bold;
+}
 ::-webkit-scrollbar {
   width: 10px;
   

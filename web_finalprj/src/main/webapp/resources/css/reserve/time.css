@@ -2,6 +2,7 @@
 
 hr { margin: 3px; }
 dl { margin: 0px; }
+dt { margin-bottom: 7px; }
 .btn {
 	display: inline-block;
 	width: 65%;
@@ -39,12 +40,14 @@ div #title {
 div #not {
 	height: 50px;
 	margin-top: 20px;
-	font-size: 14pt;
 	font-weight: bold;
 }
 label#sub { 
 	font-weight: bold;
 	margin-top: 10px;
+}
+a.btn.btn-primary {
+	font-size: 13pt;
 }
 ::-webkit-scrollbar {
   width: 10px;
