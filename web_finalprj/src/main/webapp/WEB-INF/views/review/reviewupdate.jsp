@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="review_header.jsp"></jsp:include>
+	<input type="hidden" id="blockerror" name="blockerror" value="${blockerror }"/>
 	<div class="page-title"><div class="container"><h1>영화 리뷰 수정</h1></div></div>
 	<div class="container">
 		<c:url var="update" value="/review/update" />

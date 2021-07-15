@@ -4,8 +4,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <jsp:include page="review_header.jsp"></jsp:include>
-		<div class="page-title"><div class="container"><h1>영화 리뷰</h1><a href="<%=request.getContextPath() %>/review/add">영화 리뷰 작성</a></div></div>
-		<div class="container">
+	<input type="hidden" id="error" name="error" value="${error }"/>
+	<input type="hidden" id="sessionAid" name="sessionAid" value="${sessionAid }"/>
+	<div class="page-title"><div class="container"><h1>영화 리뷰</h1><a href="javascript:;" onclick="reviewAdd()">영화 리뷰 작성</a></div></div>
+	<div class="container">
 		<%-- 임시 주석.. <section>
 			<div class="row row-cols-lg-6">
 				<div class="col">
