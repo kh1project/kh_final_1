@@ -11,7 +11,7 @@
 }
 
 .input-container {
-	margin-top: 70px;
+	margin-top: 110px;
 	margin-bottom: 60px;
 	text-align: right;
 	position: relative;
@@ -42,9 +42,10 @@
 }
 
 .starForm {
-	text-align: left;
-	text-indent: 165px;
+	position: absolute;
 	height: 35px;
+	left: 165px;
+	bottom: 70px;
 }
 
 .currcnt-outer {
@@ -54,7 +55,7 @@
 .currcnt {
 	position: absolute;
 	left: 910px;
-	bottom: 48px;
+	bottom: 80px;
 }
 
 
@@ -188,7 +189,9 @@ path:hover .line-date {
 	text-align: center;
 }
 
-
+.page-link:not(.start) {
+	color: lightgray;
+}
 
 
 

@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.web.seenema.account.dto.AccountDTO;
 import com.web.seenema.line.dto.LineDTO;
 import com.web.seenema.line.dto.PagingInfoDTO;
+import com.web.seenema.line.dto.SettingDataDTO;
 import com.web.seenema.line.service.LinePagingService;
 import com.web.seenema.movie.dao.MovieDAO;
 import com.web.seenema.movie.dto.MovieDTO;
@@ -70,12 +72,11 @@ public class MovieController {
 	}
 	
 	@RequestMapping(value = "/movie/detail")
-	public String movieDetail(Model model, @RequestParam(required=false) Integer mid, HttpServletRequest request) {
+	public String movieDetail(Model model, @RequestParam(required=false) Integer mid, @RequestParam(value="page", required=false, defaultValue="1") int page, HttpServletRequest request) {
 		
 		if(mid == null) {
 			mid = 1;
 		}
-		
 		
 		MovieDTO dto = mdao.getMovie(mid); // 영화정보 1개 가져오기
 //		Map<Integer, String> reserveRating = service.getReserveRate(); //예매율 
@@ -107,20 +108,39 @@ public class MovieController {
 			line.setEmail(email);
 		}
 		
-		// 전체 데이터 수
-		int totalrow = pagingService.totalRow(mid);
 		
-		// 한 페이지에 출력하고픈 데이터 수량
-		int list_cnt = 10;
-				
-		// 최대 페이지 번호
-		int max_page = 1;
+		int totalrow = pagingService.totalRow(mid); // 전체 데이터 수
+		int list_cnt = 10; // 한 페이지에 출력하고픈 데이터 수량
+		int max_page = 1; // 최대 페이지 번호
+		int start = (10 * (page - 1)) + 1; // 조회할 데이터 시작번호
+		int end; // 조회할 데이터 끝번호
+		
+		// max_page 구하기
 		if(totalrow != 0) {
 			if (totalrow % list_cnt == 0) {
 				max_page = totalrow / list_cnt;
 			} else {
-				max_page = (totalrow / list_cnt) + 1;
+				max_page = (int)(totalrow / list_cnt) + 1;
 			}
+		}
+
+		// end 구하기
+		if(page == max_page) {
+			end = totalrow;
+		} else {
+			end = start + 9;
+		}
+
+		// 페이지 맞는 데이터 가져오기
+		SettingDataDTO setting = new SettingDataDTO(mid, start, end);
+		List<LineDTO> linelist = pagingService.getPgDatas(setting);
+
+		// 아이디 처리
+		for(LineDTO line : linelist) {
+			String email = line.getEmail().split("@")[0];
+			email = email.substring(0, email.length() - 2);
+			email += "**";
+			line.setEmail(email);
 		}
 		
 		PagingInfoDTO info = new PagingInfoDTO();
@@ -128,8 +148,9 @@ public class MovieController {
 		info.setMax_page(max_page);
 		
 		
-		model.addAttribute("initLinelist", initLinelist);
+		model.addAttribute("linelist", linelist);
 		model.addAttribute("initPagingInfo", info);
+		model.addAttribute("page", page);
 		
 		/** 아영님 코드 끝 */
 
