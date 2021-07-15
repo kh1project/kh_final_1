@@ -121,10 +121,11 @@
 		    mt.mid,
 		    mt.tid,
 		    mt.enddate,
+            t.id,
 		    t.starttime,
 		    t.endtime,
-			(SELECT count(*) FROM seat s WHERE s.tid = th.id) as seat_count,
-			(SELECT count(*) FROM seat s WHERE s.reserved = 'y') as seat_reserved
+			(SELECT count(*) FROM seat s WHERE s.tid = t.id) as seat_count,
+			(SELECT count(*) FROM seat s WHERE s.tid = t.id AND s.reserved = 'y') as seat_reserved
 		FROM time t
 		JOIN movie_theater mt
 		ON t.mtid = mt.id
