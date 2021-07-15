@@ -43,6 +43,7 @@ DROP SEQUENCE theater_seq;
 DROP SEQUENCE time_seq;
 DROP SEQUENCE line_seq;
 DROP SEQUENCE pay_seq;
+DROP SEQUENCE account_seq;
 --*************************************
 
 --*************************************
@@ -308,7 +309,6 @@ ALTER TABLE board ADD CONSTRAINT board_id_pk PRIMARY KEY(id);
 ALTER TABLE board ADD CONSTRAINT board_btype_FK FOREIGN KEY(btype) REFERENCES board_type(id);
 ALTER TABLE board ADD CONSTRAINT board_mid_FK FOREIGN KEY(mid) REFERENCES movie(id);
 ALTER TABLE board ADD CONSTRAINT board_aid_FK FOREIGN KEY(aid) REFERENCES account(id);
-ALTER TABLE board ADD CONSTRAINT board_mid_FK FOREIGN KEY(mid) REFERENCES movie(id);
 
 COMMENT ON COLUMN board.id IS '게시판 식별번호';
 COMMENT ON COLUMN board.btype IS '게시판 구분 번호';
