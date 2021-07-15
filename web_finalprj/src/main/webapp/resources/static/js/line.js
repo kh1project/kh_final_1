@@ -26,6 +26,7 @@ $(function() {
 	});
 });
 
+/* 잘못된 incGcnt
 function incGcnt(ele, lid) {
 	console.log(lid);
 	console.log(ele.nextElementSibling);
@@ -44,6 +45,7 @@ function incGcnt(ele, lid) {
 		}
 	});
 }
+*/
 
 function deleteLine(ele, lid) {
 	$.ajax({
@@ -62,6 +64,60 @@ function deleteLine(ele, lid) {
 	});
 }
 
+$(function() {
+	$('.page-link').on('click', function() {
+		let selected_page = ele.innerText;
+		let i = 0;
+		let email = document.querySelectorAll('.user-info');
+		let star = document.querySelectorAll('.line-star');
+		let contents = document.querySelectorAll('.line-contents');
+		let gcntIcon = document.querySelectorAll('.line-gcntIcon');
+		let gcnt = document.querySelectorAll('.line-gcnt');
+		let cdate = document.querySelectorAll('.line-date');
+	
+		$.ajax({
+			url: "/seenema/lineajax/paging",
+			type: "get",
+			datatype: "json",
+			//contentType: "application/json",
+			data: {
+				selected_page: selected_page,
+				mid: mid,
+				totalrow: totalrow,
+				max_page: max_page
+			},
+			success: function(data) {
+				
+							/* 수정해야 함: 2개 동시 순회: console.log(Object.values(data.pgdatas)[0]);*/
+				for(var pgdata of data.pgdatas) {
+	
+					email[i].innerText = pgdata.email;
+					star[i].innerHTML = pgdata.star;
+					contents[i].innerHTML = pgdata.contents;
+					$(gcntIcon[i]).on('click', function() {
+						incGcnt(gcntIcon[i], pgdata.id);
+					});
+					gcnt[i].innerHTML = pgdata.gcnt;
+					cdate[i].children[0].innerText = pgdata.cdate;
+					i++;
+				}
+			}
+		});
+	
+		if(ele.innerText == max_page) {
+			// 요소들 삭제
+			let remainder = max_page % 10;
+			let lineone_outer = document.querySelectorAll('.lineone-outer');
+			let line_date = document.querySelectorAll('.line-date');
+			for(let i = remainder; i < 10; i++) {
+				lineone_outer[i].remove();
+				line_date[i].remove();
+			}		
+		}	
+	});
+});
+
+/* 잘못된 paging */
 function paging(ele, mid, totalrow, max_page) {
 	
 	let selected_page = ele.innerText;
