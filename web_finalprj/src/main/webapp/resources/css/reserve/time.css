@@ -2,6 +2,7 @@
 
 hr { margin: 3px; }
 dl { margin: 0px; }
+dt { margin-bottom: 7px; }
 .btn {
 	display: inline-block;
 	width: 65%;
@@ -9,7 +10,7 @@ dl { margin: 0px; }
 	border-style: hidden;
 	border-collapse: separate;
 	border-radius: 1ex;
-	background-color: lightgray;
+	background-color: rgb(0 123 255 / 85%);
 }
 .row { text-align: center; height: auto;}
 .col-4 { margin-bottom: 15px; }
@@ -39,12 +40,14 @@ div #title {
 div #not {
 	height: 50px;
 	margin-top: 20px;
-	font-size: 14pt;
 	font-weight: bold;
 }
 label#sub { 
 	font-weight: bold;
 	margin-top: 10px;
+}
+a.btn.btn-primary {
+	font-size: 13pt;
 }
 ::-webkit-scrollbar {
   width: 10px;

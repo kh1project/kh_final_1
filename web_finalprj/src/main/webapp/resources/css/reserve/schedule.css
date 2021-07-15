@@ -43,12 +43,8 @@ label#sub {
 	font-weight: bold;
 	margin-top: 10px;
 }
-div.col > input.nextbtn, input.backbtn {
-	height: 40px; color: white;
-	font-weight: bold;
-	border: 1px solid #4374D9;
-	border-radius: 5px;
-	background-color: #4374D9;
+input.btn.btn-outline-primary {
+    font-weight: bold;
 }
 ::-webkit-scrollbar {
   width: 10px;

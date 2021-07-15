@@ -12,6 +12,27 @@
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reservation.css">
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
+<c:url var="cencel" value="/ajax/reserve/cencel"/>
+<script type="text/javascript">
+	function cencel() {
+		$.ajax({
+			url: "${cencel}",
+			type: "get",
+			datatype: "json",
+			data: {
+				orderid: document.getElementById("id_orderid").value
+			},
+			success: function(data) {
+				if(data.result == false) {
+					alert("예매를 취소 할 수 없습니다.");
+				} else {
+					alert("예매를 취소했습니다.");
+					location.href="<%=request.getContextPath() %>/index";
+				}
+			}
+		});
+	}
+</script>
 </head>
 <body class="pt-5">
 	<header>
@@ -66,7 +87,7 @@
 						<div class="list-ticket">
 							<label class="reserve-list">예매 내역</label>
 							<hr>
-							<label class="list">예매 번호</label><input class="info reservation" name="reservationId" value="${orderid }" readonly>
+							<label class="list">예매 번호</label><input class="info reservation" name="reservationId" id="id_orderid" value="${orderid }" readonly>
 							<label class="list">예매 영화</label><input class="info" name="movieTitle" value="${title }" readonly>
 							<label class="list">상영관</label><input class="info" name="BranchTheater" value="${location } ${spot } ${theater }" readonly>
 							<label class="list">예매 일시</label><input class="info" name="moviedate" value="${moviedate }" readonly>
@@ -79,7 +100,7 @@
 				</div>
 				<div class="mainpage">
 					<input type="button" class="mainbnt" value="Home" onclick="location.href='<%=request.getContextPath() %>/index';">
-					<input type="button" class="cancelbnt" value="예매 취소" onclick="">
+					<input type="button" class="cancelbnt" value="예매 취소" onclick="cencel()">
 				</div>
 			</div>
 		</div>

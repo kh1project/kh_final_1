@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.web</groupId>
 	<artifactId>seenema</artifactId>
@@ -125,20 +124,6 @@
 		    <version>05Nov2002</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
-		<dependency>
-		    <groupId>com.googlecode.json-simple</groupId>
-		    <artifactId>json-simple</artifactId>
-		    <version>1.1.1</version>
-		</dependency>
-		-->
-		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis
-		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis</artifactId>
-		    <version>3.5.7</version>
-		</dependency>
-		-->
 		<!-- Spring JDBC -->
 		<dependency>
 		    <groupId>org.springframework</groupId>
@@ -163,12 +148,6 @@
 		    <groupId>com.googlecode.json-simple</groupId>
 		    <artifactId>json-simple</artifactId>
 		    <version>1.1.1</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-databind</artifactId>
-		    <version>2.11.0</version>
 		</dependency>
 
 		<!-- JSON 자바 객체를 손쉽게 JSON 형태로 변환(반대 작업도 가능) -->
@@ -221,8 +200,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.5.1</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                     <compilerArgument>-Xlint:all</compilerArgument>
                     <showWarnings>true</showWarnings>
                     <showDeprecation>true</showDeprecation>
@@ -236,7 +215,7 @@
                     <mainClass>org.test.int1.Main</mainClass>
                 </configuration>
             </plugin>
-            <!-- web.xml is missing and <failOnMissingWebXml> is set to true : 오류나서 추가 
+            <!-- web.xml is missing and <failOnMissingWebXml> is set to true : 오류나서 추가
             <plugin>
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-war-plugin</artifactId>
@@ -247,20 +226,20 @@
                 <failOnMissingWebXml>false</failOnMissingWebXml>
                </configuration>
             </plugin>
-            -->
-            <!-- 
-            <plugin>
-            	<groupId>org.apache.tomcat.maven</groupId>
-            	<artifactId>tomcat7-maven-plugin</artifactId>
-            	<version>2.2</version>
-            	<configuration>
-            		<url>http://localhost/manager/text</url>
-            		<username>meven_deploy</username>
-            		<password>meven_deploy</password>
-            		<path>/seenema</path>
-            	</configuration>
-            </plugin>
              -->
+			<!--
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>http://localhost/manager/text</url>
+                    <username>meven_deploy</username>
+                    <password>meven_deploy</password>
+                    <path>/</path>
+                </configuration>
+            </plugin>
+			-->
         </plugins>
     </build>
 </project>

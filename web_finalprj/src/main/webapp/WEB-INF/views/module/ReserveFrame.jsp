@@ -10,7 +10,7 @@
 				<li class="choice-movie active" onclick="location.href='<%=request.getContextPath() %>/reserve?location='">지점</li>
 				<c:choose>
 				  <c:when test="${empty param.location  || empty param.name }">
-					<li class="choice-schedule" onclick="alert('지역/지점을 선택해주세요!');">영화</li>
+					<li class="choice-schedule" onclick="alert('지역/지점을 선택해주세요.');">영화</li>
 				  </c:when>
 				  <c:otherwise>
 				  	<li class="choice-schedule" onclick="location.href='<%=request.getContextPath() %>/reserve/schedule?location=${param.location }&name=${param.name }'">영화</li>
@@ -19,7 +19,7 @@
 				<c:choose>
 				  <c:when test="${empty param.title }">
 				  	<li class="choice-time"
-					onclick="alert('지역/지점을 선택해주세요!');">상영시간</li>
+					onclick="alert('지역/지점을 선택해주세요.');">상영시간</li>
 				  </c:when>
 				  <c:otherwise>
 				  	<li class="choice-time"
@@ -36,7 +36,7 @@
 				<c:choose>
 				  <c:when test="${empty param.title }">
 				  	<li class="choice-time"
-					onclick="alert('관람하실 영화를 선택해주세요!');">상영시간</li>
+					onclick="alert('관람하실 영화를 선택해주세요.');">상영시간</li>
 				  </c:when>
 				  <c:otherwise>
 				  	<li class="choice-time"
@@ -67,8 +67,8 @@
 			</c:when>
 			<c:when test="${fn:endsWith(path, 'reservecheck.jsp') }">
 				<li class="choice-movie" onclick="location.href='<%=request.getContextPath() %>/reserve?location='">지점</li>
-				<li class="choice-schedule">영화</li>
-				<li class="choice-time">상영시간</li>
+				<li class="choice-schedule" style="cursor: default">영화</li>
+				<li class="choice-time" style="cursor: default">상영시간</li>
 				<li class="choice-seat">좌석</li>
 				<li class="choice-payment active">결제</li>
 				<li class="choice-paySuccess">결제완료</li>

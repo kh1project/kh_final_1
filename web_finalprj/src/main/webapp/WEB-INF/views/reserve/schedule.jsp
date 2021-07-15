@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +8,10 @@
 <title>영화 - SEENEMA</title>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/schedule.css">
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/static/css/common.css">
 </head>
 <body class="pt-5">
   <header>
@@ -90,8 +89,7 @@
 			<input type="hidden" name="rating" value="${param.rating }">
 			<input type="hidden" name="title" value="${param.title }">
 			<input id="idnow" type="hidden" name="moviedate">
-			<input class="backbtn" type="button" onclick="history.back();" value="< 이전">
-			<input class="nextbtn" type="button" onclick="check_movie();" value="다음 >">
+			<input class="btn btn-outline-primary" type="button" onclick="check_movie();" value="다음 >">
 		</div>
 	  </div>
 	</div>
@@ -116,7 +114,7 @@
 	
 	function check_movie() {
 		if(${param.title eq null}) {
-			alert("영화를 선택해주세요.");
+			alert("관람하실 영화를 선택해주세요.");
 			return false;
 		} else {
 			form.submit();

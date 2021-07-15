@@ -1,8 +1,6 @@
 package com.web.seenema.pay.controller;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
@@ -30,14 +28,12 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.web.seenema.account.dto.AccountDTO;
-import com.web.seenema.account.service.AccountService;
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.service.MovieService;
 import com.web.seenema.pay.dto.PaymentDTO;
 import com.web.seenema.reserve.dto.BranchTheaterDTO;
 import com.web.seenema.reserve.dto.PayInfoDTO;
 import com.web.seenema.reserve.dto.ReservationDTO;
-import com.web.seenema.reserve.dto.SeatDTO;
 import com.web.seenema.reserve.dto.TimeInfoDTO;
 import com.web.seenema.reserve.service.ReserveService;
 
@@ -50,9 +46,6 @@ public class KakaoPayController {
 	
 	@Autowired
 	private MovieService movies;
-	
-	@Autowired
-	private AccountService account;
 	
 	@RequestMapping(value = "",  method= RequestMethod.POST)
 	public String payment(HttpServletRequest req,
@@ -78,7 +71,9 @@ public class KakaoPayController {
 			SimpleDateFormat today = new SimpleDateFormat("yyMMdd");
 			String orderdate = today.format(date);
 			String timeid = Integer.toString(timelist.get(0).getId());
+			
 			String seats = pidto.getSeat();
+			
 			String seat = "";
 			String[] seatinfo = new String[5];
 			if(seats.contains(",")) {
@@ -116,7 +111,7 @@ public class KakaoPayController {
 			headers.set("Authorization", "KakaoAK d89a7a4709ce5b449b4cd03acdce548a");
 			headers.set("Content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=utf-8");
 			
-			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(param, headers);
+			HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(param, headers);
 			
 			String url = "https://kapi.kakao.com/v1/payment/ready";
 			ResponseEntity<String> resp = rest.postForEntity(url, entity, String.class);
@@ -156,16 +151,16 @@ public class KakaoPayController {
 		String forward = "";
 		HttpSession session = req.getSession();
 		String orderid = (String)req.getServletContext().getAttribute("partner_order_id");
-		int mtid = (int)req.getServletContext().getAttribute("mtid");
-		int rcnt = (int)req.getServletContext().getAttribute("rcnt");
-		int totalpay = (int)req.getServletContext().getAttribute("totalpay");
+		int mtid = (Integer)req.getServletContext().getAttribute("mtid");
+		int rcnt = (Integer)req.getServletContext().getAttribute("rcnt");
+		int totalpay = (Integer) req.getServletContext().getAttribute("totalpay");
 		char payment = ((String)req.getServletContext().getAttribute("payment")).charAt(0);
 		
 		// 상영관 정보
 		List<BranchTheaterDTO> btlist = ress.getmovieTheater(mtid);
 		
 		// 영화 정보
-		int mid = (int)req.getServletContext().getAttribute("movieid");
+		int mid = (Integer)req.getServletContext().getAttribute("movieid");
 		List<MovieDTO> moviedata = movies.getMovies(mid);
 		
 		// 시간 정보
@@ -178,7 +173,6 @@ public class KakaoPayController {
 		
 		// 좌석 정보
 		String seats = (String)req.getServletContext().getAttribute("seat");
-		// System.out.println("pidto.getSeat : " + seats);
 		String[] seatinfo = new String[5];
 		char row = ' ';
 		int col = 0;
@@ -210,7 +204,7 @@ public class KakaoPayController {
 		headers.set("Authorization", "KakaoAK d89a7a4709ce5b449b4cd03acdce548a");
 		headers.set("Content-type", MediaType.APPLICATION_FORM_URLENCODED_VALUE + ";charset=utf-8");
 		
-		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(param, headers);
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<MultiValueMap<String, String>>(param, headers);
 		
 		String url = "https://kapi.kakao.com/v1/payment/approve";
 		ResponseEntity<String> resp = rest.postForEntity(url, entity, String.class);
@@ -226,8 +220,12 @@ public class KakaoPayController {
 					row = seatinfo[i].charAt(0);
 					col = Integer.parseInt(seatinfo[i].substring(1, seatinfo[i].length()));
 					sid = ress.selectSeat(timeid, row, col);
-					ress.updateSeat(sid);
-					ress.insertReserve(orderid, sid, timeid, userid, rcnt, totalpay, payment);
+					int uRes = ress.updateSeat(sid);
+					if(uRes == 1) {
+						ress.insertReserve(orderid, sid, timeid, userid, rcnt, totalpay, payment);
+					}else {
+						forward = "kakaopay/fail";
+					}
 				}
 				forward = "kakaopay/success";
 			} else {

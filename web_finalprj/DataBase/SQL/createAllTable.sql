@@ -232,7 +232,7 @@ COMMENT ON COLUMN account.expiredate IS '회원 탈퇴일';
 -- 예매 테이블
 CREATE TABLE reservation(
     id NUMBER,
-    orderid VACHAR2(64), 
+    orderid VARCHAR2(64), 
     sid NUMBER,
     timeid NUMBER,
     aid NUMBER,
@@ -306,6 +306,7 @@ CREATE TABLE board (
 
 ALTER TABLE board ADD CONSTRAINT board_id_pk PRIMARY KEY(id);
 ALTER TABLE board ADD CONSTRAINT board_btype_FK FOREIGN KEY(btype) REFERENCES board_type(id);
+ALTER TABLE board ADD CONSTRAINT board_mid_FK FOREIGN KEY(mid) REFERENCES movie(id);
 ALTER TABLE board ADD CONSTRAINT board_aid_FK FOREIGN KEY(aid) REFERENCES account(id);
 
 COMMENT ON COLUMN board.id IS '게시판 식별번호';

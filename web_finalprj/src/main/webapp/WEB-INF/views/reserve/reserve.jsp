@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +8,10 @@
 <title>극장 - SEENEMA</title>
 <script type="text/javascript" src="<%=request.getContextPath() %>/resources/jquery/js/jquery-3.6.0.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
+<script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve.css">
 <link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/reserve/reserve_list.css">
-<script type="text/javascript" src="<%=request.getContextPath() %>/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
+<link type="text/css" rel="stylesheet" href="<%=request.getContextPath()%>/resources/static/css/common.css">
 </head>
 <body class="pt-5">
   <header>
@@ -142,7 +142,7 @@
         <div class="col" id="next">
 	       <input type="hidden" name="location" value="${param.location }">
 	       <input type="hidden" name="name" value="${param.name }">
-	       <input class="nextbtn" type="button" onclick="check()" value="다음 >">
+	       <input class="btn btn-outline-primary" type="button" onclick="check()" value="다음 >">
 	    </div>
       </div>
 	</div>
