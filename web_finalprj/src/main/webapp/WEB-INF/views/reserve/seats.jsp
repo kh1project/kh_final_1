@@ -19,7 +19,7 @@
 	</header>
 	<section class="reserve-frame pt-5">
 		<c:url var="seat" value="/reserve/reservecheck" />
-		<form action="${seat }" id="seat-form" method="get" onsubmit="return send()">
+		<form action="${seat }" id="seat-form" method="post" onsubmit="return send()">
 		<div class="reserve-window">
 				<%@ include file="../module/ReserveFrame.jsp" %>
 				<div class="main-frame">
@@ -37,6 +37,7 @@
 					</c:forEach>
 					
 					<c:forEach var="timelist" items="${timelist }">
+						<c:set var="timeid" value="${timelist.id }" />
 						<c:set var="moviedate" value="${timelist.moviedate }" />
 						<c:set var="starttime" value="${timelist.starttime }" />
 						<c:set var="endtime" value="${timelist.endtime }" />
@@ -60,54 +61,70 @@
 								<label class="screen">Screen</label>
 							</div>
 							
-							<c:forEach var="list" items="${seatlists }" >
-								<c:forEach var="seatcnt" items="${seatcnt }">
-									<c:if test="${seatcnt.key eq 'scnt' }">
-										<c:set var="seatamount" value="${seatcnt.value }" />
-									</c:if>
-								</c:forEach>
-								<c:choose>
-									<c:when test="${fn: containsIgnoreCase(list.reserved, 'y') }">
-											<label class="no-seat" id="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
-									</c:when>
-									<c:otherwise>
+								<c:forEach var="list" items="${seatlists }" >
+									<c:set var="tid" value="${list.tid }" />
+									<c:forEach var="seatcnt" items="${seatcnt }">
+										<c:if test="${seatcnt.key eq 'scnt' }">
+											<c:set var="seatamount" value="${seatcnt.value }" />
+										</c:if>
+									</c:forEach>
+									<c:if test="${tid eq timeid }">
 										<c:choose>
 											<c:when test="${seatamount%2 == 0 }" >
 												<c:choose>
-													<c:when test="${(list.seatcol eq 4) || (list.seatcol eq 10)}">
-														<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
-														<label id="${list.seatrow }${list.seatcol }" style="margin-right : 10px;" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
-													</c:when>
-													<c:when test="${list.seatcol eq 1}">
-														<br><input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
-														<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+													<c:when test="${fn: containsIgnoreCase(list.reserved, 'y')}">
+															<c:choose>
+																<c:when test="${(list.seatcol eq 4) || (list.seatcol eq 10)}">
+																	<label style="margin-right : 10px;" class="no-seat" id="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+																</c:when>
+																<c:when test="${list.seatcol eq 1}">
+																	<br><label class="no-seat" id="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+																</c:when>
+																<c:otherwise>
+																	<label class="no-seat" id="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+																</c:otherwise>
+															</c:choose>
 													</c:when>
 													<c:otherwise>
-														<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
-														<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+																<c:choose>
+																	<c:when test="${(list.seatcol eq 4) || (list.seatcol eq 10)}">
+																		<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+																		<label id="${list.seatrow }${list.seatcol }" style="margin-right : 10px;" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+																	</c:when>
+																	<c:when test="${list.seatcol eq 1}">
+																		<br><input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+																		<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+																	</c:when>
+																	<c:otherwise>
+																		<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+																		<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+																	</c:otherwise>
+																</c:choose>
 													</c:otherwise>
 												</c:choose>
 											</c:when>
 											<c:otherwise>
-												<c:choose>
+												<c:when test="${fn: containsIgnoreCase(list.reserved, 'y')}">
 													<c:when test="${(list.seatcol eq 5) || (list.seatcol eq 10)}">
-														<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
-														<label id="${list.seatrow }${list.seatcol }" style="margin-right : 10px;" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+														<label style="margin-right : 10px;" class="no-seat" id="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
 													</c:when>
+												</c:when>
+												<c:otherwise>
+															<c:when test="${(list.seatcol eq 5) || (list.seatcol eq 10)}">
+																<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
+																<label id="${list.seatrow }${list.seatcol }" style="margin-right : 10px;" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+															</c:when>
+												</c:otherwise>
 													<c:when test="${list.seatcol eq 1}">
-														<br><input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
-														<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+														<br><label class="no-seat" id="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
 													</c:when>
 													<c:otherwise>
-														<input class="seatinfo-checkbox" type="checkbox" id="${list.seatrow }${list.seatcol }" name="seat" value="${list.seatrow }${list.seatcol }">
-														<label id="${list.seatrow }${list.seatcol }" for="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
+														<label class="no-seat" id="${list.seatrow }${list.seatcol }">${list.seatrow }${list.seatcol }</label>
 													</c:otherwise>
-												</c:choose>
 											</c:otherwise>
 										</c:choose>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
+									</c:if>
+								</c:forEach>
 						</div>
 					
 					<div class="seatexample">

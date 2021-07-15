@@ -1,5 +1,6 @@
 package com.web.seenema.reserve.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -62,19 +63,16 @@ public class ReserveController {
 		return "reserve/time";
 	}
 	
-	@RequestMapping(value = "/seats", method = RequestMethod.GET)
+	@RequestMapping(value = "/seats")
 	public ModelAndView seats(HttpServletRequest req, @ModelAttribute SeatSelectDTO ssdto) throws Exception {
 		int mid = ress.getMovieId(ssdto.getTitle());
 		int mtid = ress.getmtid(mid, ssdto.getLocation(), ssdto.getName(), ssdto.getTname());
-		System.out.println(mtid);
-		System.out.println(ssdto.getMoviedate());
-		System.out.println(ssdto.getStarttime());
-		System.out.println(ssdto.getEndtime());
 		
 		List<TimeInfoDTO> timelist = ress.getTimelist(mtid, ssdto.getMoviedate(), ssdto.getStarttime(), ssdto.getEndtime());
+		int timeid = timelist.get(0).getId();
 		
 		// 상영관의 좌석 정보 가져오기.
-		List<SeatDTO> seatlists = ress.seatList(mtid);
+		List<SeatDTO> seatlists = ress.seatList(timeid);
 		
 		List<BranchTheaterDTO> btlist = ress.getmovieTheater(mtid);
 		
@@ -94,7 +92,7 @@ public class ReserveController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/reservecheck", method= RequestMethod.GET)
+	@RequestMapping(value = "/reservecheck", method= RequestMethod.POST)
 	public ModelAndView reservecheck(HttpServletRequest req, HttpServletResponse response, @ModelAttribute ReserveCheckDTO rcdto) throws Exception {
 		ModelAndView mv = new ModelAndView("reserve/reservecheck");
 		int mid = ress.getMovieId(rcdto.getTitle());

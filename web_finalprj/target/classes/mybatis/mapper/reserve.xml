@@ -30,20 +30,20 @@
 	</select>
 
 	<insert id="reserveInsert" parameterType="reservation">
-	  	INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
-			VALUES(#{id}, #{sid}, #{timeid}, ${aid}, #{rdate}, ${rcnt}, #{totalpay}, #{payment})
+	  	INSERT INTO reservation(id, orderid, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+		VALUES(res_seq.NEXTVAL, #{orderid}, #{sid}, #{timeid}, #{aid}, SYSDATE, #{rcnt}, #{totalpay}, #{payment})
 	</insert>
 
-	<update id="updateSeat" parameterType="seat">
-	    UPDATE (
-			SELECT * FROM seat s, time t
-			WHERE s.tid = t.id AND t.mtid = #{tid} AND s.seatrow = #{seatrow} AND s.seatcol = #{seatcol}
-		) SET reserved = 'y'
+	<update id="updateSeat">
+	    UPDATE seat SET reserved = 'y' WHERE id = #{sid}
 	</update>
 
-	<select id="checkseat" resultType="_int">
+	<select id="checkseat" parameterType="HashMap" resultType="seat">
     	SELECT * FROM seat
-    	 WHERE id = #{id} AND reserved = 'n'
+    	 WHERE tid = #{tid}
+    	   AND seatrow = #{row}
+    	   AND seatcol = #{col}
+    	   AND reserved = 'n'
 	</select>
 	
 	<select id="seatcnt" resultType="_int">
@@ -66,7 +66,7 @@
 	<select id="seat_all" resultType="seat">
 	    SELECT *
 	      FROM seat
-    	 WHERE tid = #{tid}
+    	 WHERE tid = #{timeid}
     	 ORDER BY id
 	</select>
 	

@@ -1,5 +1,6 @@
 package com.web.seenema.reserve.repository;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,8 +101,8 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 	}
 	
 	@Override
-	public List<SeatDTO> selectSeatAll(int tid) throws Exception {
-		List<SeatDTO> seatdata = sqlSession.selectList("reserveMapper.seat_all", tid);
+	public List<SeatDTO> selectSeatAll(int timeid) throws Exception {
+		List<SeatDTO> seatdata = sqlSession.selectList("reserveMapper.seat_all", timeid);
 		
 		return seatdata;
 	}
@@ -120,27 +121,26 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 	}
 
 	@Override
-	public int selectSeat(int id) throws Exception {
-		return sqlSession.selectOne("reserveMapper.checkseat", id);
+	public int selectSeat(int tid, char row, int col) throws Exception {
+		Map<String, Object> data = new HashMap<>();
+		data.put("tid", tid);
+		data.put("row", row);
+		data.put("col", col);
+		List<SeatDTO> sdto = sqlSession.selectList("reserveMapper.checkseat", data);
+		return sdto.get(0).getId();
 	}
 
 	@Override
-	public int updateSeat(SeatDTO seatdto) throws Exception{
-		return sqlSession.update("reserveMapper.updateSeat", seatdto);
-	}
-
-	@Override
-	public int insertReserve(ReservationDTO resdto) throws Exception{
-		System.out.println(resdto.getSid());
-		return sqlSession.insert("reserveMapper.reserveInsert", resdto);
+	public int updateSeat(int sid) throws Exception{
+		return sqlSession.update("reserveMapper.updateSeat", sid);
 	}
 
 	@Override
 	public int getBranchTheater(String location, String name, String tname) throws Exception {
 		Map<String, Object> data = new HashMap<>();
-			data.put("location", location);
-			data.put("name", name);
-			data.put("tname", tname);
+		data.put("location", location);
+		data.put("name", name);
+		data.put("tname", tname);
 		return sqlSession.selectOne("reserveMapper.getTid", data);
 	}
 
@@ -169,6 +169,21 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 		data.put("endtime", endtime);
 		
 		return sqlSession.selectList("reserveMapper.getTimeid", data);
+	}
+
+	@Override
+	public int insertReserve(String orderid, int sid, int timeid, int userid, int rcnt,
+			int totalpay, char payment) throws Exception {
+		ReservationDTO resdto = new ReservationDTO();
+		resdto.setOrderid(orderid);
+		resdto.setSid(sid);
+		resdto.setTimeid(timeid);
+		resdto.setAid(userid);
+		resdto.setRcnt(rcnt);
+		resdto.setTotalpay(totalpay);
+		resdto.setPayment(payment);
+		
+		return sqlSession.insert("reserveMapper.reserveInsert", resdto);
 	}
 
 }

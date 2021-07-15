@@ -53,8 +53,8 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 	
 	@Override
-	public List<SeatDTO> seatList(int tid) throws Exception {
-		List<SeatDTO> seatlist = dao.selectSeatAll(tid);
+	public List<SeatDTO> seatList(int timeid) throws Exception {
+		List<SeatDTO> seatlist = dao.selectSeatAll(timeid);
 		return seatlist;
 	}
 
@@ -76,18 +76,13 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public int selectSeat(int id) throws Exception {
-		return dao.selectSeat(id);
+	public int selectSeat(int tid, char row, int col) throws Exception {
+		return dao.selectSeat(tid, row, col);
 	}
 
 	@Override
-	public int updateSeat(SeatDTO seatdto) throws Exception{
-		return dao.updateSeat(seatdto);
-	}
-
-	@Override
-	public int insertReserve(ReservationDTO resDTO) throws Exception{
-		return dao.insertReserve(resDTO);
+	public int updateSeat(int sid) throws Exception {
+		return dao.updateSeat(sid);
 	}
 
 	@Override
@@ -108,6 +103,12 @@ public class ReserveServiceImpl implements ReserveService {
 	@Override
 	public List<TimeInfoDTO> getTimelist(int mtid, String moviedate, String starttime, String endtime) throws Exception {
 		return dao.getTimelist(mtid, moviedate, starttime, endtime);
+	}
+
+	@Override
+	public int insertReserve(String orderid, int sid, int timeid, int userid, int rcnt,
+			int totalpay, char payment) throws Exception {
+		return dao.insertReserve(orderid, sid, timeid, userid, rcnt, totalpay, payment);
 	}
 	
 }
