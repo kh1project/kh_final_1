@@ -34,7 +34,19 @@
 					</div>
 				</div>
 				<div class="col-6 postwrap">
-					별점 : <input type="number" id="star" name="star" min="1" max="10" value="1"><!-- 나중에 별 체크하는걸로 바꿔야함. 임시. -->
+					<div class="starRating">
+						<i class="far fa-star" data-rating="1"></i>
+						<i class="far fa-star" data-rating="2"></i>
+						<i class="far fa-star" data-rating="3"></i>
+						<i class="far fa-star" data-rating="4"></i>
+						<i class="far fa-star" data-rating="5"></i>
+						<i class="far fa-star" data-rating="6"></i>
+						<i class="far fa-star" data-rating="7"></i>
+						<i class="far fa-star" data-rating="8"></i>
+						<i class="far fa-star" data-rating="9"></i>
+						<i class="far fa-star" data-rating="10"></i>
+						<input type="hidden" id="star" name="star">
+					</div>
 					<!-- 이미지1, 텍스트1 묶음 START -->
 					<div id="post1" class="col post" onclick="selectPost(1)">
 						<img class="selectImg" src="<%=request.getContextPath() %>/resources/images/sub/bg-img-select.png" alt="이미지 없음">

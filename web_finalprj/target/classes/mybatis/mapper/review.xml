@@ -26,7 +26,7 @@
 		SELECT * FROM board WHERE btype = 1 AND deleted = 'N' AND nodel = 'N' ORDER BY (gcnt - bcnt) DESC
 	</select>
 	<select id="selectReviewSearchList" parameterType="boardSearch" resultType="reviewlist">
-		SELECT a.* FROM board a LEFT OUTER JOIN movie b ON a.mid = b.id LEFT OUTER JOIN account c ON a.aid = c.id WHERE b.title = #{search} OR b.genre = #{search} OR b.director = #{search} OR b.actor = #{search} OR c.nickname = #{search}
+		SELECT a.* FROM board a LEFT OUTER JOIN movie b ON a.mid = b.id LEFT OUTER JOIN account c ON a.aid = c.id WHERE b.title LIKE #{search} OR b.genre LIKE #{search} OR b.director LIKE #{search} OR b.actor LIKE #{search} OR c.nickname LIKE #{search}
 	</select>
 	<select id="selectReviewSeenList" parameterType="int" resultType="reviewlist">
 		SELECT * FROM board WHERE btype = 1 AND deleted = 'N' AND nodel = 'N' AND mid IN (
@@ -49,7 +49,7 @@
       GROUP BY a.mid) ORDER BY (gcnt - bcnt) DESC
 	</select>
 	<select id="selectReviewSearchSeenList" parameterType="boardSearch" resultType="reviewlist">
-		SELECT a.* FROM board a LEFT OUTER JOIN movie b ON a.mid = b.id LEFT OUTER JOIN account c ON a.aid = c.id WHERE b.title = #{search} OR b.genre = #{search} OR b.director = #{search} OR b.actor = #{search} OR c.nickname = #{search}
+		SELECT a.* FROM board a LEFT OUTER JOIN movie b ON a.mid = b.id LEFT OUTER JOIN account c ON a.aid = c.id WHERE b.title LIKE #{search} OR b.genre LIKE #{search} OR b.director LIKE #{search} OR b.actor LIKE #{search} OR c.nickname LIKE #{search}
 	</select>
 	<select id="selectReview" parameterType="int" resultType="review">
 		SELECT * FROM board WHERE id = ${rid} AND deleted = 'N' AND nodel = 'N'
@@ -115,4 +115,7 @@
 		   SET nodel = 'Y'
 		 WHERE id = #{id}
 	</update>
+	<select id="selectUserNickname" parameterType="int" resultType="String">
+		SELECT nickname FROM account WHERE id = ${id}
+	</select>
 </mapper>

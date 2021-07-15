@@ -63,14 +63,14 @@
 									<div class="card mb-3 shadow-sm rlist">
 										<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><div class="card-image"><img src="${i.getImgurl() }"></div></a>
 										<div class="card-body">
-											<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><small class="text-muted">${i.getAid() }</small></a>
+											<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><small class="text-muted">${i.getNickname() }</small></a>
 											<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><h5>${i.getTitle() }</h5></a>
 											<a href="<%=request.getContextPath() %>/review/detail?rid=${i.getId() }"><p>${i.getContents() }</p></a>
 											<div class="d-flex justify-content-between align-items-center">
 												<div class="btn-group">
 													<button type="button" class="btn btn-sm btn-outline-secondary btn-gcnt" data-id="${i.getId() }"><i class="far fa-thumbs-up fa-fw"></i><span>${i.getGcnt() }</span></button>
 													<button type="button" class="btn btn-sm btn-outline-secondary btn-bcnt" data-id="${i.getId() }"><i class="far fa-thumbs-down fa-fw"></i><span>${i.getBcnt() }</span></button>
-													<button type="button" class="btn btn-sm btn-outline-secondary btn-cnt"><i class="far fa-comment-alt fa-fw"></i><span>${i.getCommcnt() }</span></button>
+													<button type="button" class="btn btn-sm btn-outline-secondary btn-cnt"><i class="far fa-star fa-fw"></i><span>${i.getStar() }</span></button>
 												</div>
 												<small id="cdate${loop.count }" class="text-muted cdate" data-cdate="${i.getCdateFM() }"></small>
 											</div>

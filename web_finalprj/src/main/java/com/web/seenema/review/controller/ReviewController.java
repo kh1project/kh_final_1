@@ -39,7 +39,7 @@ public class ReviewController {
 	private ReviewServiceImpl review;
 	
 	@RequestMapping(value = "")
-	public String review(Model m, HttpServletRequest req, @ModelAttribute String sort, @ModelAttribute BoardSearchDTO search) throws Exception {
+	public String review(Model m, HttpServletRequest req, String sort, @ModelAttribute BoardSearchDTO search) throws Exception {
 		HttpSession session = req.getSession();
 		int aid = 0;
 		if(session.getAttribute("account") != null) {
@@ -50,14 +50,14 @@ public class ReviewController {
 		List<ReviewListDTO> list = null;
 		if(search.getBtype() == 0) {
 			if(sort != null && sort.equals("like")) {
-				list = review.reviewList();
-			} else {
 				list = review.reviewLikeList();
+			} else {
+				list = review.reviewList();
 			}
 		} else {
 			list = review.reviewSearchList(search);
 		}
-		
+		String nickname = null;
 		if(list.size() > 0) {
 			for(int i = 0; i < list.size(); i++) {
 				List<String> firstPost = review.firstContent(list.get(i).getContents());
@@ -66,6 +66,8 @@ public class ReviewController {
 				} else {
 					list.get(i).setContents(firstPost.get(0));
 					list.get(i).setImgurl(firstPost.get(1));
+					nickname = review.getNickname(list.get(i).getAid());
+					list.get(i).setNickname(nickname);
 				}
 			}
 			m.addAttribute("list", list);
@@ -81,7 +83,7 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/seen")
-	public ModelAndView reviewShow(HttpServletRequest req, @ModelAttribute String sort, @ModelAttribute BoardSearchDTO search) throws Exception {
+	public ModelAndView reviewShow(HttpServletRequest req, String sort, @ModelAttribute BoardSearchDTO search) throws Exception {
 		ModelAndView mv = new ModelAndView("review/reviewSeen");
 		
 		HttpSession session = req.getSession();
@@ -94,14 +96,14 @@ public class ReviewController {
 		List<ReviewListDTO> list = null;
 		if(search.getBtype() == 0) {
 			if(sort != null && sort.equals("like")) {
-				list = review.reviewSeenList(aid);
-			} else {
 				list = review.reviewLikeSeenList(aid);
+			} else {
+				list = review.reviewSeenList(aid);
 			}
 		} else {
 			list = review.reviewSearchSeenList(search);
 		}
-		
+		String nickname = null;
 		if(list.size() > 0) {
 			for(int i = 0; i < list.size(); i++) {
 				List<String> firstPost = review.firstContent(list.get(i).getContents());
@@ -110,6 +112,8 @@ public class ReviewController {
 				} else {
 					list.get(i).setContents(firstPost.get(0));
 					list.get(i).setImgurl(firstPost.get(1));
+					nickname = review.getNickname(list.get(i).getAid());
+					list.get(i).setNickname(nickname);
 				}
 			}
 			mv.addObject("list", list);
@@ -138,6 +142,8 @@ public class ReviewController {
 		ReviewDTO data = review.reviewOne(rid);
 		
 		if(data != null) {
+			String nickname = review.getNickname(data.getAid());
+			
 			int vcnt = data.getVcnt();
 			
 			for(Cookie cookie : cookies) {
@@ -167,6 +173,7 @@ public class ReviewController {
 			List<ReviewPostDTO> contlist = review.MergePost(data.getContents());
 			m.addAttribute("data", data);
 			m.addAttribute("contlist", contlist);
+			m.addAttribute("nickname", nickname);
 			forward = "review/reviewdetail";
 		} else {
 			forward = "redirect:/review";
@@ -200,11 +207,20 @@ public class ReviewController {
 	}
 	
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String reviewAddPost(Model m, @ModelAttribute ReviewAddDTO radto) throws Exception {
+	public String reviewAddPost(Model m, HttpServletRequest req, @ModelAttribute ReviewAddDTO radto) throws Exception {
 		String forward = "";
 		
-		int aid = 1; //session에서 aid 받아와야함. 임시데이터.
-		radto.setAid(aid);
+		HttpSession session = req.getSession();
+		int aid = 0;
+		if(session.getAttribute("account") != null) {
+			AccountDTO dto = (AccountDTO) session.getAttribute("account");
+			aid = dto.getId();
+			radto.setAid(aid);
+			System.out.println("aid : " + aid);
+		}
+		if(aid == 0) {
+			return "redirect:/review";
+		}
 
 		//addreview 메서드 호출
 		boolean result = review.addReview(radto);
@@ -238,7 +254,8 @@ public class ReviewController {
 			if(aid == 0 || aid != data.getAid()) {
 				return "redirect:/review";
 			} else if(aid == data.getAid() && data.getNodel().equals("Y")) {
-				m.addAttribute("blockerror", "해당 게시물은 블럭 처리되었습니다.");
+				System.out.println("지금 여기 들어온거야?");
+				m.addAttribute("blockerror", 1);
 			}
 			List<ReviewPostDTO> contlist = review.MergePost(data.getContents());
 			m.addAttribute("data", data);
@@ -255,15 +272,15 @@ public class ReviewController {
 	public String reviewUpdatePost(Model m, HttpServletRequest req, @ModelAttribute ReviewDTO dto) throws Exception {
 		String forward = "";
 		
-		HttpSession session = req.getSession();
-		int aid = 0;
-		if(session.getAttribute("account") != null) {
-			AccountDTO adto = (AccountDTO) session.getAttribute("account");
-			aid = adto.getId();
-		}
-		if(aid == 0 || aid != dto.getAid()) {
-			return "redirect:/review";
-		}
+//		HttpSession session = req.getSession();
+//		int aid = 0;
+//		if(session.getAttribute("account") != null) {
+//			AccountDTO adto = (AccountDTO) session.getAttribute("account");
+//			aid = adto.getId();
+//		}
+//		if(aid == 0 || aid != dto.getAid()) {
+//			return "redirect:/review";
+//		}
 		
 		System.out.println("Update Controller 정상 진입 확인");
 		System.out.println("-------------------------");

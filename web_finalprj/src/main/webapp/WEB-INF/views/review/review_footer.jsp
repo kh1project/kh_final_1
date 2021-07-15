@@ -34,6 +34,7 @@ $(function(){
 		e.preventDefault();
 		if(sessionAid == null || sessionAid == 0 || sessionAid == '') {
 			alert("로그인 후 이용하실 수 있습니다.");
+			location.href="<%=request.getContextPath() %>/account/login";
 		} else {
 			const btn_gcnt = $(this).children('span');
 			const gcnt = btn_gcnt.html();
@@ -56,6 +57,7 @@ $(function(){
 		e.preventDefault();
 		if(sessionAid == null || sessionAid == 0 || sessionAid == '') {
 			alert("로그인 후 이용하실 수 있습니다.");
+			location.href="<%=request.getContextPath() %>/account/login";
 		} else {
 			const btn_bcnt = $(this).children('span');
 			const bcnt = btn_bcnt.html();
@@ -80,6 +82,10 @@ $(function(){
 		const getdata = dataid.attr("data-cdate");
 		$(dataid).html(timeForToday(getdata));		
 	}
+	
+	const rating = $("#star").val();
+	$(".starRating i:nth-child("+rating+")").attr("class", "fas fa-star").prevAll().attr("class", "fas fa-star");
+	
 });
 
 var sessionAid = $("#sessionAid").val();
@@ -87,6 +93,7 @@ var sessionAid = $("#sessionAid").val();
 function reviewAdd() {
 	if(sessionAid == null || sessionAid == 0 || sessionAid == '') {
 		alert("로그인 후 이용하실 수 있습니다.");
+		location.href="<%=request.getContextPath() %>/account/login";
 	} else {
 		location.href="<%=request.getContextPath() %>/review/add";
 	}
@@ -95,6 +102,7 @@ function reviewAdd() {
 function reviewUpdate() {
 	if(sessionAid == null || sessionAid == 0 || sessionAid == '') {
 		alert("로그인 후 이용하실 수 있습니다.");
+		location.href="<%=request.getContextPath() %>/account/login";
 	} else {
 		location.href="<%=request.getContextPath() %>/review/update?rid=${data.getId() }";
 	}
@@ -103,6 +111,7 @@ function reviewUpdate() {
 function reviewDelete() {
 	if(sessionAid == null || sessionAid == 0 || sessionAid == '') {
 		alert("로그인 후 이용하실 수 있습니다.");
+		location.href="<%=request.getContextPath() %>/account/login";
 	} else {
 		location.href="<%=request.getContextPath() %>/review/delete?rid=${data.getId() }";
 	}

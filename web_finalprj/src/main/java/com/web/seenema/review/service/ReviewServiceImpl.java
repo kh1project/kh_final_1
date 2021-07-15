@@ -290,4 +290,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return dto.updateVcnt(rdto);
 		
 	}
+
+	@Override
+	public String getNickname(int id) throws Exception {
+		return dto.selectUserNickname(id);
+	}
 }

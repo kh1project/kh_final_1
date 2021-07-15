@@ -34,7 +34,7 @@ COMMENT ON COLUMN account.joindate IS '회원 가입일';
 COMMENT ON COLUMN account.logindate IS '회원 로그인일';
 COMMENT ON COLUMN account.expiredate IS '회원 탈퇴일';
 
-
+SELECT a.* FROM board a LEFT OUTER JOIN movie b ON a.mid = b.id LEFT OUTER JOIN account c ON a.aid = c.id WHERE b.title like '어드민' OR b.genre like '어드민' OR b.director like '어드민' OR b.actor like '어드민' OR c.nickname like '어드민';
 
 -- 회원 구분 테이블
 CREATE TABLE account_type (

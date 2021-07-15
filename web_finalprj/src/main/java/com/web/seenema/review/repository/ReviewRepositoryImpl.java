@@ -189,4 +189,9 @@ public class ReviewRepositoryImpl implements ReviewRepository {
 	public int blockReview(int id) throws Exception {
 		return sqlSession.update("reviewMapper.blockReview", id);
 	}
+
+	@Override
+	public String selectUserNickname(int id) throws Exception {
+		return sqlSession.selectOne("reviewMapper.selectUserNickname", id);
+	}
 }

@@ -819,6 +819,14 @@ INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVA
 INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 6, TO_DATE('21/07/14', 'YY/MM/DD'), '13:34:00', '15:18:00');
 INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 6, TO_DATE('21/07/14', 'YY/MM/DD'), '17:40:00', '19:10:00');
 
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 10, TO_DATE('21/07/15', 'YY/MM/DD'), '11:30:00', '13:14:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 10, TO_DATE('21/07/15', 'YY/MM/DD'), '13:34:00', '15:18:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 10, TO_DATE('21/07/15', 'YY/MM/DD'), '17:40:00', '19:10:00');
+
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 11, TO_DATE('21/07/14', 'YY/MM/DD'), '11:30:00', '13:14:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 11, TO_DATE('21/07/14', 'YY/MM/DD'), '13:34:00', '15:18:00');
+INSERT INTO time(id, mtid, moviedate, starttime, endtime) VALUES(time_seq.NEXTVAL, 11, TO_DATE('21/07/14', 'YY/MM/DD'), '17:40:00', '19:10:00');
+
 --UPDATE time SET moviedate = TO_DATE('21/07/15', 'YY/MM/DD');
 
 
@@ -971,6 +979,16 @@ INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
 	VALUES(res_seq.NEXTVAL, 8, 8, 1, SYSDATE, 1, 13000, 'k');
 INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
 	VALUES(res_seq.NEXTVAL, 5, 10, 1, SYSDATE, 1, 13000, 'k');
+INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+	VALUES(res_seq.NEXTVAL, 8, 8, 1, SYSDATE, 1, 13000, 'k');
+INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+	VALUES(res_seq.NEXTVAL, 5, 10, 1, SYSDATE, 1, 13000, 'k');
+-- aid 2번 사람 영화(timeid 잘 체크해야함)
+INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+	VALUES(res_seq.NEXTVAL, 4, 2, 2, SYSDATE, 1, 13000, 'k');
+INSERT INTO reservation(id, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
+	VALUES(res_seq.NEXTVAL, 2, 10, 2, SYSDATE, 1, 13000, 'k');
+	select * from time;
 	
 --*************************************
 -- line테이블 INSERT
