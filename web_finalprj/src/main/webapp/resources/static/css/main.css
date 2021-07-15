@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-
+/*
 .carousel-item {
   height: 100vh;
   min-height: 350px;
@@ -10,6 +10,7 @@
   -o-background-size: cover;
   background-size: cover;
 }
+*/
 
 #boxoffice {
 	/*background-image: url('https://source.unsplash.com/RCAhiGJsUUE/1920x1080');*/
@@ -61,6 +62,7 @@
 	background-color: rgba(0, 0, 0, 0.8);
 	text-align: left;
 	color: white;
+	transition: background-color .3s ease-in-out, color 0s ease-out .5s;
 }
 
 .btn-primary {

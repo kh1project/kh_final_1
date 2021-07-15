@@ -66,7 +66,7 @@
 	      			<div class="carousel-item">
 	      		</c:otherwise>
 	      	</c:choose>
-	      		<c:url var="path1" value="/resources/img/${item }/stillcut/movie_image.jpg" />
+	      		<c:url var="path1" value="/resources/images/movie/${item }/stillcut/movie_image (5).jpg" />
 	      		<img src="${path1 }">
 	      	</div>
 	      </c:forEach>
@@ -80,7 +80,7 @@
 	          <span class="sr-only">Next</span>
 	    </a>
 	  </div>
-	</div>
+	</div>	      
 	    
 
 	<div id="boxoffice">
@@ -117,7 +117,9 @@
 			  </div>
 		   </div>
 		</div>
-	</div>	      
+	</div>
+	
+	
 
 	
     <%@ include file="./module/footer.jsp" %>
