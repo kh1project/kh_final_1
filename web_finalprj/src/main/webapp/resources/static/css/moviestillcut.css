@@ -51,12 +51,38 @@
 }
 
 #crs .crs-imagebox{
-	max-height: 640px;
-	max-width: 100%;
+	height: 640px;
+    max-width: 100%;
+    position: relative;
+    display: inline-flex;
+}
+
+#crs .crs-imagebox > img{
+	height: fit-content;
+    max-height: 640px;
 }
 
 #crs .crs-window{
-	display: inline-block;
+	display: block;
     position: relative;
     margin-top: 5%;
+}
+
+#crs .close{
+	color: white;
+	opacity: 1;
+	float: none;
+}
+
+#crs .crs-buttonbox {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;	
+}
+
+#crs .crs-buttonbox > span > i{
+    color: darkseagreen;
+    font-size: 4em;
+    cursor: pointer;
 }

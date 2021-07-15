@@ -23,6 +23,7 @@
 </style>
 <link type="text/css" rel="stylesheet" href="${root }resources/static/css/moviedetail.css">
 <link type="text/css" rel="stylesheet" href="${root }resources/static/css/moviestillcut.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
 	<header>
@@ -197,8 +198,13 @@
 					<img src="">
 				</div>
 				<div class="crs-buttonbox">
-					<button class="crs-pre"></button>
-					<button class="crs-next"></button>
+					<input type="hidden" value="" />
+					<span class="crs-pre" onclick="pre(${size})">
+						<i class="bi bi-arrow-left-circle-fill"></i>
+					</span>
+					<span class="crs-next" onclick="next(${size})">
+						<i class="bi bi-arrow-right-circle-fill"></i>
+					</span>
 				</div>
 			</div>
 		</div>	
