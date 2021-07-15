@@ -1,5 +1,6 @@
 package com.web.seenema.review.dto;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 public class ReviewDTO {
 
@@ -81,11 +82,21 @@ public class ReviewDTO {
 	public Date getCdate() {
 		return cdate;
 	}
+	public String getCdateFM() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String formatdate = format.format(cdate);
+		return formatdate;
+	}
 	public void setCdate(Date cdate) {
 		this.cdate = cdate;
 	}
 	public Date getUdate() {
 		return udate;
+	}
+	public String getUdateFM() {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String formatdate = format.format(udate);
+		return formatdate;
 	}
 	public void setUdate(Date udate) {
 		this.udate = udate;
@@ -101,5 +112,11 @@ public class ReviewDTO {
 	}
 	public void setDeleted(String deleted) {
 		this.deleted = deleted;
+	}
+	@Override
+	public String toString() {
+		return "ReviewDTO [id=" + id + ", mid=" + mid + ", aid=" + aid + ", nickname=" + nickname + ", title=" + title
+				+ ", contents=" + contents + ", vcnt=" + vcnt + ", gcnt=" + gcnt + ", bcnt=" + bcnt + ", star=" + star
+				+ ", cdate=" + cdate + ", udate=" + udate + ", nodel=" + nodel + ", deleted=" + deleted + "]";
 	}
 }

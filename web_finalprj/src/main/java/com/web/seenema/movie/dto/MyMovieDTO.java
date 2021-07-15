@@ -30,4 +30,8 @@ public class MyMovieDTO {
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Override
+	public String toString() {
+		return "MyMovieDTO [id=" + id + ", title=" + title + ", path=" + path + ", name=" + name + "]";
+	}
 }

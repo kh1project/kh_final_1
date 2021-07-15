@@ -8,8 +8,7 @@
 		<div class="review-detail-wrap">
 			<div class="review-detail-header">
 				<h3>${data.getTitle() }
-					<fmt:formatDate var="cdate" value="${data.getCdate() }" pattern="yyyy/MM/dd HH:mm:ss.SSS" />
-					<small class="cdate" data-id="${data.getId() }" data-cdate="${cdate }">${cdate }</small>
+					<small id="cdate" class="cdate" data-cdate="${data.getCdateFM() }"></small>
 				</h3>
 				<div>
 					<p><a href="<%=request.getContextPath() %>/review/update?rid=${data.getId() }">수정</a> <a href="<%=request.getContextPath() %>/review/delete?rid=${data.getId() }">삭제</a> <a href="javascript:;" onclick="history.back();">목록</a></p>

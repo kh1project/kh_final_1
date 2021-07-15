@@ -20,10 +20,39 @@
 			VALUES(board_seq.NEXTVAL, 1, #{mid}, #{aid}, #{title}, #{contents})
 	</insert>
 	<select id="selectReviewList" resultType="reviewlist">
-		SELECT * FROM board WHERE btype = 1 AND deleted = 'N' ORDER BY id DESC
+		SELECT * FROM board WHERE btype = 1 AND deleted = 'N' AND nodel = 'N' ORDER BY id DESC
+	</select>
+	<select id="selectOrderbyLikeList" resultType="reviewlist">
+		SELECT * FROM board WHERE btype = 1 AND deleted = 'N' AND nodel = 'N' ORDER BY (gcnt - bcnt) DESC
+	</select>
+	<select id="selectReviewSearchList" parameterType="boardSearch" resultType="reviewlist">
+		SELECT a.* FROM board a LEFT OUTER JOIN movie b ON a.mid = b.id LEFT OUTER JOIN account c ON a.aid = c.id WHERE b.title = #{search} OR b.genre = #{search} OR b.director = #{search} OR b.actor = #{search} OR c.nickname = #{search}
+	</select>
+	<select id="selectReviewSeenList" parameterType="int" resultType="reviewlist">
+		SELECT * FROM board WHERE btype = 1 AND deleted = 'N' AND nodel = 'N' AND mid IN (
+		SELECT a.mid FROM board a
+		  LEFT OUTER JOIN account b ON a.aid = b.id
+		  LEFT OUTER JOIN movie_theater c ON a.mid = c.mid
+		  LEFT OUTER JOIN time d ON c.tid = d.id
+		  LEFT OUTER JOIN reservation e ON d.id = e.timeid
+		 WHERE b.id = ${id}
+      GROUP BY a.mid) ORDER BY id DESC
+	</select>
+	<select id="selectOrderbyLikeSeenList" parameterType="int" resultType="reviewlist">
+		SELECT * FROM board WHERE btype = 1 AND deleted = 'N' AND nodel = 'N' AND mid IN (
+		SELECT a.mid FROM board a
+		  LEFT OUTER JOIN account b ON a.aid = b.id
+		  LEFT OUTER JOIN movie_theater c ON a.mid = c.mid
+		  LEFT OUTER JOIN time d ON c.tid = d.id
+		  LEFT OUTER JOIN reservation e ON d.id = e.timeid
+		 WHERE b.id = ${id}
+      GROUP BY a.mid) ORDER BY (gcnt - bcnt) DESC
+	</select>
+	<select id="selectReviewSearchSeenList" parameterType="boardSearch" resultType="reviewlist">
+		SELECT a.* FROM board a LEFT OUTER JOIN movie b ON a.mid = b.id LEFT OUTER JOIN account c ON a.aid = c.id WHERE b.title = #{search} OR b.genre = #{search} OR b.director = #{search} OR b.actor = #{search} OR c.nickname = #{search}
 	</select>
 	<select id="selectReview" parameterType="int" resultType="review">
-		SELECT * FROM board WHERE id = ${rid} AND deleted = 'N'
+		SELECT * FROM board WHERE id = ${rid} AND deleted = 'N' AND nodel = 'N'
 	</select>
 	<update id="firstUpdatePost" parameterType="reviewpost">
 		UPDATE post
@@ -80,5 +109,10 @@
 		 <selectKey keyColumn="vcnt" keyProperty="vcnt" resultType="int" order="AFTER">
 		 	SELECT vcnt FROM board WHERE id = #{id}
 		 </selectKey>
+	</update>
+	<update id="blockReview" parameterType="int">
+		UPDATE board
+		   SET nodel = 'Y'
+		 WHERE id = #{id}
 	</update>
 </mapper>
