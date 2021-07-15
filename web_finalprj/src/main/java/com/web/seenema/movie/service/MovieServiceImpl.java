@@ -1,18 +1,23 @@
 package com.web.seenema.movie.service;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FilenameUtils;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -23,6 +28,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.seenema.movie.dao.MovieDAO;
+import com.web.seenema.movie.dto.AddmovieDTO;
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MovieGcntDTO;
 import com.web.seenema.movie.dto.MovieImageDTO;
@@ -218,14 +224,103 @@ public class MovieServiceImpl implements MovieService {
 	}
 	
 	@Override
-	public void posterUpload(MultipartFile[] poster) {
-		// TODO Auto-generated method stub
+	public void posterUpload(MultipartFile[] poster, int mid, HttpServletRequest req) throws IOException {
+		
+		UUID uuid = UUID.randomUUID();
+		String originName = "";
+		String changeName = "";
+		String fileExt = "";
+
+		if(poster.length > 0) {
+			for(MultipartFile f: poster) {	
+				originName = f.getOriginalFilename();
+				changeName = uuid.toString()+"_"+originName;
+				fileExt = FilenameUtils.getExtension(f.getOriginalFilename());
+				if(fileExt.equals("jpg") || fileExt.equals("jpeg") || fileExt.equals("png")) {
+					String rootPath = req.getServletContext().getRealPath("/");
+					File usePath = new File(rootPath + "/resources/images/movie/"+mid+"/poster/");
+					String relativePath = "/resources/images/movie/"+mid+"/poster/";
+					if(!usePath.exists()) 
+						Files.createDirectories(usePath.toPath());
+					
+					f.transferTo(new File(usePath + changeName));
+					insertFile(relativePath, changeName, mid);
+				}
+			}
+		}
 		
 	}
 	
 	@Override
-	public void stillcutUpload(MultipartFile[] stillcut) {
-		// TODO Auto-generated method stub
+	public void stillcutUpload(MultipartFile[] stillcut, int mid, HttpServletRequest req) throws IOException {
+		
+		UUID uuid = UUID.randomUUID();
+		String originName = "";
+		String changeName = "";
+		String fileExt = "";
+		
+		if(stillcut.length > 0) {
+			for(MultipartFile f: stillcut) {	
+				originName = f.getOriginalFilename();
+				changeName = uuid.toString()+"_"+originName;
+				fileExt = FilenameUtils.getExtension(f.getOriginalFilename());
+				if(fileExt.equals("jpg") || fileExt.equals("jpeg") || fileExt.equals("png")) {
+					String rootPath = req.getServletContext().getRealPath("/");
+					File usePath = new File(rootPath + "/resources/images/movie/"+mid+"/stillcut/");
+					String relativePath = "/resources/images/movie/"+mid+"/stillcut/";
+					if(!usePath.exists()) 
+						Files.createDirectories(usePath.toPath());
+					
+					f.transferTo(new File(usePath + changeName));
+					insertFile(relativePath, changeName, mid);
+				}
+			}
+		}
 		
 	}
+
+	private void insertFile(String relativePath, String changeName, int mid) {
+		String path = relativePath.toString();
+		String name = changeName.toString();
+		MovieImageDTO midto = new MovieImageDTO();
+		midto.setMid(mid);
+		midto.setName(name);
+		midto.setPath(path);
+		dao.insertFile(midto);
+		
+	}
+	
+	@Override
+	public void insertMovieData(MovieDTO dto) {
+		System.out.println(dto.toString());
+		dao.insertMovieData(dto);
+	}
+	
+	@Override
+	public Map<Integer, List<MovieImageDTO>> getPosterInfo(int size) {
+
+		Map<Integer, List<MovieImageDTO>> imageMap = new HashMap<>();
+		for(int i = 1; i <= size; i++) {
+			imageMap.put(i, dao.getPoster(i));
+		}
+
+		return imageMap;
+	}
+	
+	@Override
+	public Map<Integer, List<MovieImageDTO>> getStillcutInfo(int size) {
+
+		Map<Integer, List<MovieImageDTO>> imageMap = new HashMap<>();
+		for(int i = 1; i <= size; i++) {
+			imageMap.put(i, dao.getStillcut(i));
+		}
+
+		return imageMap;
+	}
+	
+	@Override
+	public List<MovieImageDTO> getOnePoster() {
+		return dao.getOnePoster();
+	}
+
 }

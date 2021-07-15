@@ -1,11 +1,16 @@
 package com.web.seenema.movie.controller;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,10 +55,12 @@ public class MovieController {
             num = Integer.parseInt(sort);
             movieList = service.getAllMovies(num);
         }
-        
+         
+//        Map<Integer, List<MovieImageDTO>> posters = service.getPosterInfo(movieList.size());
+//        Map<Integer, List<MovieImageDTO>> stillcuts = service.getStillcutInfo(movieList.size());
         Map<Integer, String> reserveRating = service.getReserveRate();
         HttpSession session = request.getSession();
-        
+//        posters.get(1).get(1).getPath();
         int aid = 0;
         
         if(session.getAttribute("account") != null) {
@@ -63,12 +70,15 @@ public class MovieController {
         
         List<MovieLikeDTO> likeList = service.getMovieLikeList(aid);
         Map<Integer, Integer> gcnt = service.getGcnt();
-        
+        List<MovieImageDTO> mainposter = service.getOnePoster();
         model.addAttribute("movieList", movieList);
         model.addAttribute("reserveRating", reserveRating);
         model.addAttribute("likeList", likeList);
         model.addAttribute("sort", num);
         model.addAttribute("gcnt", gcnt);
+//        model.addAttribute("posters", posters);
+//        model.addAttribute("stillcuts", stillcuts);
+        model.addAttribute("mainposter", mainposter);
         
         return "movie/movie";
     }
@@ -287,26 +297,17 @@ public class MovieController {
     
     //영화 등록 로직
     @RequestMapping(value = "/movie/add/register")
-	public String movieAdd( Model model, 
-			@RequestParam("poster") MultipartFile[] poster,
+    public String movieAdd(Model model, 
+    		@RequestParam("poster") MultipartFile[] poster,
 			@RequestParam("stillcut") MultipartFile[] stillcut, 
-			@ModelAttribute AddmovieDTO amdto) {
+			@ModelAttribute MovieDTO dto,
+			HttpServletRequest req) throws Exception {
 		
-		for(MultipartFile f: poster) {
-			if(!f.isEmpty()) {
-				System.out.println("poster : " + f.getOriginalFilename());				
-			}
-		}
-		
-		for(MultipartFile f: stillcut) {
-			if(!f.isEmpty()) {
-				System.out.println("stilcut : " + f.getOriginalFilename());				
-			}
-		}
-		
-		System.out.println(amdto.toString());
-		
-		return "redirect:/movie/detail?mid="+amdto.getMid();
+    	service.insertMovieData(dto);
+    	service.posterUpload(poster, dto.getId(), req);
+    	service.stillcutUpload(stillcut, dto.getId(), req);
+	
+		return "redirect:/movie/detail?mid="+dto.getId();
 	}
     
     @RequestMapping(value = "/movie/getinfo")

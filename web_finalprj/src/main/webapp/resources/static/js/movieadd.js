@@ -5,13 +5,13 @@ $(document).ready(function(){
      poster.onchange = function(){
            let label = poster.nextElementSibling;
            let filenames = "";
-           let index = 1;
+           /*let index = 1;*/
            
            for(item of poster.files){
                 filenames += item.name;
           filenames += ", ";
           
-          let main = document.querySelector("#mainposter");
+          /*let main = document.querySelector("#mainposter");
           let sub = document.querySelector("#subposter");
           main.append(document.createElement('option'));
           main.children[index].value = item.name;
@@ -20,7 +20,7 @@ $(document).ready(function(){
           sub.append(document.createElement('option'));
           sub.children[index].value = item.name;
           sub.children[index].text = item.name;
-          index++;
+          index++;*/
           
      }
      label.innerText = filenames.slice(0, -2);

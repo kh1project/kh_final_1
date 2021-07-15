@@ -119,7 +119,7 @@ ul {
 							<div class="rank">${numRank = numRank+1 }</div>
 							<a
 								href="${root}movie/detail?mid=${item.getId() }"><img
-								src="${root}resources/images/movie/${item.getId() }/poster/movie_image.jpg"
+								src="${root}/${mainposter.get(item.getId()-1).getPath()}/${mainposter.get(item.getId()-1).getName()}"
 								alt="${item.getTitle() }"></a>
 						</div>
 						<div class="title-box">
@@ -190,7 +190,7 @@ ul {
 									</c:otherwise>
 								</c:choose>
 								<span class="btn btn-outline-dark" id="reserve-${item.getId() }"
-									onclick="window.location.href = '/seenema/reserve?location=';">
+									onclick="window.location.href = '${root}reserve?location=';">
 									예매 </span>
 							</div>
 						</div>

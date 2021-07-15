@@ -27,7 +27,7 @@
            <form class="pt-5" action="${root}movie/add/register" method="POST" enctype="multipart/form-data">
                 <label for="mid">영화 등록번호</label>
                 <!-- 아래 input name을 mid에서 id로 바꿨습니다. -->
-                <input class="form-control" id="mid" name="mid" type="text" placeholder="영화 등록번호" value="${mid }" readonly></input>
+                <input class="form-control" id="id" name="id" type="text" placeholder="영화 등록번호" value="${mid }" readonly></input>
                 <div>
                      <div class="info-container pt-5">
                            <div class="input-group mb-3">
@@ -48,7 +48,7 @@
                                      <label class="custom-file-label" for="stillcut">선택된 파일 없음</label>
                                 </div>
                            </div>
-                           <div class="select-poster">
+                           <!-- <div class="select-poster">
                                 <span>
                                      <label for="mainposter">포스터 선택</label>
                                      <select class="custom-select" id="mainposter" name="mainposter" required>
@@ -60,7 +60,7 @@
                                            <option selected disabled value="">서브 포스터</option>
                                      </select>
                                 </span>
-                           </div>
+                           </div> -->
                            
                            <div>
                                 <label for="title">영화 제목</label>
