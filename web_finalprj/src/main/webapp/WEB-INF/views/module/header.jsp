@@ -15,3 +15,38 @@ body { padding-top:66px !important; }
     <a href="<%=request.getContextPath() %>/review">리뷰</a>
   </div>
 </nav>
+&nbsp;  
+  	<div class="container" style="font-size:1.2rem;">
+			<ul class="nav justify-content-end">
+			
+		<%
+			if(session.getAttribute("account") != null) {
+		%>
+					<li class="nav-item">
+						<%
+							if(getServletInfo().equals("mypage")) {
+						%>
+								<a class="nav-link active" href="<%=request.getContextPath() %>/account/mypage" style="color: #4C4C4C">마이페이지</a>
+						<%		
+							} else {
+						%>
+								<a class="nav-link" href="<%=request.getContextPath() %>/account/mypage" style="color: #4C4C4C">마이페이지</a>
+						<%
+							}
+						%>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="<%=request.getContextPath() %>/account/logout">로그아웃</a>
+					</li>
+				</ul>
+		<% } else { %>
+				<ul class="nav justify-content-end">
+					<li class="nav-item">
+						<a class="nav-link" href="<%=request.getContextPath() %>/account/login" style="color: #4C4C4C">로그인</a>
+					</li>				
+					<li class="nav-item">
+						<a class="nav-link" href="<%=request.getContextPath() %>/account/join" style="color: #4C4C4C">회원가입</a>
+					</li>
+				</ul>
+		<% } %>
+  </div>
