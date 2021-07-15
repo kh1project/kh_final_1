@@ -3,6 +3,8 @@ package com.web.seenema.movie.service;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.dto.MovieImageDTO;
 import com.web.seenema.movie.dto.MovieLikeDTO;
@@ -27,4 +29,6 @@ public interface MovieService {
 	public int getLastMovieNum();
 	public List<MovieImageDTO> getMoviePosters(Integer mid);
 	public List<MovieImageDTO> getMovieStillcuts(Integer mid);
+	public void posterUpload(MultipartFile[] poster);
+	public void stillcutUpload(MultipartFile[] stillcut);
 }

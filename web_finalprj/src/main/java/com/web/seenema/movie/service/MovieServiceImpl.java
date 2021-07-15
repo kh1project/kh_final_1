@@ -20,6 +20,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.web.seenema.movie.dao.MovieDAO;
 import com.web.seenema.movie.dto.MovieDTO;
@@ -214,5 +215,17 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public List<MovieImageDTO> getMovieStillcuts(Integer mid) {
 		return dao.getMovieStillcuts(mid);
+	}
+	
+	@Override
+	public void posterUpload(MultipartFile[] poster) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public void stillcutUpload(MultipartFile[] stillcut) {
+		// TODO Auto-generated method stub
+		
 	}
 }
