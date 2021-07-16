@@ -13,8 +13,27 @@ body { padding-top:66px !important; }
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
   <div class="container">
   	<div class="mini-menu">
-  		<a href="<%=request.getContextPath() %>/account/join">회원가입</a>
-  		<a href="<%=request.getContextPath() %>/account/login">로그인</a>
+  		<%
+			if(session.getAttribute("account") != null) {
+		%>
+			<ul class="nav justify-content-end">
+					<li class="nav-item">
+						<a class="nav-link" href="<%=request.getContextPath() %>/account/mypage">마이페이지</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="<%=request.getContextPath() %>/account/logout">로그아웃</a>
+					</li>
+				</ul>
+		<% } else { %>
+				<ul class="nav justify-content-end">
+					<li class="nav-item">
+						<a class="nav-link" href="<%=request.getContextPath() %>/account/login">로그인</a>
+					</li>				
+					<li class="nav-item">
+						<a class="nav-link" href="<%=request.getContextPath() %>/account/join">회원가입</a>
+					</li>
+				</ul>
+		<% } %>
   	</div>
   	<div class="menu">
 	  	<a href="<%=request.getContextPath() %>/movie">영화</a>

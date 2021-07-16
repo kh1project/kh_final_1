@@ -43,8 +43,8 @@
   	</select>
   
   	<insert id="insertAccount" parameterType="account">
-  		INSERT INTO account(id, email, password,  username, nickname, gender, age, phone)
-  	    	 VALUES(account_seq.NEXTVAL, #{email}, #{password}, #{username}, #{nickname}, #{gender}, #{age}, #{phone})
+  		INSERT INTO account(id, email, password,  username, nickname, age, phone)
+  	    	 VALUES(account_seq.NEXTVAL, #{email}, #{password}, #{username}, #{nickname}, #{age}, #{phone})
   	</insert>
   
   	<update id="loginDate">
@@ -56,7 +56,6 @@
   	<update id="updateAccount" parameterType="account">
   		UPDATE account
   	   	SET nickname = #{nickname}
-  	     	, gender = #{gender}
   	     	, age = #{age}
   	 	WHERE id = #{id}
   	</update>
