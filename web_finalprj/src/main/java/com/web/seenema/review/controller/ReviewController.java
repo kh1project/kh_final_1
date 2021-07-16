@@ -197,9 +197,9 @@ public class ReviewController {
 		} else {
 			List<List<MyMovieDTO>> mywlist = account.mywatchList(aid);
 			List<Integer> myaddlist = review.myAddReviewList(aid);
-			System.out.println(myaddlist.size());
+			System.out.println("[controller] 내가 작성한 리뷰 목록의 사이즈 : " + myaddlist.size());
 			for(int i:myaddlist) {
-				System.out.println(i);
+				System.out.println("[controller] 내가 작성한 리뷰 id" + i);
 			}
 			
 			m.addAttribute("mywlist", mywlist);
