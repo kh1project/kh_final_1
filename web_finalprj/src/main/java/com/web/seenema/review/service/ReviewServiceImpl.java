@@ -257,11 +257,6 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<String> firstContent(String cont) throws Exception {
 		List<ReviewPostDTO> contents = MergePost(cont);
-		for(int i = 0; i < contents.size(); i++) {
-			System.out.println(contents.get(i));
-		}
-		
-		
 		List<String> firstPost = new ArrayList<String>();
 		
 		if(contents.get(0).getPosttext() != null && contents.get(0).getPostimg() != null) {
@@ -306,5 +301,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public String getNickname(int id) throws Exception {
 		return dto.selectUserNickname(id);
+	}
+
+	@Override
+	public List<Integer> myAddReviewList(int aid) throws Exception {
+		return dto.selectAddReviewList(aid);
 	}
 }

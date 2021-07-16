@@ -51,6 +51,10 @@
 .checkbg { opacity:0; position:absolute; width:calc(100% - 2rem); height:calc(100% - 4.5rem); background:rgba(0,0,0,.6); z-index:3; }
 .checkbg:hover { opacity:0.3; }
 .checkbg i { color: #fff; font-size: 2rem; position: absolute; left: calc(50% - 1rem); top: calc(50% - 1rem); }
+.checkbg span { color:#fff; font-size:1.4rem; position:absolute; top:calc(50% - 16px); left:calc(50% - 41px); cursor:default; }
+.checkbg.on { opacity:1; cursor:initial; }
+.checkbg.on:hover { opacity:1; }
+.checkbg.on + img + p { cursor:default; }
 
 #add-step2 > form > .row,
 #update > form > .row { justify-content: space-between; margin-right:15px; margin-left:15px; }

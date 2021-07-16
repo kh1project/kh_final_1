@@ -8,17 +8,26 @@
 	<div id="pageContainer" class="container">
 	
 		<div id="add-step1">
-			<div class="add-step-header">리뷰를 작성하실 영화를 선택해주세요!<span>등록가능한 영화 <strong>${mywlist.size() } </strong>건</span></div>
+			<div class="add-step-header">리뷰를 작성하실 영화를 선택해주세요!<span>등록가능한 영화 <strong>${mywlist.size() - myaddlist.size() } </strong>건</span></div>
 	
 			<div class="row row-cols-lg-4">
-				<c:forEach var="i" items="${mywlist }" varStatus="loop">
-					<c:forEach var="j" items="${i }" begin="0" end="0">
-						<label for="wm${j.getId() }" onclick="selectmovie(${j.getId() });"><div id="wm${j.getId() }wrap" class="p-3 border bg-light wmwrap">
-							<div id="checkbg${j.getId() }" class="checkbg"><i class="fa fa-check"></i></div>
-							<img src="<%=request.getContextPath() %>${j.getPath() }${j.getName() }">
-							<p>${j.getTitle() }</p>
-							<input type="radio" name="wm" id="wm${j.getId() }" class="r_movieselect" value="wm${j.getId() }">
-						</div></label>
+				<c:forEach var="i" items="${mywlist }" varStatus="iLoop">
+				${myaddlist[iLoop.index]}
+					<c:forEach var="j" items="${i }" begin="0" end="0" varStatus="jLoop">
+						<c:if test="${myaddlist[iLoop.index] eq j.getId()}">
+						미작성 (${myaddlist[iLoop.index]}, ${j.getId() })
+							<label for="wm${j.getId() }" onclick="selectmovie(${j.getId() });"><div id="wm${j.getId() }wrap" class="p-3 border bg-light wmwrap">
+								<div id="checkbg${j.getId() }" class="checkbg"><i class="fa fa-check"></i></div>
+						</c:if>
+						<c:if test="${myaddlist[iLoop.index] ne j.getId()}">
+						작성 (${myaddlist[iLoop.index]}, ${j.getId() })
+							<label for="wm${j.getId() }"><div id="wm${j.getId() }wrap" class="p-3 border bg-light wmwrap">
+								<div id="checkbg${j.getId() }" class="checkbg on"><span>작성완료</span></div>
+						</c:if>
+								<img src="<%=request.getContextPath() %>${j.getPath() }${j.getName() }">
+								<p>${j.getTitle() }</p>
+								<input type="radio" name="wm" id="wm${j.getId() }" class="r_movieselect" value="wm${j.getId() }">
+							</div></label>
 					</c:forEach>
 				</c:forEach>
 			</div>

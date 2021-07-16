@@ -65,16 +65,26 @@ CREATE SEQUENCE board_seq;
 select id,title from movie where id = 1;
 SELECT * FROM board WHERE btype = 1 ORDER BY (gcnt - bcnt) DESC;
 
--- 내가본 영화 쿼리 테스트
-SELECT * FROM board WHERE btype = 1 AND deleted = 'N' AND nodel = 'N' AND mid IN (
-		SELECT a.mid FROM board a
-		  LEFT OUTER JOIN account b ON a.aid = b.id
-		  LEFT OUTER JOIN movie_theater c ON a.mid = c.mid
-		  LEFT OUTER JOIN time d ON c.tid = d.id
-		  LEFT OUTER JOIN reservation e ON d.id = e.timeid
-		 WHERE b.id = 1
-      GROUP BY a.mid) ORDER BY id DESC;
- 
+SELECT a.id, a.btype, a.mid, a.aid, a.title, a.contents, a.gcnt, a.bcnt, a.cdate, a.star FROM board a
+        LEFT OUTER JOIN movie b ON a.mid = b.id
+        LEFT OUTER JOIN account c ON a.aid = c.id        
+        WHERE REGEXP_LIKE(b.title, '홍', 'x')
+           OR REGEXP_LIKE(b.genre, '홍', 'x')
+           OR REGEXP_LIKE(b.director, '홍', 'x')
+           OR REGEXP_LIKE(b.actor, '홍', 'x')
+           OR REGEXP_LIKE(c.nickname, '홍', 'x')
+           AND btype = 1 AND deleted = 'N' AND nodel = 'N' AND mid IN (
+           SELECT d.mid FROM board d
+				  LEFT OUTER JOIN account e ON d.aid = e.id
+				  LEFT OUTER JOIN movie_theater f ON d.mid = f.mid
+				  LEFT OUTER JOIN time g ON f.tid = g.id
+				  LEFT OUTER JOIN reservation h ON g.id = h.timeid
+				 WHERE e.id = 1
+		      GROUP BY d.mid
+           ) ORDER BY id DESC;
+
+SELECT mid FROM board WHERE aid = 2 AND deleted = 'N' AND nodel = 'N' GROUP BY mid
+
 
 DROP SEQUENCE board_seq;
 DELETE FROM board WHERE id  <= 100;

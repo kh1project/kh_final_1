@@ -195,10 +195,15 @@ public class ReviewController {
 		if(aid == 0) {
 			return "redirect:/review";
 		} else {
-			List<List<MyMovieDTO>> mywlist = null;
-			mywlist = account.mywatchList(aid);
+			List<List<MyMovieDTO>> mywlist = account.mywatchList(aid);
+			List<Integer> myaddlist = review.myAddReviewList(aid);
+			System.out.println(myaddlist.size());
+			for(int i:myaddlist) {
+				System.out.println(i);
+			}
 			
-			m.addAttribute("mywlist", mywlist);			
+			m.addAttribute("mywlist", mywlist);
+			m.addAttribute("myaddlist", myaddlist);	
 		}
 		
 		m.addAttribute("sessionAid", aid);
@@ -252,7 +257,6 @@ public class ReviewController {
 			if(aid == 0 || aid != data.getAid()) {
 				return "redirect:/review";
 			} else if(aid == data.getAid() && data.getNodel().equals("Y")) {
-				System.out.println("지금 여기 들어온거야?");
 				m.addAttribute("blockerror", 1);
 			}
 			List<ReviewPostDTO> contlist = review.MergePost(data.getContents());

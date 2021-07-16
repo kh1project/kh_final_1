@@ -142,4 +142,7 @@
 	<select id="selectUserNickname" parameterType="int" resultType="String">
 		SELECT nickname FROM account WHERE id = ${id}
 	</select>
+	<select id="selectAddReviewList" parameterType="int" resultType="int">
+		SELECT mid FROM board WHERE aid = ${aid} AND deleted = 'N' AND nodel = 'N' GROUP BY mid
+	</select>
 </mapper>
