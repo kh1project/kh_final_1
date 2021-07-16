@@ -257,7 +257,6 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public List<String> firstContent(String cont) throws Exception {
 		List<ReviewPostDTO> contents = MergePost(cont);
-		System.out.println("-------MergePost(cont) 검증-------");
 		for(int i = 0; i < contents.size(); i++) {
 			System.out.println(contents.get(i));
 		}
@@ -268,7 +267,6 @@ public class ReviewServiceImpl implements ReviewService {
 		if(contents.get(0).getPosttext() != null && contents.get(0).getPostimg() != null) {
 			firstPost.add(contents.get(0).getPosttext());
 			firstPost.add(contents.get(0).getPostimg());
-			System.out.println("firstPost 정보 제대로 담았음");
 		} else {
 			System.out.println("!!!!firstPost 정보 담지 못 함!!!!");
 		}

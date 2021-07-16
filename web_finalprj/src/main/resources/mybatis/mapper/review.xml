@@ -16,8 +16,8 @@
 		SELECT * FROM post WHERE mergePost = #{mergeId}
 	</select>
 	<insert id="insertReview" parameterType="reviewadd">
-		INSERT INTO board(id, btype, mid, aid, title, contents)
-			VALUES(board_seq.NEXTVAL, 1, #{mid}, #{aid}, #{title}, #{contents})
+		INSERT INTO board(id, btype, mid, aid, title, contents, star)
+			VALUES(board_seq.NEXTVAL, 1, #{mid}, #{aid}, #{title}, #{contents}, #{star})
 	</insert>
 	<select id="selectReviewList" resultType="reviewlist">
 		SELECT * FROM board WHERE btype = 1 AND deleted = 'N' AND nodel = 'N' ORDER BY id DESC

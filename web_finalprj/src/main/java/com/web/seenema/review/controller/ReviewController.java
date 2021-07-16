@@ -59,13 +59,8 @@ public class ReviewController {
 		}
 		String nickname = null;
 		if(list.size() > 0) {
-			System.out.println("[Controller] list.size() : " + list.size() + "번 반복해야 합니다.");
-			System.out.println("-------------------------------------------------------------------------------");
 			for(int i = 0; i < list.size(); i++) {
-				System.out.println("[Controller] (" + (i+1) + "/" + list.size() + ")번째 게시물의 firstPost 사진,글 가져올 예정");
 				List<String> firstPost = review.firstContent(list.get(i).getContents());
-				System.out.println("[Controller] (" + (i+1) + "/" + list.size() + ")번째 게시물의 firstPost 사진,글 가져옴");
-				System.out.println("-------------------------------------------------------------------------------");
 				if(firstPost.get(0) == "-1") {
 					System.out.println("리뷰 존재하지 않음");
 				} else {
@@ -221,15 +216,13 @@ public class ReviewController {
 			AccountDTO dto = (AccountDTO) session.getAttribute("account");
 			aid = dto.getId();
 			radto.setAid(aid);
-			System.out.println("aid : " + aid);
 		}
 		if(aid == 0) {
 			return "redirect:/review";
 		}
-
+		
 		//addreview 메서드 호출
 		boolean result = review.addReview(radto);
-		System.out.println("board저장");
 				
 		if(result) {
 			// 작성 성공시 리뷰 리스트로 이동
