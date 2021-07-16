@@ -12,6 +12,7 @@ import com.web.seenema.movie.dto.MyMovieDTO;
 import com.web.seenema.movie.repository.MovieRepositoryImpl;
 
 import com.web.seenema.account.dto.AccountDTO;
+import com.web.seenema.account.dto.AccountGradeDTO;
 import com.web.seenema.account.repository.AccountRepositoryImpl;
 
 @Service
@@ -111,5 +112,17 @@ public class AccountServiceImpl implements AccountService {
 	public List<MyMovieDTO> mywatchSelect(int aid) throws Exception {
 		List<MyMovieDTO> data = mdao.selectWatchMovieList(aid);
 		return data;
+	}
+	
+	@Override
+	public Boolean adminCheck(int aid) {
+		List<AccountGradeDTO> agdto = dao.getAdminList();
+		Boolean res = false;
+		for(AccountGradeDTO item : agdto) {
+			if(aid == item.getId())
+				res = true;
+		}
+		
+		return res;
 	}
 }

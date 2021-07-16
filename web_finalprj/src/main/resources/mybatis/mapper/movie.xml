@@ -100,5 +100,7 @@
 		ORDER BY mid
 	</select>
 	
-	
+	<select id="getAdminList" resultType="com.web.seenema.account.dto.AccountGradeDTO">
+  		SELECT id, name FROM account_type WHERE name = 'admin'
+  	</select>
 </mapper>

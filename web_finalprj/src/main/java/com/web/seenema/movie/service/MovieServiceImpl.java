@@ -16,6 +16,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.json.simple.JSONArray;
@@ -27,6 +28,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.web.seenema.account.dto.AccountDTO;
 import com.web.seenema.movie.dao.MovieDAO;
 import com.web.seenema.movie.dto.AddmovieDTO;
 import com.web.seenema.movie.dto.MovieDTO;
@@ -238,12 +240,12 @@ public class MovieServiceImpl implements MovieService {
 				fileExt = FilenameUtils.getExtension(f.getOriginalFilename());
 				if(fileExt.equals("jpg") || fileExt.equals("jpeg") || fileExt.equals("png")) {
 					String rootPath = req.getServletContext().getRealPath("/");
-					File usePath = new File(rootPath + "/resources/images/movie/"+mid+"/poster/");
+					File usePath = new File(rootPath + "/resources/images/movie/"+mid+"/poster");
 					String relativePath = "/resources/images/movie/"+mid+"/poster/";
 					if(!usePath.exists()) 
 						Files.createDirectories(usePath.toPath());
 					
-					f.transferTo(new File(usePath + changeName));
+					f.transferTo(new File(usePath + "/" + changeName));
 					insertFile(relativePath, changeName, mid);
 				}
 			}
@@ -266,12 +268,12 @@ public class MovieServiceImpl implements MovieService {
 				fileExt = FilenameUtils.getExtension(f.getOriginalFilename());
 				if(fileExt.equals("jpg") || fileExt.equals("jpeg") || fileExt.equals("png")) {
 					String rootPath = req.getServletContext().getRealPath("/");
-					File usePath = new File(rootPath + "/resources/images/movie/"+mid+"/stillcut/");
+					File usePath = new File(rootPath + "/resources/images/movie/"+mid+"/stillcut");
 					String relativePath = "/resources/images/movie/"+mid+"/stillcut/";
 					if(!usePath.exists()) 
 						Files.createDirectories(usePath.toPath());
 					
-					f.transferTo(new File(usePath + changeName));
+					f.transferTo(new File(usePath + "/"+ changeName));
 					insertFile(relativePath, changeName, mid);
 				}
 			}
@@ -321,6 +323,19 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public List<MovieImageDTO> getOnePoster() {
 		return dao.getOnePoster();
+	}
+	
+	@Override
+	public int getAid(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		int aid=0;
+		
+    	if(session.getAttribute("account") != null) {
+            AccountDTO dto = (AccountDTO) session.getAttribute("account");
+            aid = dto.getId();
+        }
+    	System.out.println(aid);
+		return aid;
 	}
 
 }

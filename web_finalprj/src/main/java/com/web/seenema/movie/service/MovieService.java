@@ -39,4 +39,5 @@ public interface MovieService {
 	public Map<Integer, List<MovieImageDTO>> getPosterInfo(int size);
 	public Map<Integer, List<MovieImageDTO>> getStillcutInfo(int size);
 	public List<MovieImageDTO> getOnePoster();
+	public int getAid(HttpServletRequest request);
 }

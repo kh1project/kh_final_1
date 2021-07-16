@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.seenema.account.dto.AccountDTO;
+import com.web.seenema.account.service.AccountService;
 import com.web.seenema.line.dto.LineDTO;
 import com.web.seenema.line.dto.PagingInfoDTO;
 import com.web.seenema.line.service.LinePagingService;
@@ -41,6 +42,9 @@ public class MovieController {
     private MovieDAO mdao;
     
     @Autowired
+    private AccountService aservice;
+    
+    @Autowired
     private LinePagingService pagingService;
     
     @RequestMapping(value = "/movie")
@@ -55,30 +59,21 @@ public class MovieController {
             num = Integer.parseInt(sort);
             movieList = service.getAllMovies(num);
         }
-         
-//        Map<Integer, List<MovieImageDTO>> posters = service.getPosterInfo(movieList.size());
-//        Map<Integer, List<MovieImageDTO>> stillcuts = service.getStillcutInfo(movieList.size());
+                 
+        int aid = service.getAid(request);
+        Boolean isAdmin = aservice.adminCheck(aid); //관리자 계정인지 확인용
         Map<Integer, String> reserveRating = service.getReserveRate();
-        HttpSession session = request.getSession();
-//        posters.get(1).get(1).getPath();
-        int aid = 0;
-        
-        if(session.getAttribute("account") != null) {
-            AccountDTO dto = (AccountDTO) session.getAttribute("account");
-            aid = dto.getId();
-        }    
-        
         List<MovieLikeDTO> likeList = service.getMovieLikeList(aid);
         Map<Integer, Integer> gcnt = service.getGcnt();
         List<MovieImageDTO> mainposter = service.getOnePoster();
+        
         model.addAttribute("movieList", movieList);
         model.addAttribute("reserveRating", reserveRating);
         model.addAttribute("likeList", likeList);
         model.addAttribute("sort", num);
         model.addAttribute("gcnt", gcnt);
-//        model.addAttribute("posters", posters);
-//        model.addAttribute("stillcuts", stillcuts);
         model.addAttribute("mainposter", mainposter);
+        model.addAttribute("isAdmin", isAdmin);
         
         return "movie/movie";
     }
@@ -86,28 +81,22 @@ public class MovieController {
     @RequestMapping(value = "/movie/detail")
     public String movieDetail(Model model, @RequestParam(required=false) Integer mid, HttpServletRequest request) {
         
-        if(mid == null) {
+        if(mid == null) 
             mid = 1;
-        }
-        
+             
+        int aid = service.getAid(request);
         
         MovieDTO dto = mdao.getMovie(mid); // 영화정보 1개 가져오기
         Map<Integer, String> reserveRating = service.getReserveRate(); //예매율
-        HttpSession session = request.getSession(); // 로그인 세션 가져오기
         Map<Integer, Integer> gcnt = service.getGcnt(); // 좋아요 갯수 가져오기(전체)
-        
-        int aid = 0;
-        
-        if(session.getAttribute("account") != null) {
-            AccountDTO adto = (AccountDTO) session.getAttribute("account");
-            aid = adto.getId();
-        }
         List<MovieLikeDTO> likeList = service.getMovieLikeList(aid); // 좋아요 받은 영화 리스트 가져오기
+        List<MovieImageDTO> mainposter = service.getOnePoster();
         
         model.addAttribute("movie", dto);        
         model.addAttribute("reserveRating", reserveRating.get(mid));
         model.addAttribute("likeList", likeList);
         model.addAttribute("gcnt", gcnt);
+        model.addAttribute("mainposter", mainposter);
         
         /** 아영님 코드 시작 */
         // 1page 에 출력할 한줄평 데이터
@@ -153,28 +142,21 @@ public class MovieController {
     @RequestMapping(value = "/movie/detail/comment")
     public String movieComment(Model model, @RequestParam(required=false) Integer mid, HttpServletRequest request) {
 
-        if(mid == null) {
+        if(mid == null) 
             mid = 1;
-        }
         
-        
+        int aid = service.getAid(request);
         MovieDTO dto = mdao.getMovie(mid); // 영화정보 1개 가져오기
         Map<Integer, String> reserveRating = service.getReserveRate(); //예매율
-        HttpSession session = request.getSession(); // 로그인 세션 가져오기
         Map<Integer, Integer> gcnt = service.getGcnt(); // 좋아요 갯수 가져오기(전체)
-        
-        int aid = 0;
-        
-        if(session.getAttribute("account") != null) {
-            AccountDTO adto = (AccountDTO) session.getAttribute("account");
-            aid = adto.getId();
-        }
         List<MovieLikeDTO> likeList = service.getMovieLikeList(aid); // 좋아요 받은 영화 리스트 가져오기
+        List<MovieImageDTO> mainposter = service.getOnePoster();
         
         model.addAttribute("movie", dto);        
         model.addAttribute("reserveRating", reserveRating.get(mid));
         model.addAttribute("likeList", likeList);
         model.addAttribute("gcnt", gcnt);
+        model.addAttribute("mainposter", mainposter);
         
         /** 아영님 코드 시작 */
         // 1page 에 출력할 한줄평 데이터
@@ -220,29 +202,23 @@ public class MovieController {
     @RequestMapping(value = "/movie/detail/post")
     public String moviePost(Model model, @RequestParam(required=false) Integer mid, HttpServletRequest request) {
 
-        if(mid == null) {
+        if(mid == null)
             mid = 1;
-        }
+        
+        int aid = service.getAid(request);
         
         MovieDTO dto = mdao.getMovie(mid); // 영화정보 1개 가져오기
         Map<Integer, String> reserveRating = service.getReserveRate(); //예매율
-        HttpSession session = request.getSession(); // 로그인 세션 가져오기
         Map<Integer, Integer> gcnt = service.getGcnt(); // 좋아요 갯수 가져오기(전체)
-        
-        int aid = 0;
-        
-        if(session.getAttribute("account") != null) {
-            AccountDTO adto = (AccountDTO) session.getAttribute("account");
-            aid = adto.getId();
-        }
         List<MovieLikeDTO> likeList = service.getMovieLikeList(aid); // 좋아요 받은 영화 리스트 가져오기
+        List<MovieImageDTO> mainposter = service.getOnePoster();
         
         model.addAttribute("movie", dto);        
         model.addAttribute("reserveRating", reserveRating.get(mid));
         model.addAttribute("likeList", likeList);
         model.addAttribute("gcnt", gcnt);
+        model.addAttribute("mainposter", mainposter);
         
-
         return "movie/moviepost";
     }
     
@@ -251,23 +227,16 @@ public class MovieController {
 
         if(mid == null)
             mid = 1;        
+                
+        int aid = service.getAid(request);
         
         MovieDTO dto = mdao.getMovie(mid); // 영화정보 1개 가져오기
-        
         Map<Integer, String> reserveRating = service.getReserveRate(); //예매율
-        HttpSession session = request.getSession(); // 로그인 세션 가져오기
         Map<Integer, Integer> gcnt = service.getGcnt(); // 좋아요 갯수 가져오기(전체)
-        
-        int aid = 0;
-        
-        if(session.getAttribute("account") != null) {
-            AccountDTO adto = (AccountDTO) session.getAttribute("account");
-            aid = adto.getId();
-        }
         List<MovieLikeDTO> likeList = service.getMovieLikeList(aid); // 좋아요 받은 영화 리스트 가져오기
         List<MovieImageDTO> moviePosters = service.getMoviePosters(mid);
         List<MovieImageDTO> movieStillcuts = service.getMovieStillcuts(mid);
-        
+        List<MovieImageDTO> mainposter = service.getOnePoster();
         
         model.addAttribute("movie", dto);        
         model.addAttribute("reserveRating", reserveRating.get(mid));
@@ -275,6 +244,7 @@ public class MovieController {
         model.addAttribute("gcnt", gcnt);
         model.addAttribute("moviePosters", moviePosters);
         model.addAttribute("movieStillcuts", movieStillcuts);
+        model.addAttribute("mainposter", mainposter);
         
 
         return "movie/moviestillcut";
@@ -288,10 +258,15 @@ public class MovieController {
     }
     
     @RequestMapping(value = "/movie/add")
-    public String movieAdd(Model model) {
+    public String movieAdd(Model model, HttpServletRequest request) {
+   	
+    	int aid = service.getAid(request); 
+    	
+    	if(!aservice.adminCheck(aid))
+    		return "redirect:/movie";
+    	
         int movieNum = service.getLastMovieNum()+1;
         model.addAttribute("mid", movieNum);
-        //영화 등록페이지로 이동
         return "movie/movieadd";
     }
     
