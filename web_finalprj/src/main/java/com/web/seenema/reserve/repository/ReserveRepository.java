@@ -20,7 +20,7 @@ public interface ReserveRepository {
 	public List<SeatDTO> selectSeatAll(int timeid) throws Exception;
 	public int searchprice(int id) throws Exception;
 	public List<BranchTheaterDTO> selectMovieTheater(int tid) throws Exception;
-	public int selectSeat(int id, char row, int col) throws Exception;
+	public List<SeatDTO> Seatlist(int id) throws Exception;
 	public int updateSeat(int sid) throws Exception;
 	public int cencelSeat(int sid) throws Exception;
 	public int insertReserve(String orderid, int sid, int timeid, int userid, int rcnt, int totalpay, char payment) throws Exception;

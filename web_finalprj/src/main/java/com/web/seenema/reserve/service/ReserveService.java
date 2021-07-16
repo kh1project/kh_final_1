@@ -19,7 +19,6 @@ public interface ReserveService {
 	public List<SeatDTO> seatList(int timeid) throws Exception;
 	public int getprice(int id) throws Exception;
 	public List<BranchTheaterDTO> getmovieTheater(int tid) throws Exception;
-	public int selectSeat(int tid, char row, int col) throws Exception;
 	public int updateSeat(int sid) throws Exception;
 	public int Seatcencel(int sid) throws Exception;
 	public int insertReserve(String orderid, int sid, int timeid, int userid, int rcnt, int totalpay, char payment) throws Exception;
@@ -29,5 +28,7 @@ public interface ReserveService {
 	public List<TimeInfoDTO> getTimelist(int mtid, String moviedate, String starttime, String endtime) throws Exception;
 	public int ResDelete(int id) throws Exception;
 	public List<ReservationDTO> Reservelist(String orderid, int aid) throws Exception;
+	public List<SeatDTO> getSeatlist(int id) throws Exception;
+	
 	
 }

@@ -42,6 +42,10 @@
 	  	INSERT INTO reservation(id, orderid, sid, timeid, aid, rdate,  rcnt, totalpay, payment)
 		VALUES(res_seq.NEXTVAL, #{orderid}, #{sid}, #{timeid}, #{aid}, SYSDATE, #{rcnt}, #{totalpay}, #{payment})
 	</insert>
+	
+	<select id="Seatlist" resultType="seat">
+		SELECT * FROM seat WHERE id = #{id}
+	</select>
 
 	<update id="updateSeat">
 	    UPDATE seat SET reserved = 'y' WHERE id = #{sid}
@@ -50,14 +54,6 @@
 	<update id="cencelSeat">
 	    UPDATE seat SET reserved = 'n' WHERE id = #{sid}
 	</update>
-
-	<select id="checkseat" parameterType="HashMap" resultType="seat">
-    	SELECT * FROM seat
-    	 WHERE tid = #{tid}
-    	   AND seatrow = #{row}
-    	   AND seatcol = #{col}
-    	   AND reserved = 'n'
-	</select>
 	
 	<select id="seatcnt" resultType="_int">
     	SELECT count(*)

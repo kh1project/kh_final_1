@@ -1,5 +1,6 @@
 package com.web.seenema.pay.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
@@ -30,10 +31,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.web.seenema.account.dto.AccountDTO;
 import com.web.seenema.movie.dto.MovieDTO;
 import com.web.seenema.movie.service.MovieService;
+import com.web.seenema.pay.dto.PayInfoDTO;
 import com.web.seenema.pay.dto.PaymentDTO;
 import com.web.seenema.reserve.dto.BranchTheaterDTO;
-import com.web.seenema.reserve.dto.PayInfoDTO;
 import com.web.seenema.reserve.dto.ReservationDTO;
+import com.web.seenema.reserve.dto.SeatDTO;
 import com.web.seenema.reserve.dto.TimeInfoDTO;
 import com.web.seenema.reserve.service.ReserveService;
 
@@ -49,8 +51,7 @@ public class KakaoPayController {
 	
 	@RequestMapping(value = "",  method= RequestMethod.POST)
 	public String payment(HttpServletRequest req,
-			Model m, @ModelAttribute PayInfoDTO pidto,
-			@ModelAttribute PaymentDTO pdto) throws Exception {
+			Model m, @ModelAttribute PayInfoDTO pidto) throws Exception {
 		String forward = "";
 		// 주문자가 결제 요청한 상품의 정보를 확인 후 카카오페이 서버에 상품관련 결제준비 정보 전송
 		HttpSession session = req.getSession();
@@ -73,18 +74,29 @@ public class KakaoPayController {
 			String timeid = Integer.toString(timelist.get(0).getId());
 			
 			String seats = pidto.getSeat();
+			System.out.println("payment 좌석 : " + seats);
 			
-			String seat = "";
-			String[] seatinfo = new String[5];
-			if(seats.contains(",")) {
-				seatinfo = seats.split(", ");
-				seat = seatinfo[0];
-			} else {
-				seat = seats.charAt(0) + seats.substring(1, seats.length());
+			// 좌석 정보
+			List<SeatDTO> seatlist = new ArrayList<SeatDTO>();
+			String[] seatinfo = req.getParameterValues("seat");
+			for(int i = 0; i < seatinfo.length; i++) {
+				seatlist.addAll(ress.getSeatlist(Integer.parseInt(seatinfo[i])));
+				System.out.println("결제 페이지 좌석 ID : " + seatlist.get(0).getId());
 			}
 			
-			// 예매번호 : 년월일 + 시간 + 영화정보 + 좌석정보
-			String orderid = orderdate + timeid + mid + seat;
+			for(int i = 0; i < seatlist.size(); i++) {
+				System.out.println("결제 페이지 좌석 ID : " + seatlist.get(i).getId());
+			}
+			
+			// 예매번호 : 년월일 + 시간 + 영화정보 + 좌석정보(첫번째)
+			String orderid = orderdate + timeid + mid + seatlist.get(0).getSeatrow() + seatlist.get(0).getSeatcol();
+			System.out.println("orderid : " + orderid);
+			
+			List<PayInfoDTO> paylist = new ArrayList<PayInfoDTO>();
+			paylist.add(pidto);
+			
+			System.out.println("paylist 영화 제목 : " + paylist.get(0).getTitle());
+			
 			// 상품 정보를 확인하기 위한 코드 작성 끝
 			
 			// 카카오페이 서버 결제준비 정보 전송 시작
@@ -126,17 +138,11 @@ public class KakaoPayController {
 			
 			// 임시로 작성한 코드(WAS 전역 메모리에 저장) 반드시 데이터베이스로 저장하도록 해야함.
 			req.getServletContext().setAttribute("tid", tid);
-			req.getServletContext().setAttribute("mtid", mtid);
-			req.getServletContext().setAttribute("partner_order_id", orderid);
-			req.getServletContext().setAttribute("movieid", moviedata.get(0).getId());
-			req.getServletContext().setAttribute("timeid", timelist.get(0).getId());
-			req.getServletContext().setAttribute("Moviedate", pidto.getMoviedate());
-			req.getServletContext().setAttribute("Starttime", pidto.getStarttime());
-			req.getServletContext().setAttribute("Endtime", pidto.getEndtime());
-			req.getServletContext().setAttribute("seat", pidto.getSeat());
-			req.getServletContext().setAttribute("rcnt", pidto.getPeple());
-			req.getServletContext().setAttribute("totalpay", pidto.getTotal());
-			req.getServletContext().setAttribute("payment", pidto.getMethodPay());
+			req.getServletContext().setAttribute("orderid", orderid);
+			req.getServletContext().setAttribute("moviedata", moviedata);
+			req.getServletContext().setAttribute("timelist", timelist);
+			req.getServletContext().setAttribute("seatlist", seatlist);
+			req.getServletContext().setAttribute("paylist", paylist);
 			
 			forward = "redirect:" + redirect_pc;
 			// 카카오페이 서버 결제준비 정보 전송 끝
@@ -150,44 +156,32 @@ public class KakaoPayController {
 			HttpServletRequest req, Model m, @ModelAttribute ReservationDTO resDTO) throws Exception {
 		String forward = "";
 		HttpSession session = req.getSession();
-		String orderid = (String)req.getServletContext().getAttribute("partner_order_id");
-		int mtid = (Integer)req.getServletContext().getAttribute("mtid");
-		int rcnt = (Integer)req.getServletContext().getAttribute("rcnt");
-		int totalpay = (Integer) req.getServletContext().getAttribute("totalpay");
-		char payment = ((String)req.getServletContext().getAttribute("payment")).charAt(0);
 		
-		// 상영관 정보
-		List<BranchTheaterDTO> btlist = ress.getmovieTheater(mtid);
+		// 이전 정보 받아오기.
+		List<PayInfoDTO> paylist = (List<PayInfoDTO>) req.getServletContext().getAttribute("paylist");
+		String orderid = (String) req.getServletContext().getAttribute("orderid");
 		
 		// 영화 정보
-		int mid = (Integer)req.getServletContext().getAttribute("movieid");
-		List<MovieDTO> moviedata = movies.getMovies(mid);
+		List<MovieDTO> movielist = (List<MovieDTO>) req.getServletContext().getAttribute("moviedata");
+		List<MovieDTO> moviedata = movies.getMovies(movielist.get(0).getId());
 		
 		// 시간 정보
-		String rdate = (String)req.getServletContext().getAttribute("Moviedate");
-		String Starttime = (String)req.getServletContext().getAttribute("Starttime");
-		String Endtime = (String)req.getServletContext().getAttribute("Endtime");
-		List<TimeInfoDTO> timelist = ress.getTimelist(mtid, rdate, Starttime, Endtime);
-		
+		List<TimeInfoDTO> timelist = (List<TimeInfoDTO>) req.getServletContext().getAttribute("timelist");
 		int timeid = timelist.get(0).getId();
 		
+		// 상영관 정보
+		List<BranchTheaterDTO> btlist = ress.getmovieTheater(timelist.get(0).getMtid());
+		
 		// 좌석 정보
-		String seats = (String)req.getServletContext().getAttribute("seat");
-		String[] seatinfo = new String[5];
-		char row = ' ';
-		int col = 0;
+		List<SeatDTO> seatlist = (List<SeatDTO>) req.getServletContext().getAttribute("seatlist");
+		for(int i = 0; i < seatlist.size(); i++) {
+			System.out.println(seatlist.get(i).getId());
+		}
 		
 		// accountid 가져오기
 		AccountDTO adto = (AccountDTO)session.getAttribute("account");
 		String username = adto.getNickname();
 		int userid = adto.getId();
-		
-		// Map에 정보 담기.
-		Map<String, Object> resmap = new HashMap<String, Object>();
-		resmap.put("orderid", orderid);
-		resmap.put("rcnt", rcnt);
-		resmap.put("totalpay", totalpay);
-		resmap.put("payment", (String)req.getServletContext().getAttribute("payment"));
 		
 		// 예매 하기.
 		MultiValueMap<String, String> param = new LinkedMultiValueMap<String, String>();
@@ -211,39 +205,29 @@ public class KakaoPayController {
 		
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> resp_data = mapper.readValue(resp.getBody(), HashMap.class);
-		int sid = 0;
 		if(resp.getStatusCode() == HttpStatus.OK) {
-			if(seats.contains(",")) {
-				// 좌석이 2개 이상일 때
-				seatinfo = seats.split(", ");
-				for(int i = 0; i < seatinfo.length; i++) {
-					row = seatinfo[i].charAt(0);
-					col = Integer.parseInt(seatinfo[i].substring(1, seatinfo[i].length()));
-					sid = ress.selectSeat(timeid, row, col);
-					int uRes = ress.updateSeat(sid);
-					if(uRes == 1) {
-						ress.insertReserve(orderid, sid, timeid, userid, rcnt, totalpay, payment);
-					}else {
-						forward = "kakaopay/fail";
-					}
+			System.out.println("7");
+			for(int i = 0; i < seatlist.size(); i++) {
+				int uRes = ress.updateSeat(seatlist.get(i).getId());
+				System.out.println("8");
+				if(uRes == 1) {
+					System.out.println("9");
+					ress.insertReserve(orderid, seatlist.get(i).getId(), timeid, userid, 
+							paylist.get(0).getPeple(), paylist.get(0).getTotal(), paylist.get(0).getMethodPay().charAt(0));
+					forward = "kakaopay/success";
+				}else {
+					forward = "kakaopay/fail";
 				}
-				forward = "kakaopay/success";
-			} else {
-				// 좌석이 1개 일 때
-				row = seats.charAt(0);
-				col = Integer.parseInt(seats.substring(1, seats.length()));
-				sid = ress.selectSeat(mtid, row, col);
-				ress.updateSeat(sid);
-				ress.insertReserve(orderid, sid, timeid, userid, rcnt, totalpay, payment);
-				forward = "kakaopay/success";
 			}
+			forward = "kakaopay/success";
 		} else if(resp.getStatusCode() == HttpStatus.BAD_REQUEST) {
 			forward = "kakaopay/fail";
 		}
 		
 		// System.out.println(resp.getBody());
-		m.addAttribute("resmap", resmap);
-		m.addAttribute("seats", seats);
+		m.addAttribute("orderid", orderid);
+		m.addAttribute("paylist", paylist);
+		m.addAttribute("seatlist", seatlist);
 		m.addAttribute("btlist", btlist);
 		m.addAttribute("moviedata", moviedata);
 		m.addAttribute("timelist", timelist);

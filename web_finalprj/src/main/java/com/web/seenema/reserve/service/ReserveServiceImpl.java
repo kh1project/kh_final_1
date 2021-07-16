@@ -70,12 +70,6 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public int selectSeat(int tid, char row, int col) throws Exception {
-		// 선택한 좌석 아이디
-		return dao.selectSeat(tid, row, col);
-	}
-
-	@Override
 	public int updateSeat(int sid) throws Exception {
 		// 좌석 'n'-> 'y' 업데이트
 		return dao.updateSeat(sid);
@@ -123,6 +117,12 @@ public class ReserveServiceImpl implements ReserveService {
 	@Override
 	public List<ReservationDTO> Reservelist(String orderid, int aid) throws Exception {
 		return dao.Reservelist(orderid, aid);
+	}
+
+	@Override
+	public List<SeatDTO> getSeatlist(int id) throws Exception {
+		// 좌석 정보 가져오기
+		return dao.Seatlist(id);
 	}
 	
 }

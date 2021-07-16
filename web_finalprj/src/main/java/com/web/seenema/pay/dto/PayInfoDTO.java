@@ -1,4 +1,4 @@
-package com.web.seenema.reserve.dto;
+package com.web.seenema.pay.dto;
 
 public class PayInfoDTO {
 	private String title;

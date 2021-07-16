@@ -1,5 +1,7 @@
 package com.web.seenema.reserve.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -106,17 +108,13 @@ public class ReserveController {
 		// 시간 List
 		List<TimeInfoDTO> timelist = ress.getTimelist(mtid, rcdto.getMoviedate(), rcdto.getStarttime(), rcdto.getEndtime());
 		
-		String Seat ="";
+		List<SeatDTO> seatlist = new ArrayList<SeatDTO>();
 		// 체크된 좌석 정보
 		String[] seatinfo = req.getParameterValues("seat");
 		for(int i = 0; i < seatinfo.length; i++) {
-			if(i < seatinfo.length - 1) {
-				Seat += seatinfo[i] + ", ";
-			} else if(i == seatinfo.length - 1) {
-				Seat += seatinfo[i];
-			}
+			seatlist.addAll(ress.getSeatlist(Integer.parseInt(seatinfo[i])));
+			System.out.println("체크된 좌석 : " + seatinfo[i]);
 		}
-		// System.out.println("Seat");
 		
 		// 가격 가져오기
 		int adult = rcdto.getAdult();
@@ -147,7 +145,7 @@ public class ReserveController {
 		mv.addObject("moviedata", moviedata);
 		mv.addObject("btlist", btlist);
 		mv.addObject("peple", peple);
-		mv.addObject("Seat", Seat);
+		mv.addObject("seatlist", seatlist);
 		mv.addObject("price", price);
 		
 		return mv;

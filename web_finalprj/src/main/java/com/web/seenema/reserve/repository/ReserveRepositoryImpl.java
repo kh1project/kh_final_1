@@ -80,15 +80,10 @@ public class ReserveRepositoryImpl implements ReserveRepository{
 		
 		return mtlist;
 	}
-
+	
 	@Override
-	public int selectSeat(int tid, char row, int col) throws Exception {
-		Map<String, Object> data = new HashMap<String, Object>();
-		data.put("tid", tid);
-		data.put("row", row);
-		data.put("col", col);
-		List<SeatDTO> sdto = sqlSession.selectList("reserveMapper.checkseat", data);
-		return sdto.get(0).getId();
+	public List<SeatDTO> Seatlist(int id) throws Exception {
+		return sqlSession.selectList("reserveMapper.Seatlist", id);
 	}
 
 	@Override
