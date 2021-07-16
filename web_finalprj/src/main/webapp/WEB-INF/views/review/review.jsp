@@ -47,7 +47,12 @@
 					    		<div class="tab-header-search">
 					    			<input type="hidden" name="btype" value="${btype }">
 					    			<input type="text" name="search" placeholder="제목, 장르, 감독, 배우, 닉네임">
-					    			<button type="submit"><i class="fas fa-search fa-fw"></i></button>
+					    			<c:if test="${list != null}">
+					    				<button type="submit"><i class="fas fa-search fa-fw"></i></button>
+					    			</c:if>
+					    			<c:if test="${list == null}">
+					    				<button type="button" onclick="alert('리뷰가 없으므로 검색할 수 없습니다.')"><i class="fas fa-search fa-fw"></i></button>
+					    			</c:if>
 					    		</div>
 				    		</form>
 			    		</div>

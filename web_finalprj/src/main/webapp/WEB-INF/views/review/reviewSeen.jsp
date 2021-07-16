@@ -44,8 +44,13 @@
 			    			<form method="get" action="<%=request.getContextPath() %>/review">
 					    		<div class="tab-header-search">
 					    			<input type="hidden" name="btype" value="${btype }">
-					    			<input type="text" name="search" placeholder="제목, 장르, 감독, 배우, 닉네임">
-					    			<button type="submit"><i class="fas fa-search fa-fw"></i></button>
+					    				<input type="text" name="search" placeholder="제목, 장르, 감독, 배우, 닉네임">
+					    			<c:if test="${list != null}">
+					    				<button type="submit"><i class="fas fa-search fa-fw"></i></button>
+					    			</c:if>
+					    			<c:if test="${list == null}">
+					    				<button type="button" onclick="alert('내가 본 영화의 리뷰가 없습니다.')"><i class="fas fa-search fa-fw"></i></button>
+					    			</c:if>
 					    		</div>
 				    		</form>
 			    		</div>
